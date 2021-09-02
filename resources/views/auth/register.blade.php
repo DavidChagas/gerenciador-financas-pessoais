@@ -40,6 +40,22 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="data_nascimento" class="col-md-4 col-form-label text-md-right">{{ __('Data de Nascimento') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="data_nascimento" type="date" class="form-control" name="data_nascimento" value="{{ old('data_nascimento') }}" required autocomplete="data_nascimento">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="sexo" class="col-md-4 col-form-label text-md-right">{{ __('Sexo') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="sexo" type="text" class="form-control" name="sexo" value="{{ old('sexo') }}" required autocomplete="sexo">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
