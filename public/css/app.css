@@ -10002,3 +10002,16 @@ h3 {
     border-color: #dee2e6;
   }
 }
+.row.no-padding {
+  margin-right: 0;
+  margin-left: 0;
+}
+.row.no-padding > [class^=col-], .row.no-padding > [class*=" col-"] {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.container-fluid, .container-sm, .container-md, .container-lg, .container-xl {
+  padding-right: 0;
+  padding-left: 0;
+}

@@ -21,9 +21,18 @@
 </head>
 <body>
     <div id="app">
-        <main class="py-4">
-            @yield('content')
-        </main>
+        <div class="container-fluid no-padding">
+            <div class="row no-padding">
+                <div class="col-md-2">
+                    @auth
+                        <menu-component nome-usuario="{{Auth::user()->nome}}" receita-route="{{route('receitas')}}"></menu-component>
+                    @endauth
+                </div>
+                <div class="col-md-8">
+                    @yield('content')
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>
