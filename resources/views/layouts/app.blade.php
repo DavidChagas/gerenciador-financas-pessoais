@@ -21,18 +21,15 @@
 </head>
 <body>
     <div id="app">
-        <div class="container-fluid no-padding">
-            <div class="row no-padding">
-                <div class="col-md-2">
-                    @auth
-                        <menu-component nome-usuario="{{Auth::user()->nome}}" receita-route="{{route('receitas')}}"></menu-component>
-                    @endauth
-                </div>
-                <div class="col-md-8">
-                    @yield('content')
-                </div>
-            </div>
+        <div class="menu-lateral">
+            @auth
+                <menu-component nome-usuario="{{Auth::user()->nome}}" receita-route="{{route('receitas')}}"></menu-component>
+            @endauth
         </div>
+        <div class="pagina">
+            @yield('content')
+        </div>
+           
     </div>
 </body>
 </html>
