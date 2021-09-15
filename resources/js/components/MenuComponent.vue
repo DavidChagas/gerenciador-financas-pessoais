@@ -4,10 +4,11 @@
             Olá {{nomeUsuario}}
         </div>
         <div class="acoes">
+            <a class="acao" v-bind:href="contaRoute">Cadastrar Conta</a>
             <a class="acao" v-bind:href="receitaRoute">Cadastrar Receita</a>
-            <div class="acao">Cadastrar Despesa</div>
-            <div class="acao">Cadastrar Objetivo</div>
-            <div class="acao">Cadastrar Investimento</div>
+            <a class="acao">Cadastrar Despesa</a>
+            <a class="acao">Cadastrar Objetivo</a>
+            <a class="acao">Cadastrar Investimento</a>
         </div>
     </div>
 </template>
@@ -16,7 +17,8 @@
     export default {
         props : [
             'nomeUsuario',
-            'receitaRoute'
+            'receitaRoute',
+            'contaRoute'
         ],
         mounted() {
             console.log('Component mounted.')
@@ -43,10 +45,16 @@
         }
 
         .acoes{
+            display: flex;
+            flex-direction: column;
+
             .acao{
                 margin: 5px 0;
                 padding: 5px 0;
 
+                color: white;
+                text-decoration: none;
+                
                 &:hover{
                     cursor: pointer;
                     color: #ddd;

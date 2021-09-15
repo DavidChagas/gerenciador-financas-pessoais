@@ -23,7 +23,7 @@
     <div id="app">
         <div class="menu-lateral">
             @auth
-                <menu-component nome-usuario="{{Auth::user()->nome}}" receita-route="{{route('receitas')}}"></menu-component>
+                <menu-component nome-usuario="{{Auth::user()->nome}}" receita-route="{{route('receitas')}}" conta-route="{{route('conta')}}"></menu-component>
             @endauth
         </div>
         <div class="pagina">
