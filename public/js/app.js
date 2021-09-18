@@ -1860,7 +1860,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({});
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: ['token']
+});
 
 /***/ }),
 
@@ -38113,32 +38116,41 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "componente-conta-form" }, [
+    _c("div", { staticClass: "descricao" }, [
+      _vm._v(
+        "\n        Aqui você poderá cadastrar todas as suas contas existentes. Exemplos de contas: Poupança, Carteira, Nuconta, etc...\n    "
+      )
+    ]),
+    _vm._v(" "),
+    _c("form", { attrs: { action: "/conta", method: "POST" } }, [
+      _c("input", {
+        attrs: { type: "hidden", name: "_token" },
+        domProps: { value: _vm.token }
+      }),
+      _vm._v(" "),
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+        [_vm._v("Cadastrar")]
+      )
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "componente-conta-form" }, [
-      _c("div", { staticClass: "descricao" }, [
-        _vm._v(
-          "\n        Aqui você poderás cadastrar todas as suas contas existentes. Exemplos de contas: Poupança, Carteira, Nuconta, etc...\n    "
-        )
-      ]),
+    return _c("div", { staticClass: "form-group" }, [
+      _c("label", [_vm._v("Descrição")]),
       _vm._v(" "),
-      _c("form", { attrs: { action: "#", method: "POST" } }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", [_vm._v("Descriçãos")]),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "form-control",
-            attrs: { type: "text", name: "descricao" }
-          })
-        ]),
-        _vm._v(" "),
-        _c("button", { staticClass: "btn btn-primary" }, [_vm._v("Cadastrar")])
-      ])
+      _c("input", {
+        staticClass: "form-control",
+        attrs: { type: "text", name: "descricao" }
+      })
     ])
   }
 ]

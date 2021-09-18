@@ -7,11 +7,12 @@ use Illuminate\Http\Request;
 
 class ContaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    private $conta;
+
+    public function __construct(){
+        $this->conta = new Conta();
+    }
+
     public function index()
     {
         //
@@ -35,7 +36,18 @@ class ContaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $this->validate($request, [
+        //     'cid_nome' => 'required|max:85',
+        //     'cid_uf' => ['required', 'max:2']
+        // ]);
+
+        $conta =  $this->conta;
+        $conta->descricao = $request->input('descricao');
+        $conta->usuario_id = $request->user()->id;
+
+        $conta->save();
+
+        return redirect('/')->with('success', 'conta salva com sucesso!');
     }
 
     /**

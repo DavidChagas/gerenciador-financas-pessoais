@@ -6,6 +6,8 @@ Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/receitas', [App\Http\Controllers\ReceitaController::class, 'index'])->name('receitas');
+
+Route::post('/conta', [App\Http\Controllers\ContaController::class, 'store'])->name('conta');
 Route::get('/conta', function(){
 	return view('layouts/contas/cadastrar');
 })->name('conta');
