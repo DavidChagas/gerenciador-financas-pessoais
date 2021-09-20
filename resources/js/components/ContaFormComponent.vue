@@ -7,7 +7,7 @@
             <input type="hidden" name="_token" v-bind:value="token">
             <div class="form-group">
                 <label>Descrição</label>
-                <input class="form-control" type="text" name="descricao">
+                <input class="form-control" type="text" name="descricao" v-bind:value="conta.descricao">
             </div>
             <button class="btn btn-primary" type="submit">Cadastrar</button>
         </form>
@@ -17,8 +17,19 @@
 <script>
     export default {
         props: [
-            'token'
-        ]
+            'token',
+            'conta'
+        ],
+
+        data(){
+            return {
+                conta: {}
+            }
+        },
+
+        mounted(){
+            this.conta = JSON.parse(this.conta);
+        }
     }
 </script>
 

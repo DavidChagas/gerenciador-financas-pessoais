@@ -11,7 +11,7 @@
             <tbody>
                 <tr v-for="i in list">
                     <td>{{i.descricao}}</td>
-                    <td> <a href="" class="btn btn-info btn-sm">Editar</a> </td>
+                    <td> <a v-bind:href="'/contas/'+i.id+'/edit'" class="btn btn-info btn-sm">Editar</a> </td>
                     <td> <a href="" class="btn btn-danger btn-sm">Excluir</a> </td>
                 </tr>
             </tbody>

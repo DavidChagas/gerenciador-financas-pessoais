@@ -19,7 +19,7 @@ class ContaController extends Controller
     }
 
     public function create(){
-        //
+        return view('layouts/contas/cadastrar');
     }
 
     public function store(Request $request){
@@ -33,11 +33,11 @@ class ContaController extends Controller
     }
 
     public function show(Conta $conta){
-        echo 'show';
+        dd($conta);
     }
 
     public function edit(Conta $conta){
-        echo 'editt';
+        return view('layouts.contas.cadastrar')->with('conta', $conta);;
     }
 
     public function update(Request $request, Conta $conta){

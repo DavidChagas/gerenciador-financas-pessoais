@@ -1862,7 +1862,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['token']
+  props: ['token', 'conta'],
+  data: function data() {
+    return {
+      conta: {}
+    };
+  },
+  mounted: function mounted() {
+    this.conta = JSON.parse(this.conta);
+    console.log(this.conta);
+  }
 });
 
 /***/ }),
@@ -38248,7 +38257,15 @@ var render = function() {
         domProps: { value: _vm.token }
       }),
       _vm._v(" "),
-      _vm._m(0),
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", [_vm._v("Descrição")]),
+        _vm._v(" "),
+        _c("input", {
+          staticClass: "form-control",
+          attrs: { type: "text", name: "descricao" },
+          domProps: { value: _vm.conta.descricao }
+        })
+      ]),
       _vm._v(" "),
       _c(
         "button",
@@ -38258,21 +38275,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("label", [_vm._v("Descrição")]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control",
-        attrs: { type: "text", name: "descricao" }
-      })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -38305,9 +38308,18 @@ var render = function() {
           return _c("tr", [
             _c("td", [_vm._v(_vm._s(i.descricao))]),
             _vm._v(" "),
-            _vm._m(1, true),
+            _c("td", [
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-info btn-sm",
+                  attrs: { href: "/contas/" + i.id + "/edit" }
+                },
+                [_vm._v("Editar")]
+              )
+            ]),
             _vm._v(" "),
-            _vm._m(2, true)
+            _vm._m(1, true)
           ])
         }),
         0
@@ -38327,16 +38339,6 @@ var staticRenderFns = [
         _c("th", { attrs: { scope: "col", width: "100px" } }),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col", width: "100px" } })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("a", { staticClass: "btn btn-info btn-sm", attrs: { href: "" } }, [
-        _vm._v("Editar")
       ])
     ])
   },
