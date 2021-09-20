@@ -29,15 +29,15 @@ class ContaController extends Controller
 
         $conta->save();
 
-        return redirect('/')->with('success', 'conta salva com sucesso!');
+        return redirect('/contas')->with('success', 'conta salva com sucesso!');
     }
 
     public function show(Conta $conta){
-        //
+        echo 'show';
     }
 
     public function edit(Conta $conta){
-        //
+        echo 'editt';
     }
 
     public function update(Request $request, Conta $conta){
