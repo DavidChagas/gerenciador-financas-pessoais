@@ -3,7 +3,8 @@
         <div class="descricao">
             Aqui você poderá cadastrar todas as suas contas existentes. Exemplos de contas: Poupança, Carteira, Nuconta, etc...
         </div>
-        <form action="/conta" method="POST">
+        <form v-bind:action="action" v-bind:method="method">
+            <slot name="method"></slot>
             <input type="hidden" name="_token" v-bind:value="token">
             <div class="form-group">
                 <label>Descrição</label>
@@ -17,8 +18,11 @@
 <script>
     export default {
         props: [
+            'action',
+            'method',
             'token',
-            'conta'
+            'conta',
+            'teste'
         ],
 
         data(){

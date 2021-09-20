@@ -41,7 +41,13 @@ class ContaController extends Controller
     }
 
     public function update(Request $request, Conta $conta){
-        //
+        $conta->descricao = $request->input('descricao');
+       
+
+        $conta->save();
+
+
+        return redirect('/contas')->with('success', 'Conta alterada com sucesso!');
     }
 
     public function destroy(Conta $conta){
