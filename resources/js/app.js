@@ -23,6 +23,7 @@ Vue.component('menu-component', require('./components/MenuComponent.vue').defaul
 Vue.component('titulo-form-component', require('./components/TituloFormComponent.vue').default);
 Vue.component('conta-form-component', require('./components/ContaformComponent.vue').default);
 Vue.component('listagem-table-component', require('./components/ListagemTableComponent.vue').default);
+Vue.component('modal-exclusao-component', require('./components/ModalExclusaoComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

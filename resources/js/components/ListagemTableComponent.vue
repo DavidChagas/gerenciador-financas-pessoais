@@ -12,10 +12,12 @@
                 <tr v-for="i in list">
                     <td>{{i.descricao}}</td>
                     <td> <a v-bind:href="'/contas/'+i.id+'/edit'" class="btn btn-info btn-sm">Editar</a> </td>
-                    <td> <a href="" class="btn btn-danger btn-sm">Excluir</a> </td>
+                    <td> <button class="btn btn-danger btn-sm" v-on:click="abrirModal('sss')">Excluir</button> </td>
                 </tr>
             </tbody>
         </table>
+
+        <modal-exclusao-component v-if="visible"></modal-exclusao-component>
     </div>
 </template>
 
@@ -27,15 +29,26 @@
 
         data(){
             return {
-                list: []
+                list: [],
+                visible: false,
+                item: ''
+            }
+        },
+
+        methods: {
+            abrirModal(item) {
+                this.visible = true;
+                console.log('itemm'. item)
             }
         },
 
         mounted(){
-            this.list = JSON.parse(this.infos)
+            this.list = JSON.parse(this.infos);
         }
     }
 </script>
 <style lang="scss">
-   
+   .componente-listagem-tabela{
+    position: relative;
+   }
 </style>
