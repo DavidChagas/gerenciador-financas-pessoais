@@ -5,7 +5,7 @@
         </div>
         <div class="botoes">
             <button class="btn btn-sm btn-danger">Cancelar</button>
-            <button class="btn btn-sm btn-info">Excluir</button>
+            <button class="btn btn-sm btn-info" v-on:click="fecharModal('sss')">Excluir</button>
         </div>
     </div>
 </template>
@@ -23,6 +23,11 @@
         mounted() {
             console.log(this.item);
             this.i = JSON.parse(this.item);
+        },
+        methods: {
+            fecharModal() {
+                this.$destroy();
+            }
         }
     }
 </script>

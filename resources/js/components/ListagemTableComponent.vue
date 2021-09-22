@@ -12,7 +12,12 @@
                 <tr v-for="i in list">
                     <td>{{i.descricao}}</td>
                     <td> <a v-bind:href="'/contas/'+i.id+'/edit'" class="btn btn-info btn-sm">Editar</a> </td>
-                    <td> <button class="btn btn-danger btn-sm" v-on:click="abrirModal('sss')">Excluir</button> </td>
+                    <td> 
+                        <form v-bind:action="'/contas/'+i.id" method="POST">
+                            <slot name="method"></slot>
+                            <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
+                        </form>
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -34,14 +39,11 @@
                 item: ''
             }
         },
-
         methods: {
-            abrirModal(item) {
+            abrirModal() {
                 this.visible = true;
-                console.log('itemm'. item)
             }
         },
-
         mounted(){
             this.list = JSON.parse(this.infos);
         }

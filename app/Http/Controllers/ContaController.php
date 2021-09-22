@@ -51,6 +51,13 @@ class ContaController extends Controller
     }
 
     public function destroy(Conta $conta){
-        //
+        try {
+            $conta->delete();
+            return redirect('/contas')->with('success', 'Conta excluida com sucesso!');
+        } catch (\Illuminate\Database\QueryException $qe) {
+            return ['status' => 'errorQuery', 'message' => $qe->getMessage()];
+        } catch (\PDOException $e) {
+            return ['status' => 'errorPDO', 'message' => $e->getMessage()];
+        }
     }
 }

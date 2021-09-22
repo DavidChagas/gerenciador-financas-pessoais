@@ -2082,8 +2082,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['action', 'method', 'token', 'conta', 'teste'],
   data: function data() {
@@ -2132,6 +2130,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['infos'],
   data: function data() {
@@ -2142,9 +2145,8 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    abrirModal: function abrirModal(item) {
+    abrirModal: function abrirModal() {
       this.visible = true;
-      console.log('itemm'.item);
     }
   },
   mounted: function mounted() {
@@ -2222,6 +2224,11 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     console.log(this.item);
     this.i = JSON.parse(this.item);
+  },
+  methods: {
+    fecharModal: function fecharModal() {
+      this.$destroy();
+    }
   }
 });
 
@@ -38812,16 +38819,21 @@ var render = function() {
               _vm._v(" "),
               _c("td", [
                 _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-danger btn-sm",
-                    on: {
-                      click: function($event) {
-                        return _vm.abrirModal("sss")
-                      }
-                    }
-                  },
-                  [_vm._v("Excluir")]
+                  "form",
+                  { attrs: { action: "/contas/" + i.id, method: "POST" } },
+                  [
+                    _vm._t("method"),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-danger btn-sm",
+                        attrs: { type: "submit" }
+                      },
+                      [_vm._v("Excluir")]
+                    )
+                  ],
+                  2
                 )
               ])
             ])
@@ -38918,30 +38930,32 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "componente-modal-exclusao" }, [
-      _c("div", { staticClass: "titulo" }, [
-        _vm._v("\n        Tem certeza que seja excluir tal registro?\n    ")
+  return _c("div", { staticClass: "componente-modal-exclusao" }, [
+    _c("div", { staticClass: "titulo" }, [
+      _vm._v("\n        Tem certeza que seja excluir tal registro?\n    ")
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "botoes" }, [
+      _c("button", { staticClass: "btn btn-sm btn-danger" }, [
+        _vm._v("Cancelar")
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "botoes" }, [
-        _c("button", { staticClass: "btn btn-sm btn-danger" }, [
-          _vm._v("Cancelar")
-        ]),
-        _vm._v(" "),
-        _c("button", { staticClass: "btn btn-sm btn-info" }, [
-          _vm._v("Excluir")
-        ])
-      ])
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-sm btn-info",
+          on: {
+            click: function($event) {
+              return _vm.fecharModal("sss")
+            }
+          }
+        },
+        [_vm._v("Excluir")]
+      )
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 

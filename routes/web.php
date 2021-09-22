@@ -12,6 +12,7 @@ Route::get('/contas/create', [App\Http\Controllers\ContaController::class, 'crea
 Route::post('/contas', [App\Http\Controllers\ContaController::class, 'store']);
 Route::get('/contas/{conta}/edit', [App\Http\Controllers\ContaController::class, 'edit']);
 Route::put('/contas/{conta}', [App\Http\Controllers\ContaController::class, 'update']);
+Route::delete('/contas/{conta}', [App\Http\Controllers\ContaController::class, 'destroy']);
 
 
 // Route::get('/home', function(){
