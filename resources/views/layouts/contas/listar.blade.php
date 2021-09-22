@@ -4,9 +4,9 @@
 
 
 <titulo-form-component titulo="Lista de Contas"></titulo-form-component>
-<div style="float: right; margin-bottom: 30px;">
-	<a href="{{route('conta.cadastrar')}}" class="btn btn-primary" >Cadastrar Nova Conta</a>
-</div>
+
+<a href="{{route('conta.cadastrar')}}" class="btn btn-primary" style="margin-bottom: 30px;">Cadastrar Nova Conta</a>
+
 <listagem-table-component infos="{{ $infos }}" token="{{ csrf_token() }}">
 	<span slot="method">
 		@csrf
