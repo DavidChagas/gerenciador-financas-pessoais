@@ -32,4 +32,7 @@ class User extends Authenticatable
     public function contas(){
         return $this->hasMany(Conta::class);
     }
+    public function categorias(){
+        return $this->hasMany(Categoria::class);
+    }
 }

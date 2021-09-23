@@ -13,7 +13,7 @@ class Receita extends Model
     public function conta(){
         return $this->belongsTo(conta::class, 'conta_id');
     }
-    public function categoriaReceita(){
-        return $this->belongsTo(categoriaReceita::class, 'categoria_receita_id');
+    public function categoria(){
+        return $this->belongsTo(categoria::class, 'categoria_id');
     }
 }

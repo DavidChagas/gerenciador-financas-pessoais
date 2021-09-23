@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CategoriaDespesa;
+use App\Models\Categoria;
 use Illuminate\Http\Request;
 
-class CategoriaDespesaController extends Controller
+class CategoriaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class CategoriaDespesaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\CategoriaDespesa  $categoriaDespesa
+     * @param  \App\Models\Categoria  $categoria
      * @return \Illuminate\Http\Response
      */
-    public function show(CategoriaDespesa $categoriaDespesa)
+    public function show(Categoria $categoria)
     {
         //
     }
@@ -52,10 +52,10 @@ class CategoriaDespesaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\CategoriaDespesa  $categoriaDespesa
+     * @param  \App\Models\Categoria  $categoria
      * @return \Illuminate\Http\Response
      */
-    public function edit(CategoriaDespesa $categoriaDespesa)
+    public function edit(Categoria $categoria)
     {
         //
     }
@@ -64,10 +64,10 @@ class CategoriaDespesaController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\CategoriaDespesa  $categoriaDespesa
+     * @param  \App\Models\Categoria  $categoria
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, CategoriaDespesa $categoriaDespesa)
+    public function update(Request $request, Categoria $categoria)
     {
         //
     }
@@ -75,10 +75,10 @@ class CategoriaDespesaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\CategoriaDespesa  $categoriaDespesa
+     * @param  \App\Models\Categoria  $categoria
      * @return \Illuminate\Http\Response
      */
-    public function destroy(CategoriaDespesa $categoriaDespesa)
+    public function destroy(Categoria $categoria)
     {
         //
     }

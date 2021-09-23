@@ -17,8 +17,8 @@ class CreateDespesasTable extends Migration
 
             $table->integer('conta_id')->unsigned();
             $table->foreign('conta_id')->references('id')->on('contas');
-            $table->integer('categoria_despesa_id')->unsigned();
-            $table->foreign('categoria_despesa_id')->references('id')->on('categoria_despesas');
+            $table->integer('categoria_id')->unsigned();
+            $table->foreign('categoria_id')->references('id')->on('categorias');
         });
     }
 

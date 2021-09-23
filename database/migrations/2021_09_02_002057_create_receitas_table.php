@@ -17,8 +17,8 @@ class CreateReceitasTable extends Migration
 
             $table->integer('conta_id')->unsigned();
             $table->foreign('conta_id')->references('id')->on('contas');
-            $table->integer('categoria_receita_id')->unsigned();
-            $table->foreign('categoria_receita_id')->references('id')->on('categoria_receitas');
+            $table->integer('categoria_id')->unsigned();
+            $table->foreign('categoria_id')->references('id')->on('categorias');
         });
     }
 

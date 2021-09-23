@@ -13,7 +13,7 @@ class Despesa extends Model
     public function conta(){
         return $this->belongsTo(conta::class, 'conta_id');
     }
-    public function categoriaDespesa(){
-        return $this->belongsTo(categoriaDespesa::class, 'categoria_despesa_id');
+    public function categoria(){
+        return $this->belongsTo(categoria::class, 'categoria_id');
     }
 }
