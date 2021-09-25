@@ -7,8 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Categoria extends Model{
     public $timestamps = false;
 
-    protected $fillable = ['descricao'];
-    protected $fillable = ['tipo'];
+    protected $fillable = ['descricao', 'tipo'];
 
     public function usuario(){
         return $this->belongsTo(usuario::class, 'usuario_id');

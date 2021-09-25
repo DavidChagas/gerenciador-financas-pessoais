@@ -14,6 +14,13 @@ Route::get('/contas/{conta}/edit', [App\Http\Controllers\ContaController::class,
 Route::put('/contas/{conta}', [App\Http\Controllers\ContaController::class, 'update']);
 Route::delete('/contas/{conta}', [App\Http\Controllers\ContaController::class, 'destroy']);
 
+Route::get('/categorias', [App\Http\Controllers\CategoriaController::class, 'index'])->name('categoria.listar');
+Route::get('/categorias/create', [App\Http\Controllers\CategoriaController::class, 'create'])->name('categoria.cadastrar');
+Route::post('/categorias', [App\Http\Controllers\CategoriaController::class, 'store']);
+Route::get('/categorias/{categoria}/edit', [App\Http\Controllers\CategoriaController::class, 'edit']);
+Route::put('/categorias/{categoria}', [App\Http\Controllers\CategoriaController::class, 'update']);
+Route::delete('/categorias/{categoria}', [App\Http\Controllers\CategoriaController::class, 'destroy']);
+
 
 // Route::get('/home', function(){
 // 	return view('layouts/home');

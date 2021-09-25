@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Conta;
 use Illuminate\Http\Request;
 
-class ContaController extends Controller
-{
+class ContaController extends Controller{
+    
     private $conta;
 
     public function __construct(){
@@ -37,15 +37,13 @@ class ContaController extends Controller
     }
 
     public function edit(Conta $conta){
-        return view('layouts.contas.cadastrar')->with('conta', $conta);;
+        return view('layouts.contas.cadastrar')->with('conta', $conta);
     }
 
     public function update(Request $request, Conta $conta){
         $conta->descricao = $request->input('descricao');
        
-
         $conta->save();
-
 
         return redirect('/contas')->with('success', 'Conta alterada com sucesso!');
     }

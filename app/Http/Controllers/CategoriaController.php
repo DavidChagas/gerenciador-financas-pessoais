@@ -5,81 +5,59 @@ namespace App\Http\Controllers;
 use App\Models\Categoria;
 use Illuminate\Http\Request;
 
-class CategoriaController extends Controller
-{
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
+class CategoriaController extends Controller{
+
+    private $categoria;
+
+    public function __construct(){
+        $this->categoria = new Categoria();
+    }
+    
+    public function index(){
+        $categorias = $this->categoria::all();
+        return view('layouts.categorias.listar')->with('infos', $categorias);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    public function create(){
+        return view('layouts/categorias/cadastrar');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request){
+        $categoria =  $this->categoria;
+        $categoria->descricao = $request->input('descricao');
+        $categoria->tipo = $request->input('tipo');
+        $categoria->usuario_id = $request->user()->id;
+
+        $categoria->save();
+
+        return redirect('/categorias')->with('success', 'categoria salva com sucesso!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Categoria  $categoria
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Categoria $categoria)
-    {
-        //
+    public function show(Categoria $categoria){
+        dd($categoria);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Categoria  $categoria
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Categoria $categoria)
-    {
-        //
+    public function edit(Categoria $categoria){
+        return view('layouts.categorias.cadastrar')->with('categoria', $categoria);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Categoria  $categoria
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Categoria $categoria)
-    {
-        //
+    public function update(Request $request, Categoria $categoria){
+        $categoria->descricao = $request->input('descricao');
+        $categoria->tipo = $request->input('tipo');
+       
+        $categoria->save();
+
+        return redirect('/categorias')->with('success', 'categoria alterada com sucesso!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Categoria  $categoria
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Categoria $categoria)
-    {
-        //
+    public function destroy(Categoria $categoria){
+        try {
+            $categoria->delete();
+            return redirect('/categorias')->with('success', 'categoria excluida com sucesso!');
+        } catch (\Illuminate\Database\QueryException $qe) {
+            return ['status' => 'errorQuery', 'message' => $qe->getMessage()];
+        } catch (\PDOException $e) {
+            return ['status' => 'errorPDO', 'message' => $e->getMessage()];
+        }
     }
 }

@@ -11,9 +11,9 @@
             <tbody>
                 <tr v-for="i in list">
                     <td>{{i.descricao}}</td>
-                    <td> <a v-bind:href="'/contas/'+i.id+'/edit'" class="btn btn-info btn-sm">Editar</a> </td>
+                    <td> <a v-bind:href="'/'+model+'/'+i.id+'/edit'" class="btn btn-info btn-sm">Editar</a> </td>
                     <td> 
-                        <form v-bind:action="'/contas/'+i.id" method="POST">
+                        <form v-bind:action="'/'+model+'/'+i.id" method="POST">
                             <slot name="method"></slot>
                             <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
                         </form>
@@ -29,7 +29,8 @@
 <script>
     export default {
         props : [
-            'infos'
+            'infos',
+            'model'
         ],
 
         data(){

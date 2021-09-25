@@ -4,11 +4,12 @@
             Olá {{nomeUsuario}}
         </div>
         <div class="acoes">
-            <a class="acao" v-bind:href="contaRoute">Cadastrar Conta</a>
-            <a class="acao" v-bind:href="receitaRoute">Cadastrar Receita</a>
-            <a class="acao">Cadastrar Despesa</a>
-            <a class="acao">Cadastrar Objetivo</a>
-            <a class="acao">Cadastrar Investimento</a>
+            <a class="acao" href="/contas">Contas</a>
+            <a class="acao" href="/receitas">Receitas</a>
+            <a class="acao">Despesas</a>
+            <a class="acao" href="/categorias">Categorias</a>
+            <a class="acao">Objetivos</a>
+            <a class="acao">Investimentos</a>
         </div>
     </div>
 </template>
@@ -16,9 +17,7 @@
 <script>
     export default {
         props : [
-            'nomeUsuario',
-            'receitaRoute',
-            'contaRoute'
+            'nomeUsuario'
         ],
         mounted() {
             console.log('Component mounted.')
