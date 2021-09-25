@@ -6,10 +6,10 @@
         <div class="acoes">
             <a class="acao" href="/contas">Contas</a>
             <a class="acao" href="/receitas">Receitas</a>
-            <a class="acao">Despesas</a>
             <a class="acao" href="/categorias">Categorias</a>
-            <a class="acao">Objetivos</a>
-            <a class="acao">Investimentos</a>
+            <!-- <a class="acao">Despesas</a> -->
+            <!-- <a class="acao">Objetivos</a> -->
+            <!-- <a class="acao">Investimentos</a> -->
         </div>
     </div>
 </template>

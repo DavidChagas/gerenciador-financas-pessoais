@@ -22,6 +22,7 @@ window.Vue = require('vue').default;
 Vue.component('menu-component', require('./components/MenuComponent.vue').default);
 Vue.component('titulo-form-component', require('./components/TituloFormComponent.vue').default);
 Vue.component('conta-form-component', require('./components/ContaformComponent.vue').default);
+Vue.component('receita-form-component', require('./components/ReceitaformComponent.vue').default);
 Vue.component('categoria-form-component', require('./components/CategoriaformComponent.vue').default);
 Vue.component('listagem-table-component', require('./components/ListagemTableComponent.vue').default);
 Vue.component('modal-exclusao-component', require('./components/ModalExclusaoComponent.vue').default);
