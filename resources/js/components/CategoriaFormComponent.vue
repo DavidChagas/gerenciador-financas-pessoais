@@ -12,7 +12,10 @@
             </div>
             <div class="form-group">
                 <label>Tipo</label>
-                <input class="form-control" type="text" name="tipo" v-bind:value="categoria.tipo">
+                <select class="form-control" name="tipo" v-bind:value="categoria.tipo">
+                    <option value="Receita">Receita</option>
+                    <option value="Despesa">Despesa</option>
+                </select>
             </div>
             <button class="btn btn-primary" type="submit">Cadastrar</button>
         </form>
