@@ -4,7 +4,7 @@
 
 @if(isset($receita))
 	<titulo-form-component titulo="Editar Receita"></titulo-form-component>
-	<receita-form-component action="/receitas/{{$receita->id}}" method="POST" token="{{ csrf_token() }}" receita="{{$receita}}">
+	<receita-form-component action="/receitas/{{$receita->id}}" method="POST" token="{{ csrf_token() }}" receita="{{$receita}}" contas="{{$contas}}" categorias-receita="{{$categoriasReceita}}">
 		<span slot="method">{{ method_field('PUT') }}</span>
 	</receita-form-component>
 @else 

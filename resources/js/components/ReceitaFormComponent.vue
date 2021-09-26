@@ -23,7 +23,7 @@
             </div>
             <div class="form-group">
                 <label>Receita Fixa?</label>
-                <select class="form-control" name="fixa" v-bind:value="receitaObj.fixa">
+                <select class="form-control" name="fixa" v-bind:value="receitaObj.receita_fixa">
                     <option value="sim">Sim</option>
                     <option value="nao">Não</option>
                 </select>
@@ -69,14 +69,13 @@
         },
 
         created(){
-            console.log('222', this.categoriasReceita);
             this.contasObj = JSON.parse(this.contas);
             this.categoriasObj = JSON.parse(this.categoriasReceita);
         },
 
         mounted(){
-            console.log('111', this.categoriasReceita);
             this.receitaObj = JSON.parse(this.receita);
+            console.log(this.receitaObj.data);
         }
     }
 </script>

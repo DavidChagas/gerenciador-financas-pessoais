@@ -2136,13 +2136,12 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   created: function created() {
-    console.log('222', this.categoriasReceita);
     this.contasObj = JSON.parse(this.contas);
     this.categoriasObj = JSON.parse(this.categoriasReceita);
   },
   mounted: function mounted() {
-    console.log('111', this.categoriasReceita);
     this.receitaObj = JSON.parse(this.receita);
+    console.log(this.receitaObj.data);
   }
 });
 
@@ -39195,7 +39194,7 @@ var render = function() {
             {
               staticClass: "form-control",
               attrs: { name: "fixa" },
-              domProps: { value: _vm.receitaObj.fixa }
+              domProps: { value: _vm.receitaObj.receita_fixa }
             },
             [
               _c("option", { attrs: { value: "sim" } }, [_vm._v("Sim")]),

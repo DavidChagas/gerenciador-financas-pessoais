@@ -51,14 +51,34 @@ class ReceitaController extends Controller{
     }
 
     public function edit(Receita $receita){
-        return view('layouts.receitas.cadastrar')->with('receita', $receita);
+        $contas = $this->conta::all();
+        $categoriasReceita = $this->categoria::all()->where('tipo', 'Receita');
+        
+        return view('layouts.receitas.cadastrar')->with('receita', $receita)->with('contas', $contas)->with('categoriasReceita', $categoriasReceita);
     }
 
     public function update(Request $request, Receita $receita){
-        //
+        $receita->descricao = $request->input('descricao');
+        $receita->status = $request->input('status');
+        $receita->data = $request->input('data');
+        $receita->receita_fixa = $request->input('fixa');
+        $receita->observacao = $request->input('observacao');
+        $receita->conta_id = $request->input('conta');
+        $receita->categoria_id = $request->input('categoria');
+       
+        $receita->save();
+
+        return redirect('/receitas')->with('success', 'Receita alterada com sucesso!');
     }
 
     public function destroy(Receita $receita){
-        //
+        try {
+            $receita->delete();
+            return redirect('/receitas')->with('success', 'receita excluida com sucesso!');
+        } catch (\Illuminate\Database\QueryException $qe) {
+            return ['status' => 'errorQuery', 'message' => $qe->getMessage()];
+        } catch (\PDOException $e) {
+            return ['status' => 'errorPDO', 'message' => $e->getMessage()];
+        }
     }
 }
