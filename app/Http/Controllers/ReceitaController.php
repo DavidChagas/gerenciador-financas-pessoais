@@ -31,7 +31,19 @@ class ReceitaController extends Controller{
     }
 
     public function store(Request $request){
-        //
+        $receita =  $this->receita;
+        $receita->descricao = $request->input('descricao');
+        $receita->status = $request->input('status');
+        $receita->data = $request->input('data');
+        $receita->receita_fixa = $request->input('fixa');
+        $receita->observacao = $request->input('observacao');
+        $receita->conta_id = $request->input('conta');
+        $receita->categoria_id = $request->input('categoria');
+        // $receita->usuario_id = $request->user()->id;
+
+        $receita->save();
+
+        return redirect('/receitas')->with('success', 'receita salva com sucesso!');
     }
 
     public function show(Receita $receita){

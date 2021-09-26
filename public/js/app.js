@@ -39212,7 +39212,7 @@ var render = function() {
             "select",
             { staticClass: "form-control", attrs: { name: "conta" } },
             _vm._l(_vm.contasObj, function(conta) {
-              return _c("option", { attrs: { value: "sim" } }, [
+              return _c("option", { domProps: { value: conta.id } }, [
                 _vm._v(_vm._s(conta.descricao))
               ])
             }),
@@ -39227,7 +39227,7 @@ var render = function() {
             "select",
             { staticClass: "form-control", attrs: { name: "categoria" } },
             _vm._l(_vm.categoriasObj, function(categoria) {
-              return _c("option", { attrs: { value: "sim" } }, [
+              return _c("option", { domProps: { value: categoria.id } }, [
                 _vm._v(_vm._s(categoria.descricao))
               ])
             }),

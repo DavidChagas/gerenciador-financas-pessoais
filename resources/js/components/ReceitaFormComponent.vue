@@ -31,13 +31,13 @@
             <div class="form-group">
                 <label>Conta</label>
                 <select class="form-control" name="conta">
-                    <option value="sim" v-for="conta in contasObj">{{conta.descricao}}</option>
+                    <option v-bind:value="conta.id" v-for="conta in contasObj">{{conta.descricao}}</option>
                 </select>
             </div>
             <div class="form-group">
                 <label>Categorias</label>
                 <select class="form-control" name="categoria">
-                    <option value="sim" v-for="categoria in categoriasObj">{{categoria.descricao}}</option>
+                    <option v-bind:value="categoria.id" v-for="categoria in categoriasObj">{{categoria.descricao}}</option>
                 </select>
             </div>
             <div class="form-group">

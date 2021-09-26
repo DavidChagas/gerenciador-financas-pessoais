@@ -9,7 +9,6 @@
 	</receita-form-component>
 @else 
 	<titulo-form-component titulo="Cadastrar Receita"></titulo-form-component>
-	{{$categoriasReceita}}
 	<receita-form-component action="/receitas" method="POST" token="{{ csrf_token() }}" receita="''" contas="{{$contas}}" categorias-receita="{{$categoriasReceita}}"></receita-form-component>
 @endif
 
