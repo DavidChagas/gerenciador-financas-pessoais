@@ -10,6 +10,7 @@
                 <label>Descrição</label>
                 <input class="form-control" type="text" name="descricao" v-bind:value="conta.descricao">
             </div>
+            <button class="btn btn-danger" type="button" v-on:click="voltar()">Voltar</button>
             <button class="btn btn-primary" type="submit">Cadastrar</button>
         </form>
     </div>
@@ -28,6 +29,12 @@
         data(){
             return {
                 conta: {}
+            }
+        },
+
+        methods:{
+            voltar(){
+                window.history.back();
             }
         },
 
