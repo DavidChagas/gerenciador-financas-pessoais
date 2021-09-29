@@ -23,7 +23,9 @@
     <div id="app">
         <div class="menu-lateral">
             @auth
-                <menu-component nome-usuario="{{Auth::user()->nome}}"></menu-component>
+                <menu-component nome-usuario="{{Auth::user()->nome}}">
+                    <span slot="method">@csrf</span>
+                </menu-component>
             @endauth
         </div>
         <div class="pagina">

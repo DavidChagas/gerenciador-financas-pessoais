@@ -4,12 +4,19 @@
             Olá {{nomeUsuario}}
         </div>
         <div class="acoes">
-            <a class="acao" href="/contas">Contas</a>
-            <a class="acao" href="/receitas">Receitas</a>
-            <a class="acao" href="/categorias">Categorias</a>
-            <!-- <a class="acao">Despesas</a> -->
-            <!-- <a class="acao">Objetivos</a> -->
-            <!-- <a class="acao">Investimentos</a> -->
+            <div class="paginas">
+                <a class="acao" href="/">Dashboard</a>
+                <a class="acao" href="/contas">Contas</a>
+                <a class="acao" href="/receitas">Receitas</a>
+                <a class="acao" href="/categorias">Categorias</a>
+                <!-- <a class="acao">Despesas</a> -->
+                <!-- <a class="acao">Objetivos</a> -->
+                <!-- <a class="acao">Investimentos</a> -->
+            </div>
+            <form action="/logout" method="POST">
+                <slot name="method"></slot>
+                <button type="submit" class="btn btn-danger btn-sm">Logout</button>
+            </form>
         </div>
     </div>
 </template>
@@ -44,20 +51,43 @@
         }
 
         .acoes{
+            height: 90%;
             display: flex;
             flex-direction: column;
+            justify-content: space-between;
 
-            .acao{
-                margin: 5px 0;
-                padding: 5px 0;
-
-                color: white;
-                text-decoration: none;
+            .paginas{
+                display: flex;
+                flex-direction: column;
                 
-                &:hover{
-                    cursor: pointer;
-                    color: #ddd;
-                } 
+                .acao{
+                    margin: 5px 0;
+                    padding: 5px 0;
+
+                    color: white;
+                    text-decoration: none;
+                    
+                    &:hover{
+                        cursor: pointer;
+                        color: #ddd;
+                    } 
+                }
+            }
+
+            form{
+                display: flex;
+                justify-content: center;
+
+                button{
+                    padding: 2px;
+                    background-color: transparent;
+                    color: white;
+                    border-left: none;
+                    border-right: none;
+                    border-top: none;
+                    border-bottom: 1px solid #eee;
+                    border-radius: 0;
+                }
             }
         }
     }

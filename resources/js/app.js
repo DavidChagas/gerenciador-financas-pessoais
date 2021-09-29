@@ -26,6 +26,7 @@ Vue.component('receita-form-component', require('./components/ReceitaformCompone
 Vue.component('categoria-form-component', require('./components/CategoriaformComponent.vue').default);
 Vue.component('listagem-table-component', require('./components/ListagemTableComponent.vue').default);
 Vue.component('modal-exclusao-component', require('./components/ModalExclusaoComponent.vue').default);
+Vue.component('home-component', require('./components/HomeComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
