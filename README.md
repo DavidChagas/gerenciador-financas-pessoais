@@ -12,7 +12,7 @@ No arquivo php.ini remover ; das linhas:<br>
 ;extension=pdo_mysql
 </p>
 
-<h2>Configuração de Projeto<h2>
+<h2>Configuração de Projeto</h2>
     
 <p>
 -Criar um arquivo chamado .env na raiz do projeto utilizando como base o arquivo .env.example alterando apenas as variáveis DB_USERNAME e DB_PASSWORD conforme as configurações do seu banco de dados.<br>
