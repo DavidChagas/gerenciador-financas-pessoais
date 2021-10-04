@@ -9,10 +9,10 @@ class CreateReceitasTable extends Migration
     public function up(){
         Schema::create('receitas', function (Blueprint $table) {
             $table->increments('id');
-            $table->boolean('status');
+            $table->text('status');
             $table->date('data');
             $table->text('descricao');
-            $table->boolean('receita_fixa');
+            $table->text('receita_fixa');
             $table->text('observacao');
 
             $table->integer('conta_id')->unsigned();
