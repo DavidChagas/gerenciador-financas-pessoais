@@ -33,12 +33,13 @@
 </script>
 
 <style lang="scss">
+    @import "../../sass/_variables.scss";
     .componente-menu{
         height: 100vh;
 
         padding: 30px;
 
-        background-color: #212120;
+        background-color: $brand-primary;
         box-shadow: 5px 4px 25px #555;
         color: white;
 

@@ -20,18 +20,23 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app">
-        <div class="menu-lateral">
-            @auth
+    @auth
+        <div id="app">
+            <div class="menu-lateral">
                 <menu-component nome-usuario="{{Auth::user()->nome}}">
                     <span slot="method">@csrf</span>
                 </menu-component>
-            @endauth
+            </div>
+            <div class="pagina">
+                @yield('content')
+            </div>
         </div>
-        <div class="pagina">
-            @yield('content')
+    @else
+        <div id="app-login">
+            <div class="pagina">
+                @yield('content')
+            </div>
         </div>
-           
-    </div>
+    @endauth
 </body>
 </html>
