@@ -32,6 +32,7 @@ class ReceitaController extends Controller{
 
     public function store(Request $request){
         $receita =  $this->receita;
+        $receita->valor = $request->input('valor');
         $receita->descricao = $request->input('descricao');
         $receita->status = $request->input('status');
         $receita->data = $request->input('data');
@@ -58,6 +59,7 @@ class ReceitaController extends Controller{
     }
 
     public function update(Request $request, Receita $receita){
+        $receita->valor = $request->input('valor');
         $receita->descricao = $request->input('descricao');
         $receita->status = $request->input('status');
         $receita->data = $request->input('data');

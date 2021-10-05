@@ -2164,6 +2164,118 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/DespesaformComponent.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/DespesaformComponent.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: ['action', 'method', 'token', 'despesa', 'contas', 'categoriasDespesa'],
+  data: function data() {
+    return {
+      despesaObj: {},
+      contasObj: [],
+      categoriasObj: []
+    };
+  },
+  created: function created() {
+    this.contasObj = JSON.parse(this.contas);
+    this.categoriasObj = JSON.parse(this.categoriasDespesa);
+  },
+  methods: {
+    voltar: function voltar() {
+      window.history.back();
+    }
+  },
+  mounted: function mounted() {
+    this.despesaObj = JSON.parse(this.despesa);
+    console.log(this.despesaObj.data);
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/HomeComponent.vue?vue&type=script&lang=js&":
 /*!********************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/HomeComponent.vue?vue&type=script&lang=js& ***!
@@ -2422,6 +2534,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['action', 'method', 'token', 'receita', 'contas', 'categoriasReceita'],
   data: function data() {
@@ -2499,6 +2617,7 @@ Vue.component('menu-component', __webpack_require__(/*! ./components/MenuCompone
 Vue.component('titulo-form-component', __webpack_require__(/*! ./components/TituloFormComponent.vue */ "./resources/js/components/TituloFormComponent.vue")["default"]);
 Vue.component('conta-form-component', __webpack_require__(/*! ./components/ContaformComponent.vue */ "./resources/js/components/ContaformComponent.vue")["default"]);
 Vue.component('receita-form-component', __webpack_require__(/*! ./components/ReceitaformComponent.vue */ "./resources/js/components/ReceitaformComponent.vue")["default"]);
+Vue.component('despesa-form-component', __webpack_require__(/*! ./components/DespesaformComponent.vue */ "./resources/js/components/DespesaformComponent.vue")["default"]);
 Vue.component('categoria-form-component', __webpack_require__(/*! ./components/CategoriaformComponent.vue */ "./resources/js/components/CategoriaformComponent.vue")["default"]);
 Vue.component('listagem-table-component', __webpack_require__(/*! ./components/ListagemTableComponent.vue */ "./resources/js/components/ListagemTableComponent.vue")["default"]);
 Vue.component('modal-exclusao-component', __webpack_require__(/*! ./components/ModalExclusaoComponent.vue */ "./resources/js/components/ModalExclusaoComponent.vue")["default"]);
@@ -38645,6 +38764,45 @@ component.options.__file = "resources/js/components/ContaformComponent.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/DespesaformComponent.vue":
+/*!**********************************************************!*\
+  !*** ./resources/js/components/DespesaformComponent.vue ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _DespesaformComponent_vue_vue_type_template_id_17e7778f___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DespesaformComponent.vue?vue&type=template&id=17e7778f& */ "./resources/js/components/DespesaformComponent.vue?vue&type=template&id=17e7778f&");
+/* harmony import */ var _DespesaformComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DespesaformComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/DespesaformComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _DespesaformComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _DespesaformComponent_vue_vue_type_template_id_17e7778f___WEBPACK_IMPORTED_MODULE_0__.render,
+  _DespesaformComponent_vue_vue_type_template_id_17e7778f___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/DespesaformComponent.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/HomeComponent.vue":
 /*!***************************************************!*\
   !*** ./resources/js/components/HomeComponent.vue ***!
@@ -38921,6 +39079,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/DespesaformComponent.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/components/DespesaformComponent.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DespesaformComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DespesaformComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/DespesaformComponent.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DespesaformComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/HomeComponent.vue?vue&type=script&lang=js&":
 /*!****************************************************************************!*\
   !*** ./resources/js/components/HomeComponent.vue?vue&type=script&lang=js& ***!
@@ -39112,6 +39286,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ContaformComponent_vue_vue_type_template_id_14dc1396___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ContaformComponent_vue_vue_type_template_id_14dc1396___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ContaformComponent.vue?vue&type=template&id=14dc1396& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ContaformComponent.vue?vue&type=template&id=14dc1396&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/DespesaformComponent.vue?vue&type=template&id=17e7778f&":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/components/DespesaformComponent.vue?vue&type=template&id=17e7778f& ***!
+  \*****************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DespesaformComponent_vue_vue_type_template_id_17e7778f___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DespesaformComponent_vue_vue_type_template_id_17e7778f___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DespesaformComponent_vue_vue_type_template_id_17e7778f___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DespesaformComponent.vue?vue&type=template&id=17e7778f& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/DespesaformComponent.vue?vue&type=template&id=17e7778f&");
 
 
 /***/ }),
@@ -39396,6 +39587,197 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/DespesaformComponent.vue?vue&type=template&id=17e7778f&":
+/*!********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/DespesaformComponent.vue?vue&type=template&id=17e7778f& ***!
+  \********************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "componente-despesa-form" }, [
+    _c("div", { staticClass: "descricao" }, [
+      _vm._v(
+        "\n        Aqui você poderá cadastrar todas as suas despesas.\n    "
+      )
+    ]),
+    _vm._v(" "),
+    _c(
+      "form",
+      { attrs: { action: _vm.action, method: _vm.method } },
+      [
+        _vm._t("method"),
+        _vm._v(" "),
+        _c("input", {
+          attrs: { type: "hidden", name: "_token" },
+          domProps: { value: _vm.token }
+        }),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-sm-5" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", [_vm._v("Valor")]),
+              _vm._v(" "),
+              _c("input", {
+                staticClass: "form-control",
+                attrs: { type: "text", name: "valor" },
+                domProps: { value: _vm.despesaObj.valor }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-5" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", [_vm._v("Descrição")]),
+              _vm._v(" "),
+              _c("input", {
+                staticClass: "form-control",
+                attrs: { type: "text", name: "descricao" },
+                domProps: { value: _vm.despesaObj.descricao }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-2" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", [_vm._v("Status")]),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  staticClass: "form-control",
+                  attrs: { name: "status" },
+                  domProps: { value: _vm.despesaObj.status }
+                },
+                [
+                  _c("option", { attrs: { value: "pago" } }, [_vm._v("Pago")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "nao-pago" } }, [
+                    _vm._v("Não Pago")
+                  ])
+                ]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-6" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", [_vm._v("Data")]),
+              _vm._v(" "),
+              _c("input", {
+                staticClass: "form-control",
+                attrs: { type: "date", name: "data" },
+                domProps: { value: _vm.despesaObj.data }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-6" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", [_vm._v("Despesa Fixa?")]),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  staticClass: "form-control",
+                  attrs: { name: "fixa" },
+                  domProps: { value: _vm.despesaObj.despesa_fixa }
+                },
+                [
+                  _c("option", { attrs: { value: "sim" } }, [_vm._v("Sim")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "nao" } }, [_vm._v("Não")])
+                ]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-6" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", [_vm._v("Conta")]),
+              _vm._v(" "),
+              _c(
+                "select",
+                { staticClass: "form-control", attrs: { name: "conta" } },
+                _vm._l(_vm.contasObj, function(conta) {
+                  return _c("option", { domProps: { value: conta.id } }, [
+                    _vm._v(_vm._s(conta.descricao))
+                  ])
+                }),
+                0
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-6" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", [_vm._v("Categorias")]),
+              _vm._v(" "),
+              _c(
+                "select",
+                { staticClass: "form-control", attrs: { name: "categoria" } },
+                _vm._l(_vm.categoriasObj, function(categoria) {
+                  return _c("option", { domProps: { value: categoria.id } }, [
+                    _vm._v(_vm._s(categoria.descricao))
+                  ])
+                }),
+                0
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-12" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", [_vm._v("Observação")]),
+              _vm._v(" "),
+              _c("textarea", {
+                staticClass: "form-control",
+                attrs: { type: "observacao", rows: "5", name: "observacao" },
+                domProps: { value: _vm.despesaObj.observacao }
+              })
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-danger",
+            attrs: { type: "button" },
+            on: {
+              click: function($event) {
+                return _vm.voltar()
+              }
+            }
+          },
+          [_vm._v("Voltar")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+          [_vm._v("Cadastrar")]
+        )
+      ],
+      2
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/HomeComponent.vue?vue&type=template&id=782dcf83&":
 /*!*************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/HomeComponent.vue?vue&type=template&id=782dcf83& ***!
@@ -39590,12 +39972,16 @@ var staticRenderFns = [
         _vm._v("Contas")
       ]),
       _vm._v(" "),
+      _c("a", { staticClass: "acao", attrs: { href: "/categorias" } }, [
+        _vm._v("Categorias")
+      ]),
+      _vm._v(" "),
       _c("a", { staticClass: "acao", attrs: { href: "/receitas" } }, [
         _vm._v("Receitas")
       ]),
       _vm._v(" "),
-      _c("a", { staticClass: "acao", attrs: { href: "/categorias" } }, [
-        _vm._v("Categorias")
+      _c("a", { staticClass: "acao", attrs: { href: "/despesas" } }, [
+        _vm._v("Despesas")
       ])
     ])
   }
@@ -39689,7 +40075,19 @@ var render = function() {
         }),
         _vm._v(" "),
         _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-sm-6" }, [
+          _c("div", { staticClass: "col-sm-5" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", [_vm._v("Valor")]),
+              _vm._v(" "),
+              _c("input", {
+                staticClass: "form-control",
+                attrs: { type: "text", name: "valor" },
+                domProps: { value: _vm.receitaObj.valor }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-5" }, [
             _c("div", { staticClass: "form-group" }, [
               _c("label", [_vm._v("Descrição")]),
               _vm._v(" "),
@@ -39701,7 +40099,7 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col-sm-6" }, [
+          _c("div", { staticClass: "col-sm-2" }, [
             _c("div", { staticClass: "form-group" }, [
               _c("label", [_vm._v("Status")]),
               _vm._v(" "),

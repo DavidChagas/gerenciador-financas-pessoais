@@ -1,7 +1,7 @@
 <template>
-    <div class="componente-receita-form">
+    <div class="componente-despesa-form">
         <div class="descricao">
-            Aqui você poderá cadastrar todas as suas receitas.
+            Aqui você poderá cadastrar todas as suas despesas.
         </div>
         <form v-bind:action="action" v-bind:method="method">
             <slot name="method"></slot>
@@ -11,19 +11,19 @@
                 <div class="col-sm-5">
                     <div class="form-group">
                         <label>Valor</label>
-                        <input class="form-control" type="text" name="valor" v-bind:value="receitaObj.valor">
+                        <input class="form-control" type="text" name="valor" v-bind:value="despesaObj.valor">
                     </div>
                 </div>
                 <div class="col-sm-5">
                     <div class="form-group">
                         <label>Descrição</label>
-                        <input class="form-control" type="text" name="descricao" v-bind:value="receitaObj.descricao">
+                        <input class="form-control" type="text" name="descricao" v-bind:value="despesaObj.descricao">
                     </div>
                 </div>
                 <div class="col-sm-2">
                     <div class="form-group">
                         <label>Status</label>
-                        <select class="form-control" name="status" v-bind:value="receitaObj.status">
+                        <select class="form-control" name="status" v-bind:value="despesaObj.status">
                             <option value="pago">Pago</option>
                             <option value="nao-pago">Não Pago</option>
                         </select>
@@ -32,13 +32,13 @@
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label>Data</label>
-                        <input class="form-control" type="date" name="data" v-bind:value="receitaObj.data">
+                        <input class="form-control" type="date" name="data" v-bind:value="despesaObj.data">
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <label>Receita Fixa?</label>
-                        <select class="form-control" name="fixa" v-bind:value="receitaObj.receita_fixa">
+                        <label>Despesa Fixa?</label>
+                        <select class="form-control" name="fixa" v-bind:value="despesaObj.despesa_fixa">
                             <option value="sim">Sim</option>
                             <option value="nao">Não</option>
                         </select>
@@ -63,7 +63,7 @@
                 <div class="col-sm-12">
                     <div class="form-group">
                         <label>Observação</label>
-                        <textarea class="form-control" type="observacao" rows="5" name="observacao" v-bind:value="receitaObj.observacao"></textarea>
+                        <textarea class="form-control" type="observacao" rows="5" name="observacao" v-bind:value="despesaObj.observacao"></textarea>
                     </div>
                 </div>
             </div>
@@ -79,14 +79,14 @@
             'action',
             'method',
             'token',
-            'receita',
+            'despesa',
             'contas',
-            'categoriasReceita'
+            'categoriasDespesa'
         ],
 
         data(){
             return {
-                receitaObj: {},
+                despesaObj: {},
                 contasObj: [],
                 categoriasObj: []
             }
@@ -94,7 +94,7 @@
 
         created(){
             this.contasObj = JSON.parse(this.contas);
-            this.categoriasObj = JSON.parse(this.categoriasReceita);
+            this.categoriasObj = JSON.parse(this.categoriasDespesa);
         },
 
         methods:{
@@ -104,8 +104,8 @@
         },
 
         mounted(){
-            this.receitaObj = JSON.parse(this.receita);
-            console.log(this.receitaObj.data);
+            this.despesaObj = JSON.parse(this.despesa);
+            console.log(this.despesaObj.data);
         }
     }
 </script>

@@ -7,9 +7,9 @@
             <div class="paginas">
                 <a class="acao" href="/">Dashboard</a>
                 <a class="acao" href="/contas">Contas</a>
-                <a class="acao" href="/receitas">Receitas</a>
                 <a class="acao" href="/categorias">Categorias</a>
-                <!-- <a class="acao">Despesas</a> -->
+                <a class="acao" href="/receitas">Receitas</a>
+                <a class="acao" href="/despesas">Despesas</a>
                 <!-- <a class="acao">Objetivos</a> -->
                 <!-- <a class="acao">Investimentos</a> -->
             </div>

@@ -27,6 +27,13 @@ Route::get('/receitas/{receita}/edit', [App\Http\Controllers\ReceitaController::
 Route::put('/receitas/{receita}', [App\Http\Controllers\ReceitaController::class, 'update'])->middleware('auth');
 Route::delete('/receitas/{receita}', [App\Http\Controllers\ReceitaController::class, 'destroy'])->middleware('auth');
 
+Route::get('/despesas', [App\Http\Controllers\DespesaController::class, 'index'])->name('despesa.listar')->middleware('auth');
+Route::get('/despesas/create', [App\Http\Controllers\DespesaController::class, 'create'])->name('despesa.cadastrar')->middleware('auth');
+Route::post('/despesas', [App\Http\Controllers\DespesaController::class, 'store'])->middleware('auth');
+Route::get('/despesas/{despesa}/edit', [App\Http\Controllers\DespesaController::class, 'edit'])->middleware('auth');
+Route::put('/despesas/{despesa}', [App\Http\Controllers\DespesaController::class, 'update'])->middleware('auth');
+Route::delete('/despesas/{despesa}', [App\Http\Controllers\DespesaController::class, 'destroy'])->middleware('auth');
+
 
 // Route::get('/home', function(){
 // 	return view('layouts/home');

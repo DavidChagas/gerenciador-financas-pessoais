@@ -9,6 +9,7 @@ class CreateReceitasTable extends Migration
     public function up(){
         Schema::create('receitas', function (Blueprint $table) {
             $table->increments('id');
+            $table->decimal('valor');
             $table->text('status');
             $table->date('data');
             $table->text('descricao');
