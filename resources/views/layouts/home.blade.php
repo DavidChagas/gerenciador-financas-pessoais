@@ -2,6 +2,6 @@
 
 @section('content')
 
-<home-component></home-component>
+<home-component datas_receitas="{{$datas_receitas}}" datas_despesas="{{$datas_despesas}}"></home-component>
             
 @endsection

@@ -2299,10 +2299,109 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['nomeUsuario'],
+  props: ['datas_receitas', 'datas_despesas'],
+  data: function data() {
+    return {
+      datas_receitasObj: {},
+      datas_despesasObj: {},
+      datas: []
+    };
+  },
+  created: function created() {
+    this.datas_receitasObj = JSON.parse(this.datas_receitas);
+    this.datas_despesasObj = JSON.parse(this.datas_despesas);
+  },
+  methods: {
+    retornaNomeMes: function retornaNomeMes(mesNumero) {
+      var mes = '';
+
+      switch (mesNumero) {
+        case '01':
+          mes = 'Janeiro';
+          break;
+
+        case '02':
+          mes = 'Fevereiro';
+          break;
+
+        case '03':
+          mes = 'Março';
+          break;
+
+        case '04':
+          mes = 'Abril';
+          break;
+
+        case '05':
+          mes = 'Maio';
+          break;
+
+        case '06':
+          mes = 'Junho';
+          break;
+
+        case '07':
+          mes = 'Julho';
+          break;
+
+        case '08':
+          mes = 'Agosto';
+          break;
+
+        case '09':
+          mes = 'Setembro';
+          break;
+
+        case '10':
+          mes = 'Outubro';
+          break;
+
+        case '11':
+          mes = 'Novembro';
+          break;
+
+        case '12':
+          mes = 'Dezembro';
+          break;
+      }
+
+      return mes;
+    }
+  },
   mounted: function mounted() {
-    console.log('Component mounted.');
+    var _this = this;
+
+    this.datas_receitasObj.forEach(function (receita) {
+      var data = receita.data.split('-');
+      var dataFormatada = data[1] + '-' + data[0];
+
+      if (!_this.datas.includes(dataFormatada)) {
+        _this.datas.push(dataFormatada);
+      }
+    });
+    this.datas_despesasObj.forEach(function (despesa) {
+      var data = despesa.data.split('-');
+      var dataFormatada = data[1] + '-' + data[0];
+
+      if (!_this.datas.includes(dataFormatada)) {
+        _this.datas.push(dataFormatada);
+      }
+    });
+    this.datasFormatadas = this.datas.map(function (data) {
+      return {
+        data: data,
+        descricao: _this.retornaNomeMes(data.split('-')[0]) + ' ' + data.split('-')[1]
+      };
+    });
   }
 });
 
@@ -39794,26 +39893,36 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "componente-home" }, [
-      _c("h1", [_vm._v("Dashboard")]),
+  return _c("div", { staticClass: "componente-home" }, [
+    _c("h1", [_vm._v("Dashboard")]),
+    _vm._v(" "),
+    _c("div", { staticClass: "datas" }, [
+      _c(
+        "select",
+        { staticClass: "form-control", attrs: { name: "data" } },
+        _vm._l(_vm.datasFormatadas, function(data) {
+          return _c("option", { domProps: { value: data.data } }, [
+            _vm._v(_vm._s(data.descricao))
+          ])
+        }),
+        0
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "img-desenvolvimento" }, [
+      _c("img", { attrs: { src: "/images/construcao.jpg" } }),
       _vm._v(" "),
-      _c("div", { staticClass: "img-desenvolvimento" }, [
-        _c("img", { attrs: { src: "/images/construcao.jpg" } }),
-        _vm._v(" "),
-        _c("div", { staticClass: "desenvolvimento" }, [
-          _vm._v("\n            Em desenvolvimento\n        ")
-        ])
+      _c("div", { staticClass: "desenvolvimento" }, [
+        _vm._v(
+          "\n            Em desenvolvimento\n\n            " +
+            _vm._s(_vm.datas) +
+            "\n        "
+        )
       ])
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 

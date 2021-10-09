@@ -3,26 +3,48 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
-class HomeController extends Controller
-{
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
+class HomeController extends Controller{
+    private $meses;
+
+    public function __construct(){
+        
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function index()
-    {
-        return view('layouts/home');
+    public function index(){
+
+        $query_datas_receitas = "SELECT date_format(r.data, '%m-%Y') as data
+                    from contas c 
+                    inner join receitas r on r.conta_id = c.id
+                    where c.usuario_id = ?";
+
+        $query_datas_despesas = "SELECT date_format(d.data, '%m-%Y') as data
+                    from contas c 
+                    inner join despesas d on d.conta_id = c.id
+                    where c.usuario_id = ?";
+
+        // $datas_receitas = DB::select($query_datas_receitas, [Auth::id()]);
+        // $datas_despesas = DB::select($query_datas_despesas, [Auth::id()]);
+
+        $datas_receitas = DB::table('receitas')
+        ->select('data')
+        ->join('contas', function ($join) {
+            $join->on('contas.id', '=', 'receitas.conta_id')
+                 ->where('contas.usuario_id', '=', Auth::id());
+        })
+        ->get();
+
+        $datas_despesas = DB::table('despesas')
+        ->select('data')
+        ->join('contas', function ($join) {
+            $join->on('contas.id', '=', 'despesas.conta_id')
+                 ->where('contas.usuario_id', '=', Auth::id());
+        })
+        ->get();
+
+
+        return view('layouts/home', compact('datas_receitas', 'datas_despesas'));
     }
 }
