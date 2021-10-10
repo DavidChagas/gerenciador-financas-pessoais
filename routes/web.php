@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
+Route::get('/api/teste', [App\Http\Controllers\HomeController::class, 'teste']);
+
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('auth');
 
 Route::get('/contas', [App\Http\Controllers\ContaController::class, 'index'])->name('conta.listar')->middleware('auth');

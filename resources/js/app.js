@@ -7,6 +7,9 @@
 require('./bootstrap');
 
 window.Vue = require('vue').default;
+window.VueResource = require('vue-resource').default;
+
+Vue.use(VueResource);
 
 /**
  * The following block of code may be used to automatically register your

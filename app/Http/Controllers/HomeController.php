@@ -47,4 +47,9 @@ class HomeController extends Controller{
 
         return view('layouts/home', compact('datas_receitas', 'datas_despesas'));
     }
+
+    public function teste(Request $request){
+        echo $_GET['teste'];
+        return 'top demais';
+    }
 }

@@ -29,7 +29,8 @@
             return {
                 datas_receitasObj: {},
                 datas_despesasObj: {},
-                datas: []
+                datas: [],
+                datasFormatadas: []
             }
         },
 
@@ -40,6 +41,14 @@
         },
 
         methods:{
+            getTotais(){
+                this.$http.get('/api/teste?teste=ss').then(response => {
+                    console.log('responseee:', response.body);
+                }, err => {
+                    console.log('err: ');
+                });
+            },
+
             retornaNomeMes(mesNumero){
                 let mes = '';
                 switch(mesNumero){
@@ -106,6 +115,8 @@
             this.datasFormatadas = this.datas.map(data =>{
                 return {data: data, descricao: this.retornaNomeMes(data.split('-')[0])+' '+data.split('-')[1]}
             })
+
+            this.getTotais();
         }
     }
 </script>
