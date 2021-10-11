@@ -7,18 +7,20 @@
                 <option v-bind:value="data.data" v-for="data in datasFormatadas">{{data.descricao}}</option>
             </select>
         </div>
-        <div class="img-desenvolvimento">
-            <img src="/images/construcao.jpg">
-            <div class="desenvolvimento">
-                Em desenvolvimento
-
-                {{datas}}
+        <div class="totais">
+            <div class="total">
+                Total de Receitas R${{formatPrice(totalReceitas)}}
+            </div>
+            <div class="total">
+                Total de Despesas R${{formatPrice(totalDespesas)}}
             </div>
         </div>
     </div>
 </template>
 
 <script>
+    import moment from 'moment';
+    
     export default {
         props : [
             'datas_receitas',
@@ -30,7 +32,9 @@
                 datas_receitasObj: {},
                 datas_despesasObj: {},
                 datas: [],
-                datasFormatadas: []
+                datasFormatadas: [],
+                totalReceitas: '',
+                totalDespesas: ''
             }
         },
 
@@ -41,9 +45,16 @@
         },
 
         methods:{
-            getTotais(){
-                this.$http.get('/api/teste?teste=ss').then(response => {
-                    console.log('responseee:', response.body);
+            formatPrice(value) {
+                let val = (value/1).toFixed(2).replace('.', ',')
+                return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+            },
+
+            getTotais(firstDay, lastDay){
+                this.$http.get(`/api/teste?first=${firstDay}&last=${lastDay}`).then(response => {
+                   
+                    this.totalReceitas = response.body[0].total_receitas;
+                    this.totalDespesas = response.body[1].total_despesas;
                 }, err => {
                     console.log('err: ');
                 });
@@ -116,7 +127,10 @@
                 return {data: data, descricao: this.retornaNomeMes(data.split('-')[0])+' '+data.split('-')[1]}
             })
 
-            this.getTotais();
+            const firstDay = moment().startOf('month').format('YYYY-MM-DD');
+            const lastDay   = moment().endOf('month').format('YYYY-MM-DD');
+
+            this.getTotais(firstDay, lastDay);
         }
     }
 </script>
@@ -126,20 +140,20 @@
         h1{
             margin: 50px 0 100px 0;
         }
-        .img-desenvolvimento{
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+        .totais{
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-column-gap: 10px;
+            
+            .total{
+                height: 100px;
+                background-color: #eee;
+                box-shadow: 3px 3px 5px #aaa;
+                border-radius: 5px;
 
-            img{
-                width: 420px;
-            }
-
-            .desenvolvimento{
-                font-size: 20px;
-                color: #aaa;
+                display: flex;
+                justify-content: center;
+                align-items: center;
             }
         }
     }

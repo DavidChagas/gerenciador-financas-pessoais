@@ -49,7 +49,12 @@ class HomeController extends Controller{
     }
 
     public function teste(Request $request){
-        echo $_GET['teste'];
-        return 'top demais';
+        $first = (String) $_GET['first'];
+        $last = (String) $_GET['last'];
+
+        $soma_receitas = DB::table('receitas')->select(DB::raw('SUM(valor) AS total_receitas'))->whereBetween('data', ["$first", "$last"])->get();
+        $soma_despesas = DB::table('despesas')->select(DB::raw('SUM(valor) AS total_despesas'))->whereBetween('data', ["$first", "$last"])->get();
+        
+        return [$soma_receitas[0], $soma_despesas[0]];
     }
 }
