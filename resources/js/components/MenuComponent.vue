@@ -35,7 +35,10 @@
 <style lang="scss">
     @import "../../sass/_variables.scss";
     .componente-menu{
+        position: fixed;
+
         height: 100vh;
+        width: 25%;
 
         padding: 30px;
 
