@@ -3,8 +3,8 @@
         <h1>Dashboard</h1>
 
         <div class="datas">
-            <select class="form-control" name="data">
-                <option v-bind:value="data.data" v-for="data in datasFormatadas">{{data.descricao}}</option>
+            <select class="form-control" name="data" v-model="dataSelecionada" v-on:change="getTotais(dataSelecionada)">
+                <option v-bind:key="data.data" v-bind:value="data.data" v-for="data in datasFormatadas">{{data.descricao}}</option>
             </select>
         </div>
         <div class="totais">
@@ -34,7 +34,8 @@
                 datas: [],
                 datasFormatadas: [],
                 totalReceitas: '',
-                totalDespesas: ''
+                totalDespesas: '',
+                dataSelecionada: ''
             }
         },
 
@@ -50,7 +51,10 @@
                 return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
             },
 
-            getTotais(firstDay, lastDay){
+            getTotais(dataSelecionada){
+                const firstDay = dataSelecionada+'-01';
+                const lastDay = dataSelecionada+'-31';
+
                 this.$http.get(`/api/teste?first=${firstDay}&last=${lastDay}`).then(response => {
                    
                     this.totalReceitas = response.body[0].total_receitas;
@@ -108,7 +112,7 @@
         mounted() {
             this.datas_receitasObj.forEach(receita =>{
                 let data = receita.data.split('-');
-                let dataFormatada = data[1]+'-'+data[0];
+                let dataFormatada = data[0]+'-'+data[1];
                 if( !this.datas.includes(dataFormatada) ){
                     this.datas.push(dataFormatada);
                 }
@@ -116,7 +120,7 @@
 
             this.datas_despesasObj.forEach(despesa =>{
                 let data = despesa.data.split('-');
-                let dataFormatada = data[1]+'-'+data[0];
+                let dataFormatada = data[0]+'-'+data[1];
 
                 if( !this.datas.includes(dataFormatada) ){
                     this.datas.push(dataFormatada)
@@ -124,13 +128,13 @@
             });
             
             this.datasFormatadas = this.datas.map(data =>{
-                return {data: data, descricao: this.retornaNomeMes(data.split('-')[0])+' '+data.split('-')[1]}
+                return {data: data, descricao: this.retornaNomeMes(data.split('-')[1])+' '+data.split('-')[0]}
             })
 
-            const firstDay = moment().startOf('month').format('YYYY-MM-DD');
-            const lastDay   = moment().endOf('month').format('YYYY-MM-DD');
+            const mesAtual = moment().format('YYYY-MM');
+            this.dataSelecionada = mesAtual;
 
-            this.getTotais(firstDay, lastDay);
+            this.getTotais(mesAtual);
         }
     }
 </script>
@@ -140,6 +144,25 @@
         h1{
             margin: 50px 0 100px 0;
         }
+
+        .datas{
+            width: 200px;
+            margin: 0 auto 40px;
+
+            select{
+                border-top: none;
+                border-left: none;
+                border-right: none;
+                border-radius: 0px;
+
+                &:focus{
+                    border-color: transparent;
+                    outline: none;
+                    box-shadow: none;
+                }
+            }
+        }
+
         .totais{
             display: grid;
             grid-template-columns: repeat(2, 1fr);

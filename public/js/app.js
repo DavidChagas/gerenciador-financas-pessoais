@@ -2099,7 +2099,8 @@ __webpack_require__.r(__webpack_exports__);
       datas: [],
       datasFormatadas: [],
       totalReceitas: '',
-      totalDespesas: ''
+      totalDespesas: '',
+      dataSelecionada: ''
     };
   },
   created: function created() {
@@ -2111,9 +2112,11 @@ __webpack_require__.r(__webpack_exports__);
       var val = (value / 1).toFixed(2).replace('.', ',');
       return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     },
-    getTotais: function getTotais(firstDay, lastDay) {
+    getTotais: function getTotais(dataSelecionada) {
       var _this = this;
 
+      var firstDay = dataSelecionada + '-01';
+      var lastDay = dataSelecionada + '-31';
       this.$http.get("/api/teste?first=".concat(firstDay, "&last=").concat(lastDay)).then(function (response) {
         _this.totalReceitas = response.body[0].total_receitas;
         _this.totalDespesas = response.body[1].total_despesas;
@@ -2182,7 +2185,7 @@ __webpack_require__.r(__webpack_exports__);
 
     this.datas_receitasObj.forEach(function (receita) {
       var data = receita.data.split('-');
-      var dataFormatada = data[1] + '-' + data[0];
+      var dataFormatada = data[0] + '-' + data[1];
 
       if (!_this2.datas.includes(dataFormatada)) {
         _this2.datas.push(dataFormatada);
@@ -2190,7 +2193,7 @@ __webpack_require__.r(__webpack_exports__);
     });
     this.datas_despesasObj.forEach(function (despesa) {
       var data = despesa.data.split('-');
-      var dataFormatada = data[1] + '-' + data[0];
+      var dataFormatada = data[0] + '-' + data[1];
 
       if (!_this2.datas.includes(dataFormatada)) {
         _this2.datas.push(dataFormatada);
@@ -2199,12 +2202,12 @@ __webpack_require__.r(__webpack_exports__);
     this.datasFormatadas = this.datas.map(function (data) {
       return {
         data: data,
-        descricao: _this2.retornaNomeMes(data.split('-')[0]) + ' ' + data.split('-')[1]
+        descricao: _this2.retornaNomeMes(data.split('-')[1]) + ' ' + data.split('-')[0]
       };
     });
-    var firstDay = moment__WEBPACK_IMPORTED_MODULE_0___default()().startOf('month').format('YYYY-MM-DD');
-    var lastDay = moment__WEBPACK_IMPORTED_MODULE_0___default()().endOf('month').format('YYYY-MM-DD');
-    this.getTotais(firstDay, lastDay);
+    var mesAtual = moment__WEBPACK_IMPORTED_MODULE_0___default()().format('YYYY-MM');
+    this.dataSelecionada = mesAtual;
+    this.getTotais(mesAtual);
   }
 });
 
@@ -7040,7 +7043,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".componente-home h1 {\n  margin: 50px 0 100px 0;\n}\n.componente-home .totais {\n  display: grid;\n  grid-template-columns: repeat(2, 1fr);\n  grid-column-gap: 10px;\n}\n.componente-home .totais .total {\n  height: 100px;\n  background-color: #eee;\n  box-shadow: 3px 3px 5px #aaa;\n  border-radius: 5px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".componente-home h1 {\n  margin: 50px 0 100px 0;\n}\n.componente-home .datas {\n  width: 200px;\n  margin: 0 auto 40px;\n}\n.componente-home .datas select {\n  border-top: none;\n  border-left: none;\n  border-right: none;\n  border-radius: 0px;\n}\n.componente-home .datas select:focus {\n  border-color: transparent;\n  outline: none;\n  box-shadow: none;\n}\n.componente-home .totais {\n  display: grid;\n  grid-template-columns: repeat(2, 1fr);\n  grid-column-gap: 10px;\n}\n.componente-home .totais .total {\n  height: 100px;\n  background-color: #eee;\n  box-shadow: 3px 3px 5px #aaa;\n  border-radius: 5px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -61138,11 +61141,44 @@ var render = function() {
     _c("div", { staticClass: "datas" }, [
       _c(
         "select",
-        { staticClass: "form-control", attrs: { name: "data" } },
+        {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.dataSelecionada,
+              expression: "dataSelecionada"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: { name: "data" },
+          on: {
+            change: [
+              function($event) {
+                var $$selectedVal = Array.prototype.filter
+                  .call($event.target.options, function(o) {
+                    return o.selected
+                  })
+                  .map(function(o) {
+                    var val = "_value" in o ? o._value : o.value
+                    return val
+                  })
+                _vm.dataSelecionada = $event.target.multiple
+                  ? $$selectedVal
+                  : $$selectedVal[0]
+              },
+              function($event) {
+                return _vm.getTotais(_vm.dataSelecionada)
+              }
+            ]
+          }
+        },
         _vm._l(_vm.datasFormatadas, function(data) {
-          return _c("option", { domProps: { value: data.data } }, [
-            _vm._v(_vm._s(data.descricao))
-          ])
+          return _c(
+            "option",
+            { key: data.data, domProps: { value: data.data } },
+            [_vm._v(_vm._s(data.descricao))]
+          )
         }),
         0
       )
