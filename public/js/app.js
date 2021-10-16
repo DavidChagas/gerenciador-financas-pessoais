@@ -2089,9 +2089,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['datas_receitas', 'datas_despesas'],
+  props: ['datas_receitas', 'datas_despesas', 'saldo_total'],
   data: function data() {
     return {
       datas_receitasObj: {},
@@ -7043,7 +7047,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".componente-home h1 {\n  margin: 50px 0 100px 0;\n}\n.componente-home .datas {\n  width: 200px;\n  margin: 0 auto 40px;\n}\n.componente-home .datas select {\n  border-top: none;\n  border-left: none;\n  border-right: none;\n  border-radius: 0px;\n}\n.componente-home .datas select:focus {\n  border-color: transparent;\n  outline: none;\n  box-shadow: none;\n}\n.componente-home .totais {\n  display: grid;\n  grid-template-columns: repeat(2, 1fr);\n  grid-column-gap: 10px;\n}\n.componente-home .totais .total {\n  height: 100px;\n  background-color: #eee;\n  box-shadow: 3px 3px 5px #aaa;\n  border-radius: 5px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".componente-home h1 {\n  margin: 50px 0 50px 0;\n}\n.componente-home .saldoTotal {\n  margin-bottom: 30px;\n  text-align: center;\n  font-size: 20px;\n  font-weight: bold;\n  color: #444;\n}\n.componente-home .datas {\n  width: 200px;\n  margin: 0 auto 40px;\n}\n.componente-home .datas select {\n  border-top: none;\n  border-left: none;\n  border-right: none;\n  border-radius: 0px;\n}\n.componente-home .datas select:focus {\n  border-color: transparent;\n  outline: none;\n  box-shadow: none;\n}\n.componente-home .totais {\n  display: grid;\n  grid-template-columns: repeat(2, 1fr);\n  grid-column-gap: 10px;\n}\n.componente-home .totais .total {\n  height: 100px;\n  background-color: #eee;\n  box-shadow: 3px 3px 5px #aaa;\n  border-radius: 5px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -7139,7 +7143,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".componente-titulo-form {\n  width: 100%;\n  margin: 50px 0 100px 0;\n  text-align: center;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".componente-titulo-form {\n  width: 100%;\n  margin: 50px 0 50px 0;\n  text-align: center;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -61137,6 +61141,14 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "componente-home" }, [
     _c("h1", [_vm._v("Dashboard")]),
+    _vm._v(" "),
+    _c("div", { staticClass: "saldoTotal" }, [
+      _c("small", [_vm._v("Saldo em Contas")]),
+      _c("br"),
+      _vm._v(
+        "\n        R$" + _vm._s(_vm.formatPrice(_vm.saldo_total)) + "\n    "
+      )
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "datas" }, [
       _c(

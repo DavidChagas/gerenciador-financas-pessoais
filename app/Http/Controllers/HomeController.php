@@ -13,20 +13,7 @@ class HomeController extends Controller{
         
     }
 
-    public function index(){
-
-        $query_datas_receitas = "SELECT date_format(r.data, '%m-%Y') as data
-                    from contas c 
-                    inner join receitas r on r.conta_id = c.id
-                    where c.usuario_id = ?";
-
-        $query_datas_despesas = "SELECT date_format(d.data, '%m-%Y') as data
-                    from contas c 
-                    inner join despesas d on d.conta_id = c.id
-                    where c.usuario_id = ?";
-
-        // $datas_receitas = DB::select($query_datas_receitas, [Auth::id()]);
-        // $datas_despesas = DB::select($query_datas_despesas, [Auth::id()]);
+    public function index(){          
 
         $datas_receitas = DB::table('receitas')
         ->select('data')
@@ -43,9 +30,15 @@ class HomeController extends Controller{
                  ->where('contas.usuario_id', '=', Auth::id());
         })
         ->get();
+    
+        $query_saldo_total_receitas = "select sum(valor) as total from receitas where usuario_id = ?";
+        $query_saldo_total_despesas = "select sum(valor) as total from despesas where usuario_id = ?";
 
-
-        return view('layouts/home', compact('datas_receitas', 'datas_despesas'));
+        $saldo_total_receitas = DB::select($query_saldo_total_receitas, [Auth::id()]);
+        $saldo_total_despesas = DB::select($query_saldo_total_despesas, [Auth::id()]);
+        $saldo_total = (int) $saldo_total_receitas[0]->total - (int) $saldo_total_despesas[0]->total;
+        
+        return view('layouts/home', compact('datas_receitas', 'datas_despesas', 'saldo_total'));
     }
 
     public function teste(Request $request){

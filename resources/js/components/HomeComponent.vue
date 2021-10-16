@@ -2,6 +2,10 @@
     <div class="componente-home">
         <h1>Dashboard</h1>
 
+        <div class="saldoTotal">
+            <small>Saldo em Contas</small><br>
+            R${{formatPrice(saldo_total)}}
+        </div>
         <div class="datas">
             <select class="form-control" name="data" v-model="dataSelecionada" v-on:change="getTotais(dataSelecionada)">
                 <option v-bind:key="data.data" v-bind:value="data.data" v-for="data in datasFormatadas">{{data.descricao}}</option>
@@ -24,7 +28,8 @@
     export default {
         props : [
             'datas_receitas',
-            'datas_despesas'
+            'datas_despesas',
+            'saldo_total'
         ],
 
         data(){
@@ -142,9 +147,17 @@
 <style lang="scss">
     .componente-home{
         h1{
-            margin: 50px 0 100px 0;
+            margin: 50px 0 50px 0;
         }
 
+        .saldoTotal{
+            margin-bottom: 30px;
+            
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            color: #444;
+        }
         .datas{
             width: 200px;
             margin: 0 auto 40px;
