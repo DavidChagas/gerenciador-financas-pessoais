@@ -10,6 +10,9 @@ class Receita extends Model
 
     protected $fillable = ['valor', 'status', 'data', 'descricao', 'receita_fixa', 'observacao'];
 
+    public function usuario(){
+        return $this->belongsTo(usuario::class);
+    }
     public function conta(){
         return $this->belongsTo(conta::class, 'conta_id');
     }

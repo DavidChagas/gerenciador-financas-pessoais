@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Conta;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class ContaController extends Controller{
@@ -14,7 +15,7 @@ class ContaController extends Controller{
     }
 
     public function index(){
-        $contas = $this->conta::all();
+        $contas = $this->conta::all()->where('usuario_id', '=', Auth::id());
         return view('layouts.contas.listar')->with('infos', $contas);
     }
 

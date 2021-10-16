@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Categoria;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CategoriaController extends Controller{
 
@@ -14,7 +15,7 @@ class CategoriaController extends Controller{
     }
     
     public function index(){
-        $categorias = $this->categoria::all();
+        $categorias = $this->categoria::all()->where('usuario_id', '=', Auth::id());;
         return view('layouts.categorias.listar')->with('infos', $categorias);
     }
 

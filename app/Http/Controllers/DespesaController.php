@@ -6,6 +6,7 @@ use App\Models\Despesa;
 use App\Models\Conta;
 use App\Models\Categoria;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DespesaController extends Controller
 {
@@ -20,13 +21,13 @@ class DespesaController extends Controller
     }
     
     public function index(){
-        $despesas = $this->despesa::all();
+        $despesas = $this->despesa::all()->where('usuario_id', '=', Auth::id());
         return view('layouts.despesas.listar')->with('infos', $despesas);
     }
 
     public function create(){
-        $contas = $this->conta::all();
-        $categoriasDespesa = $this->categoria::all()->where('tipo', 'Despesa');
+        $contas = $this->conta::all()->where('usuario_id', '=', Auth::id());
+        $categoriasDespesa = $this->categoria::all()->where('tipo', 'Despesa')->where('usuario_id', '=', Auth::id());
         return view('layouts/despesas/cadastrar')->with('contas', $contas)->with('categoriasDespesa', $categoriasDespesa);
     }
 
@@ -40,7 +41,7 @@ class DespesaController extends Controller
         $despesa->observacao = $request->input('observacao');
         $despesa->conta_id = $request->input('conta');
         $despesa->categoria_id = $request->input('categoria');
-        // $despesa->usuario_id = $request->user()->id;
+        $despesa->usuario_id = $request->user()->id;
 
         $despesa->save();
 
@@ -52,8 +53,8 @@ class DespesaController extends Controller
     }
 
     public function edit(Despesa $despesa){
-        $contas = $this->conta::all();
-        $categoriasDespesa = $this->categoria::all()->where('tipo', 'Despesa');
+        $contas = $this->conta::all()->where('usuario_id', '=', Auth::id());
+        $categoriasDespesa = $this->categoria::all()->where('tipo', 'Despesa')->where('usuario_id', '=', Auth::id());
         
         return view('layouts.despesas.cadastrar')->with('despesa', $despesa)->with('contas', $contas)->with('categoriasDespesa', $categoriasDespesa);
     }

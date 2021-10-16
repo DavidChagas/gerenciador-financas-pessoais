@@ -16,6 +16,8 @@ class CreateReceitasTable extends Migration
             $table->text('receita_fixa');
             $table->text('observacao');
 
+            $table->integer('usuario_id')->unsigned();
+            $table->foreign('usuario_id')->references('id')->on('users');
             $table->integer('conta_id')->unsigned();
             $table->foreign('conta_id')->references('id')->on('contas');
             $table->integer('categoria_id')->unsigned();

@@ -6,6 +6,7 @@ use App\Models\Receita;
 use App\Models\Conta;
 use App\Models\Categoria;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReceitaController extends Controller{
 
@@ -20,13 +21,13 @@ class ReceitaController extends Controller{
     }
     
     public function index(){
-        $receitas = $this->receita::all();
+        $receitas = $this->receita::all()->where('usuario_id', '=', Auth::id());
         return view('layouts.receitas.listar')->with('infos', $receitas);
     }
 
     public function create(){
-        $contas = $this->conta::all();
-        $categoriasReceita = $this->categoria::all()->where('tipo', 'Receita');
+        $contas = $this->conta::all()->where('usuario_id', '=', Auth::id());
+        $categoriasReceita = $this->categoria::all()->where('tipo', 'Receita')->where('usuario_id', '=', Auth::id());
         return view('layouts/receitas/cadastrar')->with('contas', $contas)->with('categoriasReceita', $categoriasReceita);
     }
 
@@ -40,7 +41,7 @@ class ReceitaController extends Controller{
         $receita->observacao = $request->input('observacao');
         $receita->conta_id = $request->input('conta');
         $receita->categoria_id = $request->input('categoria');
-        // $receita->usuario_id = $request->user()->id;
+        $receita->usuario_id = $request->user()->id;
 
         $receita->save();
 
@@ -52,8 +53,8 @@ class ReceitaController extends Controller{
     }
 
     public function edit(Receita $receita){
-        $contas = $this->conta::all();
-        $categoriasReceita = $this->categoria::all()->where('tipo', 'Receita');
+        $contas = $this->conta::all()->where('usuario_id', '=', Auth::id());
+        $categoriasReceita = $this->categoria::all()->where('tipo', 'Receita')->where('usuario_id', '=', Auth::id());
         
         return view('layouts.receitas.cadastrar')->with('receita', $receita)->with('contas', $contas)->with('categoriasReceita', $categoriasReceita);
     }
