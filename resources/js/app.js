@@ -24,13 +24,17 @@ Vue.use(VueResource);
 
 Vue.component('menu-component', require('./components/MenuComponent.vue').default);
 Vue.component('titulo-form-component', require('./components/TituloFormComponent.vue').default);
-Vue.component('conta-form-component', require('./components/ContaformComponent.vue').default);
-Vue.component('receita-form-component', require('./components/ReceitaformComponent.vue').default);
-Vue.component('despesa-form-component', require('./components/DespesaformComponent.vue').default);
-Vue.component('categoria-form-component', require('./components/CategoriaformComponent.vue').default);
 Vue.component('listagem-table-component', require('./components/ListagemTableComponent.vue').default);
 Vue.component('modal-exclusao-component', require('./components/ModalExclusaoComponent.vue').default);
 Vue.component('home-component', require('./components/HomeComponent.vue').default);
+
+Vue.component('conta-form-component', require('./components/form/ContaformComponent.vue').default);
+Vue.component('receita-form-component', require('./components/form/ReceitaformComponent.vue').default);
+Vue.component('despesa-form-component', require('./components/form/DespesaformComponent.vue').default);
+Vue.component('categoria-form-component', require('./components/form/CategoriaformComponent.vue').default);
+
+Vue.component('receita-list-component', require('./components/list/ListReceitaComponent.vue').default);
+Vue.component('despesa-list-component', require('./components/list/ListDespesaComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
