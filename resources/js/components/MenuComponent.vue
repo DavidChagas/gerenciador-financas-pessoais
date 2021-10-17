@@ -38,7 +38,7 @@
         position: fixed;
 
         height: 100vh;
-        width: 25%;
+        min-width: 280px;
 
         padding: 30px;
 

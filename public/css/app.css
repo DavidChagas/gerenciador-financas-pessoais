@@ -10002,24 +10002,28 @@ h3 {
     border-color: #dee2e6;
   }
 }
-#app {
-  width: 98vw;
-  display: flex;
+body {
+  min-width: 100vw;
+  min-height: 100vh;
 }
-#app .menu-lateral {
-  width: 25%;
-}
-#app .pagina {
-  width: 75%;
-  padding: 0 50px;
-  background-color: white;
-}
-
-#app-login {
+body #app {
   width: 100vw;
   display: flex;
 }
-#app-login .pagina {
+body #app .menu-lateral {
+  min-width: 280px;
+}
+body #app .pagina {
+  width: 100%;
+  min-height: 100vh;
+  padding: 0 50px;
+  background-color: white;
+}
+body #app-login {
+  width: 100vw;
+  display: flex;
+}
+body #app-login .pagina {
   width: 100%;
   height: 100vh;
   padding: 0 50px;

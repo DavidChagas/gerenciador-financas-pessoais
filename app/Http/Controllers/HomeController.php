@@ -15,6 +15,7 @@ class HomeController extends Controller{
 
     public function index(){          
 
+        // DATAS
         $datas_receitas = DB::table('receitas')
         ->select('data')
         ->join('contas', function ($join) {
@@ -30,7 +31,8 @@ class HomeController extends Controller{
                  ->where('contas.usuario_id', '=', Auth::id());
         })
         ->get();
-    
+        
+        // SALDO TOTAL
         $query_saldo_total_receitas = "select sum(valor) as total from receitas where usuario_id = ?";
         $query_saldo_total_despesas = "select sum(valor) as total from despesas where usuario_id = ?";
 
