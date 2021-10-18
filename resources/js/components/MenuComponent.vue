@@ -5,11 +5,11 @@
         </div>
         <div class="acoes">
             <div class="paginas">
-                <a class="acao" href="/">Dashboard</a>
-                <a class="acao" href="/contas">Contas</a>
-                <a class="acao" href="/categorias">Categorias</a>
-                <a class="acao" href="/receitas">Receitas</a>
-                <a class="acao" href="/despesas">Despesas</a>
+                <a class="acao" href="/"><i class="fas fa-chart-pie" style="margin-right: 7px"></i> Dashboard</a>
+                <a class="acao" href="/contas"><i class="fas fa-wallet" style="margin-right: 7px"></i> Contas</a>
+                <a class="acao" href="/categorias"><i class="fas fa-bookmark" style="margin-right: 7px"></i> Categorias</a>
+                <a class="acao" href="/receitas"><i class="fas fa-chart-line" style="margin-right: 7px"></i> Receitas</a>
+                <a class="acao" href="/despesas"><i class="fas fa-chart-line" style="margin-right: 7px; transform: rotate(180deg)"></i> Despesas</a>
                 <!-- <a class="acao">Objetivos</a> -->
                 <!-- <a class="acao">Investimentos</a> -->
             </div>

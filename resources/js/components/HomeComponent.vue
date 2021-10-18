@@ -4,7 +4,7 @@
 
         <div class="saldoTotal">
             <small>Saldo em Contas</small><br>
-            R${{formatPrice(saldo_total)}}
+            R$ {{formatPrice(saldo_total)}}
         </div>
         <div class="datas">
             <select class="form-control" name="data" v-model="dataSelecionada" v-on:change="getTotais(dataSelecionada)">
@@ -147,16 +147,20 @@
 <style lang="scss">
     .componente-home{
         h1{
-            margin: 50px 0 50px 0;
+            margin: 50px 0 10px 0;
         }
 
         .saldoTotal{
             margin-bottom: 30px;
             
             text-align: center;
-            font-size: 20px;
+            font-size: 30px;
             font-weight: bold;
             color: #444;
+
+            small{
+                font-size: 15px;
+            }
         }
         .datas{
             width: 200px;

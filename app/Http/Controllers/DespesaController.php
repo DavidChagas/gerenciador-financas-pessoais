@@ -7,6 +7,7 @@ use App\Models\Conta;
 use App\Models\Categoria;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class DespesaController extends Controller
 {
@@ -21,7 +22,16 @@ class DespesaController extends Controller
     }
     
     public function index(){
-        $despesas = $this->despesa::all()->where('usuario_id', '=', Auth::id());
+        // $despesas = $this->despesa::all()->where('usuario_id', '=', Auth::id());
+        $despesas = DB::table('despesas')
+        ->select('despesas.*', 'contas.descricao as conta', 'categorias.descricao as categoria')
+        ->join('contas', function ($join) {
+            $join->on('contas.id', '=', 'despesas.conta_id');
+        })
+        ->join('categorias', function ($join) {
+            $join->on('categorias.id', '=', 'despesas.categoria_id');
+        })
+        ->get();
         return view('layouts.despesas.listar')->with('infos', $despesas);
     }
 

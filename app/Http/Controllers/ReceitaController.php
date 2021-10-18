@@ -7,6 +7,7 @@ use App\Models\Conta;
 use App\Models\Categoria;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ReceitaController extends Controller{
 
@@ -21,7 +22,16 @@ class ReceitaController extends Controller{
     }
     
     public function index(){
-        $receitas = $this->receita::all()->where('usuario_id', '=', Auth::id());
+        // $receitas = $this->receita::all()->where('usuario_id', '=', Auth::id());
+        $receitas = DB::table('receitas')
+        ->select('receitas.*', 'contas.descricao as conta', 'categorias.descricao as categoria')
+        ->join('contas', function ($join) {
+            $join->on('contas.id', '=', 'receitas.conta_id');
+        })
+        ->join('categorias', function ($join) {
+            $join->on('categorias.id', '=', 'receitas.categoria_id');
+        })
+        ->get();
         return view('layouts.receitas.listar')->with('infos', $receitas);
     }
 

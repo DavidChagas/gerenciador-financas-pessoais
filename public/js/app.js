@@ -2541,6 +2541,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['infos', 'model'],
   data: function data() {
@@ -2578,6 +2582,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
+//
+//
 //
 //
 //
@@ -7187,7 +7195,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".componente-home h1 {\n  margin: 50px 0 50px 0;\n}\n.componente-home .saldoTotal {\n  margin-bottom: 30px;\n  text-align: center;\n  font-size: 20px;\n  font-weight: bold;\n  color: #444;\n}\n.componente-home .datas {\n  width: 200px;\n  margin: 0 auto 40px;\n}\n.componente-home .datas select {\n  border-top: none;\n  border-left: none;\n  border-right: none;\n  border-radius: 0px;\n}\n.componente-home .datas select:focus {\n  border-color: transparent;\n  outline: none;\n  box-shadow: none;\n}\n.componente-home .totais {\n  display: grid;\n  grid-template-columns: repeat(2, 1fr);\n  grid-column-gap: 10px;\n}\n.componente-home .totais .total {\n  height: 100px;\n  background-color: #eee;\n  box-shadow: 3px 3px 5px #aaa;\n  border-radius: 5px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".componente-home h1 {\n  margin: 50px 0 10px 0;\n}\n.componente-home .saldoTotal {\n  margin-bottom: 30px;\n  text-align: center;\n  font-size: 30px;\n  font-weight: bold;\n  color: #444;\n}\n.componente-home .saldoTotal small {\n  font-size: 15px;\n}\n.componente-home .datas {\n  width: 200px;\n  margin: 0 auto 40px;\n}\n.componente-home .datas select {\n  border-top: none;\n  border-left: none;\n  border-right: none;\n  border-radius: 0px;\n}\n.componente-home .datas select:focus {\n  border-color: transparent;\n  outline: none;\n  box-shadow: none;\n}\n.componente-home .totais {\n  display: grid;\n  grid-template-columns: repeat(2, 1fr);\n  grid-column-gap: 10px;\n}\n.componente-home .totais .total {\n  height: 100px;\n  background-color: #eee;\n  box-shadow: 3px 3px 5px #aaa;\n  border-radius: 5px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -61199,7 +61207,7 @@ var render = function() {
       _c("small", [_vm._v("Saldo em Contas")]),
       _c("br"),
       _vm._v(
-        "\n        R$" + _vm._s(_vm.formatPrice(_vm.saldo_total)) + "\n    "
+        "\n        R$ " + _vm._s(_vm.formatPrice(_vm.saldo_total)) + "\n    "
       )
     ]),
     _vm._v(" "),
@@ -61420,23 +61428,43 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "paginas" }, [
       _c("a", { staticClass: "acao", attrs: { href: "/" } }, [
-        _vm._v("Dashboard")
+        _c("i", {
+          staticClass: "fas fa-chart-pie",
+          staticStyle: { "margin-right": "7px" }
+        }),
+        _vm._v(" Dashboard")
       ]),
       _vm._v(" "),
       _c("a", { staticClass: "acao", attrs: { href: "/contas" } }, [
-        _vm._v("Contas")
+        _c("i", {
+          staticClass: "fas fa-wallet",
+          staticStyle: { "margin-right": "7px" }
+        }),
+        _vm._v(" Contas")
       ]),
       _vm._v(" "),
       _c("a", { staticClass: "acao", attrs: { href: "/categorias" } }, [
-        _vm._v("Categorias")
+        _c("i", {
+          staticClass: "fas fa-bookmark",
+          staticStyle: { "margin-right": "7px" }
+        }),
+        _vm._v(" Categorias")
       ]),
       _vm._v(" "),
       _c("a", { staticClass: "acao", attrs: { href: "/receitas" } }, [
-        _vm._v("Receitas")
+        _c("i", {
+          staticClass: "fas fa-chart-line",
+          staticStyle: { "margin-right": "7px" }
+        }),
+        _vm._v(" Receitas")
       ]),
       _vm._v(" "),
       _c("a", { staticClass: "acao", attrs: { href: "/despesas" } }, [
-        _vm._v("Despesas")
+        _c("i", {
+          staticClass: "fas fa-chart-line",
+          staticStyle: { "margin-right": "7px", transform: "rotate(180deg)" }
+        }),
+        _vm._v(" Despesas")
       ])
     ])
   }
@@ -62113,20 +62141,26 @@ var render = function() {
               _vm._v(" "),
               _c("td", [_vm._v(_vm._s(i.descricao))]),
               _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(i.status))]),
+              _c("td", [_vm._v(_vm._s(i.conta))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(i.categoria))]),
               _vm._v(" "),
               _c("td", [
+                _vm._v(_vm._s(i.status == "pago" ? "Pago" : "Não Pago"))
+              ]),
+              _vm._v(" "),
+              _c("td", { staticStyle: { "text-align": "center" } }, [
                 _c(
                   "a",
                   {
                     staticClass: "btn btn-info btn-sm",
                     attrs: { href: "/" + _vm.model + "/" + i.id + "/edit" }
                   },
-                  [_vm._v("Editar")]
+                  [_c("i", { staticClass: "fas fa-pencil-alt" })]
                 )
               ]),
               _vm._v(" "),
-              _c("td", [
+              _c("td", { staticStyle: { "text-align": "center" } }, [
                 _c(
                   "form",
                   {
@@ -62135,18 +62169,7 @@ var render = function() {
                       method: "POST"
                     }
                   },
-                  [
-                    _vm._t("method"),
-                    _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-danger btn-sm",
-                        attrs: { type: "submit" }
-                      },
-                      [_vm._v("Excluir")]
-                    )
-                  ],
+                  [_vm._t("method"), _vm._v(" "), _vm._m(1, true)],
                   2
                 )
               ])
@@ -62172,13 +62195,31 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Descrição")]),
         _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Conta")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Categoria")]),
+        _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Status")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col", width: "100px" } }),
+        _c("th", { attrs: { scope: "col", width: "50px" } }, [
+          _vm._v("Editar")
+        ]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col", width: "100px" } })
+        _c("th", { attrs: { scope: "col", width: "50px" } }, [
+          _vm._v("Excluir")
+        ])
       ])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      { staticClass: "btn btn-danger btn-sm", attrs: { type: "submit" } },
+      [_c("i", { staticClass: "far fa-trash-alt" })]
+    )
   }
 ]
 render._withStripped = true
@@ -62218,20 +62259,26 @@ var render = function() {
               _vm._v(" "),
               _c("td", [_vm._v(_vm._s(i.descricao))]),
               _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(i.status))]),
+              _c("td", [_vm._v(_vm._s(i.conta))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(i.categoria))]),
               _vm._v(" "),
               _c("td", [
+                _vm._v(_vm._s(i.status == "pago" ? "Recebido" : "Não Recebido"))
+              ]),
+              _vm._v(" "),
+              _c("td", { staticStyle: { "text-align": "center" } }, [
                 _c(
                   "a",
                   {
                     staticClass: "btn btn-info btn-sm",
                     attrs: { href: "/" + _vm.model + "/" + i.id + "/edit" }
                   },
-                  [_vm._v("Editar")]
+                  [_c("i", { staticClass: "fas fa-pencil-alt" })]
                 )
               ]),
               _vm._v(" "),
-              _c("td", [
+              _c("td", { staticStyle: { "text-align": "center" } }, [
                 _c(
                   "form",
                   {
@@ -62240,18 +62287,7 @@ var render = function() {
                       method: "POST"
                     }
                   },
-                  [
-                    _vm._t("method"),
-                    _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-danger btn-sm",
-                        attrs: { type: "submit" }
-                      },
-                      [_vm._v("Excluir")]
-                    )
-                  ],
+                  [_vm._t("method"), _vm._v(" "), _vm._m(1, true)],
                   2
                 )
               ])
@@ -62277,13 +62313,31 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Descrição")]),
         _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Conta")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Categoria")]),
+        _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Status")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col", width: "100px" } }),
+        _c("th", { attrs: { scope: "col", width: "50px" } }, [
+          _vm._v("Editar")
+        ]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col", width: "100px" } })
+        _c("th", { attrs: { scope: "col", width: "50px" } }, [
+          _vm._v("Excluir")
+        ])
       ])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      { staticClass: "btn btn-danger btn-sm", attrs: { type: "submit" } },
+      [_c("i", { staticClass: "far fa-trash-alt" })]
+    )
   }
 ]
 render._withStripped = true
