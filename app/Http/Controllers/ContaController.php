@@ -26,6 +26,7 @@ class ContaController extends Controller{
     public function store(Request $request){
         $conta =  $this->conta;
         $conta->descricao = $request->input('descricao');
+        $conta->valor = $request->input('valor');
         $conta->usuario_id = $request->user()->id;
 
         $conta->save();

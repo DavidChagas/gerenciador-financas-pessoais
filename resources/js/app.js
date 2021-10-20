@@ -35,6 +35,7 @@ Vue.component('categoria-form-component', require('./components/form/Categoriafo
 
 Vue.component('receita-list-component', require('./components/list/ListReceitaComponent.vue').default);
 Vue.component('despesa-list-component', require('./components/list/ListDespesaComponent.vue').default);
+Vue.component('conta-list-component', require('./components/list/ListContaComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

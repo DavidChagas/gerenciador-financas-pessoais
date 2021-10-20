@@ -7,11 +7,11 @@
 
 <a href="{{route('conta.cadastrar')}}" class="btn btn-primary" style="margin-bottom: 30px;">Cadastrar Nova Conta</a>
 
-<listagem-table-component infos="{{ $infos }}" token="{{ csrf_token() }}" model="contas">
+<conta-list-component infos="{{ $infos }}" token="{{ csrf_token() }}" model="contas">
 	<span slot="method">
 		@csrf
 		{{ method_field('DELETE') }}
 	</span>
-</listagem-table-component>
+</conta-list-component>
 
 @endsection

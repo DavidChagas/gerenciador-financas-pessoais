@@ -1,7 +1,8 @@
 <template>
     <div class="componente-categoria-form">
         <div class="descricao">
-            Aqui você poderá cadastrar todas as suas categorias.
+            <b>Aqui você poderá cadastrar todas as suas categorias.</b><br> 
+            Exemplos de categorias: Alimentação, Transporte, Lazer, etc...<br> <br> <br>
         </div>
         <form v-bind:action="action" v-bind:method="method">
             <slot name="method"></slot>
@@ -59,4 +60,12 @@
 </script>
 
 <style lang="scss">
+    .componente-categoria-form{
+        .descricao{
+            color: #444;
+            b{
+                font-size: 18px;
+            }
+        }   
+    }
 </style>

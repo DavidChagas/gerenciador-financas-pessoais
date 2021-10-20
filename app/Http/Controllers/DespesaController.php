@@ -55,6 +55,11 @@ class DespesaController extends Controller
 
         $despesa->save();
 
+        // Atualiza Saldo da Conta Selecionada
+        $conta = DB::table('contas')->where('id', '=', $despesa->conta_id)->get();
+        $valor_atualizado = (int) $conta[0]->valor - $despesa->valor;
+        DB::table('contas')->where('id', $despesa->conta_id)->update(['valor' => $valor_atualizado]);
+
         return redirect('/despesas')->with('success', 'despesa salva com sucesso!');
     }
 
@@ -70,6 +75,11 @@ class DespesaController extends Controller
     }
 
     public function update(Request $request, Despesa $despesa){
+        // Atualiza Saldo da Conta Selecionada
+        $conta = DB::table('contas')->where('id', '=', $despesa->conta_id)->get();
+        $valor_atualizado = ( (int) $conta[0]->valor + $despesa->valor ) - $request->input('valor');
+        DB::table('contas')->where('id', $despesa->conta_id)->update(['valor' => $valor_atualizado]);
+
         $despesa->valor = $request->input('valor');
         $despesa->descricao = $request->input('descricao');
         $despesa->status = $request->input('status');
@@ -87,6 +97,12 @@ class DespesaController extends Controller
     public function destroy(Despesa $despesa){
         try {
             $despesa->delete();
+
+            // Atualiza Saldo da Conta Selecionada
+            $conta = DB::table('contas')->where('id', '=', $despesa->conta_id)->get();
+            $valor_atualizado = (int) $conta[0]->valor + $despesa->valor ;
+            DB::table('contas')->where('id', $despesa->conta_id)->update(['valor' => $valor_atualizado]);
+
             return redirect('/despesas')->with('success', 'despesa excluida com sucesso!');
         } catch (\Illuminate\Database\QueryException $qe) {
             return ['status' => 'errorQuery', 'message' => $qe->getMessage()];

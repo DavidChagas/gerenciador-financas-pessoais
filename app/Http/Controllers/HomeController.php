@@ -33,12 +33,11 @@ class HomeController extends Controller{
         ->get();
         
         // SALDO TOTAL
-        $query_saldo_total_receitas = "select sum(valor) as total from receitas where usuario_id = ?";
-        $query_saldo_total_despesas = "select sum(valor) as total from despesas where usuario_id = ?";
+        $query_saldo_total = "select sum(valor) as total from contas where usuario_id = ?";
 
-        $saldo_total_receitas = DB::select($query_saldo_total_receitas, [Auth::id()]);
-        $saldo_total_despesas = DB::select($query_saldo_total_despesas, [Auth::id()]);
-        $saldo_total = (int) $saldo_total_receitas[0]->total - (int) $saldo_total_despesas[0]->total;
+        $saldo_total = DB::select($query_saldo_total, [Auth::id()]);
+        
+        $saldo_total = (int) $saldo_total[0]->total;
         
         return view('layouts/home', compact('datas_receitas', 'datas_despesas', 'saldo_total'));
     }

@@ -16,6 +16,7 @@ class CreateContasTable extends Migration
         Schema::create('contas', function (Blueprint $table) {
             $table->increments('id');
             $table->string('descricao');
+            $table->decimal('valor');
 
             $table->integer('usuario_id')->unsigned();
             $table->foreign('usuario_id')->references('id')->on('users');

@@ -8,7 +8,7 @@ class Conta extends Model{
 
     public $timestamps = false;
 
-    protected $fillable = ['descricao'];
+    protected $fillable = ['descricao', 'valor'];
 
     public function usuario(){
         return $this->belongsTo(usuario::class);
