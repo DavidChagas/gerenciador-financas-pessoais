@@ -11,12 +11,53 @@
                 <option v-bind:key="data.data" v-bind:value="data.data" v-for="data in datasFormatadas">{{data.descricao}}</option>
             </select>
         </div>
-        <div class="totais">
+        <!-- <div class="totais">
             <div class="total">
                 Total de Receitas R${{formatPrice(totalReceitas)}}
             </div>
             <div class="total">
                 Total de Despesas R${{formatPrice(totalDespesas)}}
+            </div>
+        </div> -->
+
+        <div class="grafico-barras">
+            
+            <div class="infos">
+                <div class="total">
+                    <img src="/images/receitas.png">
+                    <div>
+                        Total de Receitas<br> 
+                        <span>R$ {{formatPrice(totalReceitas)}}</span>
+                    </div>
+                </div>
+                <div class="total">
+                    <img src="/images/despesas.png">
+                    <div>
+                        Total de Despesas<br> 
+                        <span>R$ {{formatPrice(totalDespesas)}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="grafico">
+                <canvas id="barChart"></canvas>
+            </div>
+        </div>
+        <div class="grafico-pizza">
+            <div class="tipo">
+                <div class="descricao">
+                    Receitas por Categoria
+                </div>
+                <div class="grafico">
+                    <canvas id="categoriaReceitasChart"></canvas>
+                </div>
+            </div>
+            <div class="tipo">
+                <div class="descricao">
+                    Despesas por Categoria
+                </div>
+                <div class="grafico">
+                    <canvas id="categoriaDespesasChart"></canvas>
+                </div>
             </div>
         </div>
     </div>
@@ -64,9 +105,100 @@
                    
                     this.totalReceitas = response.body[0].total_receitas;
                     this.totalDespesas = response.body[1].total_despesas;
+
+                    this.montarGraficoBarra();
+                    this.montarGraficoPizzaReceitas();
+                    this.montarGraficoPizzaDespesas();
                 }, err => {
                     console.log('err: ');
                 });
+            },
+
+            montarGraficoBarra(){
+                console.log('teste', this.totalReceitas)
+                const labels = ['Total Receitas','Total Despesas'];
+                const data = {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Total Receitas',
+                        backgroundColor: 'rgb(255, 99, 132)',
+                        borderColor: 'rgb(255, 99, 132)',
+                        data: [this.totalReceitas, this.totalDespesas],
+                        backgroundColor: [
+                            '#00800087',
+                            '#ff000087'
+                        ],
+                        borderColor: [
+                            'green',
+                            'red'
+                        ],
+                        borderWidth: 1,
+                        hoverOffset: 4
+                    }]
+                };
+                const config = {
+                    type: 'bar',
+                    data: data,
+                    options: {}
+                };
+                var barChart = new Chart(
+                    document.getElementById('barChart'),config
+                );
+            },
+
+            montarGraficoPizzaReceitas(){
+                const data = {
+                    labels: [
+                        'Red',
+                        'Blue',
+                        'Yellow'
+                    ],
+                    datasets: [{
+                        label: 'My First Dataset',
+                        data: [300, 50, 100],
+                        backgroundColor: [
+                        'rgb(255, 99, 132)',
+                        'rgb(54, 162, 235)',
+                        'rgb(255, 205, 86)'
+                        ],
+                        hoverOffset: 4
+                    }]
+                };
+                const config = {
+                    type: 'doughnut',
+                    data: data,
+                };
+                var categoriaReceitasChart = new Chart(
+                    document.getElementById('categoriaReceitasChart'),config
+                );
+            },
+
+            montarGraficoPizzaDespesas(){
+                const data = {
+                    labels: [
+                        'green',
+                        'black',
+                        'purple'
+                    ],
+                    datasets: [{
+                        label: 'My First Dataset',
+                        data: [300, 50, 100],
+                        backgroundColor: [
+                        'green',
+                        'black',
+                        'purple'
+                        ],
+                        hoverOffset: 4
+                    }]
+                };
+                const config = {
+                    type: 'doughnut',
+                    data: data,
+                };
+                
+                var categoriaDespesasChart = new Chart(
+                    document.getElementById('categoriaDespesasChart'),config
+                );
             },
 
             retornaNomeMes(mesNumero){
@@ -194,6 +326,52 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
+            }
+        }
+
+        .grafico-barras{
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+
+            .infos{
+                padding: 30px 20px;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+
+                .total{
+                    display: flex;
+                    justify-content: center;
+
+                    img{
+                        width: 50px;
+                        height: 50px;
+
+                        margin-right: 10px;
+                    }
+                    span{
+                        font-size: 24px;
+                        font-weight: bold;
+                        color: #444;
+                    }
+                }
+            }
+        }
+
+        .grafico-pizza{
+            margin-top: 50px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+
+            .tipo{
+                width: 300px;
+                margin: 0 auto;
+                .descricao{
+                    font-weight: bold;
+                    font-size: 24px;
+                    text-align: center;
+                    color: #444;
+                }
             }
         }
     }

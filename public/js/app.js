@@ -1847,6 +1847,49 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -1902,9 +1945,68 @@ __webpack_require__.r(__webpack_exports__);
       this.$http.get("/api/teste?first=".concat(firstDay, "&last=").concat(lastDay)).then(function (response) {
         _this.totalReceitas = response.body[0].total_receitas;
         _this.totalDespesas = response.body[1].total_despesas;
+
+        _this.montarGraficoBarra();
+
+        _this.montarGraficoPizzaReceitas();
+
+        _this.montarGraficoPizzaDespesas();
       }, function (err) {
         console.log('err: ');
       });
+    },
+    montarGraficoBarra: function montarGraficoBarra() {
+      var _ref;
+
+      console.log('teste', this.totalReceitas);
+      var labels = ['Total Receitas', 'Total Despesas'];
+      var data = {
+        labels: labels,
+        datasets: [(_ref = {
+          label: 'Total Receitas',
+          backgroundColor: 'rgb(255, 99, 132)',
+          borderColor: 'rgb(255, 99, 132)',
+          data: [this.totalReceitas, this.totalDespesas]
+        }, _defineProperty(_ref, "backgroundColor", ['#00800087', '#ff000087']), _defineProperty(_ref, "borderColor", ['green', 'red']), _defineProperty(_ref, "borderWidth", 1), _defineProperty(_ref, "hoverOffset", 4), _ref)]
+      };
+      var config = {
+        type: 'bar',
+        data: data,
+        options: {}
+      };
+      var barChart = new Chart(document.getElementById('barChart'), config);
+    },
+    montarGraficoPizzaReceitas: function montarGraficoPizzaReceitas() {
+      var data = {
+        labels: ['Red', 'Blue', 'Yellow'],
+        datasets: [{
+          label: 'My First Dataset',
+          data: [300, 50, 100],
+          backgroundColor: ['rgb(255, 99, 132)', 'rgb(54, 162, 235)', 'rgb(255, 205, 86)'],
+          hoverOffset: 4
+        }]
+      };
+      var config = {
+        type: 'doughnut',
+        data: data
+      };
+      var categoriaReceitasChart = new Chart(document.getElementById('categoriaReceitasChart'), config);
+    },
+    montarGraficoPizzaDespesas: function montarGraficoPizzaDespesas() {
+      var data = {
+        labels: ['green', 'black', 'purple'],
+        datasets: [{
+          label: 'My First Dataset',
+          data: [300, 50, 100],
+          backgroundColor: ['green', 'black', 'purple'],
+          hoverOffset: 4
+        }]
+      };
+      var config = {
+        type: 'doughnut',
+        data: data
+      };
+      var categoriaDespesasChart = new Chart(document.getElementById('categoriaDespesasChart'), config);
     },
     retornaNomeMes: function retornaNomeMes(mesNumero) {
       var mes = '';
@@ -7276,7 +7378,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".componente-home h1 {\n  margin: 50px 0 10px 0;\n}\n.componente-home .saldoTotal {\n  margin-bottom: 30px;\n  text-align: center;\n  font-size: 30px;\n  font-weight: bold;\n  color: #444;\n}\n.componente-home .saldoTotal small {\n  font-size: 15px;\n}\n.componente-home .datas {\n  width: 200px;\n  margin: 0 auto 40px;\n}\n.componente-home .datas select {\n  border-top: none;\n  border-left: none;\n  border-right: none;\n  border-radius: 0px;\n}\n.componente-home .datas select:focus {\n  border-color: transparent;\n  outline: none;\n  box-shadow: none;\n}\n.componente-home .totais {\n  display: grid;\n  grid-template-columns: repeat(2, 1fr);\n  grid-column-gap: 10px;\n}\n.componente-home .totais .total {\n  height: 100px;\n  background-color: #eee;\n  box-shadow: 3px 3px 5px #aaa;\n  border-radius: 5px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".componente-home h1 {\n  margin: 50px 0 10px 0;\n}\n.componente-home .saldoTotal {\n  margin-bottom: 30px;\n  text-align: center;\n  font-size: 30px;\n  font-weight: bold;\n  color: #444;\n}\n.componente-home .saldoTotal small {\n  font-size: 15px;\n}\n.componente-home .datas {\n  width: 200px;\n  margin: 0 auto 40px;\n}\n.componente-home .datas select {\n  border-top: none;\n  border-left: none;\n  border-right: none;\n  border-radius: 0px;\n}\n.componente-home .datas select:focus {\n  border-color: transparent;\n  outline: none;\n  box-shadow: none;\n}\n.componente-home .totais {\n  display: grid;\n  grid-template-columns: repeat(2, 1fr);\n  grid-column-gap: 10px;\n}\n.componente-home .totais .total {\n  height: 100px;\n  background-color: #eee;\n  box-shadow: 3px 3px 5px #aaa;\n  border-radius: 5px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.componente-home .grafico-barras {\n  display: grid;\n  grid-template-columns: repeat(2, 1fr);\n}\n.componente-home .grafico-barras .infos {\n  padding: 30px 20px;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-around;\n}\n.componente-home .grafico-barras .infos .total {\n  display: flex;\n  justify-content: center;\n}\n.componente-home .grafico-barras .infos .total img {\n  width: 50px;\n  height: 50px;\n  margin-right: 10px;\n}\n.componente-home .grafico-barras .infos .total span {\n  font-size: 24px;\n  font-weight: bold;\n  color: #444;\n}\n.componente-home .grafico-pizza {\n  margin-top: 50px;\n  display: grid;\n  grid-template-columns: repeat(2, 1fr);\n}\n.componente-home .grafico-pizza .tipo {\n  width: 300px;\n  margin: 0 auto;\n}\n.componente-home .grafico-pizza .tipo .descricao {\n  font-weight: bold;\n  font-size: 24px;\n  text-align: center;\n  color: #444;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -61617,26 +61719,77 @@ var render = function() {
       )
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "totais" }, [
-      _c("div", { staticClass: "total" }, [
-        _vm._v(
-          "\n            Total de Receitas R$" +
-            _vm._s(_vm.formatPrice(_vm.totalReceitas)) +
-            "\n        "
-        )
+    _c("div", { staticClass: "grafico-barras" }, [
+      _c("div", { staticClass: "infos" }, [
+        _c("div", { staticClass: "total" }, [
+          _c("img", { attrs: { src: "/images/receitas.png" } }),
+          _vm._v(" "),
+          _c("div", [
+            _vm._v("\n                    Total de Receitas"),
+            _c("br"),
+            _vm._v(" "),
+            _c("span", [
+              _vm._v("R$ " + _vm._s(_vm.formatPrice(_vm.totalReceitas)))
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "total" }, [
+          _c("img", { attrs: { src: "/images/despesas.png" } }),
+          _vm._v(" "),
+          _c("div", [
+            _vm._v("\n                    Total de Despesas"),
+            _c("br"),
+            _vm._v(" "),
+            _c("span", [
+              _vm._v("R$ " + _vm._s(_vm.formatPrice(_vm.totalDespesas)))
+            ])
+          ])
+        ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "total" }, [
-        _vm._v(
-          "\n            Total de Despesas R$" +
-            _vm._s(_vm.formatPrice(_vm.totalDespesas)) +
-            "\n        "
-        )
-      ])
-    ])
+      _vm._m(0)
+    ]),
+    _vm._v(" "),
+    _vm._m(1)
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "grafico" }, [
+      _c("canvas", { attrs: { id: "barChart" } })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "grafico-pizza" }, [
+      _c("div", { staticClass: "tipo" }, [
+        _c("div", { staticClass: "descricao" }, [
+          _vm._v("\n                Receitas por Categoria\n            ")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "grafico" }, [
+          _c("canvas", { attrs: { id: "categoriaReceitasChart" } })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "tipo" }, [
+        _c("div", { staticClass: "descricao" }, [
+          _vm._v("\n                Despesas por Categoria\n            ")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "grafico" }, [
+          _c("canvas", { attrs: { id: "categoriaDespesasChart" } })
+        ])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
