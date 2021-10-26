@@ -332,6 +332,7 @@
         .grafico-barras{
             display: grid;
             grid-template-columns: repeat(2, 1fr);
+            width: 100%;
 
             .infos{
                 padding: 30px 20px;
@@ -347,7 +348,7 @@
                         width: 50px;
                         height: 50px;
 
-                        margin-right: 10px;
+                        margin-right: 20px;
                     }
                     span{
                         font-size: 24px;
@@ -356,12 +357,17 @@
                     }
                 }
             }
+
+            .grafico{
+                width: 500px;
+            }
         }
 
         .grafico-pizza{
             margin-top: 50px;
             display: grid;
             grid-template-columns: repeat(2, 1fr);
+            width: 100%;
 
             .tipo{
                 width: 300px;

@@ -10003,11 +10003,11 @@ h3 {
   }
 }
 body {
-  min-width: 100vw;
-  min-height: 100vh;
+  max-width: 100vw;
+  max-height: 100vh;
 }
 body #app {
-  width: 100vw;
+  width: 100%;
   display: flex;
 }
 body #app .menu-lateral {
