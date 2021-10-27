@@ -23,7 +23,7 @@ class ReceitaController extends Controller{
     
     public function index(){
         // $receitas = $this->receita::all()->where('usuario_id', '=', Auth::id());
-        $receitas = DB::table('receitas')
+        $infos = DB::table('receitas')
         ->select('receitas.*', 'contas.descricao as conta', 'categorias.descricao as categoria')
         ->join('contas', function ($join) {
             $join->on('contas.id', '=', 'receitas.conta_id');
@@ -32,7 +32,17 @@ class ReceitaController extends Controller{
             $join->on('categorias.id', '=', 'receitas.categoria_id');
         })
         ->get();
-        return view('layouts.receitas.listar')->with('infos', $receitas);
+
+        //datas
+        $datas_receitas = DB::table('receitas')
+        ->select('data')
+        ->join('contas', function ($join) {
+            $join->on('contas.id', '=', 'receitas.conta_id')
+                 ->where('contas.usuario_id', '=', Auth::id());
+        })
+        ->get();
+
+        return view('layouts.receitas.listar', compact('datas_receitas', 'infos'));
     }
 
     public function create(){
