@@ -278,6 +278,9 @@
 
 <style lang="scss">
     .componente-home{
+        max-width: 1200px;
+        margin: 0 auto;
+
         h1{
             margin: 50px 0 10px 0;
         }
@@ -334,6 +337,7 @@
             grid-template-columns: repeat(2, 1fr);
             width: 100%;
 
+
             .infos{
                 padding: 30px 20px;
                 display: flex;
@@ -360,6 +364,7 @@
 
             .grafico{
                 width: 500px;
+                margin: 0 auto;
             }
         }
 
