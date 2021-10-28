@@ -23,7 +23,7 @@ class DespesaController extends Controller
     
     public function index(){
         // $despesas = $this->despesa::all()->where('usuario_id', '=', Auth::id());
-        $despesas = DB::table('despesas')
+        $infos = DB::table('despesas')
         ->select('despesas.*', 'contas.descricao as conta', 'categorias.descricao as categoria')
         ->join('contas', function ($join) {
             $join->on('contas.id', '=', 'despesas.conta_id');
@@ -32,7 +32,17 @@ class DespesaController extends Controller
             $join->on('categorias.id', '=', 'despesas.categoria_id');
         })
         ->get();
-        return view('layouts.despesas.listar')->with('infos', $despesas);
+
+        //datas
+        $datas_despesas = DB::table('despesas')
+        ->select('data')
+        ->join('contas', function ($join) {
+            $join->on('contas.id', '=', 'despesas.conta_id')
+                 ->where('contas.usuario_id', '=', Auth::id());
+        })
+        ->get();
+
+        return view('layouts.despesas.listar', compact('datas_despesas', 'infos'));
     }
 
     public function create(){

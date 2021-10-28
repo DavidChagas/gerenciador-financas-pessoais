@@ -155,15 +155,12 @@
         position: relative;
 
         .datas{
-            width: 100%;
-            display: flex;
-            justify-content: right;
+            width: 200px;
+            float: right;
             margin-bottom: 30px;
             margin-top: -70px;
 
             select{
-                width: 200px;
-
                 border-top: none;
                 border-left: none;
                 border-right: none;

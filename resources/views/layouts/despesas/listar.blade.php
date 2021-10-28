@@ -7,7 +7,7 @@
 
 <a href="{{route('despesa.cadastrar')}}" class="btn btn-primary" style="margin-bottom: 30px;">Cadastrar Nova Despesa</a>
 
-<despesa-list-component infos="{{ $infos }}" token="{{ csrf_token() }}" model="despesas">
+<despesa-list-component infos="{{ $infos }}" datas_despesas="{{ $datas_despesas }}" token="{{ csrf_token() }}" model="despesas">
 	<span slot="method">
 		@csrf
 		{{ method_field('DELETE') }}

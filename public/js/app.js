@@ -2691,6 +2691,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -2727,13 +2729,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['infos', 'model'],
+  props: ['datas_despesas', 'infos', 'model'],
   data: function data() {
     return {
+      datas_despesasObj: {},
       list: [],
+      despesas: [],
+      datas: [],
+      datasFormatadas: [],
       visible: false,
-      item: ''
+      item: '',
+      dataSelecionada: ''
     };
   },
   methods: {
@@ -2743,11 +2758,97 @@ __webpack_require__.r(__webpack_exports__);
     },
     abrirModal: function abrirModal() {
       this.visible = true;
+    },
+    mostrarDespesas: function mostrarDespesas(mesSelecionado) {
+      this.despesas = this.list.filter(function (despesa) {
+        var dataArray = despesa.data.split('-');
+        dataArray.pop();
+        var data = dataArray.join('-');
+        if (data == mesSelecionado) return despesa;
+      });
+      this.despesas.forEach(function (despesa) {
+        return despesa.data = moment__WEBPACK_IMPORTED_MODULE_0___default()(despesa.data).format('DD/MM/YYYY');
+      });
+      console.log('sss', this.despesas);
+    },
+    retornaNomeMes: function retornaNomeMes(mesNumero) {
+      var mes = '';
+
+      switch (mesNumero) {
+        case '01':
+          mes = 'Janeiro';
+          break;
+
+        case '02':
+          mes = 'Fevereiro';
+          break;
+
+        case '03':
+          mes = 'Março';
+          break;
+
+        case '04':
+          mes = 'Abril';
+          break;
+
+        case '05':
+          mes = 'Maio';
+          break;
+
+        case '06':
+          mes = 'Junho';
+          break;
+
+        case '07':
+          mes = 'Julho';
+          break;
+
+        case '08':
+          mes = 'Agosto';
+          break;
+
+        case '09':
+          mes = 'Setembro';
+          break;
+
+        case '10':
+          mes = 'Outubro';
+          break;
+
+        case '11':
+          mes = 'Novembro';
+          break;
+
+        case '12':
+          mes = 'Dezembro';
+          break;
+      }
+
+      return mes;
     }
   },
   mounted: function mounted() {
+    var _this = this;
+
     this.list = JSON.parse(this.infos);
-    console.log(this.list);
+    this.datas_despesasObj = JSON.parse(this.datas_despesas);
+    this.datas_despesasObj.forEach(function (despesa) {
+      var data = despesa.data.split('-');
+      var dataFormatada = data[0] + '-' + data[1];
+
+      if (!_this.datas.includes(dataFormatada)) {
+        _this.datas.push(dataFormatada);
+      }
+    });
+    this.datasFormatadas = this.datas.map(function (data) {
+      return {
+        data: data,
+        descricao: _this.retornaNomeMes(data.split('-')[1]) + ' ' + data.split('-')[0]
+      };
+    });
+    var mesAtual = moment__WEBPACK_IMPORTED_MODULE_0___default()().format('YYYY-MM');
+    this.dataSelecionada = mesAtual;
+    this.mostrarDespesas(mesAtual);
   }
 });
 
@@ -7671,7 +7772,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".componente-listagem-tabela {\n  position: relative;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".componente-listagem-tabela {\n  position: relative;\n}\n.componente-listagem-tabela .datas {\n  width: 200px;\n  float: right;\n  margin-bottom: 30px;\n  margin-top: -70px;\n}\n.componente-listagem-tabela .datas select {\n  border-top: none;\n  border-left: none;\n  border-right: none;\n  border-radius: 0px;\n}\n.componente-listagem-tabela .datas select:focus {\n  border-color: transparent;\n  outline: none;\n  box-shadow: none;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -7695,7 +7796,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".componente-listagem-tabela {\n  position: relative;\n}\n.componente-listagem-tabela .datas {\n  width: 100%;\n  display: flex;\n  justify-content: right;\n  margin-bottom: 30px;\n  margin-top: -70px;\n}\n.componente-listagem-tabela .datas select {\n  width: 200px;\n  border-top: none;\n  border-left: none;\n  border-right: none;\n  border-radius: 0px;\n}\n.componente-listagem-tabela .datas select:focus {\n  border-color: transparent;\n  outline: none;\n  box-shadow: none;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".componente-listagem-tabela {\n  position: relative;\n}\n.componente-listagem-tabela .datas {\n  width: 200px;\n  float: right;\n  margin-bottom: 30px;\n  margin-top: -70px;\n}\n.componente-listagem-tabela .datas select {\n  border-top: none;\n  border-left: none;\n  border-right: none;\n  border-radius: 0px;\n}\n.componente-listagem-tabela .datas select:focus {\n  border-color: transparent;\n  outline: none;\n  box-shadow: none;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -62889,13 +62990,59 @@ var render = function() {
     "div",
     { staticClass: "componente-listagem-tabela" },
     [
+      _c("div", { staticClass: "datas" }, [
+        _c(
+          "select",
+          {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.dataSelecionada,
+                expression: "dataSelecionada"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { name: "data" },
+            on: {
+              change: [
+                function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.dataSelecionada = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
+                },
+                function($event) {
+                  return _vm.mostrarDespesas(_vm.dataSelecionada)
+                }
+              ]
+            }
+          },
+          _vm._l(_vm.datasFormatadas, function(data) {
+            return _c(
+              "option",
+              { key: data.data, domProps: { value: data.data } },
+              [_vm._v(_vm._s(data.descricao))]
+            )
+          }),
+          0
+        )
+      ]),
+      _vm._v(" "),
       _c("table", { staticClass: "table" }, [
         _vm._m(0),
         _vm._v(" "),
         _c(
           "tbody",
-          _vm._l(_vm.list, function(i) {
-            return _c("tr", [
+          _vm._l(_vm.despesas, function(i) {
+            return _c("tr", { key: i.id }, [
               _c("td", [_vm._v("R$ " + _vm._s(_vm.formatPrice(i.valor)))]),
               _vm._v(" "),
               _c("td", [_vm._v(_vm._s(i.descricao))]),
@@ -62903,6 +63050,8 @@ var render = function() {
               _c("td", [_vm._v(_vm._s(i.conta))]),
               _vm._v(" "),
               _c("td", [_vm._v(_vm._s(i.categoria))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(i.data))]),
               _vm._v(" "),
               _c("td", [
                 _vm._v(_vm._s(i.status == "pago" ? "Pago" : "Não Pago"))
@@ -62957,6 +63106,8 @@ var staticRenderFns = [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Conta")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Categoria")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Data")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Status")]),
         _vm._v(" "),
