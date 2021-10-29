@@ -24,7 +24,7 @@
                     <td>{{i.descricao}}</td>
                     <td>{{i.conta}}</td>
                     <td>{{i.categoria}}</td>
-                    <td>{{i.data}}</td>
+                    <td>{{formatDate(i.data)}}</td>
                     <td>{{i.status == 'pago' ? 'Recebido' : 'Não Recebido'}}</td>
                     <td style="text-align: center;"> <a v-bind:href="'/'+model+'/'+i.id+'/edit'" class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i></a> </td>
                     <td style="text-align: center;"> 
@@ -68,6 +68,9 @@
                 let val = (value/1).toFixed(2).replace('.', ',')
                 return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
             },
+            formatDate(value){
+                return moment(String(value)).format('DD/MM/YYYY');
+            },
             abrirModal() {
                 this.visible = true;
             },
@@ -79,9 +82,6 @@
                     
                     if(data == mesSelecionado) return receita;
                 })
-
-                this.receitas.forEach(receita => receita.data = moment(receita.data).format('DD/MM/YYYY'));
-                console.log('sss', this.receitas)
             },
             retornaNomeMes(mesNumero){
                 let mes = '';

@@ -2756,6 +2756,9 @@ __webpack_require__.r(__webpack_exports__);
       var val = (value / 1).toFixed(2).replace('.', ',');
       return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     },
+    formatDate: function formatDate(value) {
+      return moment__WEBPACK_IMPORTED_MODULE_0___default()(String(value)).format('DD/MM/YYYY');
+    },
     abrirModal: function abrirModal() {
       this.visible = true;
     },
@@ -2766,10 +2769,6 @@ __webpack_require__.r(__webpack_exports__);
         var data = dataArray.join('-');
         if (data == mesSelecionado) return despesa;
       });
-      this.despesas.forEach(function (despesa) {
-        return despesa.data = moment__WEBPACK_IMPORTED_MODULE_0___default()(despesa.data).format('DD/MM/YYYY');
-      });
-      console.log('sss', this.despesas);
     },
     retornaNomeMes: function retornaNomeMes(mesNumero) {
       var mes = '';
@@ -2930,6 +2929,9 @@ __webpack_require__.r(__webpack_exports__);
       var val = (value / 1).toFixed(2).replace('.', ',');
       return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     },
+    formatDate: function formatDate(value) {
+      return moment__WEBPACK_IMPORTED_MODULE_0___default()(String(value)).format('DD/MM/YYYY');
+    },
     abrirModal: function abrirModal() {
       this.visible = true;
     },
@@ -2940,10 +2942,6 @@ __webpack_require__.r(__webpack_exports__);
         var data = dataArray.join('-');
         if (data == mesSelecionado) return receita;
       });
-      this.receitas.forEach(function (receita) {
-        return receita.data = moment__WEBPACK_IMPORTED_MODULE_0___default()(receita.data).format('DD/MM/YYYY');
-      });
-      console.log('sss', this.receitas);
     },
     retornaNomeMes: function retornaNomeMes(mesNumero) {
       var mes = '';
@@ -63051,7 +63049,7 @@ var render = function() {
               _vm._v(" "),
               _c("td", [_vm._v(_vm._s(i.categoria))]),
               _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(i.data))]),
+              _c("td", [_vm._v(_vm._s(_vm.formatDate(i.data)))]),
               _vm._v(" "),
               _c("td", [
                 _vm._v(_vm._s(i.status == "pago" ? "Pago" : "Não Pago"))
@@ -63219,7 +63217,7 @@ var render = function() {
               _vm._v(" "),
               _c("td", [_vm._v(_vm._s(i.categoria))]),
               _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(i.data))]),
+              _c("td", [_vm._v(_vm._s(_vm.formatDate(i.data)))]),
               _vm._v(" "),
               _c("td", [
                 _vm._v(_vm._s(i.status == "pago" ? "Recebido" : "Não Recebido"))
