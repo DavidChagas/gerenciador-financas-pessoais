@@ -32,10 +32,12 @@ Vue.component('conta-form-component', require('./components/form/ContaformCompon
 Vue.component('receita-form-component', require('./components/form/ReceitaformComponent.vue').default);
 Vue.component('despesa-form-component', require('./components/form/DespesaformComponent.vue').default);
 Vue.component('categoria-form-component', require('./components/form/CategoriaformComponent.vue').default);
+Vue.component('objetivo-form-component', require('./components/form/ObjetivoformComponent.vue').default);
 
 Vue.component('receita-list-component', require('./components/list/ListReceitaComponent.vue').default);
 Vue.component('despesa-list-component', require('./components/list/ListDespesaComponent.vue').default);
 Vue.component('conta-list-component', require('./components/list/ListContaComponent.vue').default);
+Vue.component('objetivo-list-component', require('./components/list/ListObjetivoComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

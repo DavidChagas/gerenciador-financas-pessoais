@@ -36,6 +36,12 @@ Route::get('/despesas/{despesa}/edit', [App\Http\Controllers\DespesaController::
 Route::put('/despesas/{despesa}', [App\Http\Controllers\DespesaController::class, 'update'])->middleware('auth');
 Route::delete('/despesas/{despesa}', [App\Http\Controllers\DespesaController::class, 'destroy'])->middleware('auth');
 
+Route::get('/objetivos', [App\Http\Controllers\ObjetivoController::class, 'index'])->name('objetivo.listar')->middleware('auth');
+Route::get('/objetivos/create', [App\Http\Controllers\ObjetivoController::class, 'create'])->name('objetivo.cadastrar')->middleware('auth');
+Route::post('/objetivos', [App\Http\Controllers\ObjetivoController::class, 'store'])->middleware('auth');
+Route::get('/objetivos/{objetivo}/edit', [App\Http\Controllers\ObjetivoController::class, 'edit'])->middleware('auth');
+Route::put('/objetivos/{objetivo}', [App\Http\Controllers\ObjetivoController::class, 'update'])->middleware('auth');
+Route::delete('/objetivos/{objetivo}', [App\Http\Controllers\ObjetivoController::class, 'destroy'])->middleware('auth');
 
 // Route::get('/home', function(){
 // 	return view('layouts/home');
