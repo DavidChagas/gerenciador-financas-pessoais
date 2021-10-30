@@ -2979,6 +2979,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['infos', 'model'],
   data: function data() {
@@ -7947,7 +7959,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".componente-listagem-conta {\n  position: relative;\n}\n.componente-listagem-conta .lista-vazia {\n  margin: 20px 0;\n  padding: 50px 0;\n  text-align: center;\n  background-color: #eee;\n  border: 2px solid #ddd;\n  border-radius: 5px;\n  font-size: 20px;\n  color: #444;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".componente-listagem-conta {\n  position: relative;\n}\n.componente-listagem-conta .lista-vazia {\n  margin: 20px 0;\n  padding: 50px 0;\n  text-align: center;\n  background-color: #eee;\n  border: 2px solid #ddd;\n  border-radius: 5px;\n  font-size: 20px;\n  color: #444;\n}\n.componente-listagem-conta .objetivos-grid {\n  display: grid;\n  grid-template-columns: repeat(3, 1fr);\n  grid-gap: 20px;\n}\n.componente-listagem-conta .objetivos-grid .objetivo {\n  padding: 20px 15px;\n  border-radius: 5px;\n  border: 1px solid #ddd;\n}\n.componente-listagem-conta .objetivos-grid .objetivo .nome {\n  font-size: 18px;\n  font-weight: bold;\n  color: #444;\n  text-align: center;\n}\n.componente-listagem-conta .objetivos-grid .objetivo .valores {\n  margin: 15px 0;\n  display: grid;\n  grid-template-columns: repeat(2, 1fr);\n}\n.componente-listagem-conta .objetivos-grid .objetivo .valores .valor {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  text-align: center;\n}\n.componente-listagem-conta .objetivos-grid .objetivo .progress {\n  position: relative;\n  height: 20px;\n  border: 1px solid #3490dc;\n}\n.componente-listagem-conta .objetivos-grid .objetivo .progress .porcentagem {\n  position: absolute;\n  left: 50%;\n  top: 10px;\n  width: 200px;\n  margin-left: -100px;\n  font-weight: bold;\n}\n.componente-listagem-conta .objetivos-grid .estimativa {\n  margin-top: 15px;\n  font-size: 12px;\n  line-height: 1;\n  text-align: center;\n}\n.componente-listagem-conta .objetivos-grid .botoes {\n  margin-top: 30px;\n  display: flex;\n  justify-content: space-between;\n}\n.componente-listagem-conta .objetivos-grid .botoes .editar {\n  display: flex;\n}\n.componente-listagem-conta .objetivos-grid .botoes a {\n  margin-left: 5px;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -63657,61 +63669,60 @@ var render = function() {
     "div",
     { staticClass: "componente-listagem-conta" },
     [
-      _vm.list.length
-        ? _c("table", { staticClass: "table" }, [
-            _vm._m(0),
+      _c(
+        "div",
+        { staticClass: "objetivos-grid" },
+        _vm._l(_vm.list, function(i) {
+          return _c("div", { key: i.id, staticClass: "objetivo" }, [
+            _c("div", { staticClass: "nome" }, [_vm._v(_vm._s(i.nome))]),
             _vm._v(" "),
-            _c(
-              "tbody",
-              _vm._l(_vm.list, function(i) {
-                return _c("tr", [
-                  _c("td", [_vm._v(_vm._s(i.nome))]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(_vm.formatPrice(i.valor)))]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(i.data_final))]),
-                  _vm._v(" "),
-                  _c("td", [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "btn btn-info btn-sm",
-                        attrs: { href: "/" + _vm.model + "/" + i.id + "/edit" }
-                      },
-                      [_vm._v("Editar")]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("td", [
-                    _c(
-                      "form",
-                      {
-                        attrs: {
-                          action: "/" + _vm.model + "/" + i.id,
-                          method: "POST"
-                        }
-                      },
-                      [
-                        _vm._t("method"),
-                        _vm._v(" "),
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-danger btn-sm",
-                            attrs: { type: "submit" }
-                          },
-                          [_vm._v("Excluir")]
-                        )
-                      ],
-                      2
-                    )
-                  ])
-                ])
-              }),
-              0
-            )
+            _c("hr"),
+            _vm._v(" "),
+            _vm._m(0, true),
+            _vm._v(" "),
+            _vm._m(1, true),
+            _vm._v(" "),
+            _vm._m(2, true),
+            _vm._v(" "),
+            _c("div", { staticClass: "botoes" }, [
+              _c("div", { staticClass: "editar" }, [
+                _c(
+                  "form",
+                  {
+                    attrs: {
+                      action: "/" + _vm.model + "/" + i.id,
+                      method: "POST"
+                    }
+                  },
+                  [_vm._t("method"), _vm._v(" "), _vm._m(3, true)],
+                  2
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-info btn-sm",
+                    attrs: { href: "/" + _vm.model + "/" + i.id + "/edit" }
+                  },
+                  [_vm._v("Editar")]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", [
+                _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-success btn-sm",
+                    attrs: { href: "#" }
+                  },
+                  [_vm._v("Adicionar Aporte")]
+                )
+              ])
+            ])
           ])
-        : _vm._e(),
+        }),
+        0
+      ),
       _vm._v(" "),
       !_vm.list.length
         ? _c("div", { staticClass: "lista-vazia" }, [
@@ -63729,19 +63740,60 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("thead", { staticClass: "thead-light" }, [
-      _c("tr", [
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Nome")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Valor")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Data Final")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col", width: "100px" } }),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col", width: "100px" } })
+    return _c("div", { staticClass: "valores" }, [
+      _c("div", { staticClass: "valor" }, [
+        _c("small", [_vm._v("Valor Atual")]),
+        _vm._v("\n                    R$ 100,00\n                ")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "valor" }, [
+        _c("small", [_vm._v("Objetivo")]),
+        _vm._v("\n                    R$ 200,00\n                ")
       ])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "progress" }, [
+      _c("div", {
+        staticClass: "progress-bar",
+        staticStyle: { width: "25%" },
+        attrs: {
+          role: "progressbar",
+          "aria-valuenow": "25",
+          "aria-valuemin": "0",
+          "aria-valuemax": "100"
+        }
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "porcentagem" }, [
+        _vm._v(
+          "\n                    Você já alcançou 25% do seu objetivo\n                "
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "estimativa" }, [
+      _vm._v("\n                Voce precisa poupar "),
+      _c("b", [_vm._v("R$20,00")]),
+      _vm._v(" por mês para alcançar seu objetivo\n            ")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      { staticClass: "btn btn-danger btn-sm", attrs: { type: "submit" } },
+      [_c("i", { staticClass: "far fa-trash-alt" })]
+    )
   }
 ]
 render._withStripped = true
