@@ -38,9 +38,7 @@
             </div>
         </div>
 
-        <div class="lista-vazia" v-if="!list.length">
-            Ainda não existe objetivos cadastrados :(
-        </div>
+        <lista-vazia-component v-if="!list.length"></lista-vazia-component>
 
         <modal-exclusao-component v-if="visible"></modal-exclusao-component>
     </div>

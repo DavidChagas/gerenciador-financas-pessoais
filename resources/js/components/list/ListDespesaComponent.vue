@@ -5,7 +5,7 @@
                 <option v-bind:key="data.data" v-bind:value="data.data" v-for="data in datasFormatadas">{{data.descricao}}</option>
             </select>
         </div>
-        <table class="table">
+        <table class="table" v-if="despesas.length">
             <thead class="thead-light">
                 <tr>
                     <th scope="col">Valor</th>
@@ -36,6 +36,8 @@
                 </tr>
             </tbody>
         </table>
+
+        <lista-vazia-component v-if="!despesas.length"></lista-vazia-component>
 
         <modal-exclusao-component v-if="visible"></modal-exclusao-component>
     </div>

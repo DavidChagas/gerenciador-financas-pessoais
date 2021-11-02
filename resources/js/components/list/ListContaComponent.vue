@@ -1,6 +1,6 @@
 <template>
     <div class="componente-listagem-conta">
-        <table class="table">
+        <table class="table" v-if="list.length">
             <thead class="thead-light">
                 <tr>
                     <th scope="col">Descrição</th>
@@ -23,6 +23,8 @@
                 </tr>
             </tbody>
         </table>
+
+        <lista-vazia-component v-if="!list.length"></lista-vazia-component>
 
         <modal-exclusao-component v-if="visible"></modal-exclusao-component>
     </div>
