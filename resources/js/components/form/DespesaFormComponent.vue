@@ -48,7 +48,7 @@
                     <div class="form-group">
                         <label>Conta</label>
                         <select class="form-control" name="conta">
-                            <option v-bind:value="conta.id" v-for="conta in contasObj">{{conta.descricao}}</option>
+                            <option v-bind:value="conta.id" v-for="conta in contasObj" v-bind:key="conta.id">{{conta.descricao}}</option>
                         </select>
                     </div>
                 </div>
@@ -56,7 +56,7 @@
                     <div class="form-group">
                         <label>Categorias</label>
                         <select class="form-control" name="categoria">
-                            <option v-bind:value="categoria.id" v-for="categoria in categoriasObj">{{categoria.descricao}}</option>
+                            <option v-bind:value="categoria.id" v-for="categoria in categoriasObj" v-bind:key="categoria.id">{{categoria.descricao}}</option>
                         </select>
                     </div>
                 </div>

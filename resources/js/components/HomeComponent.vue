@@ -11,15 +11,7 @@
                 <option v-bind:key="data.data" v-bind:value="data.data" v-for="data in datasFormatadas">{{data.descricao}}</option>
             </select>
         </div>
-        <!-- <div class="totais">
-            <div class="total">
-                Total de Receitas R${{formatPrice(totalReceitas)}}
-            </div>
-            <div class="total">
-                Total de Despesas R${{formatPrice(totalDespesas)}}
-            </div>
-        </div> -->
-
+        
         <div class="grafico-barras">
             
             <div class="infos">
@@ -247,6 +239,8 @@
         },
 
         mounted() {
+            const mesAtual = moment().format('YYYY-MM');
+
             this.datas_receitasObj.forEach(receita =>{
                 let data = receita.data.split('-');
                 let dataFormatada = data[0]+'-'+data[1];
@@ -263,12 +257,13 @@
                     this.datas.push(dataFormatada)
                 }
             });
+
+            if(!this.datas.includes(mesAtual)) this.datas.unshift(mesAtual);
             
             this.datasFormatadas = this.datas.map(data =>{
                 return {data: data, descricao: this.retornaNomeMes(data.split('-')[1])+' '+data.split('-')[0]}
             })
 
-            const mesAtual = moment().format('YYYY-MM');
             this.dataSelecionada = mesAtual;
 
             this.getTotais(mesAtual);

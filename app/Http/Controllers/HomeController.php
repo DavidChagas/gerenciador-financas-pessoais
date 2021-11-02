@@ -22,6 +22,7 @@ class HomeController extends Controller{
             $join->on('contas.id', '=', 'receitas.conta_id')
                  ->where('contas.usuario_id', '=', Auth::id());
         })
+        ->orderByDesc('data')
         ->get();
 
         $datas_despesas = DB::table('despesas')
@@ -30,6 +31,7 @@ class HomeController extends Controller{
             $join->on('contas.id', '=', 'despesas.conta_id')
                  ->where('contas.usuario_id', '=', Auth::id());
         })
+        ->orderByDesc('data')
         ->get();
         
         // SALDO TOTAL

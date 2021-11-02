@@ -1906,14 +1906,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['datas_receitas', 'datas_despesas', 'saldo_total'],
@@ -2067,6 +2059,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   mounted: function mounted() {
     var _this2 = this;
 
+    var mesAtual = moment__WEBPACK_IMPORTED_MODULE_0___default()().format('YYYY-MM');
     this.datas_receitasObj.forEach(function (receita) {
       var data = receita.data.split('-');
       var dataFormatada = data[0] + '-' + data[1];
@@ -2083,13 +2076,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this2.datas.push(dataFormatada);
       }
     });
+    if (!this.datas.includes(mesAtual)) this.datas.unshift(mesAtual);
     this.datasFormatadas = this.datas.map(function (data) {
       return {
         data: data,
         descricao: _this2.retornaNomeMes(data.split('-')[1]) + ' ' + data.split('-')[0]
       };
     });
-    var mesAtual = moment__WEBPACK_IMPORTED_MODULE_0___default()().format('YYYY-MM');
     this.dataSelecionada = mesAtual;
     this.getTotais(mesAtual);
   }
@@ -2908,6 +2901,7 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
+    var mesAtual = moment__WEBPACK_IMPORTED_MODULE_0___default()().format('YYYY-MM');
     this.list = JSON.parse(this.infos);
     this.datas_despesasObj = JSON.parse(this.datas_despesas);
     this.datas_despesasObj.forEach(function (despesa) {
@@ -2918,13 +2912,13 @@ __webpack_require__.r(__webpack_exports__);
         _this.datas.push(dataFormatada);
       }
     });
+    if (!this.datas.includes(mesAtual)) this.datas.unshift(mesAtual);
     this.datasFormatadas = this.datas.map(function (data) {
       return {
         data: data,
         descricao: _this.retornaNomeMes(data.split('-')[1]) + ' ' + data.split('-')[0]
       };
     });
-    var mesAtual = moment__WEBPACK_IMPORTED_MODULE_0___default()().format('YYYY-MM');
     this.dataSelecionada = mesAtual;
     this.mostrarDespesas(mesAtual);
   }
@@ -3165,6 +3159,7 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
+    var mesAtual = moment__WEBPACK_IMPORTED_MODULE_0___default()().format('YYYY-MM');
     this.list = JSON.parse(this.infos);
     this.datas_receitasObj = JSON.parse(this.datas_receitas);
     this.datas_receitasObj.forEach(function (receita) {
@@ -3175,13 +3170,13 @@ __webpack_require__.r(__webpack_exports__);
         _this.datas.push(dataFormatada);
       }
     });
+    if (!this.datas.includes(mesAtual)) this.datas.unshift(mesAtual);
     this.datasFormatadas = this.datas.map(function (data) {
       return {
         data: data,
         descricao: _this.retornaNomeMes(data.split('-')[1]) + ' ' + data.split('-')[0]
       };
     });
-    var mesAtual = moment__WEBPACK_IMPORTED_MODULE_0___default()().format('YYYY-MM');
     this.dataSelecionada = mesAtual;
     this.mostrarReceitas(mesAtual);
   }
@@ -62992,9 +62987,11 @@ var render = function() {
                 "select",
                 { staticClass: "form-control", attrs: { name: "conta" } },
                 _vm._l(_vm.contasObj, function(conta) {
-                  return _c("option", { domProps: { value: conta.id } }, [
-                    _vm._v(_vm._s(conta.descricao))
-                  ])
+                  return _c(
+                    "option",
+                    { key: conta.id, domProps: { value: conta.id } },
+                    [_vm._v(_vm._s(conta.descricao))]
+                  )
                 }),
                 0
               )
@@ -63009,9 +63006,11 @@ var render = function() {
                 "select",
                 { staticClass: "form-control", attrs: { name: "categoria" } },
                 _vm._l(_vm.categoriasObj, function(categoria) {
-                  return _c("option", { domProps: { value: categoria.id } }, [
-                    _vm._v(_vm._s(categoria.descricao))
-                  ])
+                  return _c(
+                    "option",
+                    { key: categoria.id, domProps: { value: categoria.id } },
+                    [_vm._v(_vm._s(categoria.descricao))]
+                  )
                 }),
                 0
               )

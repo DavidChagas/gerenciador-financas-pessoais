@@ -40,6 +40,7 @@ class DespesaController extends Controller
             $join->on('contas.id', '=', 'despesas.conta_id')
                  ->where('contas.usuario_id', '=', Auth::id());
         })
+        ->orderByDesc('data')
         ->get();
 
         return view('layouts.despesas.listar', compact('datas_despesas', 'infos'));

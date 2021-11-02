@@ -40,6 +40,7 @@ class ReceitaController extends Controller{
             $join->on('contas.id', '=', 'receitas.conta_id')
                  ->where('contas.usuario_id', '=', Auth::id());
         })
+        ->orderByDesc('data')
         ->get();
 
         return view('layouts.receitas.listar', compact('datas_receitas', 'infos'));

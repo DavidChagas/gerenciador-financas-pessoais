@@ -128,6 +128,8 @@
             }
         },
         mounted(){
+            const mesAtual = moment().format('YYYY-MM');
+
             this.list = JSON.parse(this.infos);
             this.datas_despesasObj = JSON.parse(this.datas_despesas);
 
@@ -138,12 +140,13 @@
                     this.datas.push(dataFormatada);
                 }
             });
+
+            if(!this.datas.includes(mesAtual)) this.datas.unshift(mesAtual);
             
             this.datasFormatadas = this.datas.map(data =>{
                 return {data: data, descricao: this.retornaNomeMes(data.split('-')[1])+' '+data.split('-')[0]}
             })
 
-            const mesAtual = moment().format('YYYY-MM');
             this.dataSelecionada = mesAtual;
 
             this.mostrarDespesas(mesAtual);
