@@ -43,6 +43,8 @@ Route::get('/objetivos/{objetivo}/edit', [App\Http\Controllers\ObjetivoControlle
 Route::put('/objetivos/{objetivo}', [App\Http\Controllers\ObjetivoController::class, 'update'])->middleware('auth');
 Route::delete('/objetivos/{objetivo}', [App\Http\Controllers\ObjetivoController::class, 'destroy'])->middleware('auth');
 
+Route::post('/objetivo-aportes', [App\Http\Controllers\ObjetivoAporteController::class, 'store'])->middleware('auth');
+
 // Route::get('/home', function(){
 // 	return view('layouts/home');
 // });

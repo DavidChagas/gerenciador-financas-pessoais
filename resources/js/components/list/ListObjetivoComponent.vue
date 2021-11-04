@@ -1,5 +1,6 @@
 <template>
-    <div class="componente-listagem-conta">
+    <div class="componente-listagem-conta" v-bind:class="{ active: modalAberto }">
+        <div class="overlay" v-bind:class="{ active: modalAberto }"></div>
         <div class="objetivos-grid">
             <div class="objetivo" v-for="i in list" v-bind:key="i.id">
                 <div class="nome">{{i.nome}}</div>
@@ -29,10 +30,11 @@
                             <slot name="method"></slot>
                             <button type="submit" class="btn btn-danger btn-sm"><i class="far fa-trash-alt"></i></button>
                         </form>
-                        <a v-bind:href="'/'+model+'/'+i.id+'/edit'" class="btn btn-info btn-sm">Editar</a>
+                        <!-- <a v-bind:href="'/'+model+'/'+i.id+'/edit'" class="btn btn-info btn-sm">Editar</a> -->
+                        <buttom class="btn btn-info btn-sm" style="margin-left: 10px">Ver Detalhes</buttom>
                     </div>
                     <div>
-                        <a v-bind:href="'#'" class="btn btn-success btn-sm">Adicionar Aporte</a>
+                        <buttom class="btn btn-success btn-sm" v-on:click="abrirModal(i.id)">Adicionar Aporte</buttom>
                     </div>
                 </div>
             </div>
@@ -40,22 +42,47 @@
 
         <lista-vazia-component v-if="!list.length"></lista-vazia-component>
 
-        <modal-exclusao-component v-if="visible"></modal-exclusao-component>
+        <div class="modal-aporte" v-bind:class="{ active: modalAberto }">
+            <form action="/objetivo-aportes" method="POST">
+                <input type="hidden" name="_token" v-bind:value="token">
+                
+                <div class="form-group">
+                    <label>Valor</label>
+                    <input class="form-control" type="text" name="valor">
+                </div>
+
+                <div class="form-group">
+                    <input class="form-control" type="hidden" name="objetivo_id" v-bind:value="objetivoIdAporte">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="hidden" name="data" v-bind:value="dataAporte">
+                </div>
+               
+                    
+                <button class="btn btn-danger" type="button" @click="modalAberto = false">Cancelar</button>
+                <button class="btn btn-primary" type="submit">Aportar</button>
+            </form>
+        </div>
     </div>
 </template>
 
 <script>
+    import moment from 'moment';
+
     export default {
         props : [
             'infos',
-            'model'
+            'model',
+            'token'
         ],
-
         data(){
             return {
                 list: [],
                 visible: false,
-                item: ''
+                item: '',
+                modalAberto: false,
+                objetivoIdAporte: 0,
+                dataAporte: ''
             }
         },
         methods: {
@@ -63,12 +90,14 @@
                 let val = (value/1).toFixed(2).replace('.', ',')
                 return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
             },
-            abrirModal() {
-                this.visible = true;
+            abrirModal(idObjetivo){
+                this.modalAberto = true;
+                this.objetivoIdAporte = idObjetivo;
             }
         },
         mounted(){
             this.list = JSON.parse(this.infos);
+            this.dataAporte =  moment().format('YYYY-MM-DD');
         }
     }
 </script>
@@ -76,6 +105,21 @@
    .componente-listagem-conta{
         position: relative;
 
+        .overlay{
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.15);
+            z-index: 1;
+
+            &.active{
+                display: block; 
+            }
+        }
+        
         .lista-vazia{
             margin: 20px 0;
             padding: 50px 0;
@@ -157,6 +201,34 @@
                 a{
                     margin-left: 5px;
                 }
+            }
+        }
+
+        .modal-aporte{
+            position: absolute;
+            top: 0px;
+            left: 50%;
+
+            display: none;
+
+            width: 300px;
+            margin-left: -150px;
+            padding: 30px;
+
+            text-align: center;
+
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 5px 4px 5px #ccc;
+
+            &.active{
+                display: block;
+                z-index: 2;
+            }
+
+            form{
+                text-align: center;
             }
         }
    }
