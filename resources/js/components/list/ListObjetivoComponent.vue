@@ -30,7 +30,7 @@
                 </div>
 
                 <div class="estimativa" v-if="!i.concluido">
-                    Voce precisa poupar <b>R$20,00</b> por mês para alcançar seu objetivo
+                    Voce precisa poupar <b>{{formatPrice(i.qtdPoupar)}}</b> por mês para alcançar seu objetivo
                 </div>
                 <div class="botoes">
                     <div class="editar">
@@ -39,10 +39,10 @@
                             <button type="submit" class="btn btn-danger btn-sm"><i class="far fa-trash-alt"></i></button>
                         </form>
                         <!-- <a v-bind:href="'/'+model+'/'+i.id+'/edit'" class="btn btn-info btn-sm">Editar</a> -->
-                        <buttom class="btn btn-info btn-sm" style="margin-left: 10px">Ver Detalhes</buttom>
+                        <buttom class="btn btn-info btn-sm" style="margin-left: 10px" v-on:click="verDetalhesObjetivo(i.id)">Ver Detalhes</buttom>
                     </div>
                     <div>
-                        <buttom class="btn btn-success btn-sm" v-on:click="abrirModal(i.id, i.maxAporte)" v-if="!i.concluido">Adicionar Aporte</buttom>
+                        <buttom class="btn btn-success btn-sm" v-on:click="abrirModalCadastro(i.id, i.maxAporte)" v-if="!i.concluido">Adicionar Aporte</buttom>
                     </div>
                 </div>
             </div>
@@ -71,6 +71,29 @@
                 <button class="btn btn-primary" type="submit">Aportar</button>
             </form>
         </div>
+
+        <div class="modal-detalhes" v-bind:class="{ active: modalDetalhesAberto }">
+            <div class="titulo">Aportes</div>
+            <div class="cabecalho">
+                <div class="item">Data</div>
+                <div class="item">Valor</div>
+                <div class="item"></div>
+                <div class="item"></div>
+            </div>
+            <div class="aportes">
+                <div class="aporte" v-for="aporte in aportesObjetivo" v-bind:key="aporte.id">
+                    <div class="item">{{formatDate(aporte.data)}}</div>
+                    <div class="item">{{formatPrice(aporte.valor)}}</div>
+                    <div class="item">Editar</div>
+                    <div class="item">
+                        <form v-bind:action="'/aporte/'+aporte.id" method="POST">
+                            <slot name="method"></slot>
+                            <button type="submit" class="btn btn-danger btn-sm"><i class="far fa-trash-alt"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -86,9 +109,11 @@
         data(){
             return {
                 list: [],
+                aportesObjetivo: [],
                 visible: false,
                 item: '',
                 modalAberto: false,
+                modalDetalhesAberto: true,
                 objetivoIdAporte: 0,
                 dataAporte: '',
                 maxAporte: 0
@@ -99,10 +124,28 @@
                 let val = (value/1).toFixed(2).replace('.', ',')
                 return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
             },
-            abrirModal(idObjetivo, maxAporte){
+            formatDate(value){
+                return moment(String(value)).format('DD/MM/YYYY');
+            },
+            abrirModalCadastro(idObjetivo, maxAporte){
                 this.modalAberto = true;
                 this.objetivoIdAporte = idObjetivo;
                 this.maxAporte = maxAporte;
+            },
+            monthDiff(d1, d2) {
+                let months;
+                months = (d2.getFullYear() - d1.getFullYear()) * 12;
+                months -= d1.getMonth();
+                months += d2.getMonth();
+                return months <= 0 ? 0 : months;
+            },
+            verDetalhesObjetivo(idObjetivo){
+                this.$http.get(`/api/aportes?idObjetivo=${idObjetivo}`).then(response => {
+                   this.aportesObjetivo = response.body;
+                    console.log(this.aportesObjetivo);
+                }, err => {
+                    console.log('err: ');
+                });
             }
         },
         mounted(){
@@ -111,8 +154,18 @@
                 objetivo.porcentagem = ((objetivo.total_aportado * 100) / objetivo.valor).toFixed(2);
                 objetivo.maxAporte = objetivo.valor - objetivo.total_aportado;
                 objetivo.concluido = objetivo.porcentagem == 100 ? true : false;
+
+                const dia = objetivo.data_final.split('-')[2];
+                const mes = objetivo.data_final.split('-')[1];
+                const ano = objetivo.data_final.split('-')[0];
+                const diaAtual = moment().format('DD');
+                const mesAtual = moment().format('MM');
+                const anoAtual = moment().format('YYYY');
+
+                let diff = this.monthDiff( new Date(anoAtual, mesAtual, diaAtual), new Date(ano, mes, dia));
+
+                objetivo.qtdPoupar = (objetivo.valor - objetivo.total_aportado) / diff;
             });
-            console.log('objetivos', this.list);
             this.dataAporte =  moment().format('YYYY-MM-DD');
         }
     }
@@ -277,6 +330,67 @@
 
             form{
                 text-align: center;
+            }
+        }
+
+        .modal-detalhes{
+            position: absolute;
+            top: -65px;
+            left: 50%;
+
+            display: none;
+
+            width: 500px;
+            height: 500px;
+            margin-left: -250px;
+            padding: 30px;
+
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0px 0px 22px #a1a1a1;
+
+            &.active{
+                display: block;
+                z-index: 2;
+            }
+
+            > .titulo{
+                font-size: 20px;
+                font-weight: bold;
+                color: #444;
+
+                text-align: center;
+                margin-bottom: 20px;
+            }
+
+            > .cabecalho{
+                display: grid;
+                grid-template-columns: 35% 35% 15% 15%;
+                border-bottom: 2px solid #ddd;
+                
+                font-weight: bold;
+                
+                > .item{
+                    text-align: center;
+                }
+            }
+
+            > .aportes{
+                height: 380px;
+                overflow-y: scroll;
+
+                > .aporte{
+                    padding: 5px 0;
+
+                    display: grid;
+                    grid-template-columns: 35% 35% 15% 15%;
+
+                    > .item{
+                        text-align: center;
+                        border-bottom: 1px solid #eee;
+                    }
+                }
             }
         }
    }
