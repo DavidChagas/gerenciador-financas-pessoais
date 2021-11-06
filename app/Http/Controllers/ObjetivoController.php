@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Objetivo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ObjetivoController extends Controller{
     private $objetivo;
@@ -14,7 +15,12 @@ class ObjetivoController extends Controller{
     }
 
     public function index(){
-        $objetivos = $this->objetivo::all()->where('usuario_id', '=', Auth::id());
+        $objetivos = DB::table('objetivos')
+            ->join('objetivo_aportes', 'objetivos.id', '=', 'objetivo_aportes.objetivo_id')
+            ->select('objetivos.id', 'objetivos.nome', 'objetivos.descricao', 'objetivos.valor', 'objetivos.data_inicial', 'objetivos.data_final', DB::raw('sum(objetivo_aportes.valor) as total_aportado'))
+            ->groupBy('objetivos.id', 'objetivos.nome', 'objetivos.descricao', 'objetivos.valor', 'objetivos.data_inicial', 'objetivos.data_final')
+            ->get();
+
         return view('layouts.objetivos.listar')->with('objetivos', $objetivos);
     }
 

@@ -5,23 +5,31 @@
             <div class="objetivo" v-for="i in list" v-bind:key="i.id">
                 <div class="nome">{{i.nome}}</div>
                 <hr>
-                <div class="valores">
+                <div class="valores" v-if="!i.concluido">
                     <div class="valor">
                         <small>Valor Atual</small>
-                        R$ 100,00
+                        R$ {{formatPrice(i.total_aportado)}}
                     </div>
                     <div class="valor">
                         <small>Objetivo</small>
-                        R$ 200,00
+                        R$ {{formatPrice(i.valor)}}
                     </div>
                 </div>
-                <div class="progress">
-                    <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                    <div class="porcentagem">
-                        Você já alcançou 25% do seu objetivo
+                <div class="progress" v-if="!i.concluido">
+                    <div class="progress-bar" role="progressbar" v-bind:style="{ width: i.porcentagem+'%'}" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="porcentagem" >
+                        Você já alcançou {{i.porcentagem}}% do seu objetivo 
                     </div>
                 </div>
-                <div class="estimativa">
+                <div class="objetico-concluido" v-if="i.concluido">
+                    <img src="/images/objetivo-concluido.png">
+                    <div class="descricao">
+                        <b>Parabéns! Você concluiu o objetivo.</b>
+                    </div>
+                    Valor atingido: R$ {{formatPrice(i.valor)}}
+                </div>
+
+                <div class="estimativa" v-if="!i.concluido">
                     Voce precisa poupar <b>R$20,00</b> por mês para alcançar seu objetivo
                 </div>
                 <div class="botoes">
@@ -34,7 +42,7 @@
                         <buttom class="btn btn-info btn-sm" style="margin-left: 10px">Ver Detalhes</buttom>
                     </div>
                     <div>
-                        <buttom class="btn btn-success btn-sm" v-on:click="abrirModal(i.id)">Adicionar Aporte</buttom>
+                        <buttom class="btn btn-success btn-sm" v-on:click="abrirModal(i.id, i.maxAporte)" v-if="!i.concluido">Adicionar Aporte</buttom>
                     </div>
                 </div>
             </div>
@@ -48,7 +56,7 @@
                 
                 <div class="form-group">
                     <label>Valor</label>
-                    <input class="form-control" type="text" name="valor">
+                    <input class="form-control" type="number" name="valor" min="0.00" :max='maxAporte' step="0.01" oninvalid="setCustomValidity('Valor máximo para concluir o objetivo ultrapassado')">
                 </div>
 
                 <div class="form-group">
@@ -82,7 +90,8 @@
                 item: '',
                 modalAberto: false,
                 objetivoIdAporte: 0,
-                dataAporte: ''
+                dataAporte: '',
+                maxAporte: 0
             }
         },
         methods: {
@@ -90,13 +99,20 @@
                 let val = (value/1).toFixed(2).replace('.', ',')
                 return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
             },
-            abrirModal(idObjetivo){
+            abrirModal(idObjetivo, maxAporte){
                 this.modalAberto = true;
                 this.objetivoIdAporte = idObjetivo;
+                this.maxAporte = maxAporte;
             }
         },
         mounted(){
             this.list = JSON.parse(this.infos);
+            this.list.forEach(objetivo => {
+                objetivo.porcentagem = ((objetivo.total_aportado * 100) / objetivo.valor).toFixed(2);
+                objetivo.maxAporte = objetivo.valor - objetivo.total_aportado;
+                objetivo.concluido = objetivo.porcentagem == 100 ? true : false;
+            });
+            console.log('objetivos', this.list);
             this.dataAporte =  moment().format('YYYY-MM-DD');
         }
     }
@@ -139,6 +155,7 @@
             grid-gap: 20px;
 
             .objetivo{
+                position: relative;
                 padding: 20px 15px;
 
                 border-radius: 5px;
@@ -170,6 +187,11 @@
                     height: 20px;
                     border: 1px solid #3490dc;
 
+                    .progress-bar{
+                        &.concluido{
+                            background-color: green;
+                        }
+                    }
                     .porcentagem{
                         position: absolute;
                         left: 50%;
@@ -179,6 +201,15 @@
                         margin-left: -100px;
 
                         font-weight: bold;
+                    }
+                }
+
+                .objetico-concluido{
+                    text-align: center;
+
+                    .descricao{
+                        margin: 3px 0;
+                        font-size: 16px;
                     }
                 }
             }
@@ -197,6 +228,23 @@
 
                 .editar{
                     display: flex;
+
+                    >form >button{
+                        position: absolute;
+                        top: 5px;
+                        right: 5px;
+
+                        background-color: transparent;
+                        color: red;
+                        border: none;
+                        padding: 0;
+                        font-size: 15px;
+                        line-height: 0;
+
+                        &:hover{
+                            color: rgb(162, 0, 0);
+                        }
+                    }
                 }
                 a{
                     margin-left: 5px;
