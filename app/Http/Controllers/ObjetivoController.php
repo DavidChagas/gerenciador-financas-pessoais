@@ -16,7 +16,7 @@ class ObjetivoController extends Controller{
 
     public function index(){
         $objetivos = DB::table('objetivos')
-            ->join('objetivo_aportes', 'objetivos.id', '=', 'objetivo_aportes.objetivo_id')
+            ->leftJoin('objetivo_aportes', 'objetivos.id', '=', 'objetivo_aportes.objetivo_id')
             ->select('objetivos.id', 'objetivos.nome', 'objetivos.descricao', 'objetivos.valor', 'objetivos.data_inicial', 'objetivos.data_final', DB::raw('sum(objetivo_aportes.valor) as total_aportado'))
             ->groupBy('objetivos.id', 'objetivos.nome', 'objetivos.descricao', 'objetivos.valor', 'objetivos.data_inicial', 'objetivos.data_final')
             ->where('objetivos.usuario_id', '=', Auth::id())

@@ -73,6 +73,7 @@
         </div>
 
         <div class="modal-detalhes" v-bind:class="{ active: modalDetalhesAberto }">
+            <button class="btn btn-xs btn-danger" type="button" @click="modalDetalhesAberto = false">x</button>
             <div class="titulo">Aportes</div>
             <div class="cabecalho">
                 <div class="item">Data</div>
@@ -113,7 +114,7 @@
                 visible: false,
                 item: '',
                 modalAberto: false,
-                modalDetalhesAberto: true,
+                modalDetalhesAberto: false,
                 objetivoIdAporte: 0,
                 dataAporte: '',
                 maxAporte: 0
@@ -142,7 +143,7 @@
             verDetalhesObjetivo(idObjetivo){
                 this.$http.get(`/api/aportes?idObjetivo=${idObjetivo}`).then(response => {
                    this.aportesObjetivo = response.body;
-                    console.log(this.aportesObjetivo);
+                   this.modalDetalhesAberto = true;
                 }, err => {
                     console.log('err: ');
                 });
@@ -341,7 +342,7 @@
             display: none;
 
             width: 500px;
-            height: 500px;
+            height: 400px;
             margin-left: -250px;
             padding: 30px;
 
@@ -353,6 +354,13 @@
             &.active{
                 display: block;
                 z-index: 2;
+            }
+
+            > button{
+                float: right;
+                padding: 0px 5px 3px;
+                line-height: 1;
+                font-weight: bold;
             }
 
             > .titulo{
@@ -377,7 +385,7 @@
             }
 
             > .aportes{
-                height: 380px;
+                height: 280px;
                 overflow-y: scroll;
 
                 > .aporte{
