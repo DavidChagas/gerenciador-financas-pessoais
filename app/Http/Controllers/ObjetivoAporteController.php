@@ -8,10 +8,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class ObjetivoAporteController extends Controller{
-    private $objetivo_aporte;
+    private $objetivoAporte;
 
     public function __construct(){
-        $this->objetivo_aporte = new ObjetivoAporte();
+        $this->objetivoAporte = new ObjetivoAporte();
     }
 
     public function index(){
@@ -23,13 +23,13 @@ class ObjetivoAporteController extends Controller{
     }
 
     public function store(Request $request){
-        $objetivo_aporte =  $this->objetivo_aporte;
+        $objetivoAporte =  $this->objetivoAporte;
         
-        $objetivo_aporte->valor = $request->input('valor');
-        $objetivo_aporte->data = $request->input('data');
-        $objetivo_aporte->objetivo_id = $request->input('objetivo_id');
+        $objetivoAporte->valor = $request->input('valor');
+        $objetivoAporte->data = $request->input('data');
+        $objetivoAporte->objetivo_id = $request->input('objetivo_id');
 
-        $objetivo_aporte->save();
+        $objetivoAporte->save();
 
         return redirect('/objetivos')->with('success', 'objetivo_aporte salva com sucesso!');
     }
@@ -37,13 +37,14 @@ class ObjetivoAporteController extends Controller{
     public function aportes(){
         $id_objetivo = $_GET['idObjetivo'];
 
-        $objetivo_aportes = DB::table('objetivos')
+        $objetivoAportes = DB::table('objetivos')
         ->join('objetivo_aportes', 'objetivos.id', '=', 'objetivo_aportes.objetivo_id')
         ->select('objetivo_aportes.*')
         ->where('objetivos.usuario_id', '=', Auth::id())
+        ->where('objetivo_id', '=', $id_objetivo)
         ->get();
         
-        return $objetivo_aportes;
+        return $objetivoAportes;
     }
 
     public function show(ObjetivoAporte $objetivoAporte){
@@ -55,10 +56,20 @@ class ObjetivoAporteController extends Controller{
     }
 
     public function update(Request $request, ObjetivoAporte $objetivoAporte){
+        echo $objetivoAporte;
+        echo $request;
 
     }
 
     public function destroy(ObjetivoAporte $objetivoAporte){
-
+        echo $objetivoAporte;
+        try {
+            $objetivoAporte->delete();
+            return redirect('/objetivos')->with('success', 'aporte objetivo excluido com sucesso!');
+        } catch (\Illuminate\Database\QueryException $qe) {
+            return ['status' => 'errorQuery', 'message' => $qe->getMessage()];
+        } catch (\PDOException $e) {
+            return ['status' => 'errorPDO', 'message' => $e->getMessage()];
+        }
     }
 }

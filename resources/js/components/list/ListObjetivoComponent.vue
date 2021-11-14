@@ -51,12 +51,12 @@
         <lista-vazia-component v-if="!list.length"></lista-vazia-component>
 
         <div class="modal-aporte" v-bind:class="{ active: modalAberto }">
-            <form action="/objetivo-aportes" method="POST">
+            <form action="/objetivoAportes" method="POST">
                 <input type="hidden" name="_token" v-bind:value="token">
                 
                 <div class="form-group">
-                    <label>Valor</label>
-                    <input class="form-control" type="number" name="valor" min="0.00" :max='maxAporte' step="0.01" oninvalid="setCustomValidity('Valor máximo para concluir o objetivo ultrapassado')">
+                    <label>Valor</label>{{maxAporte}}
+                    <input class="form-control" type="number" name="valor" min="0" :max='maxAporte' step="1" oninvalid="setCustomValidity('Valor máximo para concluir o objetivo ultrapassado')">
                 </div>
 
                 <div class="form-group">
@@ -65,8 +65,6 @@
                 <div class="form-group">
                     <input class="form-control" type="hidden" name="data" v-bind:value="dataAporte">
                 </div>
-               
-                    
                 <button class="btn btn-danger" type="button" @click="modalAberto = false">Cancelar</button>
                 <button class="btn btn-primary" type="submit">Aportar</button>
             </form>
@@ -85,9 +83,8 @@
                 <div class="aporte" v-for="aporte in aportesObjetivo" v-bind:key="aporte.id">
                     <div class="item">{{formatDate(aporte.data)}}</div>
                     <div class="item">{{formatPrice(aporte.valor)}}</div>
-                    <div class="item">Editar</div>
                     <div class="item">
-                        <form v-bind:action="'/aporte/'+aporte.id" method="POST">
+                        <form v-bind:action="'/objetivoAportes/'+aporte.id" method="POST">
                             <slot name="method"></slot>
                             <button type="submit" class="btn btn-danger btn-sm"><i class="far fa-trash-alt"></i></button>
                         </form>
@@ -154,6 +151,7 @@
             this.list.forEach(objetivo => {
                 objetivo.porcentagem = ((objetivo.total_aportado * 100) / objetivo.valor).toFixed(2);
                 objetivo.maxAporte = objetivo.valor - objetivo.total_aportado;
+                console.log('maxAporte', objetivo.maxAporte);
                 objetivo.concluido = objetivo.porcentagem == 100 ? true : false;
 
                 const dia = objetivo.data_final.split('-')[2];
@@ -342,7 +340,7 @@
             display: none;
 
             width: 500px;
-            height: 400px;
+            max-height: 400px;
             margin-left: -250px;
             padding: 30px;
 
@@ -374,7 +372,7 @@
 
             > .cabecalho{
                 display: grid;
-                grid-template-columns: 35% 35% 15% 15%;
+                grid-template-columns: 40% 40% 20%;
                 border-bottom: 2px solid #ddd;
                 
                 font-weight: bold;
@@ -385,14 +383,14 @@
             }
 
             > .aportes{
-                height: 280px;
-                overflow-y: scroll;
+                max-height: 280px;
+                overflow-y: auto;
 
                 > .aporte{
                     padding: 5px 0;
 
                     display: grid;
-                    grid-template-columns: 35% 35% 15% 15%;
+                    grid-template-columns: 40% 40% 20%;
 
                     > .item{
                         text-align: center;

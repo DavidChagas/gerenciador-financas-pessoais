@@ -3068,9 +3068,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['infos', 'model', 'token'],
@@ -3125,6 +3122,7 @@ __webpack_require__.r(__webpack_exports__);
     this.list.forEach(function (objetivo) {
       objetivo.porcentagem = (objetivo.total_aportado * 100 / objetivo.valor).toFixed(2);
       objetivo.maxAporte = objetivo.valor - objetivo.total_aportado;
+      console.log('maxAporte', objetivo.maxAporte);
       objetivo.concluido = objetivo.porcentagem == 100 ? true : false;
       var dia = objetivo.data_final.split('-')[2];
       var mes = objetivo.data_final.split('-')[1];
@@ -8114,7 +8112,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".componente-listagem-conta {\n  position: relative;\n}\n.componente-listagem-conta .overlay {\n  display: none;\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 100vw;\n  height: 100vh;\n  background-color: rgba(0, 0, 0, 0.15);\n  z-index: 1;\n}\n.componente-listagem-conta .overlay.active {\n  display: block;\n}\n.componente-listagem-conta .lista-vazia {\n  margin: 20px 0;\n  padding: 50px 0;\n  text-align: center;\n  background-color: #eee;\n  border: 2px solid #ddd;\n  border-radius: 5px;\n  font-size: 20px;\n  color: #444;\n}\n.componente-listagem-conta .objetivos-grid {\n  display: grid;\n  grid-template-columns: repeat(3, 1fr);\n  grid-gap: 20px;\n}\n.componente-listagem-conta .objetivos-grid .objetivo {\n  position: relative;\n  padding: 20px 15px;\n  border-radius: 5px;\n  border: 1px solid #ddd;\n}\n.componente-listagem-conta .objetivos-grid .objetivo .nome {\n  font-size: 18px;\n  font-weight: bold;\n  color: #444;\n  text-align: center;\n}\n.componente-listagem-conta .objetivos-grid .objetivo .valores {\n  margin: 15px 0;\n  display: grid;\n  grid-template-columns: repeat(2, 1fr);\n}\n.componente-listagem-conta .objetivos-grid .objetivo .valores .valor {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  text-align: center;\n}\n.componente-listagem-conta .objetivos-grid .objetivo .progress {\n  position: relative;\n  height: 20px;\n  border: 1px solid #3490dc;\n}\n.componente-listagem-conta .objetivos-grid .objetivo .progress .progress-bar.concluido {\n  background-color: green;\n}\n.componente-listagem-conta .objetivos-grid .objetivo .progress .porcentagem {\n  position: absolute;\n  left: 50%;\n  top: 10px;\n  width: 200px;\n  margin-left: -100px;\n  font-weight: bold;\n}\n.componente-listagem-conta .objetivos-grid .objetivo .objetico-concluido {\n  text-align: center;\n}\n.componente-listagem-conta .objetivos-grid .objetivo .objetico-concluido .descricao {\n  margin: 3px 0;\n  font-size: 16px;\n}\n.componente-listagem-conta .objetivos-grid .estimativa {\n  margin-top: 15px;\n  font-size: 12px;\n  line-height: 1;\n  text-align: center;\n}\n.componente-listagem-conta .objetivos-grid .botoes {\n  margin-top: 30px;\n  display: flex;\n  justify-content: space-between;\n}\n.componente-listagem-conta .objetivos-grid .botoes .editar {\n  display: flex;\n}\n.componente-listagem-conta .objetivos-grid .botoes .editar > form > button {\n  position: absolute;\n  top: 5px;\n  right: 5px;\n  background-color: transparent;\n  color: red;\n  border: none;\n  padding: 0;\n  font-size: 15px;\n  line-height: 0;\n}\n.componente-listagem-conta .objetivos-grid .botoes .editar > form > button:hover {\n  color: #a20000;\n}\n.componente-listagem-conta .objetivos-grid .botoes a {\n  margin-left: 5px;\n}\n.componente-listagem-conta .modal-aporte {\n  position: absolute;\n  top: 0px;\n  left: 50%;\n  display: none;\n  width: 300px;\n  margin-left: -150px;\n  padding: 30px;\n  text-align: center;\n  background-color: white;\n  border: 1px solid #ddd;\n  border-radius: 5px;\n  box-shadow: 5px 4px 5px #ccc;\n}\n.componente-listagem-conta .modal-aporte.active {\n  display: block;\n  z-index: 2;\n}\n.componente-listagem-conta .modal-aporte form {\n  text-align: center;\n}\n.componente-listagem-conta .modal-detalhes {\n  position: absolute;\n  top: -65px;\n  left: 50%;\n  display: none;\n  width: 500px;\n  height: 400px;\n  margin-left: -250px;\n  padding: 30px;\n  background-color: white;\n  border: 1px solid #ddd;\n  border-radius: 5px;\n  box-shadow: 0px 0px 22px #a1a1a1;\n}\n.componente-listagem-conta .modal-detalhes.active {\n  display: block;\n  z-index: 2;\n}\n.componente-listagem-conta .modal-detalhes > button {\n  float: right;\n  padding: 0px 5px 3px;\n  line-height: 1;\n  font-weight: bold;\n}\n.componente-listagem-conta .modal-detalhes > .titulo {\n  font-size: 20px;\n  font-weight: bold;\n  color: #444;\n  text-align: center;\n  margin-bottom: 20px;\n}\n.componente-listagem-conta .modal-detalhes > .cabecalho {\n  display: grid;\n  grid-template-columns: 35% 35% 15% 15%;\n  border-bottom: 2px solid #ddd;\n  font-weight: bold;\n}\n.componente-listagem-conta .modal-detalhes > .cabecalho > .item {\n  text-align: center;\n}\n.componente-listagem-conta .modal-detalhes > .aportes {\n  height: 280px;\n  overflow-y: scroll;\n}\n.componente-listagem-conta .modal-detalhes > .aportes > .aporte {\n  padding: 5px 0;\n  display: grid;\n  grid-template-columns: 35% 35% 15% 15%;\n}\n.componente-listagem-conta .modal-detalhes > .aportes > .aporte > .item {\n  text-align: center;\n  border-bottom: 1px solid #eee;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".componente-listagem-conta {\n  position: relative;\n}\n.componente-listagem-conta .overlay {\n  display: none;\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 100vw;\n  height: 100vh;\n  background-color: rgba(0, 0, 0, 0.15);\n  z-index: 1;\n}\n.componente-listagem-conta .overlay.active {\n  display: block;\n}\n.componente-listagem-conta .lista-vazia {\n  margin: 20px 0;\n  padding: 50px 0;\n  text-align: center;\n  background-color: #eee;\n  border: 2px solid #ddd;\n  border-radius: 5px;\n  font-size: 20px;\n  color: #444;\n}\n.componente-listagem-conta .objetivos-grid {\n  display: grid;\n  grid-template-columns: repeat(3, 1fr);\n  grid-gap: 20px;\n}\n.componente-listagem-conta .objetivos-grid .objetivo {\n  position: relative;\n  padding: 20px 15px;\n  border-radius: 5px;\n  border: 1px solid #ddd;\n}\n.componente-listagem-conta .objetivos-grid .objetivo .nome {\n  font-size: 18px;\n  font-weight: bold;\n  color: #444;\n  text-align: center;\n}\n.componente-listagem-conta .objetivos-grid .objetivo .valores {\n  margin: 15px 0;\n  display: grid;\n  grid-template-columns: repeat(2, 1fr);\n}\n.componente-listagem-conta .objetivos-grid .objetivo .valores .valor {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  text-align: center;\n}\n.componente-listagem-conta .objetivos-grid .objetivo .progress {\n  position: relative;\n  height: 20px;\n  border: 1px solid #3490dc;\n}\n.componente-listagem-conta .objetivos-grid .objetivo .progress .progress-bar.concluido {\n  background-color: green;\n}\n.componente-listagem-conta .objetivos-grid .objetivo .progress .porcentagem {\n  position: absolute;\n  left: 50%;\n  top: 10px;\n  width: 200px;\n  margin-left: -100px;\n  font-weight: bold;\n}\n.componente-listagem-conta .objetivos-grid .objetivo .objetico-concluido {\n  text-align: center;\n}\n.componente-listagem-conta .objetivos-grid .objetivo .objetico-concluido .descricao {\n  margin: 3px 0;\n  font-size: 16px;\n}\n.componente-listagem-conta .objetivos-grid .estimativa {\n  margin-top: 15px;\n  font-size: 12px;\n  line-height: 1;\n  text-align: center;\n}\n.componente-listagem-conta .objetivos-grid .botoes {\n  margin-top: 30px;\n  display: flex;\n  justify-content: space-between;\n}\n.componente-listagem-conta .objetivos-grid .botoes .editar {\n  display: flex;\n}\n.componente-listagem-conta .objetivos-grid .botoes .editar > form > button {\n  position: absolute;\n  top: 5px;\n  right: 5px;\n  background-color: transparent;\n  color: red;\n  border: none;\n  padding: 0;\n  font-size: 15px;\n  line-height: 0;\n}\n.componente-listagem-conta .objetivos-grid .botoes .editar > form > button:hover {\n  color: #a20000;\n}\n.componente-listagem-conta .objetivos-grid .botoes a {\n  margin-left: 5px;\n}\n.componente-listagem-conta .modal-aporte {\n  position: absolute;\n  top: 0px;\n  left: 50%;\n  display: none;\n  width: 300px;\n  margin-left: -150px;\n  padding: 30px;\n  text-align: center;\n  background-color: white;\n  border: 1px solid #ddd;\n  border-radius: 5px;\n  box-shadow: 5px 4px 5px #ccc;\n}\n.componente-listagem-conta .modal-aporte.active {\n  display: block;\n  z-index: 2;\n}\n.componente-listagem-conta .modal-aporte form {\n  text-align: center;\n}\n.componente-listagem-conta .modal-detalhes {\n  position: absolute;\n  top: -65px;\n  left: 50%;\n  display: none;\n  width: 500px;\n  max-height: 400px;\n  margin-left: -250px;\n  padding: 30px;\n  background-color: white;\n  border: 1px solid #ddd;\n  border-radius: 5px;\n  box-shadow: 0px 0px 22px #a1a1a1;\n}\n.componente-listagem-conta .modal-detalhes.active {\n  display: block;\n  z-index: 2;\n}\n.componente-listagem-conta .modal-detalhes > button {\n  float: right;\n  padding: 0px 5px 3px;\n  line-height: 1;\n  font-weight: bold;\n}\n.componente-listagem-conta .modal-detalhes > .titulo {\n  font-size: 20px;\n  font-weight: bold;\n  color: #444;\n  text-align: center;\n  margin-bottom: 20px;\n}\n.componente-listagem-conta .modal-detalhes > .cabecalho {\n  display: grid;\n  grid-template-columns: 40% 40% 20%;\n  border-bottom: 2px solid #ddd;\n  font-weight: bold;\n}\n.componente-listagem-conta .modal-detalhes > .cabecalho > .item {\n  text-align: center;\n}\n.componente-listagem-conta .modal-detalhes > .aportes {\n  max-height: 280px;\n  overflow-y: auto;\n}\n.componente-listagem-conta .modal-detalhes > .aportes > .aporte {\n  padding: 5px 0;\n  display: grid;\n  grid-template-columns: 40% 40% 20%;\n}\n.componente-listagem-conta .modal-detalhes > .aportes > .aporte > .item {\n  text-align: center;\n  border-bottom: 1px solid #eee;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -64141,7 +64139,7 @@ var render = function() {
         [
           _c(
             "form",
-            { attrs: { action: "/objetivo-aportes", method: "POST" } },
+            { attrs: { action: "/objetivoAportes", method: "POST" } },
             [
               _c("input", {
                 attrs: { type: "hidden", name: "_token" },
@@ -64150,15 +64148,15 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "form-group" }, [
                 _c("label", [_vm._v("Valor")]),
-                _vm._v(" "),
+                _vm._v(_vm._s(_vm.maxAporte) + "\n                "),
                 _c("input", {
                   staticClass: "form-control",
                   attrs: {
                     type: "number",
                     name: "valor",
-                    min: "0.00",
+                    min: "0",
                     max: _vm.maxAporte,
-                    step: "0.01",
+                    step: "1",
                     oninvalid:
                       "setCustomValidity('Valor máximo para concluir o objetivo ultrapassado')"
                   }
@@ -64243,13 +64241,14 @@ var render = function() {
                   _vm._v(_vm._s(_vm.formatPrice(aporte.valor)))
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "item" }, [_vm._v("Editar")]),
-                _vm._v(" "),
                 _c("div", { staticClass: "item" }, [
                   _c(
                     "form",
                     {
-                      attrs: { action: "/aporte/" + aporte.id, method: "POST" }
+                      attrs: {
+                        action: "/objetivoAportes/" + aporte.id,
+                        method: "POST"
+                      }
                     },
                     [_vm._t("method"), _vm._v(" "), _vm._m(3, true)],
                     2
