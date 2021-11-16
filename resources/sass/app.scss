@@ -16,7 +16,9 @@ body{
     display: flex;
 
     .menu-lateral{
-      min-width: 280px;
+      @media(min-width: 992px){
+        min-width: 280px;
+      }
     }
     .pagina{
       width: 100%;

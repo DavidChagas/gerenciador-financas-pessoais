@@ -10010,8 +10010,10 @@ body #app {
   width: 100%;
   display: flex;
 }
-body #app .menu-lateral {
-  min-width: 280px;
+@media (min-width: 992px) {
+  body #app .menu-lateral {
+    min-width: 280px;
+  }
 }
 body #app .pagina {
   width: 100%;

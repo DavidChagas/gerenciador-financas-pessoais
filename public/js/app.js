@@ -2213,8 +2213,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['nomeUsuario'],
+  data: function data() {
+    return {
+      menuMobileAberto: false
+    };
+  },
   mounted: function mounted() {
     console.log('Component mounted.');
   }
@@ -7944,7 +7955,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".componente-menu {\n  position: fixed;\n  height: 100vh;\n  min-width: 280px;\n  padding: 30px;\n  background-color: #182b3a;\n  box-shadow: 5px 4px 25px #555;\n  color: white;\n}\n.componente-menu .usuario {\n  margin-bottom: 20px;\n  padding-bottom: 20px;\n  border-bottom: 1px solid #bbb;\n  text-align: center;\n}\n.componente-menu .acoes {\n  height: 90%;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n}\n.componente-menu .acoes .paginas {\n  display: flex;\n  flex-direction: column;\n}\n.componente-menu .acoes .paginas .acao {\n  margin: 5px 0;\n  padding: 5px 0;\n  color: white;\n  text-decoration: none;\n}\n.componente-menu .acoes .paginas .acao:hover {\n  cursor: pointer;\n  color: #ddd;\n}\n.componente-menu .acoes form {\n  display: flex;\n  justify-content: center;\n}\n.componente-menu .acoes form button {\n  padding: 2px;\n  background-color: transparent;\n  color: white;\n  border-left: none;\n  border-right: none;\n  border-top: none;\n  border-bottom: 1px solid #eee;\n  border-radius: 0;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".componente-menu .btn-mobile {\n  position: absolute;\n  top: 10px;\n  left: 10px;\n  width: 25px;\n  height: 25px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  border-radius: 4px;\n  background-color: rgba(0, 0, 0, 0.515);\n  color: white;\n  transition: all 1s ease;\n  z-index: 1;\n}\n.componente-menu .btn-mobile.aberto {\n  left: 250px;\n}\n@media (min-width: 992px) {\n.componente-menu .btn-mobile {\n    display: none;\n}\n}\n.componente-menu .menu {\n  position: fixed;\n  height: 100%;\n  min-width: 280px;\n  padding: 30px;\n  background-color: #182b3a;\n  box-shadow: 5px 4px 25px #555;\n  color: white;\n  transition: all 1s ease;\n}\n@media (max-width: 991px) {\n.componente-menu .menu {\n    min-width: 0px;\n    left: -280px;\n}\n}\n.componente-menu .menu.abrir {\n  min-width: 280px;\n  left: 0px;\n}\n.componente-menu .menu .usuario {\n  margin-bottom: 20px;\n  padding-bottom: 20px;\n  border-bottom: 1px solid #bbb;\n  text-align: center;\n}\n.componente-menu .menu .acoes {\n  height: 90%;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n}\n.componente-menu .menu .acoes .paginas {\n  display: flex;\n  flex-direction: column;\n}\n.componente-menu .menu .acoes .paginas .acao {\n  margin: 5px 0;\n  padding: 5px 0;\n  color: white;\n  text-decoration: none;\n}\n.componente-menu .menu .acoes .paginas .acao:hover {\n  cursor: pointer;\n  color: #ddd;\n}\n.componente-menu .menu .acoes form {\n  display: flex;\n  justify-content: center;\n}\n.componente-menu .menu .acoes form button {\n  padding: 2px;\n  background-color: transparent;\n  color: white;\n  border-left: none;\n  border-right: none;\n  border-top: none;\n  border-bottom: 1px solid #eee;\n  border-radius: 0;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -62796,27 +62807,54 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "componente-menu" }, [
-    _c("div", { staticClass: "usuario" }, [
-      _vm._v("\n        Olá " + _vm._s(_vm.nomeUsuario) + "\n    ")
-    ]),
+    _c(
+      "div",
+      {
+        staticClass: "btn-mobile",
+        class: { aberto: _vm.menuMobileAberto },
+        on: {
+          click: function($event) {
+            _vm.menuMobileAberto = !_vm.menuMobileAberto
+          }
+        }
+      },
+      [
+        _vm.menuMobileAberto
+          ? _c("i", { staticClass: "fas fa-times" })
+          : _vm._e(),
+        _vm._v(" "),
+        !_vm.menuMobileAberto
+          ? _c("i", { staticClass: "fas fa-bars" })
+          : _vm._e()
+      ]
+    ),
     _vm._v(" "),
-    _c("div", { staticClass: "acoes" }, [
-      _vm._m(0),
+    _c("div", { staticClass: "menu", class: { abrir: _vm.menuMobileAberto } }, [
+      _c("div", { staticClass: "usuario" }, [
+        _vm._v("\n            Olá " + _vm._s(_vm.nomeUsuario) + "\n        ")
+      ]),
       _vm._v(" "),
-      _c(
-        "form",
-        { attrs: { action: "/logout", method: "POST" } },
-        [
-          _vm._t("method"),
-          _vm._v(" "),
-          _c(
-            "button",
-            { staticClass: "btn btn-danger btn-sm", attrs: { type: "submit" } },
-            [_vm._v("Logout")]
-          )
-        ],
-        2
-      )
+      _c("div", { staticClass: "acoes" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c(
+          "form",
+          { attrs: { action: "/logout", method: "POST" } },
+          [
+            _vm._t("method"),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-danger btn-sm",
+                attrs: { type: "submit" }
+              },
+              [_vm._v("Logout")]
+            )
+          ],
+          2
+        )
+      ])
     ])
   ])
 }
