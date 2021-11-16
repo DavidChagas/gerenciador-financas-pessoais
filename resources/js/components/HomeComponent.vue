@@ -329,15 +329,26 @@
 
         .grafico-barras{
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(1, 1fr);
             width: 100%;
 
+            @media(min-width: 992px){
+                grid-template-columns: repeat(2, 1fr);
+            }
 
             .infos{
                 padding: 30px 20px;
                 display: flex;
                 flex-direction: column;
                 justify-content: space-around;
+
+                @media(min-width: 768px){
+                    flex-direction: row;
+                }
+                @media(min-width: 992px){
+                    flex-direction: column;
+                }
+                
 
                 .total{
                     display: flex;
@@ -358,20 +369,27 @@
             }
 
             .grafico{
-                width: 500px;
                 margin: 0 auto;
+
+                @media(min-width: 992px){
+                    width: 500px;
+                }
             }
         }
 
         .grafico-pizza{
-            margin-top: 50px;
+            margin-bottom: 50px;
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(1, 1fr);
             width: 100%;
+
+            @media(min-width: 992px){
+                grid-template-columns: repeat(2, 1fr);
+            }
 
             .tipo{
                 width: 300px;
-                margin: 0 auto;
+                margin: 50px auto 0 auto;
                 .descricao{
                     font-weight: bold;
                     font-size: 24px;

@@ -10018,8 +10018,13 @@ body #app {
 body #app .pagina {
   width: 100%;
   min-height: 100vh;
-  padding: 0 50px;
+  padding: 0 15px;
   background-color: white;
+}
+@media (min-width: 992px) {
+  body #app .pagina {
+    padding: 0 50px;
+  }
 }
 body #app-login {
   width: 100vw;
@@ -10028,9 +10033,14 @@ body #app-login {
 body #app-login .pagina {
   width: 100%;
   height: 100vh;
-  padding: 0 50px;
+  padding: 0 15px;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: white;
+}
+@media (min-width: 992px) {
+  body #app-login .pagina {
+    padding: 0 50px;
+  }
 }
