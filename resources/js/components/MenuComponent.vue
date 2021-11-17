@@ -87,6 +87,7 @@
             color: white;
 
             transition: all 1s ease;
+            z-index: 1;
 
             @media(max-width: 991px){
                 min-width: 0px;
@@ -96,6 +97,7 @@
             &.abrir{
                 min-width: 280px;
                 left: 0px;
+                overflow: hidden;
             }
             .usuario{
                 margin-bottom: 20px;

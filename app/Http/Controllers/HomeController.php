@@ -44,7 +44,7 @@ class HomeController extends Controller{
         return view('layouts/home', compact('datas_receitas', 'datas_despesas', 'saldo_total'));
     }
 
-    public function teste(Request $request){
+    public function getTotais(Request $request){
         $first = (String) $_GET['first'];
         $last = (String) $_GET['last'];
 
@@ -52,5 +52,30 @@ class HomeController extends Controller{
         $soma_despesas = DB::table('despesas')->select(DB::raw('SUM(valor) AS total_despesas'))->whereBetween('data', ["$first", "$last"])->where('usuario_id', '=', Auth::id())->get();
         
         return [$soma_receitas[0], $soma_despesas[0]];
+    }
+
+    public function getTotaisCategorias(Request $request){
+        $first = (String) $_GET['first'];
+        $last = (String) $_GET['last'];
+
+        $soma_categoria_receitas = DB::table('receitas')
+        ->select(DB::raw('SUM(receitas.valor) AS soma'), 'categorias.descricao')
+        ->join('categorias', 'categorias.id', '=', 'receitas.categoria_id')
+        ->whereBetween('receitas.data', ["$first", "$last"])
+        ->where('receitas.usuario_id', '=', Auth::id())
+        ->groupBy('receitas.categoria_id', 'categorias.descricao')
+        ->orderByRaw('receitas.valor DESC')
+        ->get();
+
+        $soma_categoria_despesas = DB::table('despesas')
+        ->select(DB::raw('SUM(despesas.valor) AS soma'), 'categorias.descricao')
+        ->join('categorias', 'categorias.id', '=', 'despesas.categoria_id')
+        ->whereBetween('despesas.data', ["$first", "$last"])
+        ->where('despesas.usuario_id', '=', Auth::id())
+        ->groupBy('despesas.categoria_id', 'categorias.descricao')
+        ->orderByRaw('despesas.valor DESC')
+        ->get();
+        
+        return [$soma_categoria_receitas, $soma_categoria_despesas];
     }
 }

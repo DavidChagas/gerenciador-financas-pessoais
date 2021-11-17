@@ -30,7 +30,8 @@
                     </div>
                 </div>
             </div>
-            <div class="grafico">
+            <div class="grafico" v-bind:class="{ semMovimentacoes: 'desfocar' }">
+                <div class="semInfos" v-if="semMovimentacoes">Sem movimentações neste mês</div>
                 <canvas id="barChart"></canvas>
             </div>
         </div>
@@ -73,7 +74,8 @@
                 datasFormatadas: [],
                 totalReceitas: '',
                 totalDespesas: '',
-                dataSelecionada: ''
+                dataSelecionada: '',
+                semMovimentacoes: false
             }
         },
 
@@ -93,21 +95,34 @@
                 const firstDay = dataSelecionada+'-01';
                 const lastDay = dataSelecionada+'-31';
 
-                this.$http.get(`/api/teste?first=${firstDay}&last=${lastDay}`).then(response => {
+                this.$http.get(`/api/getTotais?first=${firstDay}&last=${lastDay}`).then(response => {
                    
                     this.totalReceitas = response.body[0].total_receitas;
                     this.totalDespesas = response.body[1].total_despesas;
 
+                    this.semMovimentacoes = !this.totalReceitas && !this.totalDespesas;
+
                     this.montarGraficoBarra();
-                    this.montarGraficoPizzaReceitas();
-                    this.montarGraficoPizzaDespesas();
+
+                    this.$http.get(`/api/getTotaisCategorias?first=${firstDay}&last=${lastDay}`).then(response => {
+                   
+                        this.totalCategoriasReceitas = response.body[0];
+                        this.totalCategoriasDespesas = response.body[1];
+
+                        console.log('this.totalCategoriasReceitas', this.totalCategoriasReceitas)
+                        console.log('this.totalCategoriasDespesas', this.totalCategoriasDespesas)
+
+                        this.montarGraficoPizzaReceitas(this.totalCategoriasReceitas);
+                        this.montarGraficoPizzaDespesas(this.totalCategoriasDespesas);
+                    }, err => {
+                        console.log('err: ');
+                    });
                 }, err => {
                     console.log('err: ');
                 });
             },
 
-            montarGraficoBarra(){
-                console.log('teste', this.totalReceitas)
+            montarGraficoBarra(){               
                 const labels = ['Total Receitas','Total Despesas'];
                 const data = {
                     labels: labels,
@@ -133,25 +148,28 @@
                     data: data,
                     options: {}
                 };
+                
                 var barChart = new Chart(
                     document.getElementById('barChart'),config
                 );
             },
 
-            montarGraficoPizzaReceitas(){
+            montarGraficoPizzaReceitas(totalCategoriasReceitas){
+                const labels = totalCategoriasReceitas.map(categoria => categoria.descricao);
+                const valores = totalCategoriasReceitas.map(categoria => categoria.soma);
+
                 const data = {
-                    labels: [
-                        'Red',
-                        'Blue',
-                        'Yellow'
-                    ],
+                    labels: labels,
                     datasets: [{
                         label: 'My First Dataset',
-                        data: [300, 50, 100],
+                        data: valores,
                         backgroundColor: [
-                        'rgb(255, 99, 132)',
-                        'rgb(54, 162, 235)',
-                        'rgb(255, 205, 86)'
+                        '#009900',
+                        '#00CC00',
+                        '#00FF00',
+                        '#33FF33',
+                        '#66FF66',
+                        '#99FF99',
                         ],
                         hoverOffset: 4
                     }]
@@ -165,20 +183,22 @@
                 );
             },
 
-            montarGraficoPizzaDespesas(){
+            montarGraficoPizzaDespesas(totalCategoriasDespesas){
+                const labels = totalCategoriasDespesas.map(categoria => categoria.descricao);
+                const valores = totalCategoriasDespesas.map(categoria => categoria.soma);
+
                 const data = {
-                    labels: [
-                        'green',
-                        'black',
-                        'purple'
-                    ],
+                    labels: labels,
                     datasets: [{
                         label: 'My First Dataset',
-                        data: [300, 50, 100],
+                        data: valores,
                         backgroundColor: [
-                        'green',
-                        'black',
-                        'purple'
+                        '#990000',
+                        '#CC0000',
+                        '#FF0000',
+                        '#FF3333',
+                        '#FF6666',
+                        '#FF9999',
                         ],
                         hoverOffset: 4
                     }]
@@ -267,6 +287,7 @@
             this.dataSelecionada = mesAtual;
 
             this.getTotais(mesAtual);
+
         }
     }
 </script>
@@ -369,10 +390,28 @@
             }
 
             .grafico{
+                position: relative;
                 margin: 0 auto;
 
                 @media(min-width: 992px){
                     width: 500px;
+                }
+
+                .semInfos{
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+
+                    width: 100%;
+                    height: 100%;
+
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    backdrop-filter: blur(3px);
+                    color: black;
+                    font-size: 18px;
                 }
             }
         }

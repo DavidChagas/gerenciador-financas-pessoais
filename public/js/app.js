@@ -1906,6 +1906,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['datas_receitas', 'datas_despesas', 'saldo_total'],
@@ -1917,7 +1918,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       datasFormatadas: [],
       totalReceitas: '',
       totalDespesas: '',
-      dataSelecionada: ''
+      dataSelecionada: '',
+      semMovimentacoes: false
     };
   },
   created: function created() {
@@ -1934,15 +1936,25 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       var firstDay = dataSelecionada + '-01';
       var lastDay = dataSelecionada + '-31';
-      this.$http.get("/api/teste?first=".concat(firstDay, "&last=").concat(lastDay)).then(function (response) {
+      this.$http.get("/api/getTotais?first=".concat(firstDay, "&last=").concat(lastDay)).then(function (response) {
         _this.totalReceitas = response.body[0].total_receitas;
         _this.totalDespesas = response.body[1].total_despesas;
+        _this.semMovimentacoes = !_this.totalReceitas && !_this.totalDespesas;
 
         _this.montarGraficoBarra();
 
-        _this.montarGraficoPizzaReceitas();
+        _this.$http.get("/api/getTotaisCategorias?first=".concat(firstDay, "&last=").concat(lastDay)).then(function (response) {
+          _this.totalCategoriasReceitas = response.body[0];
+          _this.totalCategoriasDespesas = response.body[1];
+          console.log('this.totalCategoriasReceitas', _this.totalCategoriasReceitas);
+          console.log('this.totalCategoriasDespesas', _this.totalCategoriasDespesas);
 
-        _this.montarGraficoPizzaDespesas();
+          _this.montarGraficoPizzaReceitas(_this.totalCategoriasReceitas);
+
+          _this.montarGraficoPizzaDespesas(_this.totalCategoriasDespesas);
+        }, function (err) {
+          console.log('err: ');
+        });
       }, function (err) {
         console.log('err: ');
       });
@@ -1950,7 +1962,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     montarGraficoBarra: function montarGraficoBarra() {
       var _ref;
 
-      console.log('teste', this.totalReceitas);
       var labels = ['Total Receitas', 'Total Despesas'];
       var data = {
         labels: labels,
@@ -1968,13 +1979,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       };
       var barChart = new Chart(document.getElementById('barChart'), config);
     },
-    montarGraficoPizzaReceitas: function montarGraficoPizzaReceitas() {
+    montarGraficoPizzaReceitas: function montarGraficoPizzaReceitas(totalCategoriasReceitas) {
+      var labels = totalCategoriasReceitas.map(function (categoria) {
+        return categoria.descricao;
+      });
+      var valores = totalCategoriasReceitas.map(function (categoria) {
+        return categoria.soma;
+      });
       var data = {
-        labels: ['Red', 'Blue', 'Yellow'],
+        labels: labels,
         datasets: [{
           label: 'My First Dataset',
-          data: [300, 50, 100],
-          backgroundColor: ['rgb(255, 99, 132)', 'rgb(54, 162, 235)', 'rgb(255, 205, 86)'],
+          data: valores,
+          backgroundColor: ['#009900', '#00CC00', '#00FF00', '#33FF33', '#66FF66', '#99FF99'],
           hoverOffset: 4
         }]
       };
@@ -1984,13 +2001,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       };
       var categoriaReceitasChart = new Chart(document.getElementById('categoriaReceitasChart'), config);
     },
-    montarGraficoPizzaDespesas: function montarGraficoPizzaDespesas() {
+    montarGraficoPizzaDespesas: function montarGraficoPizzaDespesas(totalCategoriasDespesas) {
+      var labels = totalCategoriasDespesas.map(function (categoria) {
+        return categoria.descricao;
+      });
+      var valores = totalCategoriasDespesas.map(function (categoria) {
+        return categoria.soma;
+      });
       var data = {
-        labels: ['green', 'black', 'purple'],
+        labels: labels,
         datasets: [{
           label: 'My First Dataset',
-          data: [300, 50, 100],
-          backgroundColor: ['green', 'black', 'purple'],
+          data: valores,
+          backgroundColor: ['#990000', '#CC0000', '#FF0000', '#FF3333', '#FF6666', '#FF9999'],
           hoverOffset: 4
         }]
       };
@@ -7883,7 +7906,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".componente-home {\n  max-width: 1200px;\n  margin: 0 auto;\n}\n.componente-home h1 {\n  margin: 50px 0 10px 0;\n}\n.componente-home .saldoTotal {\n  margin-bottom: 30px;\n  text-align: center;\n  font-size: 30px;\n  font-weight: bold;\n  color: #444;\n}\n.componente-home .saldoTotal small {\n  font-size: 15px;\n}\n.componente-home .datas {\n  width: 200px;\n  margin: 0 auto 40px;\n}\n.componente-home .datas select {\n  border-top: none;\n  border-left: none;\n  border-right: none;\n  border-radius: 0px;\n}\n.componente-home .datas select:focus {\n  border-color: transparent;\n  outline: none;\n  box-shadow: none;\n}\n.componente-home .totais {\n  display: grid;\n  grid-template-columns: repeat(2, 1fr);\n  grid-column-gap: 10px;\n}\n.componente-home .totais .total {\n  height: 100px;\n  background-color: #eee;\n  box-shadow: 3px 3px 5px #aaa;\n  border-radius: 5px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.componente-home .grafico-barras {\n  display: grid;\n  grid-template-columns: repeat(1, 1fr);\n  width: 100%;\n}\n@media (min-width: 992px) {\n.componente-home .grafico-barras {\n    grid-template-columns: repeat(2, 1fr);\n}\n}\n.componente-home .grafico-barras .infos {\n  padding: 30px 20px;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-around;\n}\n@media (min-width: 768px) {\n.componente-home .grafico-barras .infos {\n    flex-direction: row;\n}\n}\n@media (min-width: 992px) {\n.componente-home .grafico-barras .infos {\n    flex-direction: column;\n}\n}\n.componente-home .grafico-barras .infos .total {\n  display: flex;\n  justify-content: center;\n}\n.componente-home .grafico-barras .infos .total img {\n  width: 50px;\n  height: 50px;\n  margin-right: 20px;\n}\n.componente-home .grafico-barras .infos .total span {\n  font-size: 24px;\n  font-weight: bold;\n  color: #444;\n}\n.componente-home .grafico-barras .grafico {\n  margin: 0 auto;\n}\n@media (min-width: 992px) {\n.componente-home .grafico-barras .grafico {\n    width: 500px;\n}\n}\n.componente-home .grafico-pizza {\n  margin-bottom: 50px;\n  display: grid;\n  grid-template-columns: repeat(1, 1fr);\n  width: 100%;\n}\n@media (min-width: 992px) {\n.componente-home .grafico-pizza {\n    grid-template-columns: repeat(2, 1fr);\n}\n}\n.componente-home .grafico-pizza .tipo {\n  width: 300px;\n  margin: 50px auto 0 auto;\n}\n.componente-home .grafico-pizza .tipo .descricao {\n  font-weight: bold;\n  font-size: 24px;\n  text-align: center;\n  color: #444;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".componente-home {\n  max-width: 1200px;\n  margin: 0 auto;\n}\n.componente-home h1 {\n  margin: 50px 0 10px 0;\n}\n.componente-home .saldoTotal {\n  margin-bottom: 30px;\n  text-align: center;\n  font-size: 30px;\n  font-weight: bold;\n  color: #444;\n}\n.componente-home .saldoTotal small {\n  font-size: 15px;\n}\n.componente-home .datas {\n  width: 200px;\n  margin: 0 auto 40px;\n}\n.componente-home .datas select {\n  border-top: none;\n  border-left: none;\n  border-right: none;\n  border-radius: 0px;\n}\n.componente-home .datas select:focus {\n  border-color: transparent;\n  outline: none;\n  box-shadow: none;\n}\n.componente-home .totais {\n  display: grid;\n  grid-template-columns: repeat(2, 1fr);\n  grid-column-gap: 10px;\n}\n.componente-home .totais .total {\n  height: 100px;\n  background-color: #eee;\n  box-shadow: 3px 3px 5px #aaa;\n  border-radius: 5px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.componente-home .grafico-barras {\n  display: grid;\n  grid-template-columns: repeat(1, 1fr);\n  width: 100%;\n}\n@media (min-width: 992px) {\n.componente-home .grafico-barras {\n    grid-template-columns: repeat(2, 1fr);\n}\n}\n.componente-home .grafico-barras .infos {\n  padding: 30px 20px;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-around;\n}\n@media (min-width: 768px) {\n.componente-home .grafico-barras .infos {\n    flex-direction: row;\n}\n}\n@media (min-width: 992px) {\n.componente-home .grafico-barras .infos {\n    flex-direction: column;\n}\n}\n.componente-home .grafico-barras .infos .total {\n  display: flex;\n  justify-content: center;\n}\n.componente-home .grafico-barras .infos .total img {\n  width: 50px;\n  height: 50px;\n  margin-right: 20px;\n}\n.componente-home .grafico-barras .infos .total span {\n  font-size: 24px;\n  font-weight: bold;\n  color: #444;\n}\n.componente-home .grafico-barras .grafico {\n  position: relative;\n  margin: 0 auto;\n}\n@media (min-width: 992px) {\n.componente-home .grafico-barras .grafico {\n    width: 500px;\n}\n}\n.componente-home .grafico-barras .grafico .semInfos {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  -webkit-backdrop-filter: blur(3px);\n          backdrop-filter: blur(3px);\n  color: black;\n  font-size: 18px;\n}\n.componente-home .grafico-pizza {\n  margin-bottom: 50px;\n  display: grid;\n  grid-template-columns: repeat(1, 1fr);\n  width: 100%;\n}\n@media (min-width: 992px) {\n.componente-home .grafico-pizza {\n    grid-template-columns: repeat(2, 1fr);\n}\n}\n.componente-home .grafico-pizza .tipo {\n  width: 300px;\n  margin: 50px auto 0 auto;\n}\n.componente-home .grafico-pizza .tipo .descricao {\n  font-weight: bold;\n  font-size: 24px;\n  text-align: center;\n  color: #444;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -7955,7 +7978,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".componente-menu .btn-mobile {\n  position: absolute;\n  top: 10px;\n  left: 10px;\n  width: 25px;\n  height: 25px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  border-radius: 4px;\n  background-color: rgba(0, 0, 0, 0.515);\n  color: white;\n  transition: all 1s ease;\n  z-index: 1;\n}\n.componente-menu .btn-mobile.aberto {\n  left: 250px;\n}\n@media (min-width: 992px) {\n.componente-menu .btn-mobile {\n    display: none;\n}\n}\n.componente-menu .menu {\n  position: fixed;\n  height: 100%;\n  min-width: 280px;\n  padding: 30px;\n  background-color: #182b3a;\n  box-shadow: 5px 4px 25px #555;\n  color: white;\n  transition: all 1s ease;\n}\n@media (max-width: 991px) {\n.componente-menu .menu {\n    min-width: 0px;\n    left: -280px;\n}\n}\n.componente-menu .menu.abrir {\n  min-width: 280px;\n  left: 0px;\n}\n.componente-menu .menu .usuario {\n  margin-bottom: 20px;\n  padding-bottom: 20px;\n  border-bottom: 1px solid #bbb;\n  text-align: center;\n}\n.componente-menu .menu .acoes {\n  height: 90%;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n}\n.componente-menu .menu .acoes .paginas {\n  display: flex;\n  flex-direction: column;\n}\n.componente-menu .menu .acoes .paginas .acao {\n  margin: 5px 0;\n  padding: 5px 0;\n  color: white;\n  text-decoration: none;\n}\n.componente-menu .menu .acoes .paginas .acao:hover {\n  cursor: pointer;\n  color: #ddd;\n}\n.componente-menu .menu .acoes form {\n  display: flex;\n  justify-content: center;\n}\n.componente-menu .menu .acoes form button {\n  padding: 2px;\n  background-color: transparent;\n  color: white;\n  border-left: none;\n  border-right: none;\n  border-top: none;\n  border-bottom: 1px solid #eee;\n  border-radius: 0;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".componente-menu .btn-mobile {\n  position: absolute;\n  top: 10px;\n  left: 10px;\n  width: 25px;\n  height: 25px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  border-radius: 4px;\n  background-color: rgba(0, 0, 0, 0.515);\n  color: white;\n  transition: all 1s ease;\n  z-index: 1;\n}\n.componente-menu .btn-mobile.aberto {\n  left: 250px;\n}\n@media (min-width: 992px) {\n.componente-menu .btn-mobile {\n    display: none;\n}\n}\n.componente-menu .menu {\n  position: fixed;\n  height: 100%;\n  min-width: 280px;\n  padding: 30px;\n  background-color: #182b3a;\n  box-shadow: 5px 4px 25px #555;\n  color: white;\n  transition: all 1s ease;\n  z-index: 1;\n}\n@media (max-width: 991px) {\n.componente-menu .menu {\n    min-width: 0px;\n    left: -280px;\n}\n}\n.componente-menu .menu.abrir {\n  min-width: 280px;\n  left: 0px;\n  overflow: hidden;\n}\n.componente-menu .menu .usuario {\n  margin-bottom: 20px;\n  padding-bottom: 20px;\n  border-bottom: 1px solid #bbb;\n  text-align: center;\n}\n.componente-menu .menu .acoes {\n  height: 90%;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n}\n.componente-menu .menu .acoes .paginas {\n  display: flex;\n  flex-direction: column;\n}\n.componente-menu .menu .acoes .paginas .acao {\n  margin: 5px 0;\n  padding: 5px 0;\n  color: white;\n  text-decoration: none;\n}\n.componente-menu .menu .acoes .paginas .acao:hover {\n  cursor: pointer;\n  color: #ddd;\n}\n.componente-menu .menu .acoes form {\n  display: flex;\n  justify-content: center;\n}\n.componente-menu .menu .acoes form button {\n  padding: 2px;\n  background-color: transparent;\n  color: white;\n  border-left: none;\n  border-right: none;\n  border-top: none;\n  border-bottom: 1px solid #eee;\n  border-radius: 0;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -62607,21 +62630,25 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _vm._m(0)
+      _c(
+        "div",
+        { staticClass: "grafico", class: { semMovimentacoes: "desfocar" } },
+        [
+          _vm.semMovimentacoes
+            ? _c("div", { staticClass: "semInfos" }, [
+                _vm._v("Sem movimentações neste mês")
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _c("canvas", { attrs: { id: "barChart" } })
+        ]
+      )
     ]),
     _vm._v(" "),
-    _vm._m(1)
+    _vm._m(0)
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "grafico" }, [
-      _c("canvas", { attrs: { id: "barChart" } })
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

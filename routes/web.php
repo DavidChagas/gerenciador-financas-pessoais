@@ -4,7 +4,8 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/api/teste', [App\Http\Controllers\HomeController::class, 'teste']);
+Route::get('/api/getTotais', [App\Http\Controllers\HomeController::class, 'getTotais']);
+Route::get('/api/getTotaisCategorias', [App\Http\Controllers\HomeController::class, 'getTotaisCategorias']);
 Route::get('/api/aportes', [App\Http\Controllers\ObjetivoAporteController::class, 'aportes']);
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('auth');
