@@ -75,7 +75,10 @@
                 totalReceitas: '',
                 totalDespesas: '',
                 dataSelecionada: '',
-                semMovimentacoes: false
+                semMovimentacoes: false,
+                primeiroCarregamentoBar: true,
+                primeiroCarregamentoReceitas: true,
+                primeiroCarregamentoDespesas: true,
             }
         },
 
@@ -108,9 +111,6 @@
                    
                         this.totalCategoriasReceitas = response.body[0];
                         this.totalCategoriasDespesas = response.body[1];
-
-                        console.log('this.totalCategoriasReceitas', this.totalCategoriasReceitas)
-                        console.log('this.totalCategoriasDespesas', this.totalCategoriasDespesas)
 
                         this.montarGraficoPizzaReceitas(this.totalCategoriasReceitas);
                         this.montarGraficoPizzaDespesas(this.totalCategoriasDespesas);
@@ -149,9 +149,16 @@
                     options: {}
                 };
                 
-                var barChart = new Chart(
-                    document.getElementById('barChart'),config
-                );
+                if(this.primeiroCarregamentoBar){
+                    this.barChart = new Chart(
+                        document.getElementById('barChart'),config
+                    );
+                    this.primeiroCarregamentoBar = false;
+                }else{
+                    this.barChart.data.datasets[0].data[0] = this.totalReceitas;
+                    this.barChart.data.datasets[0].data[1] = this.totalDespesas;
+                    this.barChart.update();
+                }
             },
 
             montarGraficoPizzaReceitas(totalCategoriasReceitas){
@@ -178,9 +185,17 @@
                     type: 'doughnut',
                     data: data,
                 };
-                var categoriaReceitasChart = new Chart(
-                    document.getElementById('categoriaReceitasChart'),config
-                );
+                
+                if(this.primeiroCarregamentoReceitas){
+                    this.categoriaReceitasChart = new Chart(
+                        document.getElementById('categoriaReceitasChart'),config
+                    );
+                    this.primeiroCarregamentoReceitas = false;
+                }else{
+                    this.categoriaReceitasChart.data.labels = labels;
+                    this.categoriaReceitasChart.data.datasets[0].data = valores;
+                    this.categoriaReceitasChart.update();
+                }
             },
 
             montarGraficoPizzaDespesas(totalCategoriasDespesas){
@@ -208,9 +223,16 @@
                     data: data,
                 };
                 
-                var categoriaDespesasChart = new Chart(
-                    document.getElementById('categoriaDespesasChart'),config
-                );
+                if(this.primeiroCarregamentoDespesas){
+                    this.categoriaDespesasChart = new Chart(
+                        document.getElementById('categoriaDespesasChart'),config
+                    );
+                    this.primeiroCarregamentoDespesas = false;
+                }else{
+                    this.categoriaDespesasChart.data.labels = labels;
+                    this.categoriaDespesasChart.data.datasets[0].data = valores;
+                    this.categoriaDespesasChart.update();
+                }
             },
 
             retornaNomeMes(mesNumero){

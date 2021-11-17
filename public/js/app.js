@@ -1919,7 +1919,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       totalReceitas: '',
       totalDespesas: '',
       dataSelecionada: '',
-      semMovimentacoes: false
+      semMovimentacoes: false,
+      primeiroCarregamentoBar: true,
+      primeiroCarregamentoReceitas: true,
+      primeiroCarregamentoDespesas: true
     };
   },
   created: function created() {
@@ -1946,8 +1949,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this.$http.get("/api/getTotaisCategorias?first=".concat(firstDay, "&last=").concat(lastDay)).then(function (response) {
           _this.totalCategoriasReceitas = response.body[0];
           _this.totalCategoriasDespesas = response.body[1];
-          console.log('this.totalCategoriasReceitas', _this.totalCategoriasReceitas);
-          console.log('this.totalCategoriasDespesas', _this.totalCategoriasDespesas);
 
           _this.montarGraficoPizzaReceitas(_this.totalCategoriasReceitas);
 
@@ -1977,7 +1978,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         data: data,
         options: {}
       };
-      var barChart = new Chart(document.getElementById('barChart'), config);
+
+      if (this.primeiroCarregamentoBar) {
+        this.barChart = new Chart(document.getElementById('barChart'), config);
+        this.primeiroCarregamentoBar = false;
+      } else {
+        this.barChart.data.datasets[0].data[0] = this.totalReceitas;
+        this.barChart.data.datasets[0].data[1] = this.totalDespesas;
+        this.barChart.update();
+      }
     },
     montarGraficoPizzaReceitas: function montarGraficoPizzaReceitas(totalCategoriasReceitas) {
       var labels = totalCategoriasReceitas.map(function (categoria) {
@@ -1999,7 +2008,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         type: 'doughnut',
         data: data
       };
-      var categoriaReceitasChart = new Chart(document.getElementById('categoriaReceitasChart'), config);
+
+      if (this.primeiroCarregamentoReceitas) {
+        this.categoriaReceitasChart = new Chart(document.getElementById('categoriaReceitasChart'), config);
+        this.primeiroCarregamentoReceitas = false;
+      } else {
+        this.categoriaReceitasChart.data.labels = labels;
+        this.categoriaReceitasChart.data.datasets[0].data = valores;
+        this.categoriaReceitasChart.update();
+      }
     },
     montarGraficoPizzaDespesas: function montarGraficoPizzaDespesas(totalCategoriasDespesas) {
       var labels = totalCategoriasDespesas.map(function (categoria) {
@@ -2021,7 +2038,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         type: 'doughnut',
         data: data
       };
-      var categoriaDespesasChart = new Chart(document.getElementById('categoriaDespesasChart'), config);
+
+      if (this.primeiroCarregamentoDespesas) {
+        this.categoriaDespesasChart = new Chart(document.getElementById('categoriaDespesasChart'), config);
+        this.primeiroCarregamentoDespesas = false;
+      } else {
+        this.categoriaDespesasChart.data.labels = labels;
+        this.categoriaDespesasChart.data.datasets[0].data = valores;
+        this.categoriaDespesasChart.update();
+      }
     },
     retornaNomeMes: function retornaNomeMes(mesNumero) {
       var mes = '';
