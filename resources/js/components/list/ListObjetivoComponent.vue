@@ -3,9 +3,12 @@
         <div class="overlay" v-bind:class="{ active: modalAberto }"></div>
         <div class="objetivos-grid">
             <div class="objetivo" v-for="i in list" v-bind:key="i.id">
-                <div class="nome">{{i.nome}}</div>
+                <div class="nome">
+                    {{i.nome}}<br>
+                    <small>{{formatDate(i.data_final)}}</small>
+                </div>
                 <hr>
-                <div class="valores" v-if="!i.concluido">
+                <div class="valores" v-if="!i.concluido && !i.fail">
                     <div class="valor">
                         <small>Valor Atual</small>
                         R$ {{formatPrice(i.total_aportado)}}
@@ -15,13 +18,15 @@
                         R$ {{formatPrice(i.valor)}}
                     </div>
                 </div>
-                <div class="progress" v-if="!i.concluido">
+                <div class="progress" v-if="!i.concluido && !i.fail">
                     <div class="progress-bar" role="progressbar" v-bind:style="{ width: i.porcentagem+'%'}" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                     <div class="porcentagem" >
                         Você já alcançou {{i.porcentagem}}% do seu objetivo 
                     </div>
                 </div>
-                <div class="objetico-concluido" v-if="i.concluido">
+
+                <!-- OBJETIVO CONCLUIDO -->
+                <div class="objetivo-concluido" v-if="i.concluido">
                     <img src="/images/objetivo-concluido.png">
                     <div class="descricao">
                         <b>Parabéns! Você concluiu o objetivo.</b>
@@ -29,8 +34,17 @@
                     Valor atingido: R$ {{formatPrice(i.valor)}}
                 </div>
 
-                <div class="estimativa" v-if="!i.concluido">
-                    Voce precisa poupar <b>{{formatPrice(i.qtdPoupar)}}</b> por mês para alcançar seu objetivo
+                <!-- OBJETIVO FAIL -->
+                <div class="objetivo-concluido" v-if="i.fail">
+                    <img src="/images/objetivo-fail.png">
+                    <div class="descricao">
+                        <b>Que pena, você não conseguiu alcançar o objetivo.</b>
+                    </div>
+                    <div style="line-height: 1.2; font-size: 12px">Faltou R$ {{formatPrice(i.valor - i.total_aportado)}} para alcançar o objetivo de R$ {{formatPrice(i.valor)}}</div>
+                </div>
+
+                <div class="estimativa" v-if="!i.concluido && !i.fail">
+                    Voce precisa poupar <b>R$ {{formatPrice(i.qtdPoupar)}}</b> por mês para alcançar seu objetivo
                 </div>
                 <div class="botoes">
                     <div class="editar">
@@ -42,7 +56,7 @@
                         <buttom class="btn btn-info btn-sm" style="margin-left: 10px" v-on:click="verDetalhesObjetivo(i.id)">Ver Detalhes</buttom>
                     </div>
                     <div>
-                        <buttom class="btn btn-success btn-sm" v-on:click="abrirModalCadastro(i.id, i.maxAporte)" v-if="!i.concluido">Adicionar Aporte</buttom>
+                        <buttom class="btn btn-success btn-sm" v-on:click="abrirModalCadastro(i.id, i.maxAporte)" v-if="!i.concluido && !i.fail">Adicionar Aporte</buttom>
                     </div>
                 </div>
             </div>
@@ -151,8 +165,8 @@
             this.list.forEach(objetivo => {
                 objetivo.porcentagem = ((objetivo.total_aportado * 100) / objetivo.valor).toFixed(2);
                 objetivo.maxAporte = objetivo.valor - objetivo.total_aportado;
-                console.log('maxAporte', objetivo.maxAporte);
                 objetivo.concluido = objetivo.porcentagem == 100 ? true : false;
+                objetivo.fail = false;
 
                 const dia = objetivo.data_final.split('-')[2];
                 const mes = objetivo.data_final.split('-')[1];
@@ -163,7 +177,15 @@
 
                 let diff = this.monthDiff( new Date(anoAtual, mesAtual, diaAtual), new Date(ano, mes, dia));
 
-                objetivo.qtdPoupar = (objetivo.valor - objetivo.total_aportado) / diff;
+                if((ano <= anoAtual) && (mes <= mesAtual) && (dia < diaAtual) && !objetivo.concluido){
+                    objetivo.fail = true;
+                }
+                
+                if(diff == 0){
+                    objetivo.qtdPoupar = objetivo.valor - objetivo.total_aportado;
+                }else{
+                    objetivo.qtdPoupar = (objetivo.valor - objetivo.total_aportado) / diff;
+                }
             });
             this.dataAporte =  moment().format('YYYY-MM-DD');
         }
@@ -212,12 +234,22 @@
 
                 border-radius: 5px;
                 border: 1px solid #ddd;
+                transition: all .1s;
 
-                .nome{
+                &:hover{
+                    box-shadow: 0px 0px 5px #ddd;
+                }
+
+                > .nome{
                     font-size: 18px;
                     font-weight: bold;
                     color: #444;
                     text-align: center;
+                    line-height: 1;
+
+                    small{
+                        font-size: 12px;
+                    }
                 }
 
                 .valores{
@@ -256,12 +288,13 @@
                     }
                 }
 
-                .objetico-concluido{
+                .objetivo-concluido{
                     text-align: center;
 
                     .descricao{
-                        margin: 3px 0;
+                        margin: 10px 0 15px 0;
                         font-size: 16px;
+                        line-height: 1;
                     }
                 }
             }
