@@ -4,13 +4,15 @@
             <thead class="thead-light">
                 <tr>
                     <th scope="col">Descrição</th>
+                    <th scope="col">Tipo</th>
                     <th scope="col" width="100px"></th>
                     <th scope="col" width="100px"></th>
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="i in list">
+                <tr v-for="i in list" v-bind:key="i.id">
                     <td>{{i.descricao}}</td>
+                    <td>{{i.tipo}}</td>
                     <td> <a v-bind:href="'/'+model+'/'+i.id+'/edit'" class="btn btn-info btn-sm">Editar</a> </td>
                     <td> 
                         <form v-bind:action="'/'+model+'/'+i.id" method="POST">

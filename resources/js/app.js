@@ -25,7 +25,6 @@ Vue.component('usuario-form-component', require('./components/form/UsuarioformCo
 
 Vue.component('menu-component', require('./components/MenuComponent.vue').default);
 Vue.component('titulo-form-component', require('./components/TituloFormComponent.vue').default);
-Vue.component('listagem-table-component', require('./components/ListagemTableComponent.vue').default);
 Vue.component('modal-exclusao-component', require('./components/ModalExclusaoComponent.vue').default);
 Vue.component('home-component', require('./components/HomeComponent.vue').default);
 Vue.component('lista-vazia-component', require('./components/ListaVaziaComponent.vue').default);
@@ -39,6 +38,7 @@ Vue.component('objetivo-form-component', require('./components/form/Objetivoform
 Vue.component('receita-list-component', require('./components/list/ListReceitaComponent.vue').default);
 Vue.component('despesa-list-component', require('./components/list/ListDespesaComponent.vue').default);
 Vue.component('conta-list-component', require('./components/list/ListContaComponent.vue').default);
+Vue.component('categoria-list-component', require('./components/list/ListCategoriaComponent.vue').default);
 Vue.component('objetivo-list-component', require('./components/list/ListObjetivoComponent.vue').default);
 
 /**
