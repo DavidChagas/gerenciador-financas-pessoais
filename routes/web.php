@@ -10,6 +10,10 @@ Route::get('/api/aportes', [App\Http\Controllers\ObjetivoAporteController::class
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('auth');
 
+Route::get('/usuario/edit', [App\Http\Controllers\UsuarioController::class, 'edit'])->middleware('auth');
+Route::put('/usuario/{usuario}', [App\Http\Controllers\UsuarioController::class, 'update'])->middleware('auth');
+Route::delete('/usuario/{usuario}', [App\Http\Controllers\UsuarioController::class, 'destroy'])->middleware('auth');
+
 Route::get('/contas', [App\Http\Controllers\ContaController::class, 'index'])->name('conta.listar')->middleware('auth');
 Route::get('/contas/create', [App\Http\Controllers\ContaController::class, 'create'])->name('conta.cadastrar')->middleware('auth');
 Route::post('/contas', [App\Http\Controllers\ContaController::class, 'store'])->middleware('auth');

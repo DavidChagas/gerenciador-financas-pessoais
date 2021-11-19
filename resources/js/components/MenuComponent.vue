@@ -19,10 +19,13 @@
                     <!-- <a class="acao">Objetivos</a> -->
                     <!-- <a class="acao">Investimentos</a> -->
                 </div>
-                <form action="/logout" method="POST">
-                    <slot name="method"></slot>
-                    <button type="submit" class="btn btn-danger btn-sm">Logout</button>
-                </form>
+                <div class="footer-menu">
+                    <a v-bind:href="'/usuario/edit'" class="btn btn-info btn-sm">Meus Dados</a>
+                    <form action="/logout" method="POST">
+                        <slot name="method"></slot>
+                        <button type="submit" class="btn btn-danger btn-sm">Logout</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
@@ -131,11 +134,10 @@
                     }
                 }
 
-                form{
+                .footer-menu{
                     display: flex;
-                    justify-content: center;
-
-                    button{
+                    justify-content: space-between;
+                    button, a{
                         padding: 2px;
                         background-color: transparent;
                         color: white;
@@ -144,6 +146,10 @@
                         border-top: none;
                         border-bottom: 1px solid #eee;
                         border-radius: 0;
+
+                        &:hover{
+                            color: rgb(172, 172, 172);
+                        }
                     }
                 }
             }

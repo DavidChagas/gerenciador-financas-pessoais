@@ -21,6 +21,7 @@ Vue.use(VueResource);
 
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+Vue.component('usuario-form-component', require('./components/form/UsuarioformComponent.vue').default);
 
 Vue.component('menu-component', require('./components/MenuComponent.vue').default);
 Vue.component('titulo-form-component', require('./components/TituloFormComponent.vue').default);
