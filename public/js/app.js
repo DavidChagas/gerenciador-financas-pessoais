@@ -1946,16 +1946,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
         _this.montarGraficoBarra();
 
-        _this.$http.get("/api/getTotaisCategorias?first=".concat(firstDay, "&last=").concat(lastDay)).then(function (response) {
-          _this.totalCategoriasReceitas = response.body[0];
-          _this.totalCategoriasDespesas = response.body[1];
+        if (!_this.semMovimentacoes) {
+          _this.$http.get("/api/getTotaisCategorias?first=".concat(firstDay, "&last=").concat(lastDay)).then(function (response) {
+            _this.totalCategoriasReceitas = response.body[0];
+            _this.totalCategoriasDespesas = response.body[1];
 
-          _this.montarGraficoPizzaReceitas(_this.totalCategoriasReceitas);
+            _this.montarGraficoPizzaReceitas(_this.totalCategoriasReceitas);
 
-          _this.montarGraficoPizzaDespesas(_this.totalCategoriasDespesas);
-        }, function (err) {
-          console.log('err: ');
-        });
+            _this.montarGraficoPizzaDespesas(_this.totalCategoriasDespesas);
+          }, function (err) {
+            console.log('err: ');
+          });
+        }
       }, function (err) {
         console.log('err: ');
       });
@@ -2459,7 +2461,7 @@ __webpack_require__.r(__webpack_exports__);
   props: ['action', 'method', 'token', 'conta', 'teste'],
   data: function data() {
     return {
-      conta: {}
+      contaObj: {}
     };
   },
   methods: {
@@ -2468,7 +2470,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
-    this.conta = JSON.parse(this.conta);
+    this.contaObj = JSON.parse(this.conta);
   }
 });
 
@@ -62834,7 +62836,13 @@ var render = function() {
       )
     ]),
     _vm._v(" "),
-    _vm._m(0)
+    !_vm.semMovimentacoes
+      ? _c("div", { staticClass: "grafico-pizza" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _vm._m(1)
+        ])
+      : _vm._e()
   ])
 }
 var staticRenderFns = [
@@ -62842,25 +62850,27 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "grafico-pizza" }, [
-      _c("div", { staticClass: "tipo" }, [
-        _c("div", { staticClass: "descricao" }, [
-          _vm._v("\n                Receitas por Categoria\n            ")
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "grafico" }, [
-          _c("canvas", { attrs: { id: "categoriaReceitasChart" } })
-        ])
+    return _c("div", { staticClass: "tipo" }, [
+      _c("div", { staticClass: "descricao" }, [
+        _vm._v("\n                Receitas por Categoria\n            ")
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "tipo" }, [
-        _c("div", { staticClass: "descricao" }, [
-          _vm._v("\n                Despesas por Categoria\n            ")
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "grafico" }, [
-          _c("canvas", { attrs: { id: "categoriaDespesasChart" } })
-        ])
+      _c("div", { staticClass: "grafico" }, [
+        _c("canvas", { attrs: { id: "categoriaReceitasChart" } })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "tipo" }, [
+      _c("div", { staticClass: "descricao" }, [
+        _vm._v("\n                Despesas por Categoria\n            ")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "grafico" }, [
+        _c("canvas", { attrs: { id: "categoriaDespesasChart" } })
       ])
     ])
   }
@@ -63360,7 +63370,9 @@ var render = function() {
     _vm._v(" "),
     _c(
       "form",
-      { attrs: { action: _vm.action, method: _vm.method } },
+      {
+        attrs: { action: _vm.action, method: _vm.method, autocomplete: "off" }
+      },
       [
         _vm._t("method"),
         _vm._v(" "),
@@ -63377,22 +63389,22 @@ var render = function() {
               _c("input", {
                 staticClass: "form-control",
                 attrs: { type: "text", name: "descricao" },
-                domProps: { value: _vm.conta.descricao }
+                domProps: { value: _vm.contaObj.descricao }
               })
             ])
           ]),
           _vm._v(" "),
-          !_vm.conta.usuario_id
+          !_vm.contaObj.usuario_id
             ? _c("div", { staticClass: "col-sm-6" }, [
                 _c("div", { staticClass: "form-group" }, [
                   _c("label", [_vm._v("Valor Inicial")]),
                   _vm._v(
-                    _vm._s(_vm.conta.usuario_id) + "\n                    "
+                    _vm._s(_vm.contaObj.usuario_id) + "\n                    "
                   ),
                   _c("input", {
                     staticClass: "form-control",
                     attrs: { type: "text", name: "valor" },
-                    domProps: { value: _vm.conta.valor }
+                    domProps: { value: _vm.contaObj.valor }
                   })
                 ])
               ])
@@ -64085,7 +64097,7 @@ var render = function() {
             _c(
               "tbody",
               _vm._l(_vm.list, function(i) {
-                return _c("tr", [
+                return _c("tr", { key: i.id }, [
                   _c("td", [_vm._v(_vm._s(i.descricao))]),
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(_vm.formatPrice(i.valor)))]),

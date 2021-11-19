@@ -4,20 +4,20 @@
             <b>Aqui você poderá cadastrar todas as suas contas existentes.</b><br> 
             Exemplos de contas: Poupança, Carteira, Nuconta, etc...<br> <br> <br>
         </div>
-        <form v-bind:action="action" v-bind:method="method">
+        <form v-bind:action="action" v-bind:method="method" autocomplete="off">
             <slot name="method"></slot>
             <input type="hidden" name="_token" v-bind:value="token">
             <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label>Descrição</label>
-                        <input class="form-control" type="text" name="descricao" v-bind:value="conta.descricao">
+                        <input class="form-control" type="text" name="descricao" v-bind:value="contaObj.descricao">
                     </div>
                 </div>
-                <div class="col-sm-6" v-if="!conta.usuario_id">
+                <div class="col-sm-6" v-if="!contaObj.usuario_id">
                     <div class="form-group">
-                        <label>Valor Inicial</label>{{conta.usuario_id}}
-                        <input class="form-control" type="text" name="valor" v-bind:value="conta.valor">
+                        <label>Valor Inicial</label>{{contaObj.usuario_id}}
+                        <input class="form-control" type="text" name="valor" v-bind:value="contaObj.valor">
                     </div>
                 </div>
             </div>
@@ -41,7 +41,7 @@
 
         data(){
             return {
-                conta: {}
+                contaObj: {}
             }
         },
 
@@ -52,7 +52,7 @@
         },
 
         mounted(){
-            this.conta = JSON.parse(this.conta);
+            this.contaObj = JSON.parse(this.conta);
         }
     }
 </script>

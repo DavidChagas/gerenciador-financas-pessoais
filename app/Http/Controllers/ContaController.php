@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Conta;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ContaController extends Controller{
     
@@ -15,7 +16,8 @@ class ContaController extends Controller{
     }
 
     public function index(){
-        $contas = $this->conta::all()->where('usuario_id', '=', Auth::id());
+        $contas = DB::table('contas')->select('*')->where('usuario_id', '=', Auth::id())->get();
+        
         return view('layouts.contas.listar')->with('infos', $contas);
     }
 

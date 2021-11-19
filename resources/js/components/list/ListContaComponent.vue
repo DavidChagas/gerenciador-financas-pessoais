@@ -10,7 +10,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="i in list">
+                <tr v-for="i in list" v-bind:key="i.id">
                     <td>{{i.descricao}}</td>
                     <td>{{formatPrice(i.valor)}}</td>
                     <td> <a v-bind:href="'/'+model+'/'+i.id+'/edit'" class="btn btn-info btn-sm">Editar</a> </td>

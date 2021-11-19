@@ -35,7 +35,7 @@
                 <canvas id="barChart"></canvas>
             </div>
         </div>
-        <div class="grafico-pizza">
+        <div class="grafico-pizza" v-if="!semMovimentacoes">
             <div class="tipo">
                 <div class="descricao">
                     Receitas por Categoria
@@ -107,16 +107,17 @@
 
                     this.montarGraficoBarra();
 
-                    this.$http.get(`/api/getTotaisCategorias?first=${firstDay}&last=${lastDay}`).then(response => {
-                   
-                        this.totalCategoriasReceitas = response.body[0];
-                        this.totalCategoriasDespesas = response.body[1];
+                    if(!this.semMovimentacoes){
+                        this.$http.get(`/api/getTotaisCategorias?first=${firstDay}&last=${lastDay}`).then(response => {
+                            this.totalCategoriasReceitas = response.body[0];
+                            this.totalCategoriasDespesas = response.body[1];
 
-                        this.montarGraficoPizzaReceitas(this.totalCategoriasReceitas);
-                        this.montarGraficoPizzaDespesas(this.totalCategoriasDespesas);
-                    }, err => {
-                        console.log('err: ');
-                    });
+                            this.montarGraficoPizzaReceitas(this.totalCategoriasReceitas);
+                            this.montarGraficoPizzaDespesas(this.totalCategoriasDespesas);
+                        }, err => {
+                            console.log('err: ');
+                        });
+                    }
                 }, err => {
                     console.log('err: ');
                 });
