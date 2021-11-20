@@ -31,6 +31,7 @@ class ReceitaController extends Controller{
         ->join('categorias', function ($join) {
             $join->on('categorias.id', '=', 'receitas.categoria_id');
         })
+        ->where('receitas.usuario_id', '=', Auth::id())
         ->get();
 
         //datas
@@ -40,6 +41,7 @@ class ReceitaController extends Controller{
             $join->on('contas.id', '=', 'receitas.conta_id')
                  ->where('contas.usuario_id', '=', Auth::id());
         })
+        ->where('receitas.usuario_id', '=', Auth::id())
         ->orderByDesc('data')
         ->get();
 

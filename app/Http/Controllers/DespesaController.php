@@ -31,6 +31,7 @@ class DespesaController extends Controller
         ->join('categorias', function ($join) {
             $join->on('categorias.id', '=', 'despesas.categoria_id');
         })
+        ->where('despesas.usuario_id', '=', Auth::id())
         ->get();
 
         //datas
@@ -40,6 +41,7 @@ class DespesaController extends Controller
             $join->on('contas.id', '=', 'despesas.conta_id')
                  ->where('contas.usuario_id', '=', Auth::id());
         })
+        ->where('despesas.usuario_id', '=', Auth::id())
         ->orderByDesc('data')
         ->get();
 
