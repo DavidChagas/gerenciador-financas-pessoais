@@ -26,9 +26,11 @@ class ContaController extends Controller{
     }
 
     public function store(Request $request){
+        $request_valor_formatado = (int) preg_replace('/\D/', '', $request->input('valor'));
+
         $conta =  $this->conta;
         $conta->descricao = $request->input('descricao');
-        $conta->valor = $request->input('valor');
+        $conta->valor = $request_valor_formatado;
         $conta->usuario_id = $request->user()->id;
 
         $conta->save();

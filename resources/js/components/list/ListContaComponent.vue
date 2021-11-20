@@ -31,6 +31,8 @@
 </template>
 
 <script>
+    import funcoes from "../../funcoes"
+
     export default {
         props : [
             'infos',
@@ -46,8 +48,7 @@
         },
         methods: {
             formatPrice(value) {
-                let val = (value/1).toFixed(2).replace('.', ',')
-                return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+                return funcoes.formatPrice(value);
             },
             abrirModal() {
                 this.visible = true;

@@ -11,7 +11,7 @@
                 <div class="col-sm-5">
                     <div class="form-group">
                         <label>Valor</label>
-                        <input class="form-control" type="text" name="valor" v-bind:value="despesaObj.valor">
+                        <input class="form-control" type="text" name="valor" v-model="despesaObj.valor" @blur="formatarValor">
                     </div>
                 </div>
                 <div class="col-sm-5">
@@ -74,6 +74,8 @@
 </template>
 
 <script>
+    import funcoes from "../../funcoes"
+
     export default {
         props: [
             'action',
@@ -100,12 +102,14 @@
         methods:{
             voltar(){
                 window.history.back();
+            },
+            formatarValor() {
+                this.despesaObj.valor = funcoes.formatarValorInput(this.despesaObj.valor);
             }
         },
 
         mounted(){
             this.despesaObj = JSON.parse(this.despesa);
-            console.log(this.despesaObj.data);
         }
     }
 </script>

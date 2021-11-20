@@ -55,8 +55,10 @@ class ReceitaController extends Controller{
     }
 
     public function store(Request $request){
+        $request_valor_formatado = (int) preg_replace('/\D/', '', $request->input('valor'));
+
         $receita =  $this->receita;
-        $receita->valor = $request->input('valor');
+        $receita->valor = $request_valor_formatado;
         $receita->descricao = $request->input('descricao');
         $receita->status = $request->input('status');
         $receita->data = $request->input('data');
@@ -88,12 +90,15 @@ class ReceitaController extends Controller{
     }
 
     public function update(Request $request, Receita $receita){
+        $request_valor_formatado = (int) preg_replace('/\D/', '', $request->input('valor'));
+        
         // Atualiza Saldo da Conta Selecionada
         $conta = DB::table('contas')->where('id', '=', $receita->conta_id)->get();
-        $valor_atualizado = ( (int) $conta[0]->valor - $receita->valor ) + $request->input('valor');
+        $valor_atualizado = ( (int) $conta[0]->valor - $receita->valor ) + $request_valor_formatado;
+        
         DB::table('contas')->where('id', $receita->conta_id)->update(['valor' => $valor_atualizado]);
 
-        $receita->valor = $request->input('valor');
+        $receita->valor = $request_valor_formatado;
         $receita->descricao = $request->input('descricao');
         $receita->status = $request->input('status');
         $receita->data = $request->input('data');

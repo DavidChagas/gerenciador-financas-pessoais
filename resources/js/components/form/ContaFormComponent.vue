@@ -2,7 +2,7 @@
     <div class="componente-conta-form">
         <div class="descricao">
             <b>Aqui você poderá cadastrar todas as suas contas existentes.</b><br> 
-            Exemplos de contas: Poupança, Carteira, Nuconta, etc...<br> <br> <br>
+            Exemplos de contas: Poupança, Carteira, Nuconta, etc.<br> <br> <br>
         </div>
         <form v-bind:action="action" v-bind:method="method" autocomplete="off">
             <slot name="method"></slot>
@@ -16,8 +16,8 @@
                 </div>
                 <div class="col-sm-6" v-if="!contaObj.usuario_id">
                     <div class="form-group">
-                        <label>Valor Inicial</label>{{contaObj.usuario_id}}
-                        <input class="form-control" type="text" name="valor" v-bind:value="contaObj.valor">
+                        <label>Valor Inicial</label>
+                        <input class="form-control" type="text" name="valor" v-model="contaObj.valor" @blur="formatarValor">
                     </div>
                 </div>
             </div>
@@ -30,6 +30,8 @@
 </template>
 
 <script>
+    import funcoes from "../../funcoes"
+
     export default {
         props: [
             'action',
@@ -48,6 +50,9 @@
         methods:{
             voltar(){
                 window.history.back();
+            },
+            formatarValor() {
+                this.contaObj.valor = funcoes.formatarValorInput(this.contaObj.valor);
             }
         },
 

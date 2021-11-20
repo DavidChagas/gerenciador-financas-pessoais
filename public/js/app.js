@@ -2366,6 +2366,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _funcoes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../funcoes */ "./resources/js/funcoes.js");
 //
 //
 //
@@ -2397,6 +2398,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['action', 'method', 'token', 'conta', 'teste'],
   data: function data() {
@@ -2407,6 +2409,9 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     voltar: function voltar() {
       window.history.back();
+    },
+    formatarValor: function formatarValor() {
+      this.contaObj.valor = _funcoes__WEBPACK_IMPORTED_MODULE_0__["default"].formatarValorInput(this.contaObj.valor);
     }
   },
   mounted: function mounted() {
@@ -2427,6 +2432,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _funcoes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../funcoes */ "./resources/js/funcoes.js");
 //
 //
 //
@@ -2502,6 +2508,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['action', 'method', 'token', 'despesa', 'contas', 'categoriasDespesa'],
   data: function data() {
@@ -2518,11 +2525,13 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     voltar: function voltar() {
       window.history.back();
+    },
+    formatarValor: function formatarValor() {
+      this.despesaObj.valor = _funcoes__WEBPACK_IMPORTED_MODULE_0__["default"].formatarValorInput(this.despesaObj.valor);
     }
   },
   mounted: function mounted() {
     this.despesaObj = JSON.parse(this.despesa);
-    console.log(this.despesaObj.data);
   }
 });
 
@@ -2617,6 +2626,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _funcoes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../funcoes */ "./resources/js/funcoes.js");
 //
 //
 //
@@ -2692,6 +2702,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['action', 'method', 'token', 'receita', 'contas', 'categoriasReceita'],
   data: function data() {
@@ -2708,11 +2719,13 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     voltar: function voltar() {
       window.history.back();
+    },
+    formatarValor: function formatarValor() {
+      this.receitaObj.valor = _funcoes__WEBPACK_IMPORTED_MODULE_0__["default"].formatarValorInput(this.receitaObj.valor);
     }
   },
   mounted: function mounted() {
     this.receitaObj = JSON.parse(this.receita);
-    console.log(this.receitaObj.data);
   }
 });
 
@@ -2857,6 +2870,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _funcoes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../funcoes */ "./resources/js/funcoes.js");
 //
 //
 //
@@ -2889,6 +2903,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['infos', 'model'],
   data: function data() {
@@ -2900,8 +2915,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     formatPrice: function formatPrice(value) {
-      var val = (value / 1).toFixed(2).replace('.', ',');
-      return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+      return _funcoes__WEBPACK_IMPORTED_MODULE_0__["default"].formatPrice(value);
     },
     abrirModal: function abrirModal() {
       this.visible = true;
@@ -2927,6 +2941,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _funcoes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../funcoes */ "./resources/js/funcoes.js");
 //
 //
 //
@@ -2973,6 +2988,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['datas_despesas', 'infos', 'model'],
   data: function data() {
@@ -2989,8 +3005,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     formatPrice: function formatPrice(value) {
-      var val = (value / 1).toFixed(2).replace('.', ',');
-      return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+      return _funcoes__WEBPACK_IMPORTED_MODULE_1__["default"].formatPrice(value);
     },
     formatDate: function formatDate(value) {
       return moment__WEBPACK_IMPORTED_MODULE_0___default()(String(value)).format('DD/MM/YYYY');
@@ -3101,8 +3116,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _funcoes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../funcoes */ "./resources/js/funcoes.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_1__);
 //
 //
 //
@@ -3215,6 +3231,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['infos', 'model', 'token'],
   data: function data() {
@@ -3232,11 +3249,10 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     formatPrice: function formatPrice(value) {
-      var val = (value / 1).toFixed(2).replace('.', ',');
-      return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+      return _funcoes__WEBPACK_IMPORTED_MODULE_0__["default"].formatPrice(value);
     },
     formatDate: function formatDate(value) {
-      return moment__WEBPACK_IMPORTED_MODULE_0___default()(String(value)).format('DD/MM/YYYY');
+      return moment__WEBPACK_IMPORTED_MODULE_1___default()(String(value)).format('DD/MM/YYYY');
     },
     abrirModalCadastro: function abrirModalCadastro(idObjetivo, maxAporte) {
       this.modalAberto = true;
@@ -3273,9 +3289,9 @@ __webpack_require__.r(__webpack_exports__);
       var dia = objetivo.data_final.split('-')[2];
       var mes = objetivo.data_final.split('-')[1];
       var ano = objetivo.data_final.split('-')[0];
-      var diaAtual = moment__WEBPACK_IMPORTED_MODULE_0___default()().format('DD');
-      var mesAtual = moment__WEBPACK_IMPORTED_MODULE_0___default()().format('MM');
-      var anoAtual = moment__WEBPACK_IMPORTED_MODULE_0___default()().format('YYYY');
+      var diaAtual = moment__WEBPACK_IMPORTED_MODULE_1___default()().format('DD');
+      var mesAtual = moment__WEBPACK_IMPORTED_MODULE_1___default()().format('MM');
+      var anoAtual = moment__WEBPACK_IMPORTED_MODULE_1___default()().format('YYYY');
 
       var diff = _this2.monthDiff(new Date(anoAtual, mesAtual, diaAtual), new Date(ano, mes, dia));
 
@@ -3289,7 +3305,7 @@ __webpack_require__.r(__webpack_exports__);
         objetivo.qtdPoupar = (objetivo.valor - objetivo.total_aportado) / diff;
       }
     });
-    this.dataAporte = moment__WEBPACK_IMPORTED_MODULE_0___default()().format('YYYY-MM-DD');
+    this.dataAporte = moment__WEBPACK_IMPORTED_MODULE_1___default()().format('YYYY-MM-DD');
   }
 });
 
@@ -3308,6 +3324,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _funcoes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../funcoes */ "./resources/js/funcoes.js");
 //
 //
 //
@@ -3354,6 +3371,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['datas_receitas', 'infos', 'model'],
   data: function data() {
@@ -3370,8 +3388,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     formatPrice: function formatPrice(value) {
-      var val = (value / 1).toFixed(2).replace('.', ',');
-      return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+      return _funcoes__WEBPACK_IMPORTED_MODULE_1__["default"].formatPrice(value);
     },
     formatDate: function formatDate(value) {
       return moment__WEBPACK_IMPORTED_MODULE_0___default()(String(value)).format('DD/MM/YYYY');
@@ -3566,6 +3583,41 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/funcoes.js":
+/*!*********************************!*\
+  !*** ./resources/js/funcoes.js ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  formatPrice: function formatPrice(value) {
+    var arrayValue = Array.from(value.toString());
+    arrayValue.reverse();
+    arrayValue.splice(2, 0, ",");
+    arrayValue.reverse();
+    return arrayValue.join('');
+  },
+  formatarValorInput: function formatarValorInput(valor) {
+    var valueClean = valor.toString().replace('.', "").replace(/,/g, "").replace(/\D/g, "");
+    var arrayValue = Array.from(valueClean);
+    arrayValue.reverse();
+    arrayValue.splice(2, 0, ".");
+    arrayValue.reverse();
+    var stringValue = arrayValue.join('');
+    return new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL'
+    }).format(stringValue);
+  }
+});
 
 /***/ }),
 
@@ -63303,13 +63355,28 @@ var render = function() {
             ? _c("div", { staticClass: "col-sm-6" }, [
                 _c("div", { staticClass: "form-group" }, [
                   _c("label", [_vm._v("Valor Inicial")]),
-                  _vm._v(
-                    _vm._s(_vm.contaObj.usuario_id) + "\n                    "
-                  ),
+                  _vm._v(" "),
                   _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.contaObj.valor,
+                        expression: "contaObj.valor"
+                      }
+                    ],
                     staticClass: "form-control",
                     attrs: { type: "text", name: "valor" },
-                    domProps: { value: _vm.contaObj.valor }
+                    domProps: { value: _vm.contaObj.valor },
+                    on: {
+                      blur: _vm.formatarValor,
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.contaObj, "valor", $event.target.value)
+                      }
+                    }
                   })
                 ])
               ])
@@ -63333,7 +63400,7 @@ var staticRenderFns = [
       ]),
       _c("br"),
       _vm._v(
-        " \n        Exemplos de contas: Poupança, Carteira, Nuconta, etc..."
+        " \n        Exemplos de contas: Poupança, Carteira, Nuconta, etc."
       ),
       _c("br"),
       _vm._v(" "),
@@ -63401,9 +63468,26 @@ var render = function() {
               _c("label", [_vm._v("Valor")]),
               _vm._v(" "),
               _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.despesaObj.valor,
+                    expression: "despesaObj.valor"
+                  }
+                ],
                 staticClass: "form-control",
                 attrs: { type: "text", name: "valor" },
-                domProps: { value: _vm.despesaObj.valor }
+                domProps: { value: _vm.despesaObj.valor },
+                on: {
+                  blur: _vm.formatarValor,
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.despesaObj, "valor", $event.target.value)
+                  }
+                }
               })
             ])
           ]),
@@ -63723,9 +63807,26 @@ var render = function() {
               _c("label", [_vm._v("Valor")]),
               _vm._v(" "),
               _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.receitaObj.valor,
+                    expression: "receitaObj.valor"
+                  }
+                ],
                 staticClass: "form-control",
                 attrs: { type: "text", name: "valor" },
-                domProps: { value: _vm.receitaObj.valor }
+                domProps: { value: _vm.receitaObj.valor },
+                on: {
+                  blur: _vm.formatarValor,
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.receitaObj, "valor", $event.target.value)
+                  }
+                }
               })
             ])
           ]),
@@ -63804,9 +63905,11 @@ var render = function() {
                 "select",
                 { staticClass: "form-control", attrs: { name: "conta" } },
                 _vm._l(_vm.contasObj, function(conta) {
-                  return _c("option", { domProps: { value: conta.id } }, [
-                    _vm._v(_vm._s(conta.descricao))
-                  ])
+                  return _c(
+                    "option",
+                    { key: conta.id, domProps: { value: conta.id } },
+                    [_vm._v(_vm._s(conta.descricao))]
+                  )
                 }),
                 0
               )
@@ -63821,9 +63924,11 @@ var render = function() {
                 "select",
                 { staticClass: "form-control", attrs: { name: "categoria" } },
                 _vm._l(_vm.categoriasObj, function(categoria) {
-                  return _c("option", { domProps: { value: categoria.id } }, [
-                    _vm._v(_vm._s(categoria.descricao))
-                  ])
+                  return _c(
+                    "option",
+                    { key: categoria.id, domProps: { value: categoria.id } },
+                    [_vm._v(_vm._s(categoria.descricao))]
+                  )
                 }),
                 0
               )

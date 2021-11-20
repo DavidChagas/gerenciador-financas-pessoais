@@ -39,7 +39,7 @@ REPLACE INTO `users` (`id`,`nome`,`email`,`data_nascimento`,`sexo`,`email_verifi
 # Data for table "contas"
 #
 
-REPLACE INTO `contas` (`id`,`descricao`,`valor`,`usuario_id`) VALUES (1,'Carteira',6040.00,1),(2,'Nuconta',500.00,1);
+REPLACE INTO `contas` (`id`,`descricao`,`valor`,`usuario_id`) VALUES (1,'Carteira',604000,1),(2,'Nuconta',50000,1);
 
 #
 # Data for table "categorias"
@@ -51,10 +51,10 @@ REPLACE INTO `categorias` (`id`,`descricao`,`tipo`,`usuario_id`) VALUES (1,'Sal√
 # Data for table "receitas"
 #
 
-REPLACE INTO `receitas` (`id`,`valor`,`status`,`data`,`descricao`,`receita_fixa`,`observacao`,`usuario_id`,`conta_id`,`categoria_id`) VALUES (1,3000.00,'pago','2021-09-05','Pagamento','sim','teste',1,1,1),(2,500.00,'pago','2021-09-05','Bonus produtividade','nao','teste',1,1,2),(3,3000.00,'pago','2021-10-05','Pagamento','sim','teste',1,1,1),(4,650.00,'pago','2021-10-05','Bonus produtividade','nao','teste',1,1,2);
+REPLACE INTO `receitas` (`id`,`valor`,`status`,`data`,`descricao`,`receita_fixa`,`observacao`,`usuario_id`,`conta_id`,`categoria_id`) VALUES (1300000,'pago','2021-09-05','Pagamento','sim','teste',1,1,1),(250000,'pago','2021-09-05','Bonus produtividade','nao','teste',1,1,2),(3300000,'pago','2021-10-05','Pagamento','sim','teste',1,1,1),(465000,'pago','2021-10-05','Bonus produtividade','nao','teste',1,1,2);
 
 #
 # Data for table "despesas"
 #
 
-REPLACE INTO `despesas` (`id`,`valor`,`status`,`data`,`descricao`,`despesa_fixa`,`observacao`,`usuario_id`,`conta_id`,`categoria_id`) VALUES (1,200.00,'pago','2021-09-08','Onibus Faculdade','nao','teste',1,1,3),(2,50.00,'pago','2021-09-15','Uber','nao','teste',1,1,3),(3,800.00,'pago','2021-09-05','Faculdade','sim','teste',1,1,6),(4,800.00,'pago','2021-10-05','Faculdade','sim','teste',1,1,6),(5,260.00,'pago','2021-10-10','Onibus Faculdade','nao','teste',1,1,3);
+REPLACE INTO `despesas` (`id`,`valor`,`status`,`data`,`descricao`,`despesa_fixa`,`observacao`,`usuario_id`,`conta_id`,`categoria_id`) VALUES (120000,'pago','2021-09-08','Onibus Faculdade','nao','teste',1,1,3),(25000,'pago','2021-09-15','Uber','nao','teste',1,1,3),(380000,'pago','2021-09-05','Faculdade','sim','teste',1,1,6),(480000,'pago','2021-10-05','Faculdade','sim','teste',1,1,6),(526000,'pago','2021-10-10','Onibus Faculdade','nao','teste',1,1,3);

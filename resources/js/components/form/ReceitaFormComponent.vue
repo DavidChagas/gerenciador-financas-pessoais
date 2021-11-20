@@ -11,7 +11,7 @@
                 <div class="col-sm-5">
                     <div class="form-group">
                         <label>Valor</label>
-                        <input class="form-control" type="text" name="valor" v-bind:value="receitaObj.valor">
+                        <input class="form-control" type="text" name="valor" v-model="receitaObj.valor" @blur="formatarValor">
                     </div>
                 </div>
                 <div class="col-sm-5">
@@ -48,7 +48,7 @@
                     <div class="form-group">
                         <label>Conta</label>
                         <select class="form-control" name="conta">
-                            <option v-bind:value="conta.id" v-for="conta in contasObj">{{conta.descricao}}</option>
+                            <option v-bind:value="conta.id" v-for="conta in contasObj" v-bind:key="conta.id">{{conta.descricao}}</option>
                         </select>
                     </div>
                 </div>
@@ -56,7 +56,7 @@
                     <div class="form-group">
                         <label>Categorias</label>
                         <select class="form-control" name="categoria">
-                            <option v-bind:value="categoria.id" v-for="categoria in categoriasObj">{{categoria.descricao}}</option>
+                            <option v-bind:value="categoria.id" v-for="categoria in categoriasObj" v-bind:key="categoria.id">{{categoria.descricao}}</option>
                         </select>
                     </div>
                 </div>
@@ -74,6 +74,8 @@
 </template>
 
 <script>
+    import funcoes from "../../funcoes"
+
     export default {
         props: [
             'action',
@@ -100,12 +102,14 @@
         methods:{
             voltar(){
                 window.history.back();
+            },
+            formatarValor() {
+                this.receitaObj.valor = funcoes.formatarValorInput(this.receitaObj.valor);
             }
         },
 
         mounted(){
-            this.receitaObj = JSON.parse(this.receita);
-            console.log(this.receitaObj.data);
+            this.receitaObj = JSON.parse(this.receita);        
         }
     }
 </script>

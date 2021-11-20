@@ -45,6 +45,7 @@
 
 <script>
     import moment from 'moment';
+    import funcoes from "../../funcoes"
 
     export default {
         props : [
@@ -67,8 +68,7 @@
         },
         methods: {
             formatPrice(value) {
-                let val = (value/1).toFixed(2).replace('.', ',')
-                return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+                return funcoes.formatPrice(value);
             },
             formatDate(value){
                 return moment(String(value)).format('DD/MM/YYYY');

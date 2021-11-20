@@ -55,8 +55,10 @@ class DespesaController extends Controller
     }
 
     public function store(Request $request){
+        $request_valor_formatado = (int) preg_replace('/\D/', '', $request->input('valor'));
+
         $despesa =  $this->despesa;
-        $despesa->valor = $request->input('valor');
+        $despesa->valor = $request_valor_formatado;
         $despesa->descricao = $request->input('descricao');
         $despesa->status = $request->input('status');
         $despesa->data = $request->input('data');
@@ -88,12 +90,15 @@ class DespesaController extends Controller
     }
 
     public function update(Request $request, Despesa $despesa){
+        $request_valor_formatado = (int) preg_replace('/\D/', '', $request->input('valor'));
+
         // Atualiza Saldo da Conta Selecionada
         $conta = DB::table('contas')->where('id', '=', $despesa->conta_id)->get();
-        $valor_atualizado = ( (int) $conta[0]->valor + $despesa->valor ) - $request->input('valor');
+        $valor_atualizado = ( (int) $conta[0]->valor + $despesa->valor ) - $request_valor_formatado;
+
         DB::table('contas')->where('id', $despesa->conta_id)->update(['valor' => $valor_atualizado]);
 
-        $despesa->valor = $request->input('valor');
+        $despesa->valor = $request_valor_formatado;
         $despesa->descricao = $request->input('descricao');
         $despesa->status = $request->input('status');
         $despesa->data = $request->input('data');
