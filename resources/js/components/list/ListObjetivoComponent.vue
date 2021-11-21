@@ -52,7 +52,7 @@
                             <slot name="method"></slot>
                             <button type="submit" class="btn btn-danger btn-sm"><i class="far fa-trash-alt"></i></button>
                         </form>
-                        <!-- <a v-bind:href="'/'+model+'/'+i.id+'/edit'" class="btn btn-info btn-sm">Editar</a> -->
+                        <a v-bind:href="'/'+model+'/'+i.id+'/edit'" class="btn btn-info btn-sm"><i class="far fa-edit"></i></a>
                         <buttom class="btn btn-info btn-sm" style="margin-left: 10px" v-on:click="verDetalhesObjetivo(i.id)">Ver Detalhes</buttom>
                     </div>
                     <div>
@@ -339,7 +339,21 @@
                     }
                 }
                 a{
-                    margin-left: 5px;
+                    position: absolute;
+                    top: 5px;
+                    right: 25px;
+
+                    background-color: transparent;
+                    color: rgb(46, 46, 228);
+                    border: none;
+
+                    padding: 0;
+                    font-size: 15px;
+                    line-height: 0;
+
+                    &:hover{
+                        color: rgb(22, 22, 102);
+                    }
                 }
             }
         }
