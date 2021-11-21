@@ -30,12 +30,14 @@ class ObjetivoController extends Controller{
     }
 
     public function store(Request $request){
+        $request_valor_formatado = (int) preg_replace('/\D/', '', $request->input('valor'));
+
         $objetivo =  $this->objetivo;
         
         $objetivo->nome = $request->input('nome');
         $objetivo->descricao = $request->input('descricao');
-        $objetivo->valor = $request->input('valor');
-        $objetivo->data_inicial = $request->input('data_inicial');
+        $objetivo->valor = $request_valor_formatado;
+        $objetivo->data_inicial = date("Y-m-d");
         $objetivo->data_final = $request->input('data_final');
         $objetivo->usuario_id = $request->user()->id;
 
@@ -53,10 +55,11 @@ class ObjetivoController extends Controller{
     }
 
     public function update(Request $request, Objetivo $objetivo){
+        $request_valor_formatado = (int) preg_replace('/\D/', '', $request->input('valor'));
+        
         $objetivo->nome = $request->input('nome');
         $objetivo->descricao = $request->input('descricao');
-        $objetivo->valor = $request->input('valor');
-        $objetivo->data_inicial = $request->input('data_inicial');
+        $objetivo->valor = $request_valor_formatado;
         $objetivo->data_final = $request->input('data_final');
        
         $objetivo->save();

@@ -14,7 +14,7 @@ class CreateObjetivoAportesTable extends Migration
     public function up(){
         Schema::create('objetivo_aportes', function (Blueprint $table) {
             $table->increments('id');
-            $table->decimal('valor');
+            $table->integer('valor');
             $table->date('data');
 
             $table->integer('objetivo_id')->unsigned();

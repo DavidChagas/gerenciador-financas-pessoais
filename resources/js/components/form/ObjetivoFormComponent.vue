@@ -5,37 +5,31 @@
         </div>
         <form v-bind:action="action" v-bind:method="method">
             <slot name="method"></slot>
-            <input type="hidden" name="_token" v-bind:value="token">
+            <input type="hidden" name="_token" v-model="token">
 
             <div class="row">
-                <div class="col-sm-5">
+                <div class="col-sm-6">
                     <div class="form-group">
                         <label>Nome</label>
-                        <input class="form-control" type="text" name="nome" v-bind:value="objetivoObj.nome">
-                    </div>
-                </div>
-                <div class="col-sm-5">
-                    <div class="form-group">
-                        <label>Descrição</label>
-                        <input class="form-control" type="text" name="descricao" v-bind:value="objetivoObj.descricao">
-                    </div>
-                </div>
-                <div class="col-sm-5">
-                    <div class="form-group">
-                        <label>Valor</label>
-                        <input class="form-control" type="text" name="valor" v-bind:value="objetivoObj.valor">
+                        <input class="form-control" type="text" name="nome" v-model="objetivoObj.nome">
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <label>Data Inicial</label>
-                        <input class="form-control" type="date" name="data_inicial" v-bind:value="objetivoObj.data_inicial">
+                        <label>Descrição</label>
+                        <input class="form-control" type="text" name="descricao" v-model="objetivoObj.descricao">
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>Valor</label>
+                        <input class="form-control" type="text" name="valor" v-model="objetivoObj.valor" @blur="formatarValor">
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label>Data Final</label>
-                        <input class="form-control" type="date" name="data_final" v-bind:value="objetivoObj.data_final">
+                        <input class="form-control" type="date" name="data_final" v-model="objetivoObj.data_final">
                     </div>
                 </div>
             </div>
@@ -46,6 +40,8 @@
 </template>
 
 <script>
+    import funcoes from "../../funcoes"
+
     export default {
         props: [
             'action',
@@ -63,6 +59,9 @@
         methods:{
             voltar(){
                 window.history.back();
+            },
+            formatarValor() {
+                this.objetivoObj.valor = funcoes.formatarValorInput(this.objetivoObj.valor);
             }
         },
 

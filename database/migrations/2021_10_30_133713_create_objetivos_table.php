@@ -17,7 +17,7 @@ class CreateObjetivosTable extends Migration
             $table->increments('id');
             $table->string('nome');
             $table->text('descricao')->nullable();
-            $table->decimal('valor');
+            $table->integer('valor');
             $table->date('data_inicial');
             $table->date('data_final');
 

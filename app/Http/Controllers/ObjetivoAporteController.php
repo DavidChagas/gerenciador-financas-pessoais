@@ -23,9 +23,11 @@ class ObjetivoAporteController extends Controller{
     }
 
     public function store(Request $request){
+        $request_valor_formatado = (int) preg_replace('/\D/', '', $request->input('valor'));
+        
         $objetivoAporte =  $this->objetivoAporte;
         
-        $objetivoAporte->valor = $request->input('valor');
+        $objetivoAporte->valor = $request_valor_formatado;
         $objetivoAporte->data = $request->input('data');
         $objetivoAporte->objetivo_id = $request->input('objetivo_id');
 

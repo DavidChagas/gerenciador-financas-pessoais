@@ -1,6 +1,8 @@
 export default {
     formatPrice(value) {
-        let arrayValue = Array.from( value.toString() );
+        let valueClean = value.toString().replace('.', "").replace(/,/g, "").replace(/\D/g, "");
+        
+        let arrayValue = Array.from( valueClean.toString() );
         
         arrayValue.reverse();
         arrayValue.splice(2, 0, ",");

@@ -69,8 +69,8 @@
                 <input type="hidden" name="_token" v-bind:value="token">
                 
                 <div class="form-group">
-                    <label>Valor</label>{{maxAporte}}
-                    <input class="form-control" type="number" name="valor" min="0" :max='maxAporte' step="1" oninvalid="setCustomValidity('Valor máximo para concluir o objetivo ultrapassado')">
+                    <label>Valor</label>
+                    <input class="form-control" type="text" name="valor" v-model="objetivoValorAporte" @blur="formatarValor">
                 </div>
 
                 <div class="form-group">
@@ -128,6 +128,7 @@
                 modalAberto: false,
                 modalDetalhesAberto: false,
                 objetivoIdAporte: 0,
+                objetivoValorAporte: 0,
                 dataAporte: '',
                 maxAporte: 0
             }
@@ -135,6 +136,9 @@
         methods: {
             formatPrice(value) {
                 return funcoes.formatPrice(value);
+            },
+            formatarValor() {
+                this.objetivoValorAporte = funcoes.formatarValorInput(this.objetivoValorAporte);
             },
             formatDate(value){
                 return moment(String(value)).format('DD/MM/YYYY');
@@ -161,8 +165,11 @@
             }
         },
         mounted(){
+            console.log('this.infos', this.infos)
             this.list = JSON.parse(this.infos);
             this.list.forEach(objetivo => {
+                console.log('objetivo.total_aportado', objetivo.total_aportado)
+                if(objetivo.total_aportado == null) objetivo.total_aportado = 0
                 objetivo.porcentagem = ((objetivo.total_aportado * 100) / objetivo.valor).toFixed(2);
                 objetivo.maxAporte = objetivo.valor - objetivo.total_aportado;
                 objetivo.concluido = objetivo.porcentagem == 100 ? true : false;
@@ -182,9 +189,9 @@
                 }
                 
                 if(diff == 0){
-                    objetivo.qtdPoupar = objetivo.valor - objetivo.total_aportado;
+                    objetivo.qtdPoupar = parseInt( objetivo.valor - objetivo.total_aportado );
                 }else{
-                    objetivo.qtdPoupar = (objetivo.valor - objetivo.total_aportado) / diff;
+                    objetivo.qtdPoupar = parseInt( (objetivo.valor - objetivo.total_aportado) / diff );
                 }
             });
             this.dataAporte =  moment().format('YYYY-MM-DD');

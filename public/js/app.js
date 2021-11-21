@@ -2548,6 +2548,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _funcoes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../funcoes */ "./resources/js/funcoes.js");
 //
 //
 //
@@ -2589,12 +2590,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['action', 'method', 'token', 'objetivo'],
   data: function data() {
@@ -2605,6 +2601,9 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     voltar: function voltar() {
       window.history.back();
+    },
+    formatarValor: function formatarValor() {
+      this.objetivoObj.valor = _funcoes__WEBPACK_IMPORTED_MODULE_0__["default"].formatarValorInput(this.objetivoObj.valor);
     }
   },
   mounted: function mounted() {
@@ -3243,6 +3242,7 @@ __webpack_require__.r(__webpack_exports__);
       modalAberto: false,
       modalDetalhesAberto: false,
       objetivoIdAporte: 0,
+      objetivoValorAporte: 0,
       dataAporte: '',
       maxAporte: 0
     };
@@ -3250,6 +3250,9 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     formatPrice: function formatPrice(value) {
       return _funcoes__WEBPACK_IMPORTED_MODULE_0__["default"].formatPrice(value);
+    },
+    formatarValor: function formatarValor() {
+      this.objetivoValorAporte = _funcoes__WEBPACK_IMPORTED_MODULE_0__["default"].formatarValorInput(this.objetivoValorAporte);
     },
     formatDate: function formatDate(value) {
       return moment__WEBPACK_IMPORTED_MODULE_1___default()(String(value)).format('DD/MM/YYYY');
@@ -3280,8 +3283,11 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this2 = this;
 
+    console.log('this.infos', this.infos);
     this.list = JSON.parse(this.infos);
     this.list.forEach(function (objetivo) {
+      console.log('objetivo.total_aportado', objetivo.total_aportado);
+      if (objetivo.total_aportado == null) objetivo.total_aportado = 0;
       objetivo.porcentagem = (objetivo.total_aportado * 100 / objetivo.valor).toFixed(2);
       objetivo.maxAporte = objetivo.valor - objetivo.total_aportado;
       objetivo.concluido = objetivo.porcentagem == 100 ? true : false;
@@ -3300,9 +3306,9 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       if (diff == 0) {
-        objetivo.qtdPoupar = objetivo.valor - objetivo.total_aportado;
+        objetivo.qtdPoupar = parseInt(objetivo.valor - objetivo.total_aportado);
       } else {
-        objetivo.qtdPoupar = (objetivo.valor - objetivo.total_aportado) / diff;
+        objetivo.qtdPoupar = parseInt((objetivo.valor - objetivo.total_aportado) / diff);
       }
     });
     this.dataAporte = moment__WEBPACK_IMPORTED_MODULE_1___default()().format('YYYY-MM-DD');
@@ -3599,7 +3605,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   formatPrice: function formatPrice(value) {
-    var arrayValue = Array.from(value.toString());
+    var valueClean = value.toString().replace('.', "").replace(/,/g, "").replace(/\D/g, "");
+    var arrayValue = Array.from(valueClean.toString());
     arrayValue.reverse();
     arrayValue.splice(2, 0, ",");
     arrayValue.reverse();
@@ -63341,7 +63348,7 @@ var render = function() {
         _c("div", { staticClass: "row" }, [
           _c("div", { staticClass: "col-sm-6" }, [
             _c("div", { staticClass: "form-group" }, [
-              _c("label", [_vm._v("Descrição " + _vm._s(_vm.contaObj))]),
+              _c("label", [_vm._v("Descrição")]),
               _vm._v(" "),
               _c("input", {
                 directives: [
@@ -63686,55 +63693,108 @@ var render = function() {
         _vm._t("method"),
         _vm._v(" "),
         _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.token,
+              expression: "token"
+            }
+          ],
           attrs: { type: "hidden", name: "_token" },
-          domProps: { value: _vm.token }
+          domProps: { value: _vm.token },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.token = $event.target.value
+            }
+          }
         }),
         _vm._v(" "),
         _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-sm-5" }, [
+          _c("div", { staticClass: "col-sm-6" }, [
             _c("div", { staticClass: "form-group" }, [
               _c("label", [_vm._v("Nome")]),
               _vm._v(" "),
               _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.objetivoObj.nome,
+                    expression: "objetivoObj.nome"
+                  }
+                ],
                 staticClass: "form-control",
                 attrs: { type: "text", name: "nome" },
-                domProps: { value: _vm.objetivoObj.nome }
-              })
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-sm-5" }, [
-            _c("div", { staticClass: "form-group" }, [
-              _c("label", [_vm._v("Descrição")]),
-              _vm._v(" "),
-              _c("input", {
-                staticClass: "form-control",
-                attrs: { type: "text", name: "descricao" },
-                domProps: { value: _vm.objetivoObj.descricao }
-              })
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-sm-5" }, [
-            _c("div", { staticClass: "form-group" }, [
-              _c("label", [_vm._v("Valor")]),
-              _vm._v(" "),
-              _c("input", {
-                staticClass: "form-control",
-                attrs: { type: "text", name: "valor" },
-                domProps: { value: _vm.objetivoObj.valor }
+                domProps: { value: _vm.objetivoObj.nome },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.objetivoObj, "nome", $event.target.value)
+                  }
+                }
               })
             ])
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "col-sm-6" }, [
             _c("div", { staticClass: "form-group" }, [
-              _c("label", [_vm._v("Data Inicial")]),
+              _c("label", [_vm._v("Descrição")]),
               _vm._v(" "),
               _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.objetivoObj.descricao,
+                    expression: "objetivoObj.descricao"
+                  }
+                ],
                 staticClass: "form-control",
-                attrs: { type: "date", name: "data_inicial" },
-                domProps: { value: _vm.objetivoObj.data_inicial }
+                attrs: { type: "text", name: "descricao" },
+                domProps: { value: _vm.objetivoObj.descricao },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.objetivoObj, "descricao", $event.target.value)
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-6" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", [_vm._v("Valor")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.objetivoObj.valor,
+                    expression: "objetivoObj.valor"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text", name: "valor" },
+                domProps: { value: _vm.objetivoObj.valor },
+                on: {
+                  blur: _vm.formatarValor,
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.objetivoObj, "valor", $event.target.value)
+                  }
+                }
               })
             ])
           ]),
@@ -63744,9 +63804,25 @@ var render = function() {
               _c("label", [_vm._v("Data Final")]),
               _vm._v(" "),
               _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.objetivoObj.data_final,
+                    expression: "objetivoObj.data_final"
+                  }
+                ],
                 staticClass: "form-control",
                 attrs: { type: "date", name: "data_final" },
-                domProps: { value: _vm.objetivoObj.data_final }
+                domProps: { value: _vm.objetivoObj.data_final },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.objetivoObj, "data_final", $event.target.value)
+                  }
+                }
               })
             ])
           ])
@@ -64683,17 +64759,27 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "form-group" }, [
                 _c("label", [_vm._v("Valor")]),
-                _vm._v(_vm._s(_vm.maxAporte) + "\n                "),
+                _vm._v(" "),
                 _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.objetivoValorAporte,
+                      expression: "objetivoValorAporte"
+                    }
+                  ],
                   staticClass: "form-control",
-                  attrs: {
-                    type: "number",
-                    name: "valor",
-                    min: "0",
-                    max: _vm.maxAporte,
-                    step: "1",
-                    oninvalid:
-                      "setCustomValidity('Valor máximo para concluir o objetivo ultrapassado')"
+                  attrs: { type: "text", name: "valor" },
+                  domProps: { value: _vm.objetivoValorAporte },
+                  on: {
+                    blur: _vm.formatarValor,
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.objetivoValorAporte = $event.target.value
+                    }
                   }
                 })
               ]),
