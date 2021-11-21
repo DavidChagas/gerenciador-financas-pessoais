@@ -3290,7 +3290,7 @@ __webpack_require__.r(__webpack_exports__);
       if (objetivo.total_aportado == null) objetivo.total_aportado = 0;
       objetivo.porcentagem = (objetivo.total_aportado * 100 / objetivo.valor).toFixed(2);
       objetivo.maxAporte = objetivo.valor - objetivo.total_aportado;
-      objetivo.concluido = objetivo.porcentagem == 100 ? true : false;
+      objetivo.concluido = objetivo.porcentagem >= 100 ? true : false;
       objetivo.fail = false;
       var dia = objetivo.data_final.split('-')[2];
       var mes = objetivo.data_final.split('-')[1];
@@ -3607,9 +3607,13 @@ __webpack_require__.r(__webpack_exports__);
   formatPrice: function formatPrice(value) {
     var valueClean = value.toString().replace('.', "").replace(/,/g, "").replace(/\D/g, "");
     var arrayValue = Array.from(valueClean.toString());
-    arrayValue.reverse();
-    arrayValue.splice(2, 0, ",");
-    arrayValue.reverse();
+
+    if (arrayValue.length > 2) {
+      arrayValue.reverse();
+      arrayValue.splice(2, 0, ",");
+      arrayValue.reverse();
+    }
+
     return arrayValue.join('');
   },
   formatarValorInput: function formatarValorInput(valor) {

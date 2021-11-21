@@ -4,10 +4,12 @@ export default {
         
         let arrayValue = Array.from( valueClean.toString() );
         
-        arrayValue.reverse();
-        arrayValue.splice(2, 0, ",");
-        arrayValue.reverse();
-        
+        if(arrayValue.length > 2){
+            arrayValue.reverse();
+            arrayValue.splice(2, 0, ",");
+            arrayValue.reverse();
+        }
+               
         return arrayValue.join('');
     },
     formatarValorInput(valor){

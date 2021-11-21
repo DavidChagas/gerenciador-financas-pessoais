@@ -172,7 +172,7 @@
                 if(objetivo.total_aportado == null) objetivo.total_aportado = 0
                 objetivo.porcentagem = ((objetivo.total_aportado * 100) / objetivo.valor).toFixed(2);
                 objetivo.maxAporte = objetivo.valor - objetivo.total_aportado;
-                objetivo.concluido = objetivo.porcentagem == 100 ? true : false;
+                objetivo.concluido = objetivo.porcentagem >= 100 ? true : false;
                 objetivo.fail = false;
 
                 const dia = objetivo.data_final.split('-')[2];
