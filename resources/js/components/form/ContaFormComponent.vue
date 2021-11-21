@@ -11,7 +11,7 @@
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label>Descrição</label>
-                        <input class="form-control" type="text" name="descricao" v-bind:value="contaObj.descricao">
+                        <input class="form-control" type="text" name="descricao" v-model="contaObj.descricao">
                     </div>
                 </div>
                 <div class="col-sm-6" v-if="!contaObj.usuario_id">
@@ -30,7 +30,7 @@
 </template>
 
 <script>
-    import funcoes from "../../funcoes"
+    import funcoes from "../../funcoes";
 
     export default {
         props: [

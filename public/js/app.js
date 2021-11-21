@@ -63341,12 +63341,28 @@ var render = function() {
         _c("div", { staticClass: "row" }, [
           _c("div", { staticClass: "col-sm-6" }, [
             _c("div", { staticClass: "form-group" }, [
-              _c("label", [_vm._v("Descrição")]),
+              _c("label", [_vm._v("Descrição " + _vm._s(_vm.contaObj))]),
               _vm._v(" "),
               _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.contaObj.descricao,
+                    expression: "contaObj.descricao"
+                  }
+                ],
                 staticClass: "form-control",
                 attrs: { type: "text", name: "descricao" },
-                domProps: { value: _vm.contaObj.descricao }
+                domProps: { value: _vm.contaObj.descricao },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.contaObj, "descricao", $event.target.value)
+                  }
+                }
               })
             ])
           ]),
