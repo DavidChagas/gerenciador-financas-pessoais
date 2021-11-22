@@ -67,7 +67,7 @@
             background-color: rgba(0, 0, 0, 0.515);
             color: white;
             transition: all 1s ease;
-            z-index: 1;
+            z-index: 9;
 
             &.aberto{
                 left: 250px;

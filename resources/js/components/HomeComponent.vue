@@ -1,15 +1,17 @@
 <template>
     <div class="componente-home">
-        <h1>Dashboard</h1>
+        <div class="cabecalho">
+            <h1>Dashboard</h1>
+            <div class="datas">
+                <select class="form-control" name="data" v-model="dataSelecionada" v-on:change="getTotais(dataSelecionada)">
+                    <option v-bind:key="data.data" v-bind:value="data.data" v-for="data in datasFormatadas">{{data.descricao}}</option>
+                </select>
+            </div>
+        </div>
 
         <div class="saldoTotal">
             <small>Saldo em Contas</small><br>
             R$ {{formatPrice(saldo_total)}}
-        </div>
-        <div class="datas">
-            <select class="form-control" name="data" v-model="dataSelecionada" v-on:change="getTotais(dataSelecionada)">
-                <option v-bind:key="data.data" v-bind:value="data.data" v-for="data in datasFormatadas">{{data.descricao}}</option>
-            </select>
         </div>
         
         <div class="grafico-barras">
@@ -322,10 +324,40 @@
         max-width: 1200px;
         margin: 0 auto;
 
-        h1{
-            margin: 50px 0 10px 0;
-        }
+        .cabecalho{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
 
+            margin: 50px 0 10px 0;
+
+            @media(min-width: 768px){
+                flex-direction: row;
+                justify-content: space-between;
+            }
+
+            .datas{
+                width: 200px;
+
+                @media(max-width: 767px){
+                    margin-top: 20px;
+                }
+
+                select{
+                    border-top: none;
+                    border-left: none;
+                    border-right: none;
+                    border-radius: 0px;
+
+                    &:focus{
+                        border-color: transparent;
+                        outline: none;
+                        box-shadow: none;
+                    }
+                }
+            }
+        }
+        
         .saldoTotal{
             margin-bottom: 30px;
             
@@ -336,23 +368,6 @@
 
             small{
                 font-size: 15px;
-            }
-        }
-        .datas{
-            width: 200px;
-            margin: 0 auto 40px;
-
-            select{
-                border-top: none;
-                border-left: none;
-                border-right: none;
-                border-radius: 0px;
-
-                &:focus{
-                    border-color: transparent;
-                    outline: none;
-                    box-shadow: none;
-                }
             }
         }
 

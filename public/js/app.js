@@ -1908,6 +1908,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -8096,7 +8098,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".componente-home {\n  max-width: 1200px;\n  margin: 0 auto;\n}\n.componente-home h1 {\n  margin: 50px 0 10px 0;\n}\n.componente-home .saldoTotal {\n  margin-bottom: 30px;\n  text-align: center;\n  font-size: 30px;\n  font-weight: bold;\n  color: #444;\n}\n.componente-home .saldoTotal small {\n  font-size: 15px;\n}\n.componente-home .datas {\n  width: 200px;\n  margin: 0 auto 40px;\n}\n.componente-home .datas select {\n  border-top: none;\n  border-left: none;\n  border-right: none;\n  border-radius: 0px;\n}\n.componente-home .datas select:focus {\n  border-color: transparent;\n  outline: none;\n  box-shadow: none;\n}\n.componente-home .totais {\n  display: grid;\n  grid-template-columns: repeat(2, 1fr);\n  grid-column-gap: 10px;\n}\n.componente-home .totais .total {\n  height: 100px;\n  background-color: #eee;\n  box-shadow: 3px 3px 5px #aaa;\n  border-radius: 5px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.componente-home .grafico-barras {\n  display: grid;\n  grid-template-columns: repeat(1, 1fr);\n  width: 100%;\n}\n@media (min-width: 992px) {\n.componente-home .grafico-barras {\n    grid-template-columns: repeat(2, 1fr);\n}\n}\n.componente-home .grafico-barras .infos {\n  padding: 30px 20px;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-around;\n}\n@media (min-width: 768px) {\n.componente-home .grafico-barras .infos {\n    flex-direction: row;\n}\n}\n@media (min-width: 992px) {\n.componente-home .grafico-barras .infos {\n    flex-direction: column;\n}\n}\n.componente-home .grafico-barras .infos .total {\n  display: flex;\n  justify-content: center;\n}\n.componente-home .grafico-barras .infos .total img {\n  width: 50px;\n  height: 50px;\n  margin-right: 20px;\n}\n.componente-home .grafico-barras .infos .total span {\n  font-size: 24px;\n  font-weight: bold;\n  color: #444;\n}\n.componente-home .grafico-barras .grafico {\n  position: relative;\n  margin: 0 auto;\n}\n@media (min-width: 992px) {\n.componente-home .grafico-barras .grafico {\n    width: 500px;\n}\n}\n.componente-home .grafico-barras .grafico .semInfos {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  -webkit-backdrop-filter: blur(3px);\n          backdrop-filter: blur(3px);\n  color: black;\n  font-size: 18px;\n}\n.componente-home .grafico-pizza {\n  margin-bottom: 50px;\n  display: grid;\n  grid-template-columns: repeat(1, 1fr);\n  width: 100%;\n}\n@media (min-width: 992px) {\n.componente-home .grafico-pizza {\n    grid-template-columns: repeat(2, 1fr);\n}\n}\n.componente-home .grafico-pizza .tipo {\n  width: 300px;\n  margin: 50px auto 0 auto;\n}\n.componente-home .grafico-pizza .tipo .descricao {\n  font-weight: bold;\n  font-size: 24px;\n  text-align: center;\n  color: #444;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".componente-home {\n  max-width: 1200px;\n  margin: 0 auto;\n}\n.componente-home .cabecalho {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  margin: 50px 0 10px 0;\n}\n@media (min-width: 768px) {\n.componente-home .cabecalho {\n    flex-direction: row;\n    justify-content: space-between;\n}\n}\n.componente-home .cabecalho .datas {\n  width: 200px;\n}\n@media (max-width: 767px) {\n.componente-home .cabecalho .datas {\n    margin-top: 20px;\n}\n}\n.componente-home .cabecalho .datas select {\n  border-top: none;\n  border-left: none;\n  border-right: none;\n  border-radius: 0px;\n}\n.componente-home .cabecalho .datas select:focus {\n  border-color: transparent;\n  outline: none;\n  box-shadow: none;\n}\n.componente-home .saldoTotal {\n  margin-bottom: 30px;\n  text-align: center;\n  font-size: 30px;\n  font-weight: bold;\n  color: #444;\n}\n.componente-home .saldoTotal small {\n  font-size: 15px;\n}\n.componente-home .totais {\n  display: grid;\n  grid-template-columns: repeat(2, 1fr);\n  grid-column-gap: 10px;\n}\n.componente-home .totais .total {\n  height: 100px;\n  background-color: #eee;\n  box-shadow: 3px 3px 5px #aaa;\n  border-radius: 5px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.componente-home .grafico-barras {\n  display: grid;\n  grid-template-columns: repeat(1, 1fr);\n  width: 100%;\n}\n@media (min-width: 992px) {\n.componente-home .grafico-barras {\n    grid-template-columns: repeat(2, 1fr);\n}\n}\n.componente-home .grafico-barras .infos {\n  padding: 30px 20px;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-around;\n}\n@media (min-width: 768px) {\n.componente-home .grafico-barras .infos {\n    flex-direction: row;\n}\n}\n@media (min-width: 992px) {\n.componente-home .grafico-barras .infos {\n    flex-direction: column;\n}\n}\n.componente-home .grafico-barras .infos .total {\n  display: flex;\n  justify-content: center;\n}\n.componente-home .grafico-barras .infos .total img {\n  width: 50px;\n  height: 50px;\n  margin-right: 20px;\n}\n.componente-home .grafico-barras .infos .total span {\n  font-size: 24px;\n  font-weight: bold;\n  color: #444;\n}\n.componente-home .grafico-barras .grafico {\n  position: relative;\n  margin: 0 auto;\n}\n@media (min-width: 992px) {\n.componente-home .grafico-barras .grafico {\n    width: 500px;\n}\n}\n.componente-home .grafico-barras .grafico .semInfos {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  -webkit-backdrop-filter: blur(3px);\n          backdrop-filter: blur(3px);\n  color: black;\n  font-size: 18px;\n}\n.componente-home .grafico-pizza {\n  margin-bottom: 50px;\n  display: grid;\n  grid-template-columns: repeat(1, 1fr);\n  width: 100%;\n}\n@media (min-width: 992px) {\n.componente-home .grafico-pizza {\n    grid-template-columns: repeat(2, 1fr);\n}\n}\n.componente-home .grafico-pizza .tipo {\n  width: 300px;\n  margin: 50px auto 0 auto;\n}\n.componente-home .grafico-pizza .tipo .descricao {\n  font-weight: bold;\n  font-size: 24px;\n  text-align: center;\n  color: #444;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -8144,7 +8146,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".componente-menu .btn-mobile {\n  position: absolute;\n  top: 10px;\n  left: 10px;\n  width: 25px;\n  height: 25px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  border-radius: 4px;\n  background-color: rgba(0, 0, 0, 0.515);\n  color: white;\n  transition: all 1s ease;\n  z-index: 1;\n}\n.componente-menu .btn-mobile.aberto {\n  left: 250px;\n}\n@media (min-width: 992px) {\n.componente-menu .btn-mobile {\n    display: none;\n}\n}\n.componente-menu .menu {\n  position: fixed;\n  height: 100%;\n  min-width: 280px;\n  padding: 30px;\n  background-color: #182b3a;\n  box-shadow: 5px 4px 25px #555;\n  color: white;\n  transition: all 1s ease;\n  z-index: 1;\n}\n@media (max-width: 991px) {\n.componente-menu .menu {\n    min-width: 0px;\n    left: -280px;\n}\n}\n.componente-menu .menu.abrir {\n  min-width: 280px;\n  left: 0px;\n  overflow: hidden;\n}\n.componente-menu .menu .usuario {\n  margin-bottom: 20px;\n  padding-bottom: 20px;\n  border-bottom: 1px solid #bbb;\n  text-align: center;\n}\n.componente-menu .menu .acoes {\n  height: 90%;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n}\n.componente-menu .menu .acoes .paginas {\n  display: flex;\n  flex-direction: column;\n}\n.componente-menu .menu .acoes .paginas .acao {\n  margin: 5px 0;\n  padding: 5px 0;\n  color: white;\n  text-decoration: none;\n}\n.componente-menu .menu .acoes .paginas .acao:hover {\n  cursor: pointer;\n  color: #ddd;\n}\n.componente-menu .menu .acoes .footer-menu {\n  display: flex;\n  justify-content: space-between;\n}\n.componente-menu .menu .acoes .footer-menu button, .componente-menu .menu .acoes .footer-menu a {\n  padding: 2px;\n  background-color: transparent;\n  color: white;\n  border-left: none;\n  border-right: none;\n  border-top: none;\n  border-bottom: 1px solid #eee;\n  border-radius: 0;\n}\n.componente-menu .menu .acoes .footer-menu button:hover, .componente-menu .menu .acoes .footer-menu a:hover {\n  color: #acacac;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".componente-menu .btn-mobile {\n  position: absolute;\n  top: 10px;\n  left: 10px;\n  width: 25px;\n  height: 25px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  border-radius: 4px;\n  background-color: rgba(0, 0, 0, 0.515);\n  color: white;\n  transition: all 1s ease;\n  z-index: 9;\n}\n.componente-menu .btn-mobile.aberto {\n  left: 250px;\n}\n@media (min-width: 992px) {\n.componente-menu .btn-mobile {\n    display: none;\n}\n}\n.componente-menu .menu {\n  position: fixed;\n  height: 100%;\n  min-width: 280px;\n  padding: 30px;\n  background-color: #182b3a;\n  box-shadow: 5px 4px 25px #555;\n  color: white;\n  transition: all 1s ease;\n  z-index: 1;\n}\n@media (max-width: 991px) {\n.componente-menu .menu {\n    min-width: 0px;\n    left: -280px;\n}\n}\n.componente-menu .menu.abrir {\n  min-width: 280px;\n  left: 0px;\n  overflow: hidden;\n}\n.componente-menu .menu .usuario {\n  margin-bottom: 20px;\n  padding-bottom: 20px;\n  border-bottom: 1px solid #bbb;\n  text-align: center;\n}\n.componente-menu .menu .acoes {\n  height: 90%;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n}\n.componente-menu .menu .acoes .paginas {\n  display: flex;\n  flex-direction: column;\n}\n.componente-menu .menu .acoes .paginas .acao {\n  margin: 5px 0;\n  padding: 5px 0;\n  color: white;\n  text-decoration: none;\n}\n.componente-menu .menu .acoes .paginas .acao:hover {\n  cursor: pointer;\n  color: #ddd;\n}\n.componente-menu .menu .acoes .footer-menu {\n  display: flex;\n  justify-content: space-between;\n}\n.componente-menu .menu .acoes .footer-menu button, .componente-menu .menu .acoes .footer-menu a {\n  padding: 2px;\n  background-color: transparent;\n  color: white;\n  border-left: none;\n  border-right: none;\n  border-top: none;\n  border-bottom: 1px solid #eee;\n  border-radius: 0;\n}\n.componente-menu .menu .acoes .footer-menu button:hover, .componente-menu .menu .acoes .footer-menu a:hover {\n  color: #acacac;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -62807,59 +62809,61 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "componente-home" }, [
-    _c("h1", [_vm._v("Dashboard")]),
+    _c("div", { staticClass: "cabecalho" }, [
+      _c("h1", [_vm._v("Dashboard")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "datas" }, [
+        _c(
+          "select",
+          {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.dataSelecionada,
+                expression: "dataSelecionada"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { name: "data" },
+            on: {
+              change: [
+                function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.dataSelecionada = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
+                },
+                function($event) {
+                  return _vm.getTotais(_vm.dataSelecionada)
+                }
+              ]
+            }
+          },
+          _vm._l(_vm.datasFormatadas, function(data) {
+            return _c(
+              "option",
+              { key: data.data, domProps: { value: data.data } },
+              [_vm._v(_vm._s(data.descricao))]
+            )
+          }),
+          0
+        )
+      ])
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "saldoTotal" }, [
       _c("small", [_vm._v("Saldo em Contas")]),
       _c("br"),
       _vm._v(
         "\n        R$ " + _vm._s(_vm.formatPrice(_vm.saldo_total)) + "\n    "
-      )
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "datas" }, [
-      _c(
-        "select",
-        {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.dataSelecionada,
-              expression: "dataSelecionada"
-            }
-          ],
-          staticClass: "form-control",
-          attrs: { name: "data" },
-          on: {
-            change: [
-              function($event) {
-                var $$selectedVal = Array.prototype.filter
-                  .call($event.target.options, function(o) {
-                    return o.selected
-                  })
-                  .map(function(o) {
-                    var val = "_value" in o ? o._value : o.value
-                    return val
-                  })
-                _vm.dataSelecionada = $event.target.multiple
-                  ? $$selectedVal
-                  : $$selectedVal[0]
-              },
-              function($event) {
-                return _vm.getTotais(_vm.dataSelecionada)
-              }
-            ]
-          }
-        },
-        _vm._l(_vm.datasFormatadas, function(data) {
-          return _c(
-            "option",
-            { key: data.data, domProps: { value: data.data } },
-            [_vm._v(_vm._s(data.descricao))]
-          )
-        }),
-        0
       )
     ]),
     _vm._v(" "),
