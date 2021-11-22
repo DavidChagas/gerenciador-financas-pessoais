@@ -38,6 +38,7 @@
             <div class="pagina">
                 @yield('content')
             </div>
+            <div class="overlay"></div>
         </div>
     @endauth
 </body>

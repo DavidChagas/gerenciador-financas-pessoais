@@ -1847,6 +1847,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _funcoes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../funcoes */ "./resources/js/funcoes.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 //
@@ -1908,6 +1909,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['datas_receitas', 'datas_despesas', 'saldo_total'],
   data: function data() {
@@ -1931,8 +1933,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   methods: {
     formatPrice: function formatPrice(value) {
-      var val = (value / 1).toFixed(2).replace('.', ',');
-      return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+      return _funcoes__WEBPACK_IMPORTED_MODULE_1__["default"].formatPrice(value);
     },
     getTotais: function getTotais(dataSelecionada) {
       var _this = this;
@@ -1941,7 +1942,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var lastDay = dataSelecionada + '-31';
       this.$http.get("/api/getTotais?first=".concat(firstDay, "&last=").concat(lastDay)).then(function (response) {
         _this.totalReceitas = response.body[0].total_receitas;
+        if (_this.totalReceitas == null) _this.totalReceitas = 0;
         _this.totalDespesas = response.body[1].total_despesas;
+        if (_this.totalDespesas == null) _this.totalDespesas = 0;
         _this.semMovimentacoes = !_this.totalReceitas && !_this.totalDespesas;
 
         _this.montarGraficoBarra();
@@ -1972,7 +1975,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           label: 'Total Receitas',
           backgroundColor: 'rgb(255, 99, 132)',
           borderColor: 'rgb(255, 99, 132)',
-          data: [this.totalReceitas, this.totalDespesas]
+          data: [_funcoes__WEBPACK_IMPORTED_MODULE_1__["default"].formatarValorGraficos(this.totalReceitas), _funcoes__WEBPACK_IMPORTED_MODULE_1__["default"].formatarValorGraficos(this.totalDespesas)]
         }, _defineProperty(_ref, "backgroundColor", ['#00800087', '#ff000087']), _defineProperty(_ref, "borderColor", ['green', 'red']), _defineProperty(_ref, "borderWidth", 1), _defineProperty(_ref, "hoverOffset", 4), _ref)]
       };
       var config = {
@@ -1995,7 +1998,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         return categoria.descricao;
       });
       var valores = totalCategoriasReceitas.map(function (categoria) {
-        return categoria.soma;
+        return _funcoes__WEBPACK_IMPORTED_MODULE_1__["default"].formatarValorGraficos(categoria.soma);
       });
       var data = {
         labels: labels,
@@ -2025,7 +2028,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         return categoria.descricao;
       });
       var valores = totalCategoriasDespesas.map(function (categoria) {
-        return categoria.soma;
+        return _funcoes__WEBPACK_IMPORTED_MODULE_1__["default"].formatarValorGraficos(categoria.soma);
       });
       var data = {
         labels: labels,
@@ -3627,6 +3630,18 @@ __webpack_require__.r(__webpack_exports__);
       style: 'currency',
       currency: 'BRL'
     }).format(stringValue);
+  },
+  formatarValorGraficos: function formatarValorGraficos(value) {
+    var valueClean = value.toString().replace('.', "").replace(/,/g, "").replace(/\D/g, "");
+    var arrayValue = Array.from(valueClean.toString());
+
+    if (arrayValue.length > 2) {
+      arrayValue.reverse();
+      arrayValue.splice(2, 0, ".");
+      arrayValue.reverse();
+    }
+
+    return arrayValue.join('');
   }
 });
 

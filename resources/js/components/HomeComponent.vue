@@ -58,6 +58,7 @@
 
 <script>
     import moment from 'moment';
+    import funcoes from "../funcoes"
     
     export default {
         props : [
@@ -90,8 +91,7 @@
 
         methods:{
             formatPrice(value) {
-                let val = (value/1).toFixed(2).replace('.', ',')
-                return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+                return funcoes.formatPrice(value);
             },
 
             getTotais(dataSelecionada){
@@ -101,7 +101,9 @@
                 this.$http.get(`/api/getTotais?first=${firstDay}&last=${lastDay}`).then(response => {
                    
                     this.totalReceitas = response.body[0].total_receitas;
+                    if( this.totalReceitas == null ) this.totalReceitas = 0;
                     this.totalDespesas = response.body[1].total_despesas;
+                    if( this.totalDespesas == null ) this.totalDespesas = 0;
 
                     this.semMovimentacoes = !this.totalReceitas && !this.totalDespesas;
 
@@ -131,7 +133,7 @@
                         label: 'Total Receitas',
                         backgroundColor: 'rgb(255, 99, 132)',
                         borderColor: 'rgb(255, 99, 132)',
-                        data: [this.totalReceitas, this.totalDespesas],
+                        data: [funcoes.formatarValorGraficos(this.totalReceitas), funcoes.formatarValorGraficos(this.totalDespesas)],
                         backgroundColor: [
                             '#00800087',
                             '#ff000087'
@@ -164,7 +166,7 @@
 
             montarGraficoPizzaReceitas(totalCategoriasReceitas){
                 const labels = totalCategoriasReceitas.map(categoria => categoria.descricao);
-                const valores = totalCategoriasReceitas.map(categoria => categoria.soma);
+                const valores = totalCategoriasReceitas.map(categoria => funcoes.formatarValorGraficos(categoria.soma));
 
                 const data = {
                     labels: labels,
@@ -201,7 +203,7 @@
 
             montarGraficoPizzaDespesas(totalCategoriasDespesas){
                 const labels = totalCategoriasDespesas.map(categoria => categoria.descricao);
-                const valores = totalCategoriasDespesas.map(categoria => categoria.soma);
+                const valores = totalCategoriasDespesas.map(categoria => funcoes.formatarValorGraficos(categoria.soma));
 
                 const data = {
                     labels: labels,
