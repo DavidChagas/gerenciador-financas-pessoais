@@ -11,7 +11,7 @@
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label>Nome</label>
-                        <input class="form-control" type="text" name="nome" v-model="objetivoObj.nome">
+                        <input class="form-control" type="text" name="nome" v-model="objetivoObj.nome" required>
                     </div>
                 </div>
                 <div class="col-sm-6">
@@ -23,13 +23,13 @@
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label>Valor</label>
-                        <input class="form-control" type="text" name="valor" v-model="objetivoObj.valor" @blur="formatarValor">
+                        <input class="form-control" type="text" name="valor" v-model="objetivoObj.valor" @blur="formatarValor" required>
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label>Data Final</label>
-                        <input class="form-control" type="date" name="data_final" v-model="objetivoObj.data_final">
+                        <input class="form-control" type="date" name="data_final" v-model="objetivoObj.data_final" required>
                     </div>
                 </div>
             </div>

@@ -2770,15 +2770,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['action', 'method', 'token', 'usuario'],
   data: function data() {
@@ -63252,7 +63243,7 @@ var render = function() {
               _vm._v(" "),
               _c("input", {
                 staticClass: "form-control",
-                attrs: { type: "text", name: "descricao" },
+                attrs: { type: "text", name: "descricao", required: "" },
                 domProps: { value: _vm.categoria.descricao }
               })
             ])
@@ -63266,7 +63257,7 @@ var render = function() {
                 "select",
                 {
                   staticClass: "form-control",
-                  attrs: { name: "tipo" },
+                  attrs: { name: "tipo", required: "" },
                   domProps: { value: _vm.categoria.tipo }
                 },
                 [
@@ -63379,7 +63370,7 @@ var render = function() {
                   }
                 ],
                 staticClass: "form-control",
-                attrs: { type: "text", name: "descricao" },
+                attrs: { type: "text", name: "descricao", required: "" },
                 domProps: { value: _vm.contaObj.descricao },
                 on: {
                   input: function($event) {
@@ -63408,7 +63399,7 @@ var render = function() {
                       }
                     ],
                     staticClass: "form-control",
-                    attrs: { type: "text", name: "valor" },
+                    attrs: { type: "text", name: "valor", required: "" },
                     domProps: { value: _vm.contaObj.valor },
                     on: {
                       blur: _vm.formatarValor,
@@ -63487,11 +63478,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "componente-despesa-form" }, [
-    _c("div", { staticClass: "descricao" }, [
-      _vm._v(
-        "\n        Aqui você poderá cadastrar todas as suas despesas.\n    "
-      )
-    ]),
+    _vm._m(0),
     _vm._v(" "),
     _c(
       "form",
@@ -63500,8 +63487,24 @@ var render = function() {
         _vm._t("method"),
         _vm._v(" "),
         _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.token,
+              expression: "token"
+            }
+          ],
           attrs: { type: "hidden", name: "_token" },
-          domProps: { value: _vm.token }
+          domProps: { value: _vm.token },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.token = $event.target.value
+            }
+          }
         }),
         _vm._v(" "),
         _c("div", { staticClass: "row" }, [
@@ -63519,7 +63522,7 @@ var render = function() {
                   }
                 ],
                 staticClass: "form-control",
-                attrs: { type: "text", name: "valor" },
+                attrs: { type: "text", name: "valor", required: "" },
                 domProps: { value: _vm.despesaObj.valor },
                 on: {
                   blur: _vm.formatarValor,
@@ -63539,9 +63542,25 @@ var render = function() {
               _c("label", [_vm._v("Descrição")]),
               _vm._v(" "),
               _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.despesaObj.descricao,
+                    expression: "despesaObj.descricao"
+                  }
+                ],
                 staticClass: "form-control",
-                attrs: { type: "text", name: "descricao" },
-                domProps: { value: _vm.despesaObj.descricao }
+                attrs: { type: "text", name: "descricao", required: "" },
+                domProps: { value: _vm.despesaObj.descricao },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.despesaObj, "descricao", $event.target.value)
+                  }
+                }
               })
             ])
           ]),
@@ -63553,9 +63572,35 @@ var render = function() {
               _c(
                 "select",
                 {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.despesaObj.status,
+                      expression: "despesaObj.status"
+                    }
+                  ],
                   staticClass: "form-control",
-                  attrs: { name: "status" },
-                  domProps: { value: _vm.despesaObj.status }
+                  attrs: { name: "status", required: "" },
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.despesaObj,
+                        "status",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    }
+                  }
                 },
                 [
                   _c("option", { attrs: { value: "pago" } }, [_vm._v("Pago")]),
@@ -63573,9 +63618,25 @@ var render = function() {
               _c("label", [_vm._v("Data")]),
               _vm._v(" "),
               _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.despesaObj.data,
+                    expression: "despesaObj.data"
+                  }
+                ],
                 staticClass: "form-control",
-                attrs: { type: "date", name: "data" },
-                domProps: { value: _vm.despesaObj.data }
+                attrs: { type: "date", name: "data", required: "" },
+                domProps: { value: _vm.despesaObj.data },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.despesaObj, "data", $event.target.value)
+                  }
+                }
               })
             ])
           ]),
@@ -63587,9 +63648,35 @@ var render = function() {
               _c(
                 "select",
                 {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.despesaObj.despesa_fixa,
+                      expression: "despesaObj.despesa_fixa"
+                    }
+                  ],
                   staticClass: "form-control",
-                  attrs: { name: "fixa" },
-                  domProps: { value: _vm.despesaObj.despesa_fixa }
+                  attrs: { name: "fixa", required: "" },
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.despesaObj,
+                        "despesa_fixa",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    }
+                  }
                 },
                 [
                   _c("option", { attrs: { value: "sim" } }, [_vm._v("Sim")]),
@@ -63606,7 +63693,10 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "select",
-                { staticClass: "form-control", attrs: { name: "conta" } },
+                {
+                  staticClass: "form-control",
+                  attrs: { name: "conta", required: "" }
+                },
                 _vm._l(_vm.contasObj, function(conta) {
                   return _c(
                     "option",
@@ -63625,7 +63715,10 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "select",
-                { staticClass: "form-control", attrs: { name: "categoria" } },
+                {
+                  staticClass: "form-control",
+                  attrs: { name: "categoria", required: "" }
+                },
                 _vm._l(_vm.categoriasObj, function(categoria) {
                   return _c(
                     "option",
@@ -63668,14 +63761,23 @@ var render = function() {
         _c(
           "button",
           { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-          [_vm._v("Cadastrar")]
+          [_vm._v(_vm._s(_vm.despesaObj.id ? "Editar" : "Cadastrar"))]
         )
       ],
       2
     )
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "descricao" }, [
+      _c("b", [_vm._v("Aqui você poderá cadastrar todas as suas receitas.")])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -63747,7 +63849,7 @@ var render = function() {
                   }
                 ],
                 staticClass: "form-control",
-                attrs: { type: "text", name: "nome" },
+                attrs: { type: "text", name: "nome", required: "" },
                 domProps: { value: _vm.objetivoObj.nome },
                 on: {
                   input: function($event) {
@@ -63803,7 +63905,7 @@ var render = function() {
                   }
                 ],
                 staticClass: "form-control",
-                attrs: { type: "text", name: "valor" },
+                attrs: { type: "text", name: "valor", required: "" },
                 domProps: { value: _vm.objetivoObj.valor },
                 on: {
                   blur: _vm.formatarValor,
@@ -63832,7 +63934,7 @@ var render = function() {
                   }
                 ],
                 staticClass: "form-control",
-                attrs: { type: "date", name: "data_final" },
+                attrs: { type: "date", name: "data_final", required: "" },
                 domProps: { value: _vm.objetivoObj.data_final },
                 on: {
                   input: function($event) {
@@ -63895,11 +63997,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "componente-receita-form" }, [
-    _c("div", { staticClass: "descricao" }, [
-      _vm._v(
-        "\n        Aqui você poderá cadastrar todas as suas receitas.\n    "
-      )
-    ]),
+    _vm._m(0),
     _vm._v(" "),
     _c(
       "form",
@@ -63908,8 +64006,24 @@ var render = function() {
         _vm._t("method"),
         _vm._v(" "),
         _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.token,
+              expression: "token"
+            }
+          ],
           attrs: { type: "hidden", name: "_token" },
-          domProps: { value: _vm.token }
+          domProps: { value: _vm.token },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.token = $event.target.value
+            }
+          }
         }),
         _vm._v(" "),
         _c("div", { staticClass: "row" }, [
@@ -63927,7 +64041,7 @@ var render = function() {
                   }
                 ],
                 staticClass: "form-control",
-                attrs: { type: "text", name: "valor" },
+                attrs: { type: "text", name: "valor", required: "" },
                 domProps: { value: _vm.receitaObj.valor },
                 on: {
                   blur: _vm.formatarValor,
@@ -63947,9 +64061,25 @@ var render = function() {
               _c("label", [_vm._v("Descrição")]),
               _vm._v(" "),
               _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.receitaObj.descricao,
+                    expression: "receitaObj.descricao"
+                  }
+                ],
                 staticClass: "form-control",
-                attrs: { type: "text", name: "descricao" },
-                domProps: { value: _vm.receitaObj.descricao }
+                attrs: { type: "text", name: "descricao", required: "" },
+                domProps: { value: _vm.receitaObj.descricao },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.receitaObj, "descricao", $event.target.value)
+                  }
+                }
               })
             ])
           ]),
@@ -63961,9 +64091,35 @@ var render = function() {
               _c(
                 "select",
                 {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.receitaObj.status,
+                      expression: "receitaObj.status"
+                    }
+                  ],
                   staticClass: "form-control",
-                  attrs: { name: "status" },
-                  domProps: { value: _vm.receitaObj.status }
+                  attrs: { name: "status", required: "" },
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.receitaObj,
+                        "status",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    }
+                  }
                 },
                 [
                   _c("option", { attrs: { value: "pago" } }, [_vm._v("Pago")]),
@@ -63981,9 +64137,25 @@ var render = function() {
               _c("label", [_vm._v("Data")]),
               _vm._v(" "),
               _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.receitaObj.data,
+                    expression: "receitaObj.data"
+                  }
+                ],
                 staticClass: "form-control",
-                attrs: { type: "date", name: "data" },
-                domProps: { value: _vm.receitaObj.data }
+                attrs: { type: "date", name: "data", required: "" },
+                domProps: { value: _vm.receitaObj.data },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.receitaObj, "data", $event.target.value)
+                  }
+                }
               })
             ])
           ]),
@@ -63995,9 +64167,35 @@ var render = function() {
               _c(
                 "select",
                 {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.receitaObj.receita_fixa,
+                      expression: "receitaObj.receita_fixa"
+                    }
+                  ],
                   staticClass: "form-control",
-                  attrs: { name: "fixa" },
-                  domProps: { value: _vm.receitaObj.receita_fixa }
+                  attrs: { name: "fixa", required: "" },
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.receitaObj,
+                        "receita_fixa",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    }
+                  }
                 },
                 [
                   _c("option", { attrs: { value: "sim" } }, [_vm._v("Sim")]),
@@ -64014,7 +64212,10 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "select",
-                { staticClass: "form-control", attrs: { name: "conta" } },
+                {
+                  staticClass: "form-control",
+                  attrs: { name: "conta", required: "" }
+                },
                 _vm._l(_vm.contasObj, function(conta) {
                   return _c(
                     "option",
@@ -64033,7 +64234,10 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "select",
-                { staticClass: "form-control", attrs: { name: "categoria" } },
+                {
+                  staticClass: "form-control",
+                  attrs: { name: "categoria", required: "" }
+                },
                 _vm._l(_vm.categoriasObj, function(categoria) {
                   return _c(
                     "option",
@@ -64051,9 +64255,25 @@ var render = function() {
               _c("label", [_vm._v("Observação")]),
               _vm._v(" "),
               _c("textarea", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.receitaObj.observacao,
+                    expression: "receitaObj.observacao"
+                  }
+                ],
                 staticClass: "form-control",
                 attrs: { type: "observacao", rows: "5", name: "observacao" },
-                domProps: { value: _vm.receitaObj.observacao }
+                domProps: { value: _vm.receitaObj.observacao },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.receitaObj, "observacao", $event.target.value)
+                  }
+                }
               })
             ])
           ])
@@ -64076,14 +64296,23 @@ var render = function() {
         _c(
           "button",
           { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-          [_vm._v("Cadastrar")]
+          [_vm._v(_vm._s(_vm.receitaObj.id ? "Editar" : "Cadastrar"))]
         )
       ],
       2
     )
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "descricao" }, [
+      _c("b", [_vm._v("Aqui você poderá cadastrar todas as suas receitas.")])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -64107,10 +64336,6 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "componente-receita-form" }, [
-    _c("div", { staticClass: "descricao" }, [
-      _vm._v("\n        Aqui você poderá ver seus dados\n    ")
-    ]),
-    _vm._v(" "),
     _c(
       "form",
       { attrs: { action: _vm.action, method: _vm.method } },
@@ -64143,18 +64368,6 @@ var render = function() {
                 staticClass: "form-control",
                 attrs: { type: "text", name: "email" },
                 domProps: { value: _vm.usuarioObj.email }
-              })
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-sm-6" }, [
-            _c("div", { staticClass: "form-group" }, [
-              _c("label", [_vm._v("Data Nascimento")]),
-              _vm._v(" "),
-              _c("input", {
-                staticClass: "form-control",
-                attrs: { type: "date", name: "data_nascimento" },
-                domProps: { value: _vm.usuarioObj.data_nascimento }
               })
             ])
           ])

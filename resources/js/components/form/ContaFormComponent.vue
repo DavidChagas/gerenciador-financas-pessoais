@@ -11,13 +11,13 @@
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label>Descrição</label>
-                        <input class="form-control" type="text" name="descricao" v-model="contaObj.descricao">
+                        <input class="form-control" type="text" name="descricao" v-model="contaObj.descricao" required>
                     </div>
                 </div>
                 <div class="col-sm-6" v-if="!contaObj.usuario_id">
                     <div class="form-group">
                         <label>Valor Inicial</label>
-                        <input class="form-control" type="text" name="valor" v-model="contaObj.valor" @blur="formatarValor">
+                        <input class="form-control" type="text" name="valor" v-model="contaObj.valor" @blur="formatarValor" required>
                     </div>
                 </div>
             </div>

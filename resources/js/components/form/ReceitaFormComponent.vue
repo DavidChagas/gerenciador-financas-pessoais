@@ -1,29 +1,29 @@
 <template>
     <div class="componente-receita-form">
         <div class="descricao">
-            Aqui você poderá cadastrar todas as suas receitas.
+            <b>Aqui você poderá cadastrar todas as suas receitas.</b>
         </div>
         <form v-bind:action="action" v-bind:method="method">
             <slot name="method"></slot>
-            <input type="hidden" name="_token" v-bind:value="token">
+            <input type="hidden" name="_token" v-model="token">
 
             <div class="row">
                 <div class="col-sm-5">
                     <div class="form-group">
                         <label>Valor</label>
-                        <input class="form-control" type="text" name="valor" v-model="receitaObj.valor" @blur="formatarValor">
+                        <input class="form-control" type="text" name="valor" v-model="receitaObj.valor" @blur="formatarValor" required>
                     </div>
                 </div>
                 <div class="col-sm-5">
                     <div class="form-group">
                         <label>Descrição</label>
-                        <input class="form-control" type="text" name="descricao" v-bind:value="receitaObj.descricao">
+                        <input class="form-control" type="text" name="descricao" v-model="receitaObj.descricao" required>
                     </div>
                 </div>
                 <div class="col-sm-2">
                     <div class="form-group">
                         <label>Status</label>
-                        <select class="form-control" name="status" v-bind:value="receitaObj.status">
+                        <select class="form-control" name="status" v-model="receitaObj.status" required>
                             <option value="pago">Pago</option>
                             <option value="nao-pago">Não Pago</option>
                         </select>
@@ -32,13 +32,13 @@
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label>Data</label>
-                        <input class="form-control" type="date" name="data" v-bind:value="receitaObj.data">
+                        <input class="form-control" type="date" name="data" v-model="receitaObj.data" required>
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label>Receita Fixa?</label>
-                        <select class="form-control" name="fixa" v-bind:value="receitaObj.receita_fixa">
+                        <select class="form-control" name="fixa" v-model="receitaObj.receita_fixa" required>
                             <option value="sim">Sim</option>
                             <option value="nao">Não</option>
                         </select>
@@ -47,7 +47,7 @@
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label>Conta</label>
-                        <select class="form-control" name="conta">
+                        <select class="form-control" name="conta" required>
                             <option v-bind:value="conta.id" v-for="conta in contasObj" v-bind:key="conta.id">{{conta.descricao}}</option>
                         </select>
                     </div>
@@ -55,7 +55,7 @@
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label>Categorias</label>
-                        <select class="form-control" name="categoria">
+                        <select class="form-control" name="categoria" required>
                             <option v-bind:value="categoria.id" v-for="categoria in categoriasObj" v-bind:key="categoria.id">{{categoria.descricao}}</option>
                         </select>
                     </div>
@@ -63,12 +63,12 @@
                 <div class="col-sm-12">
                     <div class="form-group">
                         <label>Observação</label>
-                        <textarea class="form-control" type="observacao" rows="5" name="observacao" v-bind:value="receitaObj.observacao"></textarea>
+                        <textarea class="form-control" type="observacao" rows="5" name="observacao" v-model="receitaObj.observacao"></textarea>
                     </div>
                 </div>
             </div>
             <button class="btn btn-danger" type="button" v-on:click="voltar()">Voltar</button>
-            <button class="btn btn-primary" type="submit">Cadastrar</button>
+            <button class="btn btn-primary" type="submit">{{receitaObj.id ? 'Editar' : 'Cadastrar'}}</button>
         </form>
     </div>
 </template>

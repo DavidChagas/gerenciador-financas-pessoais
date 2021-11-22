@@ -1,29 +1,29 @@
 <template>
     <div class="componente-despesa-form">
         <div class="descricao">
-            Aqui você poderá cadastrar todas as suas despesas.
+            <b>Aqui você poderá cadastrar todas as suas receitas.</b>
         </div>
         <form v-bind:action="action" v-bind:method="method">
             <slot name="method"></slot>
-            <input type="hidden" name="_token" v-bind:value="token">
+            <input type="hidden" name="_token" v-model="token">
 
             <div class="row">
                 <div class="col-sm-5">
                     <div class="form-group">
                         <label>Valor</label>
-                        <input class="form-control" type="text" name="valor" v-model="despesaObj.valor" @blur="formatarValor">
+                        <input class="form-control" type="text" name="valor" v-model="despesaObj.valor" @blur="formatarValor" required>
                     </div>
                 </div>
                 <div class="col-sm-5">
                     <div class="form-group">
                         <label>Descrição</label>
-                        <input class="form-control" type="text" name="descricao" v-bind:value="despesaObj.descricao">
+                        <input class="form-control" type="text" name="descricao" v-model="despesaObj.descricao" required>
                     </div>
                 </div>
                 <div class="col-sm-2">
                     <div class="form-group">
                         <label>Status</label>
-                        <select class="form-control" name="status" v-bind:value="despesaObj.status">
+                        <select class="form-control" name="status" v-model="despesaObj.status" required>
                             <option value="pago">Pago</option>
                             <option value="nao-pago">Não Pago</option>
                         </select>
@@ -32,13 +32,13 @@
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label>Data</label>
-                        <input class="form-control" type="date" name="data" v-bind:value="despesaObj.data">
+                        <input class="form-control" type="date" name="data" v-model="despesaObj.data" required>
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label>Despesa Fixa?</label>
-                        <select class="form-control" name="fixa" v-bind:value="despesaObj.despesa_fixa">
+                        <select class="form-control" name="fixa" v-model="despesaObj.despesa_fixa" required>
                             <option value="sim">Sim</option>
                             <option value="nao">Não</option>
                         </select>
@@ -47,7 +47,7 @@
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label>Conta</label>
-                        <select class="form-control" name="conta">
+                        <select class="form-control" name="conta" required>
                             <option v-bind:value="conta.id" v-for="conta in contasObj" v-bind:key="conta.id">{{conta.descricao}}</option>
                         </select>
                     </div>
@@ -55,7 +55,7 @@
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label>Categorias</label>
-                        <select class="form-control" name="categoria">
+                        <select class="form-control" name="categoria" required>
                             <option v-bind:value="categoria.id" v-for="categoria in categoriasObj" v-bind:key="categoria.id">{{categoria.descricao}}</option>
                         </select>
                     </div>
@@ -68,7 +68,7 @@
                 </div>
             </div>
             <button class="btn btn-danger" type="button" v-on:click="voltar()">Voltar</button>
-            <button class="btn btn-primary" type="submit">Cadastrar</button>
+            <button class="btn btn-primary" type="submit">{{despesaObj.id ? 'Editar' : 'Cadastrar'}}</button>
         </form>
     </div>
 </template>

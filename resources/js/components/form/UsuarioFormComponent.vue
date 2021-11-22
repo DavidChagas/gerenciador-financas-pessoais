@@ -1,8 +1,5 @@
 <template>
     <div class="componente-receita-form">
-        <div class="descricao">
-            Aqui você poderá ver seus dados
-        </div>
         <form v-bind:action="action" v-bind:method="method">
             <slot name="method"></slot>
             <input type="hidden" name="_token" v-bind:value="token">
@@ -18,12 +15,6 @@
                     <div class="form-group">
                         <label>E-mail</label>
                         <input class="form-control" type="text" name="email" v-bind:value="usuarioObj.email">
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label>Data Nascimento</label>
-                        <input class="form-control" type="date" name="data_nascimento" v-bind:value="usuarioObj.data_nascimento">
                     </div>
                 </div>
             </div>

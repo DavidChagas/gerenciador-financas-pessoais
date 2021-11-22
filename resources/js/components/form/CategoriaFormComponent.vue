@@ -12,13 +12,13 @@
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label>Descrição</label>
-                        <input class="form-control" type="text" name="descricao" v-bind:value="categoria.descricao">
+                        <input class="form-control" type="text" name="descricao" v-bind:value="categoria.descricao" required>
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label>Tipo</label>
-                        <select class="form-control" name="tipo" v-bind:value="categoria.tipo">
+                        <select class="form-control" name="tipo" v-bind:value="categoria.tipo" required>
                             <option value="Receita">Receita</option>
                             <option value="Despesa">Despesa</option>
                         </select>
