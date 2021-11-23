@@ -75,7 +75,7 @@ class ReceitaController extends Controller{
         $valor_atualizado = $receita->valor + (int) $conta[0]->valor;
         DB::table('contas')->where('id', $receita->conta_id)->update(['valor' => $valor_atualizado]);
 
-        return redirect('/receitas')->with('success', 'receita salva com sucesso!');
+        return redirect('/receitas')->with('success', 'Receita salva com sucesso!');
     }
 
     public function show(Receita $receita){
@@ -121,7 +121,7 @@ class ReceitaController extends Controller{
             $valor_atualizado = (int) $conta[0]->valor - $receita->valor ;
             DB::table('contas')->where('id', $receita->conta_id)->update(['valor' => $valor_atualizado]);
 
-            return redirect('/receitas')->with('success', 'receita excluida com sucesso!');
+            return redirect('/receitas')->with('success', 'Receita excluida com sucesso!');
         } catch (\Illuminate\Database\QueryException $qe) {
             return ['status' => 'errorQuery', 'message' => $qe->getMessage()];
         } catch (\PDOException $e) {

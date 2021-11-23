@@ -1,6 +1,6 @@
 <template>
     <div class="componente-receita-form">
-        <form v-bind:action="action" v-bind:method="method">
+        <form v-bind:action="action" v-bind:method="method" autocomplete="off">
             <slot name="method"></slot>
             <input type="hidden" name="_token" v-bind:value="token">
 

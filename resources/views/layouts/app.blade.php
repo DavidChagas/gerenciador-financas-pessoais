@@ -23,6 +23,23 @@
 </head>
 <body>
     @auth
+        @if ($errors->any()) <!-- ou (count($errors) > 0)-->
+            <div class="alert alert-danger" style="position: absolute; top: 0; right: 0;">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        @if (\Session::has('success'))
+            <div class="toast-body" style="position: absolute; top: 0; right: 0;">
+                <div class="alert alert-success">
+                    <p>{{ \Session::get('success') }}</p>
+                </div>
+            </div>
+        @endif
         <div id="app">
             <div class="menu-lateral">
                 <menu-component nome-usuario="{{Auth::user()->nome}}">

@@ -46,7 +46,7 @@ class UsuarioController extends Controller{
        
         $usuario->save();
 
-        return redirect('/')->with('success', 'usuario alterada com sucesso!');
+        return redirect('/')->with('success', 'Usuário alterado com sucesso!');
     }
 
     public function destroy($id){

@@ -4,7 +4,7 @@
             <b>Aqui você poderá cadastrar todas as suas categorias.</b><br> 
             Exemplos de categorias: Alimentação, Transporte, Lazer, etc...<br> <br> <br>
         </div>
-        <form v-bind:action="action" v-bind:method="method">
+        <form v-bind:action="action" v-bind:method="method" autocomplete="off">
             <slot name="method"></slot>
             <input type="hidden" name="_token" v-bind:value="token">
 

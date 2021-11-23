@@ -75,7 +75,7 @@ class DespesaController extends Controller
         $valor_atualizado = (int) $conta[0]->valor - $despesa->valor;
         DB::table('contas')->where('id', $despesa->conta_id)->update(['valor' => $valor_atualizado]);
 
-        return redirect('/despesas')->with('success', 'despesa salva com sucesso!');
+        return redirect('/despesas')->with('success', 'Despesa salva com sucesso!');
     }
 
     public function show(Despesa $despesa){
@@ -121,7 +121,7 @@ class DespesaController extends Controller
             $valor_atualizado = (int) $conta[0]->valor + $despesa->valor ;
             DB::table('contas')->where('id', $despesa->conta_id)->update(['valor' => $valor_atualizado]);
 
-            return redirect('/despesas')->with('success', 'despesa excluida com sucesso!');
+            return redirect('/despesas')->with('success', 'Despesa excluida com sucesso!');
         } catch (\Illuminate\Database\QueryException $qe) {
             return ['status' => 'errorQuery', 'message' => $qe->getMessage()];
         } catch (\PDOException $e) {

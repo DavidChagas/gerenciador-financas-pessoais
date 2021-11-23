@@ -102,10 +102,10 @@
 
                 this.$http.get(`/api/getTotais?first=${firstDay}&last=${lastDay}`).then(response => {
                    
-                    this.totalReceitas = response.body[0].total_receitas;
-                    if( this.totalReceitas == null ) this.totalReceitas = 0;
-                    this.totalDespesas = response.body[1].total_despesas;
-                    if( this.totalDespesas == null ) this.totalDespesas = 0;
+                    this.totalReceitas = response.body[0].total_receitas == null ? 0 : funcoes.formatarValorGraficos(response.body[0].total_receitas);
+                    // if( this.totalReceitas == null ) this.totalReceitas = 0;
+                    this.totalDespesas = response.body[1].total_despesas == null ? 0 : funcoes.formatarValorGraficos(response.body[1].total_despesas);
+                    // if( this.totalDespesas == null ) this.totalDespesas = 0;
 
                     this.semMovimentacoes = !this.totalReceitas && !this.totalDespesas;
 
@@ -135,7 +135,7 @@
                         label: 'Total Receitas',
                         backgroundColor: 'rgb(255, 99, 132)',
                         borderColor: 'rgb(255, 99, 132)',
-                        data: [funcoes.formatarValorGraficos(this.totalReceitas), funcoes.formatarValorGraficos(this.totalDespesas)],
+                        data: [this.totalReceitas, this.totalDespesas],
                         backgroundColor: [
                             '#00800087',
                             '#ff000087'

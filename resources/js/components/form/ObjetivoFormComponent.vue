@@ -3,7 +3,7 @@
         <div class="descricao">
             Aqui você poderá cadastrar todos os seus objetivos.
         </div>
-        <form v-bind:action="action" v-bind:method="method">
+        <form v-bind:action="action" v-bind:method="method" autocomplete="off">
             <slot name="method"></slot>
             <input type="hidden" name="_token" v-model="token">
 

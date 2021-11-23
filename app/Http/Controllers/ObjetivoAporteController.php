@@ -33,7 +33,7 @@ class ObjetivoAporteController extends Controller{
 
         $objetivoAporte->save();
 
-        return redirect('/objetivos')->with('success', 'objetivo_aporte salva com sucesso!');
+        return redirect('/objetivos')->with('success', 'Aporte salvo com sucesso!');
     }
 
     public function aportes(){
@@ -67,7 +67,7 @@ class ObjetivoAporteController extends Controller{
         echo $objetivoAporte;
         try {
             $objetivoAporte->delete();
-            return redirect('/objetivos')->with('success', 'aporte objetivo excluido com sucesso!');
+            return redirect('/objetivos')->with('success', 'Aporte excluido com sucesso!');
         } catch (\Illuminate\Database\QueryException $qe) {
             return ['status' => 'errorQuery', 'message' => $qe->getMessage()];
         } catch (\PDOException $e) {

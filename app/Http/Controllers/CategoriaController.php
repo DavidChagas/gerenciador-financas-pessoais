@@ -31,7 +31,7 @@ class CategoriaController extends Controller{
 
         $categoria->save();
 
-        return redirect('/categorias')->with('success', 'categoria salva com sucesso!');
+        return redirect('/categorias')->with('success', 'Categoria salva com sucesso!');
     }
 
     public function show(Categoria $categoria){
@@ -48,13 +48,13 @@ class CategoriaController extends Controller{
        
         $categoria->save();
 
-        return redirect('/categorias')->with('success', 'categoria alterada com sucesso!');
+        return redirect('/categorias')->with('success', 'Categoria alterada com sucesso!');
     }
 
     public function destroy(Categoria $categoria){
         try {
             $categoria->delete();
-            return redirect('/categorias')->with('success', 'categoria excluida com sucesso!');
+            return redirect('/categorias')->with('success', 'Categoria excluida com sucesso!');
         } catch (\Illuminate\Database\QueryException $qe) {
             return ['status' => 'errorQuery', 'message' => $qe->getMessage()];
         } catch (\PDOException $e) {

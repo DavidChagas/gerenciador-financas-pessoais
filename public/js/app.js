@@ -1943,11 +1943,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var firstDay = dataSelecionada + '-01';
       var lastDay = dataSelecionada + '-31';
       this.$http.get("/api/getTotais?first=".concat(firstDay, "&last=").concat(lastDay)).then(function (response) {
-        _this.totalReceitas = response.body[0].total_receitas;
-        if (_this.totalReceitas == null) _this.totalReceitas = 0;
-        _this.totalDespesas = response.body[1].total_despesas;
-        if (_this.totalDespesas == null) _this.totalDespesas = 0;
+        _this.totalReceitas = response.body[0].total_receitas == null ? 0 : _funcoes__WEBPACK_IMPORTED_MODULE_1__["default"].formatarValorGraficos(response.body[0].total_receitas); // if( this.totalReceitas == null ) this.totalReceitas = 0;
+
+        _this.totalDespesas = response.body[1].total_despesas == null ? 0 : _funcoes__WEBPACK_IMPORTED_MODULE_1__["default"].formatarValorGraficos(response.body[1].total_despesas); // if( this.totalDespesas == null ) this.totalDespesas = 0;
+
         _this.semMovimentacoes = !_this.totalReceitas && !_this.totalDespesas;
+        console.log('this.totalReceitas', _this.totalReceitas);
 
         _this.montarGraficoBarra();
 
@@ -1977,7 +1978,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           label: 'Total Receitas',
           backgroundColor: 'rgb(255, 99, 132)',
           borderColor: 'rgb(255, 99, 132)',
-          data: [_funcoes__WEBPACK_IMPORTED_MODULE_1__["default"].formatarValorGraficos(this.totalReceitas), _funcoes__WEBPACK_IMPORTED_MODULE_1__["default"].formatarValorGraficos(this.totalDespesas)]
+          data: [this.totalReceitas, this.totalDespesas]
         }, _defineProperty(_ref, "backgroundColor", ['#00800087', '#ff000087']), _defineProperty(_ref, "borderColor", ['green', 'red']), _defineProperty(_ref, "borderWidth", 1), _defineProperty(_ref, "hoverOffset", 4), _ref)]
       };
       var config = {
@@ -63231,7 +63232,9 @@ var render = function() {
     _vm._v(" "),
     _c(
       "form",
-      { attrs: { action: _vm.action, method: _vm.method } },
+      {
+        attrs: { action: _vm.action, method: _vm.method, autocomplete: "off" }
+      },
       [
         _vm._t("method"),
         _vm._v(" "),
@@ -63813,7 +63816,9 @@ var render = function() {
     _vm._v(" "),
     _c(
       "form",
-      { attrs: { action: _vm.action, method: _vm.method } },
+      {
+        attrs: { action: _vm.action, method: _vm.method, autocomplete: "off" }
+      },
       [
         _vm._t("method"),
         _vm._v(" "),

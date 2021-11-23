@@ -35,7 +35,7 @@ class ContaController extends Controller{
 
         $conta->save();
 
-        return redirect('/contas')->with('success', 'conta salva com sucesso!');
+        return redirect('/contas')->with('success', 'Conta salva com sucesso!');
     }
 
     public function show(Conta $conta){
