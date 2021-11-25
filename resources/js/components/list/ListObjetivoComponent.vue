@@ -1,5 +1,5 @@
 <template>
-    <div class="componente-listagem-conta" v-bind:class="{ active: modalAberto }">
+    <div class="componente-listagem-objetivo" v-bind:class="{ active: modalAberto }">
         <div class="overlay" v-bind:class="{ active: modalAberto }"></div>
         <div class="objetivos-grid">
             <div class="objetivo" v-for="i in list" v-bind:key="i.id">
@@ -199,7 +199,7 @@
     }
 </script>
 <style lang="scss">
-   .componente-listagem-conta{
+   .componente-listagem-objetivo{
         position: relative;
 
         .overlay{

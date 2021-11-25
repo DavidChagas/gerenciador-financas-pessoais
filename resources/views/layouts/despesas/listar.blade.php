@@ -2,10 +2,14 @@
 
 @section('content')
 
+<div class="d-print-none">
+	<titulo-form-component titulo="Lista de Despesas"></titulo-form-component>
+</div>
+<div class="d-print-block" style="display:none">
+	<titulo-form-component titulo="Relatório de Despesas"></titulo-form-component>
+</div>
 
-<titulo-form-component titulo="Lista de Despesas"></titulo-form-component>
-
-<a href="{{route('despesa.cadastrar')}}" class="btn btn-primary" style="margin-bottom: 30px;">Cadastrar Nova Despesa</a>
+<a href="{{route('despesa.cadastrar')}}" class="btn btn-primary d-print-none" style="margin-bottom: 30px;">Cadastrar Nova Despesa</a>
 
 <despesa-list-component infos="{{ $infos }}" datas_despesas="{{ $datas_despesas }}" token="{{ csrf_token() }}" model="despesas">
 	<span slot="method">

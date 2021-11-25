@@ -2,10 +2,14 @@
 
 @section('content')
 
+<div class="d-print-none">
+	<titulo-form-component titulo="Lista de Receitas"></titulo-form-component>
+</div>
+<div class="d-print-block" style="display:none">
+	<titulo-form-component titulo="Relatório de Receitas"></titulo-form-component>
+</div>
 
-<titulo-form-component titulo="Lista de Receitas"></titulo-form-component>
-
-<a href="{{route('receita.cadastrar')}}" class="btn btn-primary" style="margin-bottom: 30px;">Cadastrar Nova Receita</a>
+<a href="{{route('receita.cadastrar')}}" class="btn btn-primary d-print-none" style="margin-bottom: 30px;">Cadastrar Nova Receita</a>
 
 <receita-list-component infos="{{ $infos }}" datas_receitas="{{ $datas_receitas }}" token="{{ csrf_token() }}" model="receitas">
 	<span slot="method">

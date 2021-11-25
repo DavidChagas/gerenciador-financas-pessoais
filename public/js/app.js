@@ -1948,7 +1948,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this.totalDespesas = response.body[1].total_despesas == null ? 0 : _funcoes__WEBPACK_IMPORTED_MODULE_1__["default"].formatarValorGraficos(response.body[1].total_despesas); // if( this.totalDespesas == null ) this.totalDespesas = 0;
 
         _this.semMovimentacoes = !_this.totalReceitas && !_this.totalDespesas;
-        console.log('this.totalReceitas', _this.totalReceitas);
 
         _this.montarGraficoBarra();
 
@@ -2983,6 +2982,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -3328,6 +3333,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _funcoes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../funcoes */ "./resources/js/funcoes.js");
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -8315,7 +8326,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".componente-listagem-tabela {\n  position: relative;\n}\n.componente-listagem-tabela .datas {\n  width: 200px;\n  float: right;\n  margin-bottom: 30px;\n  margin-top: -70px;\n}\n.componente-listagem-tabela .datas select {\n  border-top: none;\n  border-left: none;\n  border-right: none;\n  border-radius: 0px;\n}\n.componente-listagem-tabela .datas select:focus {\n  border-color: transparent;\n  outline: none;\n  box-shadow: none;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".componente-listagem-despesa {\n  position: relative;\n}\n.componente-listagem-despesa .datas {\n  position: absolute;\n  right: 50px;\n  width: 200px;\n  margin-bottom: 30px;\n  margin-top: -70px;\n  display: grid;\n  grid-template-columns: auto auto;\n}\n.componente-listagem-despesa .datas button {\n  margin-left: 10px;\n  color: white;\n}\n.componente-listagem-despesa .datas select {\n  width: 200px;\n  border-top: none;\n  border-left: none;\n  border-right: none;\n  border-radius: 0px;\n}\n.componente-listagem-despesa .datas select:focus {\n  border-color: transparent;\n  outline: none;\n  box-shadow: none;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -8339,7 +8350,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".componente-listagem-conta {\n  position: relative;\n}\n.componente-listagem-conta .overlay {\n  display: none;\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 100vw;\n  height: 100vh;\n  background-color: rgba(0, 0, 0, 0.15);\n  z-index: 1;\n}\n.componente-listagem-conta .overlay.active {\n  display: block;\n}\n.componente-listagem-conta .lista-vazia {\n  margin: 20px 0;\n  padding: 50px 0;\n  text-align: center;\n  background-color: #eee;\n  border: 2px solid #ddd;\n  border-radius: 5px;\n  font-size: 20px;\n  color: #444;\n}\n.componente-listagem-conta .objetivos-grid {\n  display: grid;\n  grid-template-columns: repeat(3, 1fr);\n  grid-gap: 20px;\n}\n.componente-listagem-conta .objetivos-grid .objetivo {\n  position: relative;\n  padding: 20px 15px;\n  border-radius: 5px;\n  border: 1px solid #ddd;\n  transition: all 0.1s;\n}\n.componente-listagem-conta .objetivos-grid .objetivo:hover {\n  box-shadow: 0px 0px 5px #ddd;\n}\n.componente-listagem-conta .objetivos-grid .objetivo > .nome {\n  font-size: 18px;\n  font-weight: bold;\n  color: #444;\n  text-align: center;\n  line-height: 1;\n}\n.componente-listagem-conta .objetivos-grid .objetivo > .nome small {\n  font-size: 12px;\n}\n.componente-listagem-conta .objetivos-grid .objetivo .valores {\n  margin: 15px 0;\n  display: grid;\n  grid-template-columns: repeat(2, 1fr);\n}\n.componente-listagem-conta .objetivos-grid .objetivo .valores .valor {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  text-align: center;\n}\n.componente-listagem-conta .objetivos-grid .objetivo .progress {\n  position: relative;\n  height: 20px;\n  border: 1px solid #3490dc;\n}\n.componente-listagem-conta .objetivos-grid .objetivo .progress .progress-bar.concluido {\n  background-color: green;\n}\n.componente-listagem-conta .objetivos-grid .objetivo .progress .porcentagem {\n  position: absolute;\n  left: 50%;\n  top: 10px;\n  width: 200px;\n  margin-left: -100px;\n  font-weight: bold;\n}\n.componente-listagem-conta .objetivos-grid .objetivo .objetivo-concluido {\n  text-align: center;\n}\n.componente-listagem-conta .objetivos-grid .objetivo .objetivo-concluido .descricao {\n  margin: 10px 0 15px 0;\n  font-size: 16px;\n  line-height: 1;\n}\n.componente-listagem-conta .objetivos-grid .estimativa {\n  margin-top: 15px;\n  font-size: 12px;\n  line-height: 1;\n  text-align: center;\n}\n.componente-listagem-conta .objetivos-grid .botoes {\n  margin-top: 30px;\n  display: flex;\n  justify-content: space-between;\n}\n.componente-listagem-conta .objetivos-grid .botoes .editar {\n  display: flex;\n}\n.componente-listagem-conta .objetivos-grid .botoes .editar > form > button {\n  position: absolute;\n  top: 5px;\n  right: 5px;\n  background-color: transparent;\n  color: red;\n  border: none;\n  padding: 0;\n  font-size: 15px;\n  line-height: 0;\n}\n.componente-listagem-conta .objetivos-grid .botoes .editar > form > button:hover {\n  color: #a20000;\n}\n.componente-listagem-conta .objetivos-grid .botoes a {\n  position: absolute;\n  top: 5px;\n  right: 25px;\n  background-color: transparent;\n  color: #2e2ee4;\n  border: none;\n  padding: 0;\n  font-size: 15px;\n  line-height: 0;\n}\n.componente-listagem-conta .objetivos-grid .botoes a:hover {\n  color: #161666;\n}\n.componente-listagem-conta .modal-aporte {\n  position: absolute;\n  top: 0px;\n  left: 50%;\n  display: none;\n  width: 300px;\n  margin-left: -150px;\n  padding: 30px;\n  text-align: center;\n  background-color: white;\n  border: 1px solid #ddd;\n  border-radius: 5px;\n  box-shadow: 5px 4px 5px #ccc;\n}\n.componente-listagem-conta .modal-aporte.active {\n  display: block;\n  z-index: 2;\n}\n.componente-listagem-conta .modal-aporte form {\n  text-align: center;\n}\n.componente-listagem-conta .modal-detalhes {\n  position: absolute;\n  top: -65px;\n  left: 50%;\n  display: none;\n  width: 500px;\n  max-height: 400px;\n  margin-left: -250px;\n  padding: 30px;\n  background-color: white;\n  border: 1px solid #ddd;\n  border-radius: 5px;\n  box-shadow: 0px 0px 22px #a1a1a1;\n}\n.componente-listagem-conta .modal-detalhes.active {\n  display: block;\n  z-index: 2;\n}\n.componente-listagem-conta .modal-detalhes > button {\n  float: right;\n  padding: 0px 5px 3px;\n  line-height: 1;\n  font-weight: bold;\n}\n.componente-listagem-conta .modal-detalhes > .titulo {\n  font-size: 20px;\n  font-weight: bold;\n  color: #444;\n  text-align: center;\n  margin-bottom: 20px;\n}\n.componente-listagem-conta .modal-detalhes > .cabecalho {\n  display: grid;\n  grid-template-columns: 40% 40% 20%;\n  border-bottom: 2px solid #ddd;\n  font-weight: bold;\n}\n.componente-listagem-conta .modal-detalhes > .cabecalho > .item {\n  text-align: center;\n}\n.componente-listagem-conta .modal-detalhes > .aportes {\n  max-height: 280px;\n  overflow-y: auto;\n}\n.componente-listagem-conta .modal-detalhes > .aportes > .aporte {\n  padding: 5px 0;\n  display: grid;\n  grid-template-columns: 40% 40% 20%;\n}\n.componente-listagem-conta .modal-detalhes > .aportes > .aporte > .item {\n  text-align: center;\n  border-bottom: 1px solid #eee;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".componente-listagem-objetivo {\n  position: relative;\n}\n.componente-listagem-objetivo .overlay {\n  display: none;\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 100vw;\n  height: 100vh;\n  background-color: rgba(0, 0, 0, 0.15);\n  z-index: 1;\n}\n.componente-listagem-objetivo .overlay.active {\n  display: block;\n}\n.componente-listagem-objetivo .lista-vazia {\n  margin: 20px 0;\n  padding: 50px 0;\n  text-align: center;\n  background-color: #eee;\n  border: 2px solid #ddd;\n  border-radius: 5px;\n  font-size: 20px;\n  color: #444;\n}\n.componente-listagem-objetivo .objetivos-grid {\n  display: grid;\n  grid-template-columns: repeat(3, 1fr);\n  grid-gap: 20px;\n}\n.componente-listagem-objetivo .objetivos-grid .objetivo {\n  position: relative;\n  padding: 20px 15px;\n  border-radius: 5px;\n  border: 1px solid #ddd;\n  transition: all 0.1s;\n}\n.componente-listagem-objetivo .objetivos-grid .objetivo:hover {\n  box-shadow: 0px 0px 5px #ddd;\n}\n.componente-listagem-objetivo .objetivos-grid .objetivo > .nome {\n  font-size: 18px;\n  font-weight: bold;\n  color: #444;\n  text-align: center;\n  line-height: 1;\n}\n.componente-listagem-objetivo .objetivos-grid .objetivo > .nome small {\n  font-size: 12px;\n}\n.componente-listagem-objetivo .objetivos-grid .objetivo .valores {\n  margin: 15px 0;\n  display: grid;\n  grid-template-columns: repeat(2, 1fr);\n}\n.componente-listagem-objetivo .objetivos-grid .objetivo .valores .valor {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  text-align: center;\n}\n.componente-listagem-objetivo .objetivos-grid .objetivo .progress {\n  position: relative;\n  height: 20px;\n  border: 1px solid #3490dc;\n}\n.componente-listagem-objetivo .objetivos-grid .objetivo .progress .progress-bar.concluido {\n  background-color: green;\n}\n.componente-listagem-objetivo .objetivos-grid .objetivo .progress .porcentagem {\n  position: absolute;\n  left: 50%;\n  top: 10px;\n  width: 200px;\n  margin-left: -100px;\n  font-weight: bold;\n}\n.componente-listagem-objetivo .objetivos-grid .objetivo .objetivo-concluido {\n  text-align: center;\n}\n.componente-listagem-objetivo .objetivos-grid .objetivo .objetivo-concluido .descricao {\n  margin: 10px 0 15px 0;\n  font-size: 16px;\n  line-height: 1;\n}\n.componente-listagem-objetivo .objetivos-grid .estimativa {\n  margin-top: 15px;\n  font-size: 12px;\n  line-height: 1;\n  text-align: center;\n}\n.componente-listagem-objetivo .objetivos-grid .botoes {\n  margin-top: 30px;\n  display: flex;\n  justify-content: space-between;\n}\n.componente-listagem-objetivo .objetivos-grid .botoes .editar {\n  display: flex;\n}\n.componente-listagem-objetivo .objetivos-grid .botoes .editar > form > button {\n  position: absolute;\n  top: 5px;\n  right: 5px;\n  background-color: transparent;\n  color: red;\n  border: none;\n  padding: 0;\n  font-size: 15px;\n  line-height: 0;\n}\n.componente-listagem-objetivo .objetivos-grid .botoes .editar > form > button:hover {\n  color: #a20000;\n}\n.componente-listagem-objetivo .objetivos-grid .botoes a {\n  position: absolute;\n  top: 5px;\n  right: 25px;\n  background-color: transparent;\n  color: #2e2ee4;\n  border: none;\n  padding: 0;\n  font-size: 15px;\n  line-height: 0;\n}\n.componente-listagem-objetivo .objetivos-grid .botoes a:hover {\n  color: #161666;\n}\n.componente-listagem-objetivo .modal-aporte {\n  position: absolute;\n  top: 0px;\n  left: 50%;\n  display: none;\n  width: 300px;\n  margin-left: -150px;\n  padding: 30px;\n  text-align: center;\n  background-color: white;\n  border: 1px solid #ddd;\n  border-radius: 5px;\n  box-shadow: 5px 4px 5px #ccc;\n}\n.componente-listagem-objetivo .modal-aporte.active {\n  display: block;\n  z-index: 2;\n}\n.componente-listagem-objetivo .modal-aporte form {\n  text-align: center;\n}\n.componente-listagem-objetivo .modal-detalhes {\n  position: absolute;\n  top: -65px;\n  left: 50%;\n  display: none;\n  width: 500px;\n  max-height: 400px;\n  margin-left: -250px;\n  padding: 30px;\n  background-color: white;\n  border: 1px solid #ddd;\n  border-radius: 5px;\n  box-shadow: 0px 0px 22px #a1a1a1;\n}\n.componente-listagem-objetivo .modal-detalhes.active {\n  display: block;\n  z-index: 2;\n}\n.componente-listagem-objetivo .modal-detalhes > button {\n  float: right;\n  padding: 0px 5px 3px;\n  line-height: 1;\n  font-weight: bold;\n}\n.componente-listagem-objetivo .modal-detalhes > .titulo {\n  font-size: 20px;\n  font-weight: bold;\n  color: #444;\n  text-align: center;\n  margin-bottom: 20px;\n}\n.componente-listagem-objetivo .modal-detalhes > .cabecalho {\n  display: grid;\n  grid-template-columns: 40% 40% 20%;\n  border-bottom: 2px solid #ddd;\n  font-weight: bold;\n}\n.componente-listagem-objetivo .modal-detalhes > .cabecalho > .item {\n  text-align: center;\n}\n.componente-listagem-objetivo .modal-detalhes > .aportes {\n  max-height: 280px;\n  overflow-y: auto;\n}\n.componente-listagem-objetivo .modal-detalhes > .aportes > .aporte {\n  padding: 5px 0;\n  display: grid;\n  grid-template-columns: 40% 40% 20%;\n}\n.componente-listagem-objetivo .modal-detalhes > .aportes > .aporte > .item {\n  text-align: center;\n  border-bottom: 1px solid #eee;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -8363,7 +8374,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".componente-listagem-tabela {\n  position: relative;\n}\n.componente-listagem-tabela .datas {\n  width: 200px;\n  float: right;\n  margin-bottom: 30px;\n  margin-top: -70px;\n}\n.componente-listagem-tabela .datas select {\n  border-top: none;\n  border-left: none;\n  border-right: none;\n  border-radius: 0px;\n}\n.componente-listagem-tabela .datas select:focus {\n  border-color: transparent;\n  outline: none;\n  box-shadow: none;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".componente-listagem-receita {\n  position: relative;\n}\n.componente-listagem-receita .datas {\n  position: absolute;\n  right: 50px;\n  width: 200px;\n  margin-bottom: 30px;\n  margin-top: -70px;\n  display: grid;\n  grid-template-columns: auto auto;\n}\n.componente-listagem-receita .datas button {\n  margin-left: 10px;\n  color: white;\n}\n.componente-listagem-receita .datas select {\n  width: 200px;\n  border-top: none;\n  border-left: none;\n  border-right: none;\n  border-radius: 0px;\n}\n.componente-listagem-receita .datas select:focus {\n  border-color: transparent;\n  outline: none;\n  box-shadow: none;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -63015,7 +63026,7 @@ var render = function() {
     _c(
       "div",
       {
-        staticClass: "btn-mobile",
+        staticClass: "btn-mobile d-print-none",
         class: { aberto: _vm.menuMobileAberto },
         on: {
           click: function($event) {
@@ -63489,7 +63500,9 @@ var render = function() {
     _vm._v(" "),
     _c(
       "form",
-      { attrs: { action: _vm.action, method: _vm.method } },
+      {
+        attrs: { action: _vm.action, method: _vm.method, autocomplete: "off" }
+      },
       [
         _vm._t("method"),
         _vm._v(" "),
@@ -64010,7 +64023,9 @@ var render = function() {
     _vm._v(" "),
     _c(
       "form",
-      { attrs: { action: _vm.action, method: _vm.method } },
+      {
+        attrs: { action: _vm.action, method: _vm.method, autocomplete: "off" }
+      },
       [
         _vm._t("method"),
         _vm._v(" "),
@@ -64347,7 +64362,9 @@ var render = function() {
   return _c("div", { staticClass: "componente-receita-form" }, [
     _c(
       "form",
-      { attrs: { action: _vm.action, method: _vm.method } },
+      {
+        attrs: { action: _vm.action, method: _vm.method, autocomplete: "off" }
+      },
       [
         _vm._t("method"),
         _vm._v(" "),
@@ -64637,9 +64654,25 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "componente-listagem-tabela" },
+    { staticClass: "componente-listagem-despesa" },
     [
       _c("div", { staticClass: "datas" }, [
+        _c(
+          "div",
+          { staticClass: "d-print-block", staticStyle: { display: "none" } },
+          [
+            _vm._v(
+              "\n            Referente à " +
+                _vm._s(
+                  this.retornaNomeMes(_vm.dataSelecionada.split("-")[1]) +
+                    " " +
+                    _vm.dataSelecionada.split("-")[0]
+                ) +
+                "\n        "
+            )
+          ]
+        ),
+        _vm._v(" "),
         _c(
           "select",
           {
@@ -64651,7 +64684,7 @@ var render = function() {
                 expression: "dataSelecionada"
               }
             ],
-            staticClass: "form-control",
+            staticClass: "form-control d-print-none",
             attrs: { name: "data" },
             on: {
               change: [
@@ -64682,12 +64715,14 @@ var render = function() {
             )
           }),
           0
-        )
+        ),
+        _vm._v(" "),
+        _vm._m(0)
       ]),
       _vm._v(" "),
       _vm.despesas.length
         ? _c("table", { staticClass: "table" }, [
-            _vm._m(0),
+            _vm._m(1),
             _vm._v(" "),
             _c(
               "tbody",
@@ -64707,30 +64742,46 @@ var render = function() {
                     _vm._v(_vm._s(i.status == "pago" ? "Pago" : "Não Pago"))
                   ]),
                   _vm._v(" "),
-                  _c("td", { staticStyle: { "text-align": "center" } }, [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "btn btn-info btn-sm",
-                        attrs: { href: "/" + _vm.model + "/" + i.id + "/edit" }
-                      },
-                      [_c("i", { staticClass: "fas fa-pencil-alt" })]
-                    )
-                  ]),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "d-print-none",
+                      staticStyle: { "text-align": "center" }
+                    },
+                    [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "btn btn-info btn-sm",
+                          attrs: {
+                            href: "/" + _vm.model + "/" + i.id + "/edit"
+                          }
+                        },
+                        [_c("i", { staticClass: "fas fa-pencil-alt" })]
+                      )
+                    ]
+                  ),
                   _vm._v(" "),
-                  _c("td", { staticStyle: { "text-align": "center" } }, [
-                    _c(
-                      "form",
-                      {
-                        attrs: {
-                          action: "/" + _vm.model + "/" + i.id,
-                          method: "POST"
-                        }
-                      },
-                      [_vm._t("method"), _vm._v(" "), _vm._m(1, true)],
-                      2
-                    )
-                  ])
+                  _c(
+                    "td",
+                    {
+                      staticClass: "d-print-none",
+                      staticStyle: { "text-align": "center" }
+                    },
+                    [
+                      _c(
+                        "form",
+                        {
+                          attrs: {
+                            action: "/" + _vm.model + "/" + i.id,
+                            method: "POST"
+                          }
+                        },
+                        [_vm._t("method"), _vm._v(" "), _vm._m(2, true)],
+                        2
+                      )
+                    ]
+                  )
                 ])
               }),
               0
@@ -64750,6 +64801,19 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "btn btn-info d-print-none",
+        attrs: { onclick: "window.print()" }
+      },
+      [_c("i", { staticClass: "fas fa-print" })]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("thead", { staticClass: "thead-light" }, [
       _c("tr", [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Valor")]),
@@ -64764,13 +64828,23 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Status")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col", width: "50px" } }, [
-          _vm._v("Editar")
-        ]),
+        _c(
+          "th",
+          {
+            staticClass: "d-print-none",
+            attrs: { scope: "col", width: "50px" }
+          },
+          [_vm._v("Editar")]
+        ),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col", width: "50px" } }, [
-          _vm._v("Excluir")
-        ])
+        _c(
+          "th",
+          {
+            staticClass: "d-print-none",
+            attrs: { scope: "col", width: "50px" }
+          },
+          [_vm._v("Excluir")]
+        )
       ])
     ])
   },
@@ -64810,7 +64884,7 @@ var render = function() {
   return _c(
     "div",
     {
-      staticClass: "componente-listagem-conta",
+      staticClass: "componente-listagem-objetivo",
       class: { active: _vm.modalAberto }
     },
     [
@@ -65211,9 +65285,25 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "componente-listagem-tabela" },
+    { staticClass: "componente-listagem-receita" },
     [
       _c("div", { staticClass: "datas" }, [
+        _c(
+          "div",
+          { staticClass: "d-print-block", staticStyle: { display: "none" } },
+          [
+            _vm._v(
+              "\n            Referente à " +
+                _vm._s(
+                  this.retornaNomeMes(_vm.dataSelecionada.split("-")[1]) +
+                    " " +
+                    _vm.dataSelecionada.split("-")[0]
+                ) +
+                "\n        "
+            )
+          ]
+        ),
+        _vm._v(" "),
         _c(
           "select",
           {
@@ -65225,7 +65315,7 @@ var render = function() {
                 expression: "dataSelecionada"
               }
             ],
-            staticClass: "form-control",
+            staticClass: "form-control d-print-none",
             attrs: { name: "data" },
             on: {
               change: [
@@ -65256,12 +65346,14 @@ var render = function() {
             )
           }),
           0
-        )
+        ),
+        _vm._v(" "),
+        _vm._m(0)
       ]),
       _vm._v(" "),
       _vm.receitas.length
         ? _c("table", { staticClass: "table" }, [
-            _vm._m(0),
+            _vm._m(1),
             _vm._v(" "),
             _c(
               "tbody",
@@ -65283,30 +65375,46 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
-                  _c("td", { staticStyle: { "text-align": "center" } }, [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "btn btn-info btn-sm",
-                        attrs: { href: "/" + _vm.model + "/" + i.id + "/edit" }
-                      },
-                      [_c("i", { staticClass: "fas fa-pencil-alt" })]
-                    )
-                  ]),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "d-print-none",
+                      staticStyle: { "text-align": "center" }
+                    },
+                    [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "btn btn-info btn-sm",
+                          attrs: {
+                            href: "/" + _vm.model + "/" + i.id + "/edit"
+                          }
+                        },
+                        [_c("i", { staticClass: "fas fa-pencil-alt" })]
+                      )
+                    ]
+                  ),
                   _vm._v(" "),
-                  _c("td", { staticStyle: { "text-align": "center" } }, [
-                    _c(
-                      "form",
-                      {
-                        attrs: {
-                          action: "/" + _vm.model + "/" + i.id,
-                          method: "POST"
-                        }
-                      },
-                      [_vm._t("method"), _vm._v(" "), _vm._m(1, true)],
-                      2
-                    )
-                  ])
+                  _c(
+                    "td",
+                    {
+                      staticClass: "d-print-none",
+                      staticStyle: { "text-align": "center" }
+                    },
+                    [
+                      _c(
+                        "form",
+                        {
+                          attrs: {
+                            action: "/" + _vm.model + "/" + i.id,
+                            method: "POST"
+                          }
+                        },
+                        [_vm._t("method"), _vm._v(" "), _vm._m(2, true)],
+                        2
+                      )
+                    ]
+                  )
                 ])
               }),
               0
@@ -65326,6 +65434,19 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "btn btn-info d-print-none",
+        attrs: { onclick: "window.print()" }
+      },
+      [_c("i", { staticClass: "fas fa-print" })]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("thead", { staticClass: "thead-light" }, [
       _c("tr", [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Valor")]),
@@ -65340,13 +65461,23 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Status")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col", width: "50px" } }, [
-          _vm._v("Editar")
-        ]),
+        _c(
+          "th",
+          {
+            staticClass: "d-print-none",
+            attrs: { scope: "col", width: "50px" }
+          },
+          [_vm._v("Editar")]
+        ),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col", width: "50px" } }, [
-          _vm._v("Excluir")
-        ])
+        _c(
+          "th",
+          {
+            staticClass: "d-print-none",
+            attrs: { scope: "col", width: "50px" }
+          },
+          [_vm._v("Excluir")]
+        )
       ])
     ])
   },

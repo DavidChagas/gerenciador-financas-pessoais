@@ -1,8 +1,8 @@
 <template>
     <div class="componente-menu">
-        <div class="btn-mobile" v-bind:class="{ aberto: menuMobileAberto }" @click="menuMobileAberto = !menuMobileAberto">
-        <i class="fas fa-times" v-if="menuMobileAberto"></i>
-        <i class="fas fa-bars" v-if="!menuMobileAberto"></i>
+        <div class="btn-mobile d-print-none" v-bind:class="{ aberto: menuMobileAberto }" @click="menuMobileAberto = !menuMobileAberto">
+            <i class="fas fa-times" v-if="menuMobileAberto"></i>
+            <i class="fas fa-bars" v-if="!menuMobileAberto"></i>
         </div>
         <div class="menu" v-bind:class="{ abrir: menuMobileAberto }">
             <div class="usuario">

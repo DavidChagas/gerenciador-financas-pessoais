@@ -1,9 +1,15 @@
 <template>
-    <div class="componente-listagem-tabela">
+    <div class="componente-listagem-receita">
         <div class="datas">
-            <select class="form-control" name="data" v-model="dataSelecionada" v-on:change="mostrarReceitas(dataSelecionada)">
+            <div class="d-print-block" style="display:none">
+                Referente à {{this.retornaNomeMes(dataSelecionada.split('-')[1])+' '+dataSelecionada.split('-')[0]}}
+            </div>
+            <select class="form-control d-print-none" name="data" v-model="dataSelecionada" v-on:change="mostrarReceitas(dataSelecionada)">
                 <option v-bind:key="data.data" v-bind:value="data.data" v-for="data in datasFormatadas">{{data.descricao}}</option>
             </select>
+            <button class="btn btn-info d-print-none" onclick="window.print()">
+                <i class="fas fa-print"></i>
+            </button>
         </div>
         <table class="table" v-if="receitas.length">
             <thead class="thead-light">
@@ -14,8 +20,8 @@
                     <th scope="col">Categoria</th>
                     <th scope="col">Data</th>
                     <th scope="col">Status</th>
-                    <th scope="col" width="50px">Editar</th>
-                    <th scope="col" width="50px">Excluir</th>
+                    <th scope="col" width="50px" class="d-print-none">Editar</th>
+                    <th scope="col" width="50px" class="d-print-none">Excluir</th>
                 </tr>
             </thead>
             <tbody>
@@ -26,8 +32,8 @@
                     <td>{{i.categoria}}</td>
                     <td>{{formatDate(i.data)}}</td>
                     <td>{{i.status == 'pago' ? 'Recebido' : 'Não Recebido'}}</td>
-                    <td style="text-align: center;"> <a v-bind:href="'/'+model+'/'+i.id+'/edit'" class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i></a> </td>
-                    <td style="text-align: center;"> 
+                    <td style="text-align: center;" class="d-print-none"> <a v-bind:href="'/'+model+'/'+i.id+'/edit'" class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i></a> </td>
+                    <td style="text-align: center;" class="d-print-none"> 
                         <form v-bind:action="'/'+model+'/'+i.id" method="POST">
                             <slot name="method"></slot>
                             <button type="submit" class="btn btn-danger btn-sm"><i class="far fa-trash-alt"></i></button>
@@ -156,16 +162,27 @@
     }
 </script>
 <style lang="scss">
-   .componente-listagem-tabela{
+   .componente-listagem-receita{
         position: relative;
 
         .datas{
+            position: absolute;
+            right: 50px;
             width: 200px;
-            float: right;
             margin-bottom: 30px;
             margin-top: -70px;
 
+            display: grid;
+            grid-template-columns: auto auto;
+
+            button{
+                margin-left: 10px;
+                color: white;
+            }
+
             select{
+                width: 200px;
+                
                 border-top: none;
                 border-left: none;
                 border-right: none;
