@@ -14,12 +14,12 @@
         <table class="table" v-if="despesas.length">
             <thead class="thead-light">
                 <tr>
-                    <th scope="col">Valor</th>
-                    <th scope="col">Descrição</th>
-                    <th scope="col">Conta</th>
-                    <th scope="col">Categoria</th>
-                    <th scope="col">Data</th>
-                    <th scope="col">Status</th>
+                    <th scope="col" v-on:click="ordenar('valor')"> Valor <i v-if="ordenacaoSelecionada == 'valor'" class="fas fa-sort-down"></i></th>
+                    <th scope="col" v-on:click="ordenar('descricao')"> Descrição <i v-if="ordenacaoSelecionada == 'descricao'" class="fas fa-sort-down"></i></th>
+                    <th scope="col" v-on:click="ordenar('conta')"> Conta <i v-if="ordenacaoSelecionada == 'conta'" class="fas fa-sort-down"></i></th>
+                    <th scope="col" v-on:click="ordenar('categoria')"> Categoria <i v-if="ordenacaoSelecionada == 'categoria'" class="fas fa-sort-down"></i></th>
+                    <th scope="col" v-on:click="ordenar('data')"> Data <i v-if="ordenacaoSelecionada == 'data'" class="fas fa-sort-down"></i></th>
+                    <th scope="col" v-on:click="ordenar('status')"> Status <i v-if="ordenacaoSelecionada == 'status'" class="fas fa-sort-down"></i></th>
                     <th scope="col" width="50px" class="d-print-none">Editar</th>
                     <th scope="col" width="50px" class="d-print-none">Excluir</th>
                 </tr>
@@ -69,7 +69,8 @@
                 datasFormatadas: [],
                 visible: false,
                 item: '',
-                dataSelecionada: ''
+                dataSelecionada: '',
+                ordenacaoSelecionada: 'data'
             }
         },
         methods: {
@@ -90,6 +91,12 @@
                     
                     if(data == mesSelecionado) return despesa;
                 })
+            },
+            ordenar(ordem){
+                this.ordenacaoSelecionada = ordem;
+                this.despesas.sort(function(a, b) {
+                    return a[ordem].toString().localeCompare(b[ordem].toString())
+                });
             },
             retornaNomeMes(mesNumero){
                 let mes = '';
@@ -158,6 +165,7 @@
             this.dataSelecionada = mesAtual;
 
             this.mostrarDespesas(mesAtual);
+            this.ordenar('data');
         }
     }
 </script>

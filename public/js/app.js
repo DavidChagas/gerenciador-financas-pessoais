@@ -3030,7 +3030,8 @@ __webpack_require__.r(__webpack_exports__);
       datasFormatadas: [],
       visible: false,
       item: '',
-      dataSelecionada: ''
+      dataSelecionada: '',
+      ordenacaoSelecionada: 'data'
     };
   },
   methods: {
@@ -3049,6 +3050,12 @@ __webpack_require__.r(__webpack_exports__);
         dataArray.pop();
         var data = dataArray.join('-');
         if (data == mesSelecionado) return despesa;
+      });
+    },
+    ordenar: function ordenar(ordem) {
+      this.ordenacaoSelecionada = ordem;
+      this.despesas.sort(function (a, b) {
+        return a[ordem].toString().localeCompare(b[ordem].toString());
       });
     },
     retornaNomeMes: function retornaNomeMes(mesNumero) {
@@ -3130,6 +3137,7 @@ __webpack_require__.r(__webpack_exports__);
     });
     this.dataSelecionada = mesAtual;
     this.mostrarDespesas(mesAtual);
+    this.ordenar('data');
   }
 });
 
@@ -3426,7 +3434,8 @@ __webpack_require__.r(__webpack_exports__);
       datasFormatadas: [],
       visible: false,
       item: '',
-      dataSelecionada: ''
+      dataSelecionada: '',
+      ordenacaoSelecionada: 'data'
     };
   },
   methods: {
@@ -3445,6 +3454,12 @@ __webpack_require__.r(__webpack_exports__);
         dataArray.pop();
         var data = dataArray.join('-');
         if (data == mesSelecionado) return receita;
+      });
+    },
+    ordenar: function ordenar(ordem) {
+      this.ordenacaoSelecionada = ordem;
+      this.receitas.sort(function (a, b) {
+        return a[ordem].toString().localeCompare(b[ordem].toString());
       });
     },
     retornaNomeMes: function retornaNomeMes(mesNumero) {
@@ -3526,6 +3541,7 @@ __webpack_require__.r(__webpack_exports__);
     });
     this.dataSelecionada = mesAtual;
     this.mostrarReceitas(mesAtual);
+    this.ordenar('data');
   }
 });
 
@@ -64797,7 +64813,135 @@ var render = function() {
       _vm._v(" "),
       _vm.despesas.length
         ? _c("table", { staticClass: "table" }, [
-            _vm._m(1),
+            _c("thead", { staticClass: "thead-light" }, [
+              _c("tr", [
+                _c(
+                  "th",
+                  {
+                    attrs: { scope: "col" },
+                    on: {
+                      click: function($event) {
+                        return _vm.ordenar("valor")
+                      }
+                    }
+                  },
+                  [
+                    _vm._v(" Valor "),
+                    _vm.ordenacaoSelecionada == "valor"
+                      ? _c("i", { staticClass: "fas fa-sort-down" })
+                      : _vm._e()
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "th",
+                  {
+                    attrs: { scope: "col" },
+                    on: {
+                      click: function($event) {
+                        return _vm.ordenar("descricao")
+                      }
+                    }
+                  },
+                  [
+                    _vm._v(" Descrição "),
+                    _vm.ordenacaoSelecionada == "descricao"
+                      ? _c("i", { staticClass: "fas fa-sort-down" })
+                      : _vm._e()
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "th",
+                  {
+                    attrs: { scope: "col" },
+                    on: {
+                      click: function($event) {
+                        return _vm.ordenar("conta")
+                      }
+                    }
+                  },
+                  [
+                    _vm._v(" Conta "),
+                    _vm.ordenacaoSelecionada == "conta"
+                      ? _c("i", { staticClass: "fas fa-sort-down" })
+                      : _vm._e()
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "th",
+                  {
+                    attrs: { scope: "col" },
+                    on: {
+                      click: function($event) {
+                        return _vm.ordenar("categoria")
+                      }
+                    }
+                  },
+                  [
+                    _vm._v(" Categoria "),
+                    _vm.ordenacaoSelecionada == "categoria"
+                      ? _c("i", { staticClass: "fas fa-sort-down" })
+                      : _vm._e()
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "th",
+                  {
+                    attrs: { scope: "col" },
+                    on: {
+                      click: function($event) {
+                        return _vm.ordenar("data")
+                      }
+                    }
+                  },
+                  [
+                    _vm._v(" Data "),
+                    _vm.ordenacaoSelecionada == "data"
+                      ? _c("i", { staticClass: "fas fa-sort-down" })
+                      : _vm._e()
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "th",
+                  {
+                    attrs: { scope: "col" },
+                    on: {
+                      click: function($event) {
+                        return _vm.ordenar("status")
+                      }
+                    }
+                  },
+                  [
+                    _vm._v(" Status "),
+                    _vm.ordenacaoSelecionada == "status"
+                      ? _c("i", { staticClass: "fas fa-sort-down" })
+                      : _vm._e()
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "th",
+                  {
+                    staticClass: "d-print-none",
+                    attrs: { scope: "col", width: "50px" }
+                  },
+                  [_vm._v("Editar")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "th",
+                  {
+                    staticClass: "d-print-none",
+                    attrs: { scope: "col", width: "50px" }
+                  },
+                  [_vm._v("Excluir")]
+                )
+              ])
+            ]),
             _vm._v(" "),
             _c(
               "tbody",
@@ -64852,7 +64996,7 @@ var render = function() {
                             method: "POST"
                           }
                         },
-                        [_vm._t("method"), _vm._v(" "), _vm._m(2, true)],
+                        [_vm._t("method"), _vm._v(" "), _vm._m(1, true)],
                         2
                       )
                     ]
@@ -64884,44 +65028,6 @@ var staticRenderFns = [
       },
       [_c("i", { staticClass: "fas fa-print" })]
     )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", { staticClass: "thead-light" }, [
-      _c("tr", [
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Valor")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Descrição")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Conta")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Categoria")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Data")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Status")]),
-        _vm._v(" "),
-        _c(
-          "th",
-          {
-            staticClass: "d-print-none",
-            attrs: { scope: "col", width: "50px" }
-          },
-          [_vm._v("Editar")]
-        ),
-        _vm._v(" "),
-        _c(
-          "th",
-          {
-            staticClass: "d-print-none",
-            attrs: { scope: "col", width: "50px" }
-          },
-          [_vm._v("Excluir")]
-        )
-      ])
-    ])
   },
   function() {
     var _vm = this
@@ -65428,7 +65534,135 @@ var render = function() {
       _vm._v(" "),
       _vm.receitas.length
         ? _c("table", { staticClass: "table" }, [
-            _vm._m(1),
+            _c("thead", { staticClass: "thead-light" }, [
+              _c("tr", [
+                _c(
+                  "th",
+                  {
+                    attrs: { scope: "col" },
+                    on: {
+                      click: function($event) {
+                        return _vm.ordenar("valor")
+                      }
+                    }
+                  },
+                  [
+                    _vm._v(" Valor "),
+                    _vm.ordenacaoSelecionada == "valor"
+                      ? _c("i", { staticClass: "fas fa-sort-down" })
+                      : _vm._e()
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "th",
+                  {
+                    attrs: { scope: "col" },
+                    on: {
+                      click: function($event) {
+                        return _vm.ordenar("descricao")
+                      }
+                    }
+                  },
+                  [
+                    _vm._v(" Descrição "),
+                    _vm.ordenacaoSelecionada == "descricao"
+                      ? _c("i", { staticClass: "fas fa-sort-down" })
+                      : _vm._e()
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "th",
+                  {
+                    attrs: { scope: "col" },
+                    on: {
+                      click: function($event) {
+                        return _vm.ordenar("conta")
+                      }
+                    }
+                  },
+                  [
+                    _vm._v(" Conta "),
+                    _vm.ordenacaoSelecionada == "conta"
+                      ? _c("i", { staticClass: "fas fa-sort-down" })
+                      : _vm._e()
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "th",
+                  {
+                    attrs: { scope: "col" },
+                    on: {
+                      click: function($event) {
+                        return _vm.ordenar("categoria")
+                      }
+                    }
+                  },
+                  [
+                    _vm._v(" Categoria "),
+                    _vm.ordenacaoSelecionada == "categoria"
+                      ? _c("i", { staticClass: "fas fa-sort-down" })
+                      : _vm._e()
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "th",
+                  {
+                    attrs: { scope: "col" },
+                    on: {
+                      click: function($event) {
+                        return _vm.ordenar("data")
+                      }
+                    }
+                  },
+                  [
+                    _vm._v(" Data "),
+                    _vm.ordenacaoSelecionada == "data"
+                      ? _c("i", { staticClass: "fas fa-sort-down" })
+                      : _vm._e()
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "th",
+                  {
+                    attrs: { scope: "col" },
+                    on: {
+                      click: function($event) {
+                        return _vm.ordenar("status")
+                      }
+                    }
+                  },
+                  [
+                    _vm._v(" Status "),
+                    _vm.ordenacaoSelecionada == "status"
+                      ? _c("i", { staticClass: "fas fa-sort-down" })
+                      : _vm._e()
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "th",
+                  {
+                    staticClass: "d-print-none",
+                    attrs: { scope: "col", width: "50px" }
+                  },
+                  [_vm._v("Editar")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "th",
+                  {
+                    staticClass: "d-print-none",
+                    attrs: { scope: "col", width: "50px" }
+                  },
+                  [_vm._v("Excluir")]
+                )
+              ])
+            ]),
             _vm._v(" "),
             _c(
               "tbody",
@@ -65485,7 +65719,7 @@ var render = function() {
                             method: "POST"
                           }
                         },
-                        [_vm._t("method"), _vm._v(" "), _vm._m(2, true)],
+                        [_vm._t("method"), _vm._v(" "), _vm._m(1, true)],
                         2
                       )
                     ]
@@ -65517,44 +65751,6 @@ var staticRenderFns = [
       },
       [_c("i", { staticClass: "fas fa-print" })]
     )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", { staticClass: "thead-light" }, [
-      _c("tr", [
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Valor")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Descrição")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Conta")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Categoria")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Data")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Status")]),
-        _vm._v(" "),
-        _c(
-          "th",
-          {
-            staticClass: "d-print-none",
-            attrs: { scope: "col", width: "50px" }
-          },
-          [_vm._v("Editar")]
-        ),
-        _vm._v(" "),
-        _c(
-          "th",
-          {
-            staticClass: "d-print-none",
-            attrs: { scope: "col", width: "50px" }
-          },
-          [_vm._v("Excluir")]
-        )
-      ])
-    ])
   },
   function() {
     var _vm = this
