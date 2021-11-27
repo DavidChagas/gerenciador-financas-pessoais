@@ -81,12 +81,14 @@
 
         .filtro{
             position: absolute;
-            top: -65px;
+            top: -67px;
             right: 0;
-            width: 200px;
+            width: 130px;
 
-            @media(max-width: 767px){
-                margin-top: 20px;
+            @media(min-width: 768px){
+                top: -65px;
+                margin-top: 0px;
+                width: 200px;
             }
 
             select{

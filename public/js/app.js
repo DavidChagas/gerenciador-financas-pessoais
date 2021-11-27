@@ -8323,7 +8323,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".componente-listagem-tabela {\n  position: relative;\n}\n.componente-listagem-tabela .filtro {\n  position: absolute;\n  top: -65px;\n  right: 0;\n  width: 200px;\n}\n@media (max-width: 767px) {\n.componente-listagem-tabela .filtro {\n    margin-top: 20px;\n}\n}\n.componente-listagem-tabela .filtro select {\n  border-top: none;\n  border-left: none;\n  border-right: none;\n  border-radius: 0px;\n}\n.componente-listagem-tabela .filtro select:focus {\n  border-color: transparent;\n  outline: none;\n  box-shadow: none;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".componente-listagem-tabela {\n  position: relative;\n}\n.componente-listagem-tabela .filtro {\n  position: absolute;\n  top: -67px;\n  right: 0;\n  width: 130px;\n}\n@media (min-width: 768px) {\n.componente-listagem-tabela .filtro {\n    top: -65px;\n    margin-top: 0px;\n    width: 200px;\n}\n}\n.componente-listagem-tabela .filtro select {\n  border-top: none;\n  border-left: none;\n  border-right: none;\n  border-radius: 0px;\n}\n.componente-listagem-tabela .filtro select:focus {\n  border-color: transparent;\n  outline: none;\n  box-shadow: none;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -8419,7 +8419,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".componente-listagem-receita {\n  position: relative;\n}\n.componente-listagem-receita .datas {\n  position: absolute;\n  right: 50px;\n  width: 200px;\n  margin-bottom: 30px;\n  margin-top: -70px;\n  display: grid;\n  grid-template-columns: auto auto;\n}\n.componente-listagem-receita .datas button {\n  margin-left: 10px;\n  color: white;\n}\n.componente-listagem-receita .datas select {\n  width: 200px;\n  border-top: none;\n  border-left: none;\n  border-right: none;\n  border-radius: 0px;\n}\n.componente-listagem-receita .datas select:focus {\n  border-color: transparent;\n  outline: none;\n  box-shadow: none;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".componente-listagem-receita {\n  position: relative;\n}\n.componente-listagem-receita .datas {\n  position: absolute;\n  right: 50px;\n  width: 200px;\n  margin-bottom: 30px;\n  margin-top: -35px;\n  display: grid;\n  grid-template-columns: auto auto;\n}\n@media (min-width: 768px) {\n.componente-listagem-receita .datas {\n    margin-top: -70px;\n}\n}\n.componente-listagem-receita .datas button {\n  margin-left: 10px;\n  color: white;\n}\n.componente-listagem-receita .datas select {\n  width: 200px;\n  border-top: none;\n  border-left: none;\n  border-right: none;\n  border-radius: 0px;\n  height: 30px;\n  padding: 5px;\n}\n.componente-listagem-receita .datas select:focus {\n  border-color: transparent;\n  outline: none;\n  box-shadow: none;\n}\n@media (max-width: 767px) {\n.componente-listagem-receita td, .componente-listagem-receita th {\n    padding: 5px;\n    white-space: nowrap;\n}\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -65533,7 +65533,7 @@ var render = function() {
       ]),
       _vm._v(" "),
       _vm.receitas.length
-        ? _c("table", { staticClass: "table" }, [
+        ? _c("table", { staticClass: "table table-responsive" }, [
             _c("thead", { staticClass: "thead-light" }, [
               _c("tr", [
                 _c(
@@ -65648,6 +65648,7 @@ var render = function() {
                   "th",
                   {
                     staticClass: "d-print-none",
+                    staticStyle: { "text-align": "center" },
                     attrs: { scope: "col", width: "50px" }
                   },
                   [_vm._v("Editar")]
@@ -65657,6 +65658,7 @@ var render = function() {
                   "th",
                   {
                     staticClass: "d-print-none",
+                    staticStyle: { "text-align": "center" },
                     attrs: { scope: "col", width: "50px" }
                   },
                   [_vm._v("Excluir")]
@@ -65746,7 +65748,7 @@ var staticRenderFns = [
     return _c(
       "button",
       {
-        staticClass: "btn btn-info d-print-none",
+        staticClass: "btn btn-info btn-sm d-print-none",
         attrs: { onclick: "window.print()" }
       },
       [_c("i", { staticClass: "fas fa-print" })]
