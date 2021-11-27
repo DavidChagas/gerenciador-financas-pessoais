@@ -2833,22 +2833,51 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['infos', 'model'],
   data: function data() {
     return {
       list: [],
+      todasCategorias: [],
       visible: false,
-      item: ''
+      item: '',
+      filtroSelecionado: 'Todos'
     };
   },
   methods: {
     abrirModal: function abrirModal() {
       this.visible = true;
+    },
+    selecionarFiltro: function selecionarFiltro() {
+      switch (this.filtroSelecionado) {
+        case 'Todos':
+          this.list = this.todasCategorias;
+          break;
+
+        case 'Receitas':
+          this.list = this.todasCategorias.filter(function (categoria) {
+            return categoria.tipo == 'Receita';
+          });
+          break;
+
+        case 'Despesas':
+          this.list = this.todasCategorias.filter(function (categoria) {
+            return categoria.tipo == 'Despesa';
+          });
+          break;
+      }
     }
   },
   mounted: function mounted() {
     this.list = JSON.parse(this.infos);
+    this.todasCategorias = JSON.parse(this.infos);
   }
 });
 
@@ -8278,7 +8307,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".componente-listagem-tabela {\n  position: relative;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".componente-listagem-tabela {\n  position: relative;\n}\n.componente-listagem-tabela .filtro {\n  position: absolute;\n  top: -65px;\n  right: 0;\n  width: 200px;\n}\n@media (max-width: 767px) {\n.componente-listagem-tabela .filtro {\n    margin-top: 20px;\n}\n}\n.componente-listagem-tabela .filtro select {\n  border-top: none;\n  border-left: none;\n  border-right: none;\n  border-radius: 0px;\n}\n.componente-listagem-tabela .filtro select:focus {\n  border-color: transparent;\n  outline: none;\n  box-shadow: none;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -64450,6 +64479,52 @@ var render = function() {
     "div",
     { staticClass: "componente-listagem-tabela" },
     [
+      _c("div", { staticClass: "filtro" }, [
+        _c(
+          "select",
+          {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.filtroSelecionado,
+                expression: "filtroSelecionado"
+              }
+            ],
+            staticClass: "form-control",
+            on: {
+              change: [
+                function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.filtroSelecionado = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
+                },
+                function($event) {
+                  return _vm.selecionarFiltro(_vm.filtroSelecionado)
+                }
+              ]
+            }
+          },
+          [
+            _c("option", { attrs: { value: "Todos" } }, [_vm._v("Todos")]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "Receitas" } }, [
+              _vm._v("Receitas")
+            ]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "Despesas" } }, [_vm._v("Despesas")])
+          ]
+        )
+      ]),
+      _vm._v(" "),
       _c("table", { staticClass: "table" }, [
         _vm._m(0),
         _vm._v(" "),

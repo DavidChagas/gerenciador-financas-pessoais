@@ -1,5 +1,12 @@
 <template>
     <div class="componente-listagem-tabela">
+        <div class="filtro">
+            <select class="form-control" v-model="filtroSelecionado" v-on:change="selecionarFiltro(filtroSelecionado)">
+                <option value="Todos">Todos</option>
+                <option value="Receitas">Receitas</option>
+                <option value="Despesas">Despesas</option>
+            </select>
+        </div>
         <table class="table">
             <thead class="thead-light">
                 <tr>
@@ -38,22 +45,62 @@
         data(){
             return {
                 list: [],
+                todasCategorias: [],
                 visible: false,
-                item: ''
+                item: '',
+                filtroSelecionado: 'Todos'
             }
         },
         methods: {
             abrirModal() {
                 this.visible = true;
+            },
+            selecionarFiltro(){
+                switch(this.filtroSelecionado){
+                    case 'Todos':
+                        this.list = this.todasCategorias;
+                    break;
+                    case 'Receitas':
+                        this.list = this.todasCategorias.filter(categoria => categoria.tipo == 'Receita');
+                    break;
+                    case 'Despesas':
+                        this.list = this.todasCategorias.filter(categoria => categoria.tipo == 'Despesa');
+                    break;
+                }
             }
         },
         mounted(){
             this.list = JSON.parse(this.infos);
+            this.todasCategorias = JSON.parse(this.infos);
         }
     }
 </script>
 <style lang="scss">
-   .componente-listagem-tabela{
-    position: relative;
-   }
+    .componente-listagem-tabela{
+        position: relative;
+
+        .filtro{
+            position: absolute;
+            top: -65px;
+            right: 0;
+            width: 200px;
+
+            @media(max-width: 767px){
+                margin-top: 20px;
+            }
+
+            select{
+                border-top: none;
+                border-left: none;
+                border-right: none;
+                border-radius: 0px;
+
+                &:focus{
+                    border-color: transparent;
+                    outline: none;
+                    box-shadow: none;
+                }
+            }
+        }
+    }
 </style>
