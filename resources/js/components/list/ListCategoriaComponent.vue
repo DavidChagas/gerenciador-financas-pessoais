@@ -12,19 +12,19 @@
                 <tr>
                     <th scope="col">Descrição</th>
                     <th scope="col">Tipo</th>
-                    <th scope="col" width="100px"></th>
-                    <th scope="col" width="100px"></th>
+                    <th scope="col" width="50px" style="text-align: center;">Editar</th>
+                    <th scope="col" width="50px" style="text-align: center;">Excluir</th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="i in list" v-bind:key="i.id">
                     <td>{{i.descricao}}</td>
                     <td>{{i.tipo}}</td>
-                    <td> <a v-bind:href="'/'+model+'/'+i.id+'/edit'" class="btn btn-info btn-sm">Editar</a> </td>
-                    <td> 
+                    <td style="text-align: center;"> <a v-bind:href="'/'+model+'/'+i.id+'/edit'" class="btn btn-info btn-sm"><i class="fas fa-pencil-alt" style="color:white"></i></a> </td>
+                    <td style="text-align: center;"> 
                         <form v-bind:action="'/'+model+'/'+i.id" method="POST">
                             <slot name="method"></slot>
-                            <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
+                            <button type="submit" class="btn btn-danger btn-sm"><i class="far fa-trash-alt"></i></button>
                         </form>
                     </td>
                 </tr>

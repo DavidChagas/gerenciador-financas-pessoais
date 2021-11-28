@@ -8413,7 +8413,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".componente-listagem-objetivo {\n  position: relative;\n}\n.componente-listagem-objetivo .overlay {\n  display: none;\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 100vw;\n  height: 100vh;\n  background-color: rgba(0, 0, 0, 0.15);\n  z-index: 1;\n}\n.componente-listagem-objetivo .overlay.active {\n  display: block;\n}\n.componente-listagem-objetivo .lista-vazia {\n  margin: 20px 0;\n  padding: 50px 0;\n  text-align: center;\n  background-color: #eee;\n  border: 2px solid #ddd;\n  border-radius: 5px;\n  font-size: 20px;\n  color: #444;\n}\n.componente-listagem-objetivo .objetivos-grid {\n  display: grid;\n  grid-template-columns: repeat(3, 1fr);\n  grid-gap: 20px;\n}\n.componente-listagem-objetivo .objetivos-grid .objetivo {\n  position: relative;\n  padding: 20px 15px;\n  border-radius: 5px;\n  border: 1px solid #ddd;\n  transition: all 0.1s;\n}\n.componente-listagem-objetivo .objetivos-grid .objetivo:hover {\n  box-shadow: 0px 0px 5px #ddd;\n}\n.componente-listagem-objetivo .objetivos-grid .objetivo > .nome {\n  font-size: 18px;\n  font-weight: bold;\n  color: #444;\n  text-align: center;\n  line-height: 1;\n}\n.componente-listagem-objetivo .objetivos-grid .objetivo > .nome small {\n  font-size: 12px;\n}\n.componente-listagem-objetivo .objetivos-grid .objetivo .valores {\n  margin: 15px 0;\n  display: grid;\n  grid-template-columns: repeat(2, 1fr);\n}\n.componente-listagem-objetivo .objetivos-grid .objetivo .valores .valor {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  text-align: center;\n}\n.componente-listagem-objetivo .objetivos-grid .objetivo .progress {\n  position: relative;\n  height: 20px;\n  border: 1px solid #3490dc;\n}\n.componente-listagem-objetivo .objetivos-grid .objetivo .progress .progress-bar.concluido {\n  background-color: green;\n}\n.componente-listagem-objetivo .objetivos-grid .objetivo .progress .porcentagem {\n  position: absolute;\n  left: 50%;\n  top: 10px;\n  width: 200px;\n  margin-left: -100px;\n  font-weight: bold;\n}\n.componente-listagem-objetivo .objetivos-grid .objetivo .objetivo-concluido {\n  text-align: center;\n}\n.componente-listagem-objetivo .objetivos-grid .objetivo .objetivo-concluido .descricao {\n  margin: 10px 0 15px 0;\n  font-size: 16px;\n  line-height: 1;\n}\n.componente-listagem-objetivo .objetivos-grid .estimativa {\n  margin-top: 15px;\n  font-size: 12px;\n  line-height: 1;\n  text-align: center;\n}\n.componente-listagem-objetivo .objetivos-grid .botoes {\n  margin-top: 30px;\n  display: flex;\n  justify-content: space-between;\n}\n.componente-listagem-objetivo .objetivos-grid .botoes .editar {\n  display: flex;\n}\n.componente-listagem-objetivo .objetivos-grid .botoes .editar > form > button {\n  position: absolute;\n  top: 5px;\n  right: 5px;\n  background-color: transparent;\n  color: red;\n  border: none;\n  padding: 0;\n  font-size: 15px;\n  line-height: 0;\n}\n.componente-listagem-objetivo .objetivos-grid .botoes .editar > form > button:hover {\n  color: #a20000;\n}\n.componente-listagem-objetivo .objetivos-grid .botoes a {\n  position: absolute;\n  top: 5px;\n  right: 25px;\n  background-color: transparent;\n  color: #2e2ee4;\n  border: none;\n  padding: 0;\n  font-size: 15px;\n  line-height: 0;\n}\n.componente-listagem-objetivo .objetivos-grid .botoes a:hover {\n  color: #161666;\n}\n.componente-listagem-objetivo .modal-aporte {\n  position: absolute;\n  top: 0px;\n  left: 50%;\n  display: none;\n  width: 300px;\n  margin-left: -150px;\n  padding: 30px;\n  text-align: center;\n  background-color: white;\n  border: 1px solid #ddd;\n  border-radius: 5px;\n  box-shadow: 5px 4px 5px #ccc;\n}\n.componente-listagem-objetivo .modal-aporte.active {\n  display: block;\n  z-index: 2;\n}\n.componente-listagem-objetivo .modal-aporte form {\n  text-align: center;\n}\n.componente-listagem-objetivo .modal-detalhes {\n  position: absolute;\n  top: -65px;\n  left: 50%;\n  display: none;\n  width: 500px;\n  max-height: 400px;\n  margin-left: -250px;\n  padding: 30px;\n  background-color: white;\n  border: 1px solid #ddd;\n  border-radius: 5px;\n  box-shadow: 0px 0px 22px #a1a1a1;\n}\n.componente-listagem-objetivo .modal-detalhes.active {\n  display: block;\n  z-index: 2;\n}\n.componente-listagem-objetivo .modal-detalhes > button {\n  float: right;\n  padding: 0px 5px 3px;\n  line-height: 1;\n  font-weight: bold;\n}\n.componente-listagem-objetivo .modal-detalhes > .titulo {\n  font-size: 20px;\n  font-weight: bold;\n  color: #444;\n  text-align: center;\n  margin-bottom: 20px;\n}\n.componente-listagem-objetivo .modal-detalhes > .cabecalho {\n  display: grid;\n  grid-template-columns: 40% 40% 20%;\n  border-bottom: 2px solid #ddd;\n  font-weight: bold;\n}\n.componente-listagem-objetivo .modal-detalhes > .cabecalho > .item {\n  text-align: center;\n}\n.componente-listagem-objetivo .modal-detalhes > .aportes {\n  max-height: 280px;\n  overflow-y: auto;\n}\n.componente-listagem-objetivo .modal-detalhes > .aportes > .aporte {\n  padding: 5px 0;\n  display: grid;\n  grid-template-columns: 40% 40% 20%;\n}\n.componente-listagem-objetivo .modal-detalhes > .aportes > .aporte > .item {\n  text-align: center;\n  border-bottom: 1px solid #eee;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".componente-listagem-objetivo {\n  position: relative;\n}\n.componente-listagem-objetivo .overlay {\n  display: none;\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 100vw;\n  height: 100vh;\n  background-color: rgba(0, 0, 0, 0.15);\n  z-index: 1;\n}\n.componente-listagem-objetivo .overlay.active {\n  display: block;\n}\n.componente-listagem-objetivo .lista-vazia {\n  margin: 20px 0;\n  padding: 50px 0;\n  text-align: center;\n  background-color: #eee;\n  border: 2px solid #ddd;\n  border-radius: 5px;\n  font-size: 20px;\n  color: #444;\n}\n.componente-listagem-objetivo .objetivos-grid {\n  display: grid;\n  grid-template-columns: repeat(1, 1fr);\n  grid-gap: 20px;\n}\n@media (min-width: 768px) {\n.componente-listagem-objetivo .objetivos-grid {\n    grid-template-columns: repeat(3, 1fr);\n}\n}\n.componente-listagem-objetivo .objetivos-grid .objetivo {\n  position: relative;\n  padding: 20px 15px;\n  border-radius: 5px;\n  border: 1px solid #ddd;\n  transition: all 0.1s;\n}\n.componente-listagem-objetivo .objetivos-grid .objetivo:hover {\n  box-shadow: 0px 0px 5px #ddd;\n}\n@media (max-width: 767px) {\n.componente-listagem-objetivo .objetivos-grid .objetivo {\n    box-shadow: 0px 0px 5px #ddd;\n}\n}\n.componente-listagem-objetivo .objetivos-grid .objetivo > .nome {\n  font-size: 18px;\n  font-weight: bold;\n  color: #444;\n  text-align: center;\n  line-height: 1;\n}\n.componente-listagem-objetivo .objetivos-grid .objetivo > .nome small {\n  font-size: 12px;\n}\n.componente-listagem-objetivo .objetivos-grid .objetivo .valores {\n  margin: 15px 0;\n  display: grid;\n  grid-template-columns: repeat(2, 1fr);\n}\n.componente-listagem-objetivo .objetivos-grid .objetivo .valores .valor {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  text-align: center;\n}\n.componente-listagem-objetivo .objetivos-grid .objetivo .progress {\n  position: relative;\n  height: 20px;\n  border: 1px solid #3490dc;\n}\n.componente-listagem-objetivo .objetivos-grid .objetivo .progress .progress-bar.concluido {\n  background-color: green;\n}\n.componente-listagem-objetivo .objetivos-grid .objetivo .progress .porcentagem {\n  position: absolute;\n  left: 50%;\n  top: 10px;\n  width: 200px;\n  margin-left: -100px;\n  font-weight: bold;\n}\n.componente-listagem-objetivo .objetivos-grid .objetivo .objetivo-concluido {\n  text-align: center;\n}\n.componente-listagem-objetivo .objetivos-grid .objetivo .objetivo-concluido .descricao {\n  margin: 10px 0 15px 0;\n  font-size: 16px;\n  line-height: 1;\n}\n.componente-listagem-objetivo .objetivos-grid .estimativa {\n  margin-top: 15px;\n  font-size: 12px;\n  line-height: 1;\n  text-align: center;\n}\n.componente-listagem-objetivo .objetivos-grid .botoes {\n  margin-top: 30px;\n  display: flex;\n  justify-content: space-between;\n}\n.componente-listagem-objetivo .objetivos-grid .botoes .editar {\n  display: flex;\n}\n.componente-listagem-objetivo .objetivos-grid .botoes .editar > form > button {\n  position: absolute;\n  top: 5px;\n  right: 5px;\n  background-color: transparent;\n  color: red;\n  border: none;\n  padding: 0;\n  font-size: 15px;\n  line-height: 0;\n}\n.componente-listagem-objetivo .objetivos-grid .botoes .editar > form > button:hover {\n  color: #a20000;\n}\n.componente-listagem-objetivo .objetivos-grid .botoes a {\n  position: absolute;\n  top: 5px;\n  right: 25px;\n  background-color: transparent;\n  color: #2e2ee4;\n  border: none;\n  padding: 0;\n  font-size: 15px;\n  line-height: 0;\n}\n.componente-listagem-objetivo .objetivos-grid .botoes a:hover {\n  color: #161666;\n}\n.componente-listagem-objetivo .modal-aporte {\n  position: absolute;\n  top: 0px;\n  left: 50%;\n  display: none;\n  width: 300px;\n  margin-left: -150px;\n  padding: 15px;\n  text-align: center;\n  background-color: white;\n  border: 1px solid #ddd;\n  border-radius: 5px;\n  box-shadow: 5px 4px 5px #ccc;\n}\n@media (min-width: 768px) {\n.componente-listagem-objetivo .modal-aporte {\n    padding: 30px;\n}\n}\n.componente-listagem-objetivo .modal-aporte.active {\n  display: block;\n  z-index: 2;\n}\n.componente-listagem-objetivo .modal-aporte form {\n  text-align: center;\n}\n.componente-listagem-objetivo .modal-detalhes {\n  position: absolute;\n  top: -65px;\n  left: 50%;\n  display: none;\n  width: 300px;\n  max-height: 400px;\n  margin-left: -150px;\n  padding: 15px;\n  background-color: white;\n  border: 1px solid #ddd;\n  border-radius: 5px;\n  box-shadow: 0px 0px 22px #a1a1a1;\n}\n@media (min-width: 768px) {\n.componente-listagem-objetivo .modal-detalhes {\n    width: 500px;\n    margin-left: -250px;\n    padding: 30px;\n}\n}\n.componente-listagem-objetivo .modal-detalhes.active {\n  display: block;\n  z-index: 2;\n}\n.componente-listagem-objetivo .modal-detalhes > button {\n  float: right;\n  padding: 0px 5px 3px;\n  line-height: 1;\n  font-weight: bold;\n}\n.componente-listagem-objetivo .modal-detalhes > .titulo {\n  font-size: 20px;\n  font-weight: bold;\n  color: #444;\n  text-align: center;\n  margin-bottom: 20px;\n}\n.componente-listagem-objetivo .modal-detalhes > .cabecalho {\n  display: grid;\n  grid-template-columns: 40% 40% 20%;\n  border-bottom: 2px solid #ddd;\n  font-weight: bold;\n}\n.componente-listagem-objetivo .modal-detalhes > .cabecalho > .item {\n  text-align: center;\n}\n.componente-listagem-objetivo .modal-detalhes > .aportes {\n  max-height: 280px;\n  overflow-y: auto;\n}\n.componente-listagem-objetivo .modal-detalhes > .aportes > .aporte {\n  padding: 5px 0;\n  display: grid;\n  grid-template-columns: 40% 40% 20%;\n}\n.componente-listagem-objetivo .modal-detalhes > .aportes > .aporte > .item {\n  text-align: center;\n  border-bottom: 1px solid #eee;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -64570,18 +64570,23 @@ var render = function() {
               _vm._v(" "),
               _c("td", [_vm._v(_vm._s(i.tipo))]),
               _vm._v(" "),
-              _c("td", [
+              _c("td", { staticStyle: { "text-align": "center" } }, [
                 _c(
                   "a",
                   {
                     staticClass: "btn btn-info btn-sm",
                     attrs: { href: "/" + _vm.model + "/" + i.id + "/edit" }
                   },
-                  [_vm._v("Editar")]
+                  [
+                    _c("i", {
+                      staticClass: "fas fa-pencil-alt",
+                      staticStyle: { color: "white" }
+                    })
+                  ]
                 )
               ]),
               _vm._v(" "),
-              _c("td", [
+              _c("td", { staticStyle: { "text-align": "center" } }, [
                 _c(
                   "form",
                   {
@@ -64590,18 +64595,7 @@ var render = function() {
                       method: "POST"
                     }
                   },
-                  [
-                    _vm._t("method"),
-                    _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-danger btn-sm",
-                        attrs: { type: "submit" }
-                      },
-                      [_vm._v("Excluir")]
-                    )
-                  ],
+                  [_vm._t("method"), _vm._v(" "), _vm._m(1, true)],
                   2
                 )
               ])
@@ -64627,11 +64621,35 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Tipo")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col", width: "100px" } }),
+        _c(
+          "th",
+          {
+            staticStyle: { "text-align": "center" },
+            attrs: { scope: "col", width: "50px" }
+          },
+          [_vm._v("Editar")]
+        ),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col", width: "100px" } })
+        _c(
+          "th",
+          {
+            staticStyle: { "text-align": "center" },
+            attrs: { scope: "col", width: "50px" }
+          },
+          [_vm._v("Excluir")]
+        )
       ])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      { staticClass: "btn btn-danger btn-sm", attrs: { type: "submit" } },
+      [_c("i", { staticClass: "far fa-trash-alt" })]
+    )
   }
 ]
 render._withStripped = true
@@ -64672,18 +64690,18 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(_vm.formatPrice(i.valor)))]),
                   _vm._v(" "),
-                  _c("td", [
+                  _c("td", { staticStyle: { "text-align": "center" } }, [
                     _c(
                       "a",
                       {
                         staticClass: "btn btn-info btn-sm",
                         attrs: { href: "/" + _vm.model + "/" + i.id + "/edit" }
                       },
-                      [_vm._v("Editar")]
+                      [_c("i", { staticClass: "fas fa-pencil-alt" })]
                     )
                   ]),
                   _vm._v(" "),
-                  _c("td", [
+                  _c("td", { staticStyle: { "text-align": "center" } }, [
                     _c(
                       "form",
                       {
@@ -64692,18 +64710,7 @@ var render = function() {
                           method: "POST"
                         }
                       },
-                      [
-                        _vm._t("method"),
-                        _vm._v(" "),
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-danger btn-sm",
-                            attrs: { type: "submit" }
-                          },
-                          [_vm._v("Excluir")]
-                        )
-                      ],
+                      [_vm._t("method"), _vm._v(" "), _vm._m(1, true)],
                       2
                     )
                   ])
@@ -64732,11 +64739,35 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Valor")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col", width: "100px" } }),
+        _c(
+          "th",
+          {
+            staticStyle: { "text-align": "center" },
+            attrs: { scope: "col", width: "50px" }
+          },
+          [_vm._v("Editar")]
+        ),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col", width: "100px" } })
+        _c(
+          "th",
+          {
+            staticStyle: { "text-align": "center" },
+            attrs: { scope: "col", width: "50px" }
+          },
+          [_vm._v("Excluir")]
+        )
       ])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      { staticClass: "btn btn-danger btn-sm", attrs: { type: "submit" } },
+      [_c("i", { staticClass: "far fa-trash-alt" })]
+    )
   }
 ]
 render._withStripped = true
@@ -65238,7 +65269,7 @@ var render = function() {
                   _c(
                     "buttom",
                     {
-                      staticClass: "btn btn-info btn-sm",
+                      staticClass: "btn btn-outline-info btn-sm",
                       staticStyle: { "margin-left": "10px" },
                       on: {
                         click: function($event) {
@@ -65468,7 +65499,11 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "button",
-      { staticClass: "btn btn-danger btn-sm", attrs: { type: "submit" } },
+      {
+        staticClass: "btn btn-outline-danger btn-sm",
+        staticStyle: { "margin-top": "-7px", padding: "1px 5px" },
+        attrs: { type: "submit" }
+      },
       [_c("i", { staticClass: "far fa-trash-alt" })]
     )
   }

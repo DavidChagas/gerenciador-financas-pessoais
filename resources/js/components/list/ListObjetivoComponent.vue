@@ -53,7 +53,7 @@
                             <button type="submit" class="btn btn-danger btn-sm"><i class="far fa-trash-alt"></i></button>
                         </form>
                         <a v-bind:href="'/'+model+'/'+i.id+'/edit'" class="btn btn-info btn-sm"><i class="far fa-edit"></i></a>
-                        <buttom class="btn btn-info btn-sm" style="margin-left: 10px" v-on:click="verDetalhesObjetivo(i.id)">Ver Detalhes</buttom>
+                        <buttom class="btn btn-outline-info btn-sm" style="margin-left: 10px" v-on:click="verDetalhesObjetivo(i.id)">Ver Detalhes</buttom>
                     </div>
                     <div>
                         <buttom class="btn btn-success btn-sm" v-on:click="abrirModalCadastro(i.id, i.maxAporte)" v-if="!i.concluido && !i.fail">Adicionar Aporte</buttom>
@@ -100,7 +100,7 @@
                     <div class="item">
                         <form v-bind:action="'/objetivoAportes/'+aporte.id" method="POST">
                             <slot name="method"></slot>
-                            <button type="submit" class="btn btn-danger btn-sm"><i class="far fa-trash-alt"></i></button>
+                            <button type="submit" class="btn btn-outline-danger btn-sm" style="margin-top: -7px; padding: 1px 5px;"><i class="far fa-trash-alt"></i></button>
                         </form>
                     </div>
                 </div>
@@ -232,8 +232,12 @@
 
         .objetivos-grid{
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(1, 1fr);
             grid-gap: 20px;
+
+            @media(min-width: 768px){
+                grid-template-columns: repeat(3, 1fr);
+            }
 
             .objetivo{
                 position: relative;
@@ -244,6 +248,10 @@
                 transition: all .1s;
 
                 &:hover{
+                    box-shadow: 0px 0px 5px #ddd;
+                }
+
+                @media(max-width: 767px){
                     box-shadow: 0px 0px 5px #ddd;
                 }
 
@@ -367,7 +375,7 @@
 
             width: 300px;
             margin-left: -150px;
-            padding: 30px;
+            padding: 15px;
 
             text-align: center;
 
@@ -375,6 +383,10 @@
             border: 1px solid #ddd;
             border-radius: 5px;
             box-shadow: 5px 4px 5px #ccc;
+
+            @media(min-width: 768px){
+                padding: 30px;
+            }
 
             &.active{
                 display: block;
@@ -393,15 +405,21 @@
 
             display: none;
 
-            width: 500px;
+            width: 300px;
             max-height: 400px;
-            margin-left: -250px;
-            padding: 30px;
+            margin-left: -150px;
+            padding: 15px;
 
             background-color: white;
             border: 1px solid #ddd;
             border-radius: 5px;
             box-shadow: 0px 0px 22px #a1a1a1;
+
+            @media(min-width: 768px){
+                width: 500px;
+                margin-left: -250px;
+                padding: 30px;
+            }
 
             &.active{
                 display: block;
