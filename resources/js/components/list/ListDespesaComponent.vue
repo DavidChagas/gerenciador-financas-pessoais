@@ -7,11 +7,11 @@
             <select class="form-control d-print-none" name="data" v-model="dataSelecionada" v-on:change="mostrarDespesas(dataSelecionada)">
                 <option v-bind:key="data.data" v-bind:value="data.data" v-for="data in datasFormatadas">{{data.descricao}}</option>
             </select>
-            <button class="btn btn-info d-print-none" onclick="window.print()">
+            <button class="btn btn-info btn-sm d-print-none" onclick="window.print()">
                 <i class="fas fa-print"></i>
             </button>
         </div>
-        <table class="table" v-if="despesas.length">
+        <table v-bind:class="dispositivo == 'desktop' ? 'table' : 'table table-responsive'" v-if="despesas.length">
             <thead class="thead-light">
                 <tr>
                     <th scope="col" v-on:click="ordenar('valor')"> Valor <i v-if="ordenacaoSelecionada == 'valor'" class="fas fa-sort-down"></i></th>
@@ -20,8 +20,8 @@
                     <th scope="col" v-on:click="ordenar('categoria')"> Categoria <i v-if="ordenacaoSelecionada == 'categoria'" class="fas fa-sort-down"></i></th>
                     <th scope="col" v-on:click="ordenar('data')"> Data <i v-if="ordenacaoSelecionada == 'data'" class="fas fa-sort-down"></i></th>
                     <th scope="col" v-on:click="ordenar('status')"> Status <i v-if="ordenacaoSelecionada == 'status'" class="fas fa-sort-down"></i></th>
-                    <th scope="col" width="50px" class="d-print-none">Editar</th>
-                    <th scope="col" width="50px" class="d-print-none">Excluir</th>
+                    <th scope="col" width="50px" style="text-align: center;" class="d-print-none">Editar</th>
+                    <th scope="col" width="50px" style="text-align: center;" class="d-print-none">Excluir</th>
                 </tr>
             </thead>
             <tbody>
@@ -70,7 +70,8 @@
                 visible: false,
                 item: '',
                 dataSelecionada: '',
-                ordenacaoSelecionada: 'data'
+                ordenacaoSelecionada: 'data',
+                dispositivo: 'desktop'
             }
         },
         methods: {
@@ -97,6 +98,13 @@
                 this.despesas.sort(function(a, b) {
                     return a[ordem].toString().localeCompare(b[ordem].toString())
                 });
+            },
+            verificarDispositivo(){
+                if (screen.width < 640 || screen.height < 480) {
+                    this.dispositivo = 'mobile';
+                }else{
+                    this.dispositivo = 'desktop';
+                }
             },
             retornaNomeMes(mesNumero){
                 let mes = '';
@@ -166,6 +174,7 @@
 
             this.mostrarDespesas(mesAtual);
             this.ordenar('data');
+            this.verificarDispositivo();
         }
     }
 </script>
@@ -178,10 +187,14 @@
             right: 50px;
             width: 200px;
             margin-bottom: 30px;
-            margin-top: -70px;
+            margin-top: -35px;
 
             display: grid;
             grid-template-columns: auto auto;
+
+            @media(min-width: 768px){
+                margin-top: -70px;
+            }
 
             button{
                 margin-left: 10px;
@@ -196,6 +209,9 @@
                 border-right: none;
                 border-radius: 0px;
 
+                height: 30px;
+                padding: 5px;
+
                 &:focus{
                     border-color: transparent;
                     outline: none;
@@ -204,4 +220,11 @@
             }
         }
    }
+
+   @media(max-width: 767px){
+        td, th{
+            padding: 5px 10px;
+            white-space: nowrap
+        }
+    } 
 </style>
