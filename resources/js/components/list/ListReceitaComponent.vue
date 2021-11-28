@@ -11,7 +11,7 @@
                 <i class="fas fa-print"></i>
             </button>
         </div>
-        <table class="table table-responsive" v-if="receitas.length">
+        <table v-bind:class="dispositivo == 'desktop' ? 'table' : 'table table-responsive'" v-if="receitas.length">
             <thead class="thead-light">
                 <tr>
                     <th scope="col" v-on:click="ordenar('valor')"> Valor <i v-if="ordenacaoSelecionada == 'valor'" class="fas fa-sort-down"></i></th>
@@ -70,7 +70,8 @@
                 visible: false,
                 item: '',
                 dataSelecionada: '',
-                ordenacaoSelecionada: 'data'
+                ordenacaoSelecionada: 'data',
+                dispositivo: 'desktop'
             }
         },
         methods: {
@@ -97,6 +98,13 @@
                 this.receitas.sort(function(a, b) {
                     return a[ordem].toString().localeCompare(b[ordem].toString())
                 });
+            },
+            verificarDispositivo(){
+                if (screen.width < 640 || screen.height < 480) {
+                    this.dispositivo = 'mobile';
+                }else{
+                    this.dispositivo = 'desktop';
+                }
             },
             retornaNomeMes(mesNumero){
                 let mes = '';
@@ -166,6 +174,7 @@
 
             this.mostrarReceitas(mesAtual);
             this.ordenar('data');
+            this.verificarDispositivo();
         }
     }
 </script>
@@ -213,7 +222,7 @@
 
         @media(max-width: 767px){
             td, th{
-                padding: 5px;
+                padding: 5px 10px;
                 white-space: nowrap
             }
         } 
