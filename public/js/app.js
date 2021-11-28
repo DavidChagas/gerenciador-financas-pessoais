@@ -2504,15 +2504,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['action', 'method', 'token', 'despesa', 'contas', 'categoriasDespesa'],
@@ -2631,15 +2622,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _funcoes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../funcoes */ "./resources/js/funcoes.js");
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -63591,7 +63573,7 @@ var render = function() {
         }),
         _vm._v(" "),
         _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-sm-5" }, [
+          _c("div", { staticClass: "col-sm-4" }, [
             _c("div", { staticClass: "form-group" }, [
               _c("label", [_vm._v("Valor")]),
               _vm._v(" "),
@@ -63620,7 +63602,7 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col-sm-5" }, [
+          _c("div", { staticClass: "col-sm-4" }, [
             _c("div", { staticClass: "form-group" }, [
               _c("label", [_vm._v("Descrição")]),
               _vm._v(" "),
@@ -63648,7 +63630,7 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col-sm-2" }, [
+          _c("div", { staticClass: "col-sm-4" }, [
             _c("div", { staticClass: "form-group" }, [
               _c("label", [_vm._v("Status")]),
               _vm._v(" "),
@@ -63696,7 +63678,7 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col-sm-6" }, [
+          _c("div", { staticClass: "col-sm-4" }, [
             _c("div", { staticClass: "form-group" }, [
               _c("label", [_vm._v("Data")]),
               _vm._v(" "),
@@ -63724,53 +63706,7 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col-sm-6" }, [
-            _c("div", { staticClass: "form-group" }, [
-              _c("label", [_vm._v("Despesa Fixa?")]),
-              _vm._v(" "),
-              _c(
-                "select",
-                {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.despesaObj.despesa_fixa,
-                      expression: "despesaObj.despesa_fixa"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { name: "fixa", required: "" },
-                  on: {
-                    change: function($event) {
-                      var $$selectedVal = Array.prototype.filter
-                        .call($event.target.options, function(o) {
-                          return o.selected
-                        })
-                        .map(function(o) {
-                          var val = "_value" in o ? o._value : o.value
-                          return val
-                        })
-                      _vm.$set(
-                        _vm.despesaObj,
-                        "despesa_fixa",
-                        $event.target.multiple
-                          ? $$selectedVal
-                          : $$selectedVal[0]
-                      )
-                    }
-                  }
-                },
-                [
-                  _c("option", { attrs: { value: "sim" } }, [_vm._v("Sim")]),
-                  _vm._v(" "),
-                  _c("option", { attrs: { value: "nao" } }, [_vm._v("Não")])
-                ]
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-sm-6" }, [
+          _c("div", { staticClass: "col-sm-4" }, [
             _c("div", { staticClass: "form-group" }, [
               _c("label", [_vm._v("Conta")]),
               _vm._v(" "),
@@ -63792,7 +63728,7 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col-sm-6" }, [
+          _c("div", { staticClass: "col-sm-4" }, [
             _c("div", { staticClass: "form-group" }, [
               _c("label", [_vm._v("Categorias")]),
               _vm._v(" "),
@@ -64114,7 +64050,7 @@ var render = function() {
         }),
         _vm._v(" "),
         _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-sm-5" }, [
+          _c("div", { staticClass: "col-sm-4" }, [
             _c("div", { staticClass: "form-group" }, [
               _c("label", [_vm._v("Valor")]),
               _vm._v(" "),
@@ -64143,7 +64079,7 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col-sm-5" }, [
+          _c("div", { staticClass: "col-sm-4" }, [
             _c("div", { staticClass: "form-group" }, [
               _c("label", [_vm._v("Descrição")]),
               _vm._v(" "),
@@ -64171,7 +64107,7 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col-sm-2" }, [
+          _c("div", { staticClass: "col-sm-4" }, [
             _c("div", { staticClass: "form-group" }, [
               _c("label", [_vm._v("Status")]),
               _vm._v(" "),
@@ -64219,7 +64155,51 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col-sm-6" }, [
+          _c("div", { staticClass: "col-sm-4" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", [_vm._v("Conta")]),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  staticClass: "form-control",
+                  attrs: { name: "conta", required: "" }
+                },
+                _vm._l(_vm.contasObj, function(conta) {
+                  return _c(
+                    "option",
+                    { key: conta.id, domProps: { value: conta.id } },
+                    [_vm._v(_vm._s(conta.descricao))]
+                  )
+                }),
+                0
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-4" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", [_vm._v("Categorias")]),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  staticClass: "form-control",
+                  attrs: { name: "categoria", required: "" }
+                },
+                _vm._l(_vm.categoriasObj, function(categoria) {
+                  return _c(
+                    "option",
+                    { key: categoria.id, domProps: { value: categoria.id } },
+                    [_vm._v(_vm._s(categoria.descricao))]
+                  )
+                }),
+                0
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-4" }, [
             _c("div", { staticClass: "form-group" }, [
               _c("label", [_vm._v("Data")]),
               _vm._v(" "),
@@ -64244,96 +64224,6 @@ var render = function() {
                   }
                 }
               })
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-sm-6" }, [
-            _c("div", { staticClass: "form-group" }, [
-              _c("label", [_vm._v("Receita Fixa?")]),
-              _vm._v(" "),
-              _c(
-                "select",
-                {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.receitaObj.receita_fixa,
-                      expression: "receitaObj.receita_fixa"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { name: "fixa", required: "" },
-                  on: {
-                    change: function($event) {
-                      var $$selectedVal = Array.prototype.filter
-                        .call($event.target.options, function(o) {
-                          return o.selected
-                        })
-                        .map(function(o) {
-                          var val = "_value" in o ? o._value : o.value
-                          return val
-                        })
-                      _vm.$set(
-                        _vm.receitaObj,
-                        "receita_fixa",
-                        $event.target.multiple
-                          ? $$selectedVal
-                          : $$selectedVal[0]
-                      )
-                    }
-                  }
-                },
-                [
-                  _c("option", { attrs: { value: "sim" } }, [_vm._v("Sim")]),
-                  _vm._v(" "),
-                  _c("option", { attrs: { value: "nao" } }, [_vm._v("Não")])
-                ]
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-sm-6" }, [
-            _c("div", { staticClass: "form-group" }, [
-              _c("label", [_vm._v("Conta")]),
-              _vm._v(" "),
-              _c(
-                "select",
-                {
-                  staticClass: "form-control",
-                  attrs: { name: "conta", required: "" }
-                },
-                _vm._l(_vm.contasObj, function(conta) {
-                  return _c(
-                    "option",
-                    { key: conta.id, domProps: { value: conta.id } },
-                    [_vm._v(_vm._s(conta.descricao))]
-                  )
-                }),
-                0
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-sm-6" }, [
-            _c("div", { staticClass: "form-group" }, [
-              _c("label", [_vm._v("Categorias")]),
-              _vm._v(" "),
-              _c(
-                "select",
-                {
-                  staticClass: "form-control",
-                  attrs: { name: "categoria", required: "" }
-                },
-                _vm._l(_vm.categoriasObj, function(categoria) {
-                  return _c(
-                    "option",
-                    { key: categoria.id, domProps: { value: categoria.id } },
-                    [_vm._v(_vm._s(categoria.descricao))]
-                  )
-                }),
-                0
-              )
             ])
           ]),
           _vm._v(" "),

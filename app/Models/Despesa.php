@@ -8,7 +8,7 @@ class Despesa extends Model
 {
     public $timestamps = false;
 
-    protected $fillable = ['valor', 'status', 'data', 'descricao', 'despesa_fixa', 'observacao'];
+    protected $fillable = ['valor', 'status', 'data', 'descricao', 'observacao'];
 
     public function usuario(){
         return $this->belongsTo(usuario::class);

@@ -62,7 +62,6 @@ class ReceitaController extends Controller{
         $receita->descricao = $request->input('descricao');
         $receita->status = $request->input('status');
         $receita->data = $request->input('data');
-        $receita->receita_fixa = $request->input('fixa');
         $receita->observacao = $request->input('observacao');
         $receita->conta_id = $request->input('conta');
         $receita->categoria_id = $request->input('categoria');
@@ -105,7 +104,6 @@ class ReceitaController extends Controller{
         $receita->descricao = $request->input('descricao');
         $receita->status = $request->input('status');
         $receita->data = $request->input('data');
-        $receita->receita_fixa = $request->input('fixa');
         $receita->observacao = $request->input('observacao');
         $receita->conta_id = $request->input('conta');
         $receita->categoria_id = $request->input('categoria');

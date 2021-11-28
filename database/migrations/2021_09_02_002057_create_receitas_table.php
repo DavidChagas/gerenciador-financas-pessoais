@@ -13,7 +13,6 @@ class CreateReceitasTable extends Migration
             $table->text('status');
             $table->date('data');
             $table->text('descricao');
-            $table->text('receita_fixa');
             $table->text('observacao')->nullable();;
 
             $table->integer('usuario_id')->unsigned();

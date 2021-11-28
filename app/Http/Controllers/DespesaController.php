@@ -62,7 +62,6 @@ class DespesaController extends Controller
         $despesa->descricao = $request->input('descricao');
         $despesa->status = $request->input('status');
         $despesa->data = $request->input('data');
-        $despesa->despesa_fixa = $request->input('fixa');
         $despesa->observacao = $request->input('observacao');
         $despesa->conta_id = $request->input('conta');
         $despesa->categoria_id = $request->input('categoria');
@@ -105,7 +104,6 @@ class DespesaController extends Controller
         $despesa->descricao = $request->input('descricao');
         $despesa->status = $request->input('status');
         $despesa->data = $request->input('data');
-        $despesa->despesa_fixa = $request->input('fixa');
         $despesa->observacao = $request->input('observacao');
         $despesa->conta_id = $request->input('conta');
         $despesa->categoria_id = $request->input('categoria');

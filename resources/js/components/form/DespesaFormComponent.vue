@@ -8,19 +8,19 @@
             <input type="hidden" name="_token" v-model="token">
 
             <div class="row">
-                <div class="col-sm-5">
+                <div class="col-sm-4">
                     <div class="form-group">
                         <label>Valor</label>
                         <input class="form-control" type="text" name="valor" v-model="despesaObj.valor" @blur="formatarValor" required>
                     </div>
                 </div>
-                <div class="col-sm-5">
+                <div class="col-sm-4">
                     <div class="form-group">
                         <label>Descrição</label>
                         <input class="form-control" type="text" name="descricao" v-model="despesaObj.descricao" required>
                     </div>
                 </div>
-                <div class="col-sm-2">
+                <div class="col-sm-4">
                     <div class="form-group">
                         <label>Status</label>
                         <select class="form-control" name="status" v-model="despesaObj.status" required>
@@ -29,22 +29,13 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                     <div class="form-group">
                         <label>Data</label>
                         <input class="form-control" type="date" name="data" v-model="despesaObj.data" required>
                     </div>
                 </div>
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label>Despesa Fixa?</label>
-                        <select class="form-control" name="fixa" v-model="despesaObj.despesa_fixa" required>
-                            <option value="sim">Sim</option>
-                            <option value="nao">Não</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                     <div class="form-group">
                         <label>Conta</label>
                         <select class="form-control" name="conta" required>
@@ -52,7 +43,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                     <div class="form-group">
                         <label>Categorias</label>
                         <select class="form-control" name="categoria" required>

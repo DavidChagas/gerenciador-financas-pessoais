@@ -36,7 +36,7 @@
         @if (\Session::has('success'))
             <div class="toast-body" style="position: absolute; top: 0; right: 0;">
                 <div class="alert alert-success">
-                    <p>{{ \Session::get('success') }}</p>
+                <i class="far fa-check-circle"></i> {{ \Session::get('success') }}
                 </div>
             </div>
         @endif

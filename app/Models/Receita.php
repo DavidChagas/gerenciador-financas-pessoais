@@ -8,7 +8,7 @@ class Receita extends Model
 {
     public $timestamps = false;
 
-    protected $fillable = ['valor', 'status', 'data', 'descricao', 'receita_fixa'];
+    protected $fillable = ['valor', 'status', 'data', 'descricao', 'observacao'];
 
     public function usuario(){
         return $this->belongsTo(usuario::class);
