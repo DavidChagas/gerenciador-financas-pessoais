@@ -93,10 +93,13 @@ class ReceitaController extends Controller{
         $request_valor_formatado = (int) preg_replace('/\D/', '', $request->input('valor'));
         
         // Atualiza Saldo da Conta Selecionada
-        $conta = DB::table('contas')->where('id', '=', $receita->conta_id)->get();
-        $valor_atualizado = ( (int) $conta[0]->valor - $receita->valor ) + $request_valor_formatado;
+        $contaAntiga = DB::table('contas')->where('id', '=', $receita->conta_id)->get();
+        $contaAntigaValor = (int) $contaAntiga[0]->valor - $receita->valor;
+        DB::table('contas')->where('id', $contaAntiga[0]->id)->update(['valor' => $contaAntigaValor]);
         
-        DB::table('contas')->where('id', $receita->conta_id)->update(['valor' => $valor_atualizado]);
+        $contaNova = DB::table('contas')->where('id', '=', $request->input('conta'))->get();
+        $contaNovaValor = (int) $contaNova[0]->valor + $request_valor_formatado;
+        DB::table('contas')->where('id', $contaNova[0]->id)->update(['valor' => $contaNovaValor]);
 
         $receita->valor = $request_valor_formatado;
         $receita->descricao = $request->input('descricao');

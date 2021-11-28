@@ -93,10 +93,13 @@ class DespesaController extends Controller
         $request_valor_formatado = (int) preg_replace('/\D/', '', $request->input('valor'));
 
         // Atualiza Saldo da Conta Selecionada
-        $conta = DB::table('contas')->where('id', '=', $despesa->conta_id)->get();
-        $valor_atualizado = ( (int) $conta[0]->valor + $despesa->valor ) - $request_valor_formatado;
-
-        DB::table('contas')->where('id', $despesa->conta_id)->update(['valor' => $valor_atualizado]);
+        $contaAntiga = DB::table('contas')->where('id', '=', $despesa->conta_id)->get();
+        $contaAntigaValor = (int) $contaAntiga[0]->valor + $despesa->valor;
+        DB::table('contas')->where('id', $contaAntiga[0]->id)->update(['valor' => $contaAntigaValor]);
+        
+        $contaNova = DB::table('contas')->where('id', '=', $request->input('conta'))->get();
+        $contaNovaValor = (int) $contaNova[0]->valor - $request_valor_formatado;
+        DB::table('contas')->where('id', $contaNova[0]->id)->update(['valor' => $contaNovaValor]);
 
         $despesa->valor = $request_valor_formatado;
         $despesa->descricao = $request->input('descricao');
