@@ -56,10 +56,10 @@ class CategoriaController extends Controller{
             $categoria->delete();
             return redirect('/categorias')->with('success', 'Categoria excluída com sucesso!');
         } catch (\Illuminate\Database\QueryException $qe) {
-            return redirect('/categorias')->with('error', 'Categoria não pode ser excluída!s');
+            return redirect('/categorias')->with('error', 'Categoria não pode ser excluída!');
             // return ['status' => 'errorQuery', 'message' => $qe->getMessage()];
         } catch (\PDOException $e) {
-            return redirect('/categorias')->with('error', 'Categoria não pode ser excluída!1');
+            return redirect('/categorias')->with('error', 'Categoria não pode ser excluída, algo inesperado aconteceu.');
             // return ['status' => 'errorPDO', 'message' => $e->getMessage()];
         }
     }
