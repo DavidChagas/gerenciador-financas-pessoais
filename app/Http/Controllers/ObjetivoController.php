@@ -69,6 +69,9 @@ class ObjetivoController extends Controller{
 
     public function destroy(Objetivo $objetivo){
         try {
+            $objetivo->aportes->each( function($aporte){
+                $aporte->delete();
+            });
             $objetivo->delete();
             return redirect('/objetivos')->with('success', 'objetivo excluido com sucesso!');
         } catch (\Illuminate\Database\QueryException $qe) {

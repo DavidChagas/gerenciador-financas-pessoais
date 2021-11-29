@@ -23,20 +23,18 @@
 </head>
 <body>
     @auth
-        @if ($errors->any()) <!-- ou (count($errors) > 0)-->
-            <div class="alert alert-danger" style="position: absolute; top: 0; right: 0;">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
+        @if (\Session::has('error')) <!-- ou (count($errors) > 0)-->
+            <div class="toast-body" style="position: absolute; top: 0; right: 0;">
+                <div class="alert alert-danger">
+                    <i class="fas fa-exclamation-circle"></i> {{ \Session::get('error') }}
+                </div>
             </div>
         @endif
 
         @if (\Session::has('success'))
             <div class="toast-body" style="position: absolute; top: 0; right: 0;">
                 <div class="alert alert-success">
-                <i class="far fa-check-circle"></i> {{ \Session::get('success') }}
+                    <i class="far fa-check-circle"></i> {{ \Session::get('success') }}
                 </div>
             </div>
         @endif

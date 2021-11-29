@@ -56,6 +56,12 @@ class ContaController extends Controller{
 
     public function destroy(Conta $conta){
         try {
+            $conta->receitas->each( function($receita){
+                $receita->delete();
+            });
+            $conta->despesas->each( function($despesa){
+                $despesa->delete();
+            });
             $conta->delete();
             return redirect('/contas')->with('success', 'Conta excluida com sucesso!');
         } catch (\Illuminate\Database\QueryException $qe) {

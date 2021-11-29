@@ -12,4 +12,8 @@ class Objetivo extends Model{
     public function usuario(){
         return $this->belongsTo(usuario::class);
     }
+    public function aportes(){
+    	//relação de um objetivo (this) para muitas aportes (ObjetivoAporte::class)
+    	return $this->hasMany(ObjetivoAporte::class);
+    }
 }
