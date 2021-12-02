@@ -17,8 +17,8 @@ class ObjetivoController extends Controller{
     public function index(){
         $objetivos = DB::table('objetivos')
             ->leftJoin('objetivo_aportes', 'objetivos.id', '=', 'objetivo_aportes.objetivo_id')
-            ->select('objetivos.id', 'objetivos.nome', 'objetivos.descricao', 'objetivos.valor', 'objetivos.data_inicial', 'objetivos.data_final', DB::raw('sum(objetivo_aportes.valor) as total_aportado'))
-            ->groupBy('objetivos.id', 'objetivos.nome', 'objetivos.descricao', 'objetivos.valor', 'objetivos.data_inicial', 'objetivos.data_final')
+            ->select('objetivos.id', 'objetivos.nome', 'objetivos.descricao', 'objetivos.valor', 'objetivos.data_inicial', 'objetivos.data_final', 'objetivos.arquivado', DB::raw('sum(objetivo_aportes.valor) as total_aportado'))
+            ->groupBy('objetivos.id', 'objetivos.nome', 'objetivos.descricao', 'objetivos.valor', 'objetivos.data_inicial', 'objetivos.data_final', 'objetivos.arquivado')
             ->where('objetivos.usuario_id', '=', Auth::id())
             ->get();
 
@@ -64,20 +64,14 @@ class ObjetivoController extends Controller{
        
         $objetivo->save();
 
-        return redirect('/objetivos')->with('success', 'objetivo alterado com sucesso!');
+        return redirect('/objetivos')->with('success', 'Objetivo alterado com sucesso!');
     }
 
     public function destroy(Objetivo $objetivo){
-        try {
-            $objetivo->aportes->each( function($aporte){
-                $aporte->delete();
-            });
-            $objetivo->delete();
-            return redirect('/objetivos')->with('success', 'objetivo excluido com sucesso!');
-        } catch (\Illuminate\Database\QueryException $qe) {
-            return ['status' => 'errorQuery', 'message' => $qe->getMessage()];
-        } catch (\PDOException $e) {
-            return ['status' => 'errorPDO', 'message' => $e->getMessage()];
-        }
+        $objetivo->arquivado = 1;
+
+        $objetivo->save();
+
+        return redirect('/objetivos')->with('success', 'Objetivo arquivado com sucesso!');
     }
 }

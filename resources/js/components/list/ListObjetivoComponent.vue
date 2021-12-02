@@ -1,8 +1,12 @@
 <template>
     <div class="componente-listagem-objetivo" v-bind:class="{ active: modalAberto }">
         <div class="overlay" v-bind:class="{ active: modalAberto }"></div>
+        <select class="form-control select-objetivos" v-model="mostrarObjetivos">
+            <option value="0">Objetivos Ativos</option>
+            <option value="1">Objetivos Arquivados</option>
+        </select>
         <div class="objetivos-grid">
-            <div class="objetivo" v-for="i in list" v-bind:key="i.id">
+            <div class="objetivo" v-for="i in list" v-bind:key="i.id" v-if="i.arquivado == mostrarObjetivos">
                 <div class="nome">
                     {{i.nome}}<br>
                     <small>{{formatDate(i.data_final)}}</small>
@@ -50,9 +54,9 @@
                     <div class="editar">
                         <form v-bind:action="'/'+model+'/'+i.id" method="POST">
                             <slot name="method"></slot>
-                            <button type="submit" class="btn btn-danger btn-sm"><i class="far fa-trash-alt"></i></button>
+                            <button type="submit" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Arquivar"><i class="far fa-folder-open"></i></button>
                         </form>
-                        <a v-bind:href="'/'+model+'/'+i.id+'/edit'" class="btn btn-info btn-sm"><i class="far fa-edit"></i></a>
+                        <a v-bind:href="'/'+model+'/'+i.id+'/edit'" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Editar"><i class="far fa-edit"></i></a>
                         <buttom class="btn btn-outline-info btn-sm" style="margin-left: 10px" v-on:click="verDetalhesObjetivo(i.id)">Ver Detalhes</buttom>
                     </div>
                     <div>
@@ -130,7 +134,8 @@
                 objetivoIdAporte: 0,
                 objetivoValorAporte: 0,
                 dataAporte: '',
-                maxAporte: 0
+                maxAporte: 0,
+                mostrarObjetivos: 0
             }
         },
         methods: {
@@ -168,7 +173,6 @@
             console.log('this.infos', this.infos)
             this.list = JSON.parse(this.infos);
             this.list.forEach(objetivo => {
-                console.log('objetivo.total_aportado', objetivo.total_aportado)
                 if(objetivo.total_aportado == null) objetivo.total_aportado = 0
                 objetivo.porcentagem = ((objetivo.total_aportado * 100) / objetivo.valor).toFixed(2);
                 objetivo.maxAporte = objetivo.valor - objetivo.total_aportado;
@@ -214,6 +218,31 @@
 
             &.active{
                 display: block; 
+            }
+        }
+
+        .select-objetivos{
+            position: absolute;
+            top: -59px;
+            right: 0;
+            width: 160px;
+            
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            border-radius: 0px;
+
+            height: 30px;
+            padding: 5px;
+
+            @media(min-width: 768px){
+                width: 200px;
+            }
+
+            &:focus{
+                border-color: transparent;
+                outline: none;
+                box-shadow: none;
             }
         }
         
@@ -338,7 +367,7 @@
                         color: red;
                         border: none;
                         padding: 0;
-                        font-size: 15px;
+                        font-size: 17px;
                         line-height: 0;
 
                         &:hover{
@@ -349,7 +378,7 @@
                 a{
                     position: absolute;
                     top: 5px;
-                    right: 25px;
+                    right: 30px;
 
                     background-color: transparent;
                     color: rgb(46, 46, 228);

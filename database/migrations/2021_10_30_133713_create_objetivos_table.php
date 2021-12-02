@@ -20,6 +20,7 @@ class CreateObjetivosTable extends Migration
             $table->integer('valor');
             $table->date('data_inicial');
             $table->date('data_final');
+            $table->boolean('arquivado')->default(0);
 
             $table->integer('usuario_id')->unsigned();
             $table->foreign('usuario_id')->references('id')->on('users');

@@ -3259,6 +3259,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -3274,7 +3278,8 @@ __webpack_require__.r(__webpack_exports__);
       objetivoIdAporte: 0,
       objetivoValorAporte: 0,
       dataAporte: '',
-      maxAporte: 0
+      maxAporte: 0,
+      mostrarObjetivos: 0
     };
   },
   methods: {
@@ -3316,7 +3321,6 @@ __webpack_require__.r(__webpack_exports__);
     console.log('this.infos', this.infos);
     this.list = JSON.parse(this.infos);
     this.list.forEach(function (objetivo) {
-      console.log('objetivo.total_aportado', objetivo.total_aportado);
       if (objetivo.total_aportado == null) objetivo.total_aportado = 0;
       objetivo.porcentagem = (objetivo.total_aportado * 100 / objetivo.valor).toFixed(2);
       objetivo.maxAporte = objetivo.valor - objetivo.total_aportado;
@@ -8395,7 +8399,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".componente-listagem-objetivo {\n  position: relative;\n}\n.componente-listagem-objetivo .overlay {\n  display: none;\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 100vw;\n  height: 100vh;\n  background-color: rgba(0, 0, 0, 0.15);\n  z-index: 1;\n}\n.componente-listagem-objetivo .overlay.active {\n  display: block;\n}\n.componente-listagem-objetivo .lista-vazia {\n  margin: 20px 0;\n  padding: 50px 0;\n  text-align: center;\n  background-color: #eee;\n  border: 2px solid #ddd;\n  border-radius: 5px;\n  font-size: 20px;\n  color: #444;\n}\n.componente-listagem-objetivo .objetivos-grid {\n  display: grid;\n  grid-template-columns: repeat(1, 1fr);\n  grid-gap: 20px;\n}\n@media (min-width: 768px) {\n.componente-listagem-objetivo .objetivos-grid {\n    grid-template-columns: repeat(3, 1fr);\n}\n}\n.componente-listagem-objetivo .objetivos-grid .objetivo {\n  position: relative;\n  padding: 20px 15px;\n  border-radius: 5px;\n  border: 1px solid #ddd;\n  transition: all 0.1s;\n}\n.componente-listagem-objetivo .objetivos-grid .objetivo:hover {\n  box-shadow: 0px 0px 5px #ddd;\n}\n@media (max-width: 767px) {\n.componente-listagem-objetivo .objetivos-grid .objetivo {\n    box-shadow: 0px 0px 5px #ddd;\n}\n}\n.componente-listagem-objetivo .objetivos-grid .objetivo > .nome {\n  font-size: 18px;\n  font-weight: bold;\n  color: #444;\n  text-align: center;\n  line-height: 1;\n}\n.componente-listagem-objetivo .objetivos-grid .objetivo > .nome small {\n  font-size: 12px;\n}\n.componente-listagem-objetivo .objetivos-grid .objetivo .valores {\n  margin: 15px 0;\n  display: grid;\n  grid-template-columns: repeat(2, 1fr);\n}\n.componente-listagem-objetivo .objetivos-grid .objetivo .valores .valor {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  text-align: center;\n}\n.componente-listagem-objetivo .objetivos-grid .objetivo .progress {\n  position: relative;\n  height: 20px;\n  border: 1px solid #3490dc;\n}\n.componente-listagem-objetivo .objetivos-grid .objetivo .progress .progress-bar.concluido {\n  background-color: green;\n}\n.componente-listagem-objetivo .objetivos-grid .objetivo .progress .porcentagem {\n  position: absolute;\n  left: 50%;\n  top: 10px;\n  width: 200px;\n  margin-left: -100px;\n  font-weight: bold;\n}\n.componente-listagem-objetivo .objetivos-grid .objetivo .objetivo-concluido {\n  text-align: center;\n}\n.componente-listagem-objetivo .objetivos-grid .objetivo .objetivo-concluido .descricao {\n  margin: 10px 0 15px 0;\n  font-size: 16px;\n  line-height: 1;\n}\n.componente-listagem-objetivo .objetivos-grid .estimativa {\n  margin-top: 15px;\n  font-size: 12px;\n  line-height: 1;\n  text-align: center;\n}\n.componente-listagem-objetivo .objetivos-grid .botoes {\n  margin-top: 30px;\n  display: flex;\n  justify-content: space-between;\n}\n.componente-listagem-objetivo .objetivos-grid .botoes .editar {\n  display: flex;\n}\n.componente-listagem-objetivo .objetivos-grid .botoes .editar > form > button {\n  position: absolute;\n  top: 5px;\n  right: 5px;\n  background-color: transparent;\n  color: red;\n  border: none;\n  padding: 0;\n  font-size: 15px;\n  line-height: 0;\n}\n.componente-listagem-objetivo .objetivos-grid .botoes .editar > form > button:hover {\n  color: #a20000;\n}\n.componente-listagem-objetivo .objetivos-grid .botoes a {\n  position: absolute;\n  top: 5px;\n  right: 25px;\n  background-color: transparent;\n  color: #2e2ee4;\n  border: none;\n  padding: 0;\n  font-size: 15px;\n  line-height: 0;\n}\n.componente-listagem-objetivo .objetivos-grid .botoes a:hover {\n  color: #161666;\n}\n.componente-listagem-objetivo .modal-aporte {\n  position: absolute;\n  top: 0px;\n  left: 50%;\n  display: none;\n  width: 300px;\n  margin-left: -150px;\n  padding: 15px;\n  text-align: center;\n  background-color: white;\n  border: 1px solid #ddd;\n  border-radius: 5px;\n  box-shadow: 5px 4px 5px #ccc;\n}\n@media (min-width: 768px) {\n.componente-listagem-objetivo .modal-aporte {\n    padding: 30px;\n}\n}\n.componente-listagem-objetivo .modal-aporte.active {\n  display: block;\n  z-index: 2;\n}\n.componente-listagem-objetivo .modal-aporte form {\n  text-align: center;\n}\n.componente-listagem-objetivo .modal-detalhes {\n  position: absolute;\n  top: -65px;\n  left: 50%;\n  display: none;\n  width: 300px;\n  max-height: 400px;\n  margin-left: -150px;\n  padding: 15px;\n  background-color: white;\n  border: 1px solid #ddd;\n  border-radius: 5px;\n  box-shadow: 0px 0px 22px #a1a1a1;\n}\n@media (min-width: 768px) {\n.componente-listagem-objetivo .modal-detalhes {\n    width: 500px;\n    margin-left: -250px;\n    padding: 30px;\n}\n}\n.componente-listagem-objetivo .modal-detalhes.active {\n  display: block;\n  z-index: 2;\n}\n.componente-listagem-objetivo .modal-detalhes > button {\n  float: right;\n  padding: 0px 5px 3px;\n  line-height: 1;\n  font-weight: bold;\n}\n.componente-listagem-objetivo .modal-detalhes > .titulo {\n  font-size: 20px;\n  font-weight: bold;\n  color: #444;\n  text-align: center;\n  margin-bottom: 20px;\n}\n.componente-listagem-objetivo .modal-detalhes > .cabecalho {\n  display: grid;\n  grid-template-columns: 40% 40% 20%;\n  border-bottom: 2px solid #ddd;\n  font-weight: bold;\n}\n.componente-listagem-objetivo .modal-detalhes > .cabecalho > .item {\n  text-align: center;\n}\n.componente-listagem-objetivo .modal-detalhes > .aportes {\n  max-height: 280px;\n  overflow-y: auto;\n}\n.componente-listagem-objetivo .modal-detalhes > .aportes > .aporte {\n  padding: 5px 0;\n  display: grid;\n  grid-template-columns: 40% 40% 20%;\n}\n.componente-listagem-objetivo .modal-detalhes > .aportes > .aporte > .item {\n  text-align: center;\n  border-bottom: 1px solid #eee;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".componente-listagem-objetivo {\n  position: relative;\n}\n.componente-listagem-objetivo .overlay {\n  display: none;\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 100vw;\n  height: 100vh;\n  background-color: rgba(0, 0, 0, 0.15);\n  z-index: 1;\n}\n.componente-listagem-objetivo .overlay.active {\n  display: block;\n}\n.componente-listagem-objetivo .select-objetivos {\n  position: absolute;\n  top: -59px;\n  right: 0;\n  width: 160px;\n  border-top: none;\n  border-left: none;\n  border-right: none;\n  border-radius: 0px;\n  height: 30px;\n  padding: 5px;\n}\n@media (min-width: 768px) {\n.componente-listagem-objetivo .select-objetivos {\n    width: 200px;\n}\n}\n.componente-listagem-objetivo .select-objetivos:focus {\n  border-color: transparent;\n  outline: none;\n  box-shadow: none;\n}\n.componente-listagem-objetivo .lista-vazia {\n  margin: 20px 0;\n  padding: 50px 0;\n  text-align: center;\n  background-color: #eee;\n  border: 2px solid #ddd;\n  border-radius: 5px;\n  font-size: 20px;\n  color: #444;\n}\n.componente-listagem-objetivo .objetivos-grid {\n  display: grid;\n  grid-template-columns: repeat(1, 1fr);\n  grid-gap: 20px;\n}\n@media (min-width: 768px) {\n.componente-listagem-objetivo .objetivos-grid {\n    grid-template-columns: repeat(3, 1fr);\n}\n}\n.componente-listagem-objetivo .objetivos-grid .objetivo {\n  position: relative;\n  padding: 20px 15px;\n  border-radius: 5px;\n  border: 1px solid #ddd;\n  transition: all 0.1s;\n}\n.componente-listagem-objetivo .objetivos-grid .objetivo:hover {\n  box-shadow: 0px 0px 5px #ddd;\n}\n@media (max-width: 767px) {\n.componente-listagem-objetivo .objetivos-grid .objetivo {\n    box-shadow: 0px 0px 5px #ddd;\n}\n}\n.componente-listagem-objetivo .objetivos-grid .objetivo > .nome {\n  font-size: 18px;\n  font-weight: bold;\n  color: #444;\n  text-align: center;\n  line-height: 1;\n}\n.componente-listagem-objetivo .objetivos-grid .objetivo > .nome small {\n  font-size: 12px;\n}\n.componente-listagem-objetivo .objetivos-grid .objetivo .valores {\n  margin: 15px 0;\n  display: grid;\n  grid-template-columns: repeat(2, 1fr);\n}\n.componente-listagem-objetivo .objetivos-grid .objetivo .valores .valor {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  text-align: center;\n}\n.componente-listagem-objetivo .objetivos-grid .objetivo .progress {\n  position: relative;\n  height: 20px;\n  border: 1px solid #3490dc;\n}\n.componente-listagem-objetivo .objetivos-grid .objetivo .progress .progress-bar.concluido {\n  background-color: green;\n}\n.componente-listagem-objetivo .objetivos-grid .objetivo .progress .porcentagem {\n  position: absolute;\n  left: 50%;\n  top: 10px;\n  width: 200px;\n  margin-left: -100px;\n  font-weight: bold;\n}\n.componente-listagem-objetivo .objetivos-grid .objetivo .objetivo-concluido {\n  text-align: center;\n}\n.componente-listagem-objetivo .objetivos-grid .objetivo .objetivo-concluido .descricao {\n  margin: 10px 0 15px 0;\n  font-size: 16px;\n  line-height: 1;\n}\n.componente-listagem-objetivo .objetivos-grid .estimativa {\n  margin-top: 15px;\n  font-size: 12px;\n  line-height: 1;\n  text-align: center;\n}\n.componente-listagem-objetivo .objetivos-grid .botoes {\n  margin-top: 30px;\n  display: flex;\n  justify-content: space-between;\n}\n.componente-listagem-objetivo .objetivos-grid .botoes .editar {\n  display: flex;\n}\n.componente-listagem-objetivo .objetivos-grid .botoes .editar > form > button {\n  position: absolute;\n  top: 5px;\n  right: 5px;\n  background-color: transparent;\n  color: red;\n  border: none;\n  padding: 0;\n  font-size: 17px;\n  line-height: 0;\n}\n.componente-listagem-objetivo .objetivos-grid .botoes .editar > form > button:hover {\n  color: #a20000;\n}\n.componente-listagem-objetivo .objetivos-grid .botoes a {\n  position: absolute;\n  top: 5px;\n  right: 30px;\n  background-color: transparent;\n  color: #2e2ee4;\n  border: none;\n  padding: 0;\n  font-size: 15px;\n  line-height: 0;\n}\n.componente-listagem-objetivo .objetivos-grid .botoes a:hover {\n  color: #161666;\n}\n.componente-listagem-objetivo .modal-aporte {\n  position: absolute;\n  top: 0px;\n  left: 50%;\n  display: none;\n  width: 300px;\n  margin-left: -150px;\n  padding: 15px;\n  text-align: center;\n  background-color: white;\n  border: 1px solid #ddd;\n  border-radius: 5px;\n  box-shadow: 5px 4px 5px #ccc;\n}\n@media (min-width: 768px) {\n.componente-listagem-objetivo .modal-aporte {\n    padding: 30px;\n}\n}\n.componente-listagem-objetivo .modal-aporte.active {\n  display: block;\n  z-index: 2;\n}\n.componente-listagem-objetivo .modal-aporte form {\n  text-align: center;\n}\n.componente-listagem-objetivo .modal-detalhes {\n  position: absolute;\n  top: -65px;\n  left: 50%;\n  display: none;\n  width: 300px;\n  max-height: 400px;\n  margin-left: -150px;\n  padding: 15px;\n  background-color: white;\n  border: 1px solid #ddd;\n  border-radius: 5px;\n  box-shadow: 0px 0px 22px #a1a1a1;\n}\n@media (min-width: 768px) {\n.componente-listagem-objetivo .modal-detalhes {\n    width: 500px;\n    margin-left: -250px;\n    padding: 30px;\n}\n}\n.componente-listagem-objetivo .modal-detalhes.active {\n  display: block;\n  z-index: 2;\n}\n.componente-listagem-objetivo .modal-detalhes > button {\n  float: right;\n  padding: 0px 5px 3px;\n  line-height: 1;\n  font-weight: bold;\n}\n.componente-listagem-objetivo .modal-detalhes > .titulo {\n  font-size: 20px;\n  font-weight: bold;\n  color: #444;\n  text-align: center;\n  margin-bottom: 20px;\n}\n.componente-listagem-objetivo .modal-detalhes > .cabecalho {\n  display: grid;\n  grid-template-columns: 40% 40% 20%;\n  border-bottom: 2px solid #ddd;\n  font-weight: bold;\n}\n.componente-listagem-objetivo .modal-detalhes > .cabecalho > .item {\n  text-align: center;\n}\n.componente-listagem-objetivo .modal-detalhes > .aportes {\n  max-height: 280px;\n  overflow-y: auto;\n}\n.componente-listagem-objetivo .modal-detalhes > .aportes > .aporte {\n  padding: 5px 0;\n  display: grid;\n  grid-template-columns: 40% 40% 20%;\n}\n.componente-listagem-objetivo .modal-detalhes > .aportes > .aporte > .item {\n  text-align: center;\n  border-bottom: 1px solid #eee;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -65024,177 +65028,233 @@ var render = function() {
       _c("div", { staticClass: "overlay", class: { active: _vm.modalAberto } }),
       _vm._v(" "),
       _c(
+        "select",
+        {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.mostrarObjetivos,
+              expression: "mostrarObjetivos"
+            }
+          ],
+          staticClass: "form-control select-objetivos",
+          on: {
+            change: function($event) {
+              var $$selectedVal = Array.prototype.filter
+                .call($event.target.options, function(o) {
+                  return o.selected
+                })
+                .map(function(o) {
+                  var val = "_value" in o ? o._value : o.value
+                  return val
+                })
+              _vm.mostrarObjetivos = $event.target.multiple
+                ? $$selectedVal
+                : $$selectedVal[0]
+            }
+          }
+        },
+        [
+          _c("option", { attrs: { value: "0" } }, [_vm._v("Objetivos Ativos")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "1" } }, [
+            _vm._v("Objetivos Arquivados")
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c(
         "div",
         { staticClass: "objetivos-grid" },
         _vm._l(_vm.list, function(i) {
-          return _c("div", { key: i.id, staticClass: "objetivo" }, [
-            _c("div", { staticClass: "nome" }, [
-              _vm._v("\n                " + _vm._s(i.nome)),
-              _c("br"),
-              _vm._v(" "),
-              _c("small", [_vm._v(_vm._s(_vm.formatDate(i.data_final)))])
-            ]),
-            _vm._v(" "),
-            _c("hr"),
-            _vm._v(" "),
-            !i.concluido && !i.fail
-              ? _c("div", { staticClass: "valores" }, [
-                  _c("div", { staticClass: "valor" }, [
-                    _c("small", [_vm._v("Valor Atual")]),
-                    _vm._v(
-                      "\n                    R$ " +
-                        _vm._s(_vm.formatPrice(i.total_aportado)) +
-                        "\n                "
-                    )
-                  ]),
+          return i.arquivado == _vm.mostrarObjetivos
+            ? _c("div", { key: i.id, staticClass: "objetivo" }, [
+                _c("div", { staticClass: "nome" }, [
+                  _vm._v("\n                " + _vm._s(i.nome)),
+                  _c("br"),
                   _vm._v(" "),
-                  _c("div", { staticClass: "valor" }, [
-                    _c("small", [_vm._v("Objetivo")]),
-                    _vm._v(
-                      "\n                    R$ " +
-                        _vm._s(_vm.formatPrice(i.valor)) +
-                        "\n                "
-                    )
-                  ])
-                ])
-              : _vm._e(),
-            _vm._v(" "),
-            !i.concluido && !i.fail
-              ? _c("div", { staticClass: "progress" }, [
-                  _c("div", {
-                    staticClass: "progress-bar",
-                    style: { width: i.porcentagem + "%" },
-                    attrs: {
-                      role: "progressbar",
-                      "aria-valuenow": "50",
-                      "aria-valuemin": "0",
-                      "aria-valuemax": "100"
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "porcentagem" }, [
-                    _vm._v(
-                      "\n                    Você já alcançou " +
-                        _vm._s(i.porcentagem) +
-                        "% do seu objetivo \n                "
-                    )
-                  ])
-                ])
-              : _vm._e(),
-            _vm._v(" "),
-            i.concluido
-              ? _c("div", { staticClass: "objetivo-concluido" }, [
-                  _c("img", {
-                    attrs: { src: "/images/objetivo-concluido.png" }
-                  }),
-                  _vm._v(" "),
-                  _vm._m(0, true),
-                  _vm._v(
-                    "\n                Valor atingido: R$ " +
-                      _vm._s(_vm.formatPrice(i.valor)) +
-                      "\n            "
-                  )
-                ])
-              : _vm._e(),
-            _vm._v(" "),
-            i.fail
-              ? _c("div", { staticClass: "objetivo-concluido" }, [
-                  _c("img", { attrs: { src: "/images/objetivo-fail.png" } }),
-                  _vm._v(" "),
-                  _vm._m(1, true),
-                  _vm._v(" "),
+                  _c("small", [_vm._v(_vm._s(_vm.formatDate(i.data_final)))])
+                ]),
+                _vm._v(" "),
+                _c("hr"),
+                _vm._v(" "),
+                !i.concluido && !i.fail
+                  ? _c("div", { staticClass: "valores" }, [
+                      _c("div", { staticClass: "valor" }, [
+                        _c("small", [_vm._v("Valor Atual")]),
+                        _vm._v(
+                          "\n                    R$ " +
+                            _vm._s(_vm.formatPrice(i.total_aportado)) +
+                            "\n                "
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "valor" }, [
+                        _c("small", [_vm._v("Objetivo")]),
+                        _vm._v(
+                          "\n                    R$ " +
+                            _vm._s(_vm.formatPrice(i.valor)) +
+                            "\n                "
+                        )
+                      ])
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                !i.concluido && !i.fail
+                  ? _c("div", { staticClass: "progress" }, [
+                      _c("div", {
+                        staticClass: "progress-bar",
+                        style: { width: i.porcentagem + "%" },
+                        attrs: {
+                          role: "progressbar",
+                          "aria-valuenow": "50",
+                          "aria-valuemin": "0",
+                          "aria-valuemax": "100"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "porcentagem" }, [
+                        _vm._v(
+                          "\n                    Você já alcançou " +
+                            _vm._s(i.porcentagem) +
+                            "% do seu objetivo \n                "
+                        )
+                      ])
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                i.concluido
+                  ? _c("div", { staticClass: "objetivo-concluido" }, [
+                      _c("img", {
+                        attrs: { src: "/images/objetivo-concluido.png" }
+                      }),
+                      _vm._v(" "),
+                      _vm._m(0, true),
+                      _vm._v(
+                        "\n                Valor atingido: R$ " +
+                          _vm._s(_vm.formatPrice(i.valor)) +
+                          "\n            "
+                      )
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                i.fail
+                  ? _c("div", { staticClass: "objetivo-concluido" }, [
+                      _c("img", {
+                        attrs: { src: "/images/objetivo-fail.png" }
+                      }),
+                      _vm._v(" "),
+                      _vm._m(1, true),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticStyle: {
+                            "line-height": "1.2",
+                            "font-size": "12px"
+                          }
+                        },
+                        [
+                          _vm._v(
+                            "Faltou R$ " +
+                              _vm._s(
+                                _vm.formatPrice(i.valor - i.total_aportado)
+                              ) +
+                              " para alcançar o objetivo de R$ " +
+                              _vm._s(_vm.formatPrice(i.valor))
+                          )
+                        ]
+                      )
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                !i.concluido && !i.fail
+                  ? _c("div", { staticClass: "estimativa" }, [
+                      _vm._v("\n                Voce precisa poupar "),
+                      _c("b", [
+                        _vm._v("R$ " + _vm._s(_vm.formatPrice(i.qtdPoupar)))
+                      ]),
+                      _vm._v(
+                        " por mês para alcançar seu objetivo\n            "
+                      )
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _c("div", { staticClass: "botoes" }, [
                   _c(
                     "div",
-                    {
-                      staticStyle: { "line-height": "1.2", "font-size": "12px" }
-                    },
+                    { staticClass: "editar" },
                     [
-                      _vm._v(
-                        "Faltou R$ " +
-                          _vm._s(_vm.formatPrice(i.valor - i.total_aportado)) +
-                          " para alcançar o objetivo de R$ " +
-                          _vm._s(_vm.formatPrice(i.valor))
-                      )
-                    ]
-                  )
-                ])
-              : _vm._e(),
-            _vm._v(" "),
-            !i.concluido && !i.fail
-              ? _c("div", { staticClass: "estimativa" }, [
-                  _vm._v("\n                Voce precisa poupar "),
-                  _c("b", [
-                    _vm._v("R$ " + _vm._s(_vm.formatPrice(i.qtdPoupar)))
-                  ]),
-                  _vm._v(" por mês para alcançar seu objetivo\n            ")
-                ])
-              : _vm._e(),
-            _vm._v(" "),
-            _c("div", { staticClass: "botoes" }, [
-              _c(
-                "div",
-                { staticClass: "editar" },
-                [
-                  _c(
-                    "form",
-                    {
-                      attrs: {
-                        action: "/" + _vm.model + "/" + i.id,
-                        method: "POST"
-                      }
-                    },
-                    [_vm._t("method"), _vm._v(" "), _vm._m(2, true)],
-                    2
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "a",
-                    {
-                      staticClass: "btn btn-info btn-sm",
-                      attrs: { href: "/" + _vm.model + "/" + i.id + "/edit" }
-                    },
-                    [_c("i", { staticClass: "far fa-edit" })]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "buttom",
-                    {
-                      staticClass: "btn btn-outline-info btn-sm",
-                      staticStyle: { "margin-left": "10px" },
-                      on: {
-                        click: function($event) {
-                          return _vm.verDetalhesObjetivo(i.id)
-                        }
-                      }
-                    },
-                    [_vm._v("Ver Detalhes")]
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                [
-                  !i.concluido && !i.fail
-                    ? _c(
+                      _c(
+                        "form",
+                        {
+                          attrs: {
+                            action: "/" + _vm.model + "/" + i.id,
+                            method: "POST"
+                          }
+                        },
+                        [_vm._t("method"), _vm._v(" "), _vm._m(2, true)],
+                        2
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "a",
+                        {
+                          staticClass: "btn btn-info btn-sm",
+                          attrs: {
+                            href: "/" + _vm.model + "/" + i.id + "/edit",
+                            "data-toggle": "tooltip",
+                            "data-placement": "top",
+                            title: "Editar"
+                          }
+                        },
+                        [_c("i", { staticClass: "far fa-edit" })]
+                      ),
+                      _vm._v(" "),
+                      _c(
                         "buttom",
                         {
-                          staticClass: "btn btn-success btn-sm",
+                          staticClass: "btn btn-outline-info btn-sm",
+                          staticStyle: { "margin-left": "10px" },
                           on: {
                             click: function($event) {
-                              return _vm.abrirModalCadastro(i.id, i.maxAporte)
+                              return _vm.verDetalhesObjetivo(i.id)
                             }
                           }
                         },
-                        [_vm._v("Adicionar Aporte")]
+                        [_vm._v("Ver Detalhes")]
                       )
-                    : _vm._e()
-                ],
-                1
-              )
-            ])
-          ])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    [
+                      !i.concluido && !i.fail
+                        ? _c(
+                            "buttom",
+                            {
+                              staticClass: "btn btn-success btn-sm",
+                              on: {
+                                click: function($event) {
+                                  return _vm.abrirModalCadastro(
+                                    i.id,
+                                    i.maxAporte
+                                  )
+                                }
+                              }
+                            },
+                            [_vm._v("Adicionar Aporte")]
+                          )
+                        : _vm._e()
+                    ],
+                    1
+                  )
+                ])
+              ])
+            : _vm._e()
         }),
         0
       ),
@@ -65365,8 +65425,16 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "button",
-      { staticClass: "btn btn-danger btn-sm", attrs: { type: "submit" } },
-      [_c("i", { staticClass: "far fa-trash-alt" })]
+      {
+        staticClass: "btn btn-danger btn-sm",
+        attrs: {
+          type: "submit",
+          "data-toggle": "tooltip",
+          "data-placement": "top",
+          title: "Arquivar"
+        }
+      },
+      [_c("i", { staticClass: "far fa-folder-open" })]
     )
   },
   function() {
