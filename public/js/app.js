@@ -3263,6 +3263,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -3310,6 +3311,13 @@ __webpack_require__.r(__webpack_exports__);
       this.$http.get("/api/aportes?idObjetivo=".concat(idObjetivo)).then(function (response) {
         _this.aportesObjetivo = response.body;
         _this.modalDetalhesAberto = true;
+      }, function (err) {
+        console.log('err: ');
+      });
+    },
+    reativarObjetivo: function reativarObjetivo(id) {
+      this.$http.get("/api/reativarObjetivo?idObjetivo=".concat(id)).then(function (response) {
+        console.log(response);
       }, function (err) {
         console.log('err: ');
       });
@@ -65169,7 +65177,7 @@ var render = function() {
                     ])
                   : _vm._e(),
                 _vm._v(" "),
-                !i.concluido && !i.fail
+                !i.concluido && !i.fail && _vm.mostrarObjetivos == 0
                   ? _c("div", { staticClass: "estimativa" }, [
                       _vm._v("\n                Voce precisa poupar "),
                       _c("b", [
@@ -65186,31 +65194,35 @@ var render = function() {
                     "div",
                     { staticClass: "editar" },
                     [
-                      _c(
-                        "form",
-                        {
-                          attrs: {
-                            action: "/" + _vm.model + "/" + i.id,
-                            method: "POST"
-                          }
-                        },
-                        [_vm._t("method"), _vm._v(" "), _vm._m(2, true)],
-                        2
-                      ),
+                      _vm.mostrarObjetivos == 0
+                        ? _c(
+                            "form",
+                            {
+                              attrs: {
+                                action: "/" + _vm.model + "/" + i.id,
+                                method: "POST"
+                              }
+                            },
+                            [_vm._t("method"), _vm._v(" "), _vm._m(2, true)],
+                            2
+                          )
+                        : _vm._e(),
                       _vm._v(" "),
-                      _c(
-                        "a",
-                        {
-                          staticClass: "btn btn-info btn-sm",
-                          attrs: {
-                            href: "/" + _vm.model + "/" + i.id + "/edit",
-                            "data-toggle": "tooltip",
-                            "data-placement": "top",
-                            title: "Editar"
-                          }
-                        },
-                        [_c("i", { staticClass: "far fa-edit" })]
-                      ),
+                      _vm.mostrarObjetivos == 0
+                        ? _c(
+                            "a",
+                            {
+                              staticClass: "btn btn-info btn-sm",
+                              attrs: {
+                                href: "/" + _vm.model + "/" + i.id + "/edit",
+                                "data-toggle": "tooltip",
+                                "data-placement": "top",
+                                title: "Editar"
+                              }
+                            },
+                            [_c("i", { staticClass: "far fa-edit" })]
+                          )
+                        : _vm._e(),
                       _vm._v(" "),
                       _c(
                         "buttom",
@@ -65232,7 +65244,7 @@ var render = function() {
                   _c(
                     "div",
                     [
-                      !i.concluido && !i.fail
+                      !i.concluido && !i.fail && _vm.mostrarObjetivos == 0
                         ? _c(
                             "buttom",
                             {
@@ -65247,6 +65259,21 @@ var render = function() {
                               }
                             },
                             [_vm._v("Adicionar Aporte")]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.mostrarObjetivos == 1
+                        ? _c(
+                            "buttom",
+                            {
+                              staticClass: "btn btn-success btn-sm",
+                              on: {
+                                click: function($event) {
+                                  return _vm.reativarObjetivo(i.id)
+                                }
+                              }
+                            },
+                            [_vm._v("Reativar Objetivo")]
                           )
                         : _vm._e()
                     ],

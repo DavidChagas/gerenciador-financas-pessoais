@@ -68,10 +68,26 @@ class ObjetivoController extends Controller{
     }
 
     public function destroy(Objetivo $objetivo){
+        echo $objetivo;
+        return;
         $objetivo->arquivado = 1;
 
         $objetivo->save();
 
         return redirect('/objetivos')->with('success', 'Objetivo arquivado com sucesso!');
+    }
+
+    public function reativarObjetivo(){
+        $id_objetivo = $_GET['idObjetivo'];
+        $objetivo = DB::table('objetivos')->where('id', $id_objetivo);
+        
+        echo $objetivo;
+        return;
+
+        $objetivo->arquivado = 0;
+
+        $objetivo->save();
+
+        return redirect('/objetivos')->with('success', 'Objetivo reativado com sucesso!');
     }
 }

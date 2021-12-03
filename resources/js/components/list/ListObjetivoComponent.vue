@@ -47,20 +47,21 @@
                     <div style="line-height: 1.2; font-size: 12px">Faltou R$ {{formatPrice(i.valor - i.total_aportado)}} para alcançar o objetivo de R$ {{formatPrice(i.valor)}}</div>
                 </div>
 
-                <div class="estimativa" v-if="!i.concluido && !i.fail">
+                <div class="estimativa" v-if="!i.concluido && !i.fail && mostrarObjetivos == 0">
                     Voce precisa poupar <b>R$ {{formatPrice(i.qtdPoupar)}}</b> por mês para alcançar seu objetivo
                 </div>
                 <div class="botoes">
                     <div class="editar">
-                        <form v-bind:action="'/'+model+'/'+i.id" method="POST">
+                        <form v-bind:action="'/'+model+'/'+i.id" method="POST" v-if="mostrarObjetivos == 0">
                             <slot name="method"></slot>
                             <button type="submit" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Arquivar"><i class="far fa-folder-open"></i></button>
                         </form>
-                        <a v-bind:href="'/'+model+'/'+i.id+'/edit'" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Editar"><i class="far fa-edit"></i></a>
+                        <a v-bind:href="'/'+model+'/'+i.id+'/edit'" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Editar" v-if="mostrarObjetivos == 0"><i class="far fa-edit"></i></a>
                         <buttom class="btn btn-outline-info btn-sm" style="margin-left: 10px" v-on:click="verDetalhesObjetivo(i.id)">Ver Detalhes</buttom>
                     </div>
                     <div>
-                        <buttom class="btn btn-success btn-sm" v-on:click="abrirModalCadastro(i.id, i.maxAporte)" v-if="!i.concluido && !i.fail">Adicionar Aporte</buttom>
+                        <buttom class="btn btn-success btn-sm" v-on:click="abrirModalCadastro(i.id, i.maxAporte)" v-if="!i.concluido && !i.fail && mostrarObjetivos == 0">Adicionar Aporte</buttom>
+                        <buttom class="btn btn-success btn-sm" v-if="mostrarObjetivos == 1" v-on:click="reativarObjetivo(i.id)">Reativar Objetivo</buttom>
                     </div>
                 </div>
             </div>
@@ -164,6 +165,13 @@
                 this.$http.get(`/api/aportes?idObjetivo=${idObjetivo}`).then(response => {
                    this.aportesObjetivo = response.body;
                    this.modalDetalhesAberto = true;
+                }, err => {
+                    console.log('err: ');
+                });
+            },
+            reativarObjetivo(id){
+                this.$http.get(`/api/reativarObjetivo?idObjetivo=${id}`).then(response => {
+                   console.log(response);
                 }, err => {
                     console.log('err: ');
                 });
