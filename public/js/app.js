@@ -3317,7 +3317,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     reativarObjetivo: function reativarObjetivo(id) {
       this.$http.get("/api/reativarObjetivo?idObjetivo=".concat(id)).then(function (response) {
-        console.log(response);
+        window.location.reload();
       }, function (err) {
         console.log('err: ');
       });

@@ -171,7 +171,7 @@
             },
             reativarObjetivo(id){
                 this.$http.get(`/api/reativarObjetivo?idObjetivo=${id}`).then(response => {
-                   console.log(response);
+                   window.location.reload();
                 }, err => {
                     console.log('err: ');
                 });
