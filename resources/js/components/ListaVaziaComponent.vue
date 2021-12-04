@@ -24,6 +24,10 @@
 
         img{
             opacity: .5;
+
+            @media(max-width: 767px){
+                width: 300px;
+            }
         }
 
         > .titulo{
