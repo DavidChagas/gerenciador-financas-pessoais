@@ -2822,6 +2822,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['infos', 'model'],
   data: function data() {
@@ -2830,7 +2838,8 @@ __webpack_require__.r(__webpack_exports__);
       todasCategorias: [],
       visible: false,
       item: '',
-      filtroSelecionado: 'Todos'
+      filtroSelecionado: 'Todos',
+      mostrarCategorias: 0
     };
   },
   methods: {
@@ -2855,6 +2864,13 @@ __webpack_require__.r(__webpack_exports__);
           });
           break;
       }
+    },
+    reativarCategoria: function reativarCategoria(id) {
+      this.$http.get("/api/reativarCategoria?idCategoria=".concat(id)).then(function () {
+        window.location.reload();
+      }, function (err) {
+        console.log('err: ');
+      });
     }
   },
   mounted: function mounted() {
@@ -8351,7 +8367,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".componente-listagem-tabela {\n  position: relative;\n}\n.componente-listagem-tabela .filtro {\n  position: absolute;\n  top: -67px;\n  right: 0;\n  width: 130px;\n}\n@media (min-width: 768px) {\n.componente-listagem-tabela .filtro {\n    top: -65px;\n    margin-top: 0px;\n    width: 200px;\n}\n}\n.componente-listagem-tabela .filtro select {\n  border-top: none;\n  border-left: none;\n  border-right: none;\n  border-radius: 0px;\n}\n.componente-listagem-tabela .filtro select:focus {\n  border-color: transparent;\n  outline: none;\n  box-shadow: none;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".componente-listagem-tabela {\n  position: relative;\n}\n.componente-listagem-tabela .select-categorias {\n  position: absolute;\n  top: -59px;\n  right: 220px;\n  width: 160px;\n  border-top: none;\n  border-left: none;\n  border-right: none;\n  border-radius: 0px;\n  height: 30px;\n  padding: 5px;\n}\n@media (min-width: 768px) {\n.componente-listagem-tabela .select-categorias {\n    width: 200px;\n}\n}\n.componente-listagem-tabela .select-categorias:focus {\n  border-color: transparent;\n  outline: none;\n  box-shadow: none;\n}\n.componente-listagem-tabela .filtro {\n  position: absolute;\n  top: -67px;\n  right: 0;\n  width: 130px;\n}\n@media (min-width: 768px) {\n.componente-listagem-tabela .filtro {\n    top: -65px;\n    margin-top: 0px;\n    width: 200px;\n}\n}\n.componente-listagem-tabela .filtro select {\n  border-top: none;\n  border-left: none;\n  border-right: none;\n  border-radius: 0px;\n}\n.componente-listagem-tabela .filtro select:focus {\n  border-color: transparent;\n  outline: none;\n  box-shadow: none;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -64431,6 +64447,45 @@ var render = function() {
     "div",
     { staticClass: "componente-listagem-tabela" },
     [
+      _c(
+        "select",
+        {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.mostrarCategorias,
+              expression: "mostrarCategorias"
+            }
+          ],
+          staticClass: "form-control select-categorias",
+          on: {
+            change: function($event) {
+              var $$selectedVal = Array.prototype.filter
+                .call($event.target.options, function(o) {
+                  return o.selected
+                })
+                .map(function(o) {
+                  var val = "_value" in o ? o._value : o.value
+                  return val
+                })
+              _vm.mostrarCategorias = $event.target.multiple
+                ? $$selectedVal
+                : $$selectedVal[0]
+            }
+          }
+        },
+        [
+          _c("option", { attrs: { value: "0" } }, [
+            _vm._v("Categorias Ativos")
+          ]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "1" } }, [
+            _vm._v("Categorias Arquivados")
+          ])
+        ]
+      ),
+      _vm._v(" "),
       _c("div", { staticClass: "filtro" }, [
         _c(
           "select",
@@ -64478,46 +64533,115 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("table", { staticClass: "table" }, [
-        _vm._m(0),
+        _c("thead", { staticClass: "thead-light" }, [
+          _c("tr", [
+            _c("th", { attrs: { scope: "col" } }, [_vm._v("Descrição")]),
+            _vm._v(" "),
+            _c("th", { attrs: { scope: "col" } }, [_vm._v("Tipo")]),
+            _vm._v(" "),
+            _vm.mostrarCategorias == 0
+              ? _c(
+                  "th",
+                  {
+                    staticStyle: { "text-align": "center" },
+                    attrs: { scope: "col", width: "50px" }
+                  },
+                  [_vm._v("Editar")]
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.mostrarCategorias == 0
+              ? _c(
+                  "th",
+                  {
+                    staticStyle: { "text-align": "center" },
+                    attrs: { scope: "col", width: "50px" }
+                  },
+                  [_vm._v("Arquivar")]
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.mostrarCategorias == 1
+              ? _c(
+                  "th",
+                  {
+                    staticStyle: { "text-align": "center" },
+                    attrs: { scope: "col", width: "50px" }
+                  },
+                  [_vm._v("Reativar")]
+                )
+              : _vm._e()
+          ])
+        ]),
         _vm._v(" "),
         _c(
           "tbody",
           _vm._l(_vm.list, function(i) {
-            return _c("tr", { key: i.id }, [
-              _c("td", [_vm._v(_vm._s(i.descricao))]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(i.tipo))]),
-              _vm._v(" "),
-              _c("td", { staticStyle: { "text-align": "center" } }, [
-                _c(
-                  "a",
-                  {
-                    staticClass: "btn btn-info btn-sm",
-                    attrs: { href: "/" + _vm.model + "/" + i.id + "/edit" }
-                  },
-                  [
-                    _c("i", {
-                      staticClass: "fas fa-pencil-alt",
-                      staticStyle: { color: "white" }
-                    })
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _c("td", { staticStyle: { "text-align": "center" } }, [
-                _c(
-                  "form",
-                  {
-                    attrs: {
-                      action: "/" + _vm.model + "/" + i.id,
-                      method: "POST"
-                    }
-                  },
-                  [_vm._t("method"), _vm._v(" "), _vm._m(1, true)],
-                  2
-                )
-              ])
-            ])
+            return i.arquivado == _vm.mostrarCategorias
+              ? _c("tr", { key: i.id }, [
+                  _c("td", [_vm._v(_vm._s(i.descricao))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(i.tipo))]),
+                  _vm._v(" "),
+                  _vm.mostrarCategorias == 0
+                    ? _c("td", { staticStyle: { "text-align": "center" } }, [
+                        _c(
+                          "a",
+                          {
+                            staticClass: "btn btn-info btn-sm",
+                            attrs: {
+                              href: "/" + _vm.model + "/" + i.id + "/edit"
+                            }
+                          },
+                          [
+                            _c("i", {
+                              staticClass: "fas fa-pencil-alt",
+                              staticStyle: { color: "white" }
+                            })
+                          ]
+                        )
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.mostrarCategorias == 0
+                    ? _c("td", { staticStyle: { "text-align": "center" } }, [
+                        _c(
+                          "form",
+                          {
+                            attrs: {
+                              action: "/" + _vm.model + "/" + i.id,
+                              method: "POST"
+                            }
+                          },
+                          [_vm._t("method"), _vm._v(" "), _vm._m(0, true)],
+                          2
+                        )
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.mostrarCategorias == 1
+                    ? _c(
+                        "td",
+                        { staticStyle: { "text-align": "center" } },
+                        [
+                          _c(
+                            "buttom",
+                            {
+                              staticClass: "btn btn-success btn-sm",
+                              on: {
+                                click: function($event) {
+                                  return _vm.reativarCategoria(i.id)
+                                }
+                              }
+                            },
+                            [_c("i", { staticClass: "far fa-folder" })]
+                          )
+                        ],
+                        1
+                      )
+                    : _vm._e()
+                ])
+              : _vm._e()
           }),
           0
         )
@@ -64533,40 +64657,10 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("thead", { staticClass: "thead-light" }, [
-      _c("tr", [
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Descrição")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Tipo")]),
-        _vm._v(" "),
-        _c(
-          "th",
-          {
-            staticStyle: { "text-align": "center" },
-            attrs: { scope: "col", width: "50px" }
-          },
-          [_vm._v("Editar")]
-        ),
-        _vm._v(" "),
-        _c(
-          "th",
-          {
-            staticStyle: { "text-align": "center" },
-            attrs: { scope: "col", width: "50px" }
-          },
-          [_vm._v("Excluir")]
-        )
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c(
       "button",
       { staticClass: "btn btn-danger btn-sm", attrs: { type: "submit" } },
-      [_c("i", { staticClass: "far fa-trash-alt" })]
+      [_c("i", { staticClass: "far fa-folder-open" })]
     )
   }
 ]

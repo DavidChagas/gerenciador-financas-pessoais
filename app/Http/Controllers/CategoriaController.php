@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Categoria;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class CategoriaController extends Controller{
 
@@ -52,15 +53,20 @@ class CategoriaController extends Controller{
     }
 
     public function destroy(Categoria $categoria){
-        try {
-            $categoria->delete();
-            return redirect('/categorias')->with('success', 'Categoria excluída com sucesso!');
-        } catch (\Illuminate\Database\QueryException $qe) {
-            return redirect('/categorias')->with('error', 'Categoria não pode ser excluída!');
-            // return ['status' => 'errorQuery', 'message' => $qe->getMessage()];
-        } catch (\PDOException $e) {
-            return redirect('/categorias')->with('error', 'Categoria não pode ser excluída, algo inesperado aconteceu.');
-            // return ['status' => 'errorPDO', 'message' => $e->getMessage()];
-        }
+        $categoria->arquivado = 1;
+
+        $categoria->save();
+
+        return redirect('/categorias')->with('success', 'Categoria arquivada com sucesso!');
+    }
+
+    public function reativarCategoria(){
+        $id_categoria = $_GET['idCategoria'];
+        
+        $affected = DB::table('categorias')
+              ->where('id', $id_categoria)
+              ->update(['arquivado' => 0]);
+
+        return;
     }
 }

@@ -50,7 +50,7 @@ class DespesaController extends Controller
 
     public function create(){
         $contas = $this->conta::all()->where('usuario_id', '=', Auth::id())->where('arquivado', '=', 0);
-        $categoriasDespesa = $this->categoria::all()->where('tipo', 'Despesa')->where('usuario_id', '=', Auth::id());
+        $categoriasDespesa = $this->categoria::all()->where('tipo', 'Despesa')->where('usuario_id', '=', Auth::id())->where('arquivado', '=', 0);
         return view('layouts/despesas/cadastrar')->with('contas', $contas)->with('categoriasDespesa', $categoriasDespesa);
     }
 

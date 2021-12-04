@@ -50,7 +50,7 @@ class ReceitaController extends Controller{
 
     public function create(){
         $contas = $this->conta::all()->where('usuario_id', '=', Auth::id())->where('arquivado', '=', 0);
-        $categoriasReceita = $this->categoria::all()->where('tipo', 'Receita')->where('usuario_id', '=', Auth::id());
+        $categoriasReceita = $this->categoria::all()->where('tipo', 'Receita')->where('usuario_id', '=', Auth::id())->where('arquivado', '=', 0);
         return view('layouts/receitas/cadastrar')->with('contas', $contas)->with('categoriasReceita', $categoriasReceita);
     }
 

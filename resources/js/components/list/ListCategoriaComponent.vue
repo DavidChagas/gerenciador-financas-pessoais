@@ -1,5 +1,9 @@
 <template>
     <div class="componente-listagem-tabela">
+        <select class="form-control select-categorias" v-model="mostrarCategorias">
+            <option value="0">Categorias Ativos</option>
+            <option value="1">Categorias Arquivados</option>
+        </select>
         <div class="filtro">
             <select class="form-control" v-model="filtroSelecionado" v-on:change="selecionarFiltro(filtroSelecionado)">
                 <option value="Todos">Todos</option>
@@ -12,20 +16,24 @@
                 <tr>
                     <th scope="col">Descrição</th>
                     <th scope="col">Tipo</th>
-                    <th scope="col" width="50px" style="text-align: center;">Editar</th>
-                    <th scope="col" width="50px" style="text-align: center;">Excluir</th>
+                    <th scope="col" width="50px" style="text-align: center;" v-if="mostrarCategorias == 0">Editar</th>
+                    <th scope="col" width="50px" style="text-align: center;" v-if="mostrarCategorias == 0">Arquivar</th>
+                    <th scope="col" width="50px" style="text-align: center;" v-if="mostrarCategorias == 1">Reativar</th>
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="i in list" v-bind:key="i.id">
+                <tr v-for="i in list" v-bind:key="i.id" v-if="i.arquivado == mostrarCategorias">
                     <td>{{i.descricao}}</td>
                     <td>{{i.tipo}}</td>
-                    <td style="text-align: center;"> <a v-bind:href="'/'+model+'/'+i.id+'/edit'" class="btn btn-info btn-sm"><i class="fas fa-pencil-alt" style="color:white"></i></a> </td>
-                    <td style="text-align: center;"> 
+                    <td style="text-align: center;" v-if="mostrarCategorias == 0"> <a v-bind:href="'/'+model+'/'+i.id+'/edit'" class="btn btn-info btn-sm"><i class="fas fa-pencil-alt" style="color:white"></i></a> </td>
+                    <td style="text-align: center;" v-if="mostrarCategorias == 0"> 
                         <form v-bind:action="'/'+model+'/'+i.id" method="POST">
                             <slot name="method"></slot>
-                            <button type="submit" class="btn btn-danger btn-sm"><i class="far fa-trash-alt"></i></button>
+                            <button type="submit" class="btn btn-danger btn-sm"><i class="far fa-folder-open"></i></button>
                         </form>
+                    </td>
+                    <td style="text-align: center;" v-if="mostrarCategorias == 1">
+                        <buttom class="btn btn-success btn-sm" v-on:click="reativarCategoria(i.id)"><i class="far fa-folder"></i></buttom>
                     </td>
                 </tr>
             </tbody>
@@ -48,7 +56,8 @@
                 todasCategorias: [],
                 visible: false,
                 item: '',
-                filtroSelecionado: 'Todos'
+                filtroSelecionado: 'Todos',
+                mostrarCategorias: 0
             }
         },
         methods: {
@@ -67,6 +76,13 @@
                         this.list = this.todasCategorias.filter(categoria => categoria.tipo == 'Despesa');
                     break;
                 }
+            },
+            reativarCategoria(id){
+                this.$http.get(`/api/reativarCategoria?idCategoria=${id}`).then(() => {
+                   window.location.reload();
+                }, err => {
+                    console.log('err: ');
+                });
             }
         },
         mounted(){
@@ -78,6 +94,31 @@
 <style lang="scss">
     .componente-listagem-tabela{
         position: relative;
+
+        .select-categorias{
+            position: absolute;
+            top: -59px;
+            right: 220px;
+            width: 160px;
+            
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            border-radius: 0px;
+
+            height: 30px;
+            padding: 5px;
+
+            @media(min-width: 768px){
+                width: 200px;
+            }
+
+            &:focus{
+                border-color: transparent;
+                outline: none;
+                box-shadow: none;
+            }
+        }
 
         .filtro{
             position: absolute;

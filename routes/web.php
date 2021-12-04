@@ -9,6 +9,7 @@ Route::get('/api/getTotaisCategorias', [App\Http\Controllers\HomeController::cla
 Route::get('/api/aportes', [App\Http\Controllers\ObjetivoAporteController::class, 'aportes']);
 Route::get('/api/reativarObjetivo', [App\Http\Controllers\ObjetivoController::class, 'reativarObjetivo']);
 Route::get('/api/reativarConta', [App\Http\Controllers\ContaController::class, 'reativarConta']);
+Route::get('/api/reativarCategoria', [App\Http\Controllers\CategoriaController::class, 'reativarCategoria']);
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('auth');
 
