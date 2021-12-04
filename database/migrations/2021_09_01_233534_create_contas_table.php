@@ -17,6 +17,7 @@ class CreateContasTable extends Migration
             $table->increments('id');
             $table->string('descricao');
             $table->integer('valor');
+            $table->boolean('arquivado')->default(0);
 
             $table->integer('usuario_id')->unsigned();
             $table->foreign('usuario_id')->references('id')->on('users');

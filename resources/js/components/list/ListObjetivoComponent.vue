@@ -170,7 +170,7 @@
                 });
             },
             reativarObjetivo(id){
-                this.$http.get(`/api/reativarObjetivo?idObjetivo=${id}`).then(response => {
+                this.$http.get(`/api/reativarObjetivo?idObjetivo=${id}`).then(() => {
                    window.location.reload();
                 }, err => {
                     console.log('err: ');

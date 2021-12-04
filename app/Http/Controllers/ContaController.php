@@ -55,19 +55,20 @@ class ContaController extends Controller{
     }
 
     public function destroy(Conta $conta){
-        try {
-            $conta->receitas->each( function($receita){
-                $receita->delete();
-            });
-            $conta->despesas->each( function($despesa){
-                $despesa->delete();
-            });
-            $conta->delete();
-            return redirect('/contas')->with('success', 'Conta excluida com sucesso!');
-        } catch (\Illuminate\Database\QueryException $qe) {
-            return ['status' => 'errorQuery', 'message' => $qe->getMessage()];
-        } catch (\PDOException $e) {
-            return ['status' => 'errorPDO', 'message' => $e->getMessage()];
-        }
+        $conta->arquivado = 1;
+
+        $conta->save();
+
+        return redirect('/contas')->with('success', 'Conta arquivada com sucesso!');
+    }
+
+    public function reativarConta(){
+        $id_conta = $_GET['idConta'];
+        
+        $affected = DB::table('contas')
+              ->where('id', $id_conta)
+              ->update(['arquivado' => 0]);
+
+        return;
     }
 }
