@@ -8367,7 +8367,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".componente-listagem-tabela {\n  position: relative;\n}\n.componente-listagem-tabela .select-categorias {\n  position: absolute;\n  top: -59px;\n  right: 220px;\n  width: 160px;\n  border-top: none;\n  border-left: none;\n  border-right: none;\n  border-radius: 0px;\n  height: 30px;\n  padding: 5px;\n}\n@media (min-width: 768px) {\n.componente-listagem-tabela .select-categorias {\n    width: 200px;\n}\n}\n.componente-listagem-tabela .select-categorias:focus {\n  border-color: transparent;\n  outline: none;\n  box-shadow: none;\n}\n.componente-listagem-tabela .filtro {\n  position: absolute;\n  top: -67px;\n  right: 0;\n  width: 130px;\n}\n@media (min-width: 768px) {\n.componente-listagem-tabela .filtro {\n    top: -65px;\n    margin-top: 0px;\n    width: 200px;\n}\n}\n.componente-listagem-tabela .filtro select {\n  border-top: none;\n  border-left: none;\n  border-right: none;\n  border-radius: 0px;\n}\n.componente-listagem-tabela .filtro select:focus {\n  border-color: transparent;\n  outline: none;\n  box-shadow: none;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".componente-listagem-tabela {\n  position: relative;\n}\n.componente-listagem-tabela .select-categorias {\n  position: absolute;\n  top: -30px;\n  right: 0px;\n  width: 130px;\n  border-top: none;\n  border-left: none;\n  border-right: none;\n  border-radius: 0px;\n  height: 30px;\n  padding: 0.375rem 0.75rem;\n}\n@media (min-width: 768px) {\n.componente-listagem-tabela .select-categorias {\n    width: 200px;\n    top: -59px;\n    right: 220px;\n}\n}\n.componente-listagem-tabela .select-categorias:focus {\n  border-color: transparent;\n  outline: none;\n  box-shadow: none;\n}\n.componente-listagem-tabela .filtro {\n  position: absolute;\n  top: -67px;\n  right: 0;\n  width: 130px;\n}\n@media (min-width: 768px) {\n.componente-listagem-tabela .filtro {\n    top: -65px;\n    margin-top: 0px;\n    width: 200px;\n}\n}\n.componente-listagem-tabela .filtro select {\n  border-top: none;\n  border-left: none;\n  border-right: none;\n  border-radius: 0px;\n}\n.componente-listagem-tabela .filtro select:focus {\n  border-color: transparent;\n  outline: none;\n  box-shadow: none;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -64476,13 +64476,9 @@ var render = function() {
           }
         },
         [
-          _c("option", { attrs: { value: "0" } }, [
-            _vm._v("Categorias Ativos")
-          ]),
+          _c("option", { attrs: { value: "0" } }, [_vm._v("Ativas")]),
           _vm._v(" "),
-          _c("option", { attrs: { value: "1" } }, [
-            _vm._v("Categorias Arquivados")
-          ])
+          _c("option", { attrs: { value: "1" } }, [_vm._v("Arquivadas")])
         ]
       ),
       _vm._v(" "),

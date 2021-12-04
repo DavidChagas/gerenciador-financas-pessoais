@@ -1,8 +1,8 @@
 <template>
     <div class="componente-listagem-tabela">
         <select class="form-control select-categorias" v-model="mostrarCategorias">
-            <option value="0">Categorias Ativos</option>
-            <option value="1">Categorias Arquivados</option>
+            <option value="0">Ativas</option>
+            <option value="1">Arquivadas</option>
         </select>
         <div class="filtro">
             <select class="form-control" v-model="filtroSelecionado" v-on:change="selecionarFiltro(filtroSelecionado)">
@@ -97,9 +97,9 @@
 
         .select-categorias{
             position: absolute;
-            top: -59px;
-            right: 220px;
-            width: 160px;
+            top: -30px;
+            right: 0px;
+            width: 130px;
             
             border-top: none;
             border-left: none;
@@ -107,10 +107,12 @@
             border-radius: 0px;
 
             height: 30px;
-            padding: 5px;
+            padding: 0.375rem 0.75rem;
 
             @media(min-width: 768px){
                 width: 200px;
+                top: -59px;
+                right: 220px;
             }
 
             &:focus{
