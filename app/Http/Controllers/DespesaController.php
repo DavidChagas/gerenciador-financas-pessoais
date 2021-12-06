@@ -57,24 +57,47 @@ class DespesaController extends Controller
     public function store(Request $request){
         $request_valor_formatado = (int) preg_replace('/\D/', '', $request->input('valor'));
 
-        $despesa =  $this->despesa;
-        $despesa->valor = $request_valor_formatado;
-        $despesa->descricao = $request->input('descricao');
-        $despesa->status = $request->input('status');
-        $despesa->data = $request->input('data');
-        $despesa->observacao = $request->input('observacao');
-        $despesa->conta_id = $request->input('conta');
-        $despesa->categoria_id = $request->input('categoria');
-        $despesa->usuario_id = $request->user()->id;
+        if($request->input('fixa') == 'sim' && $request->input('qtd_meses') > 0){
+            for ($i=0; $i <= $request->input('qtd_meses'); $i++) { 
+                $this->despesa = new Despesa();
 
-        $despesa->save();
+                $despesa =  $this->despesa;
+                $despesa->valor = $request_valor_formatado;
+                $despesa->descricao = $request->input('descricao');
+                $despesa->status = $i == 0 ? $request->input('status') : 'nao-pago';
+                $despesa->data = date('Y-m-d', strtotime("+".$i." months", strtotime($request->input('data'))));
+                $despesa->observacao = $request->input('observacao');
+                $despesa->conta_id = $request->input('conta');
+                $despesa->categoria_id = $request->input('categoria');
+                $despesa->usuario_id = $request->user()->id;
 
-        // Atualiza Saldo da Conta Selecionada
-        $conta = DB::table('contas')->where('id', '=', $despesa->conta_id)->get();
-        $valor_atualizado = (int) $conta[0]->valor - $despesa->valor;
-        DB::table('contas')->where('id', $despesa->conta_id)->update(['valor' => $valor_atualizado]);
+                $despesa->save();
+                //Atualiza Saldo da Conta Selecionada
+                $conta = DB::table('contas')->where('id', '=', $despesa->conta_id)->get();
+                $valor_atualizado = $despesa->valor + (int) $conta[0]->valor;
+                DB::table('contas')->where('id', $despesa->conta_id)->update(['valor' => $valor_atualizado]);
+            }
 
-        return redirect('/despesas')->with('success', 'Despesa salva com sucesso!');
+            return redirect('/despesas')->with('success', 'Despesas criadas com sucesso!');
+        }else{
+            $despesa = $this->despesa;
+            $despesa->valor = $request_valor_formatado;
+            $despesa->descricao = $request->input('descricao');
+            $despesa->status = $request->input('status');
+            $despesa->data = $request->input('data');
+            $despesa->observacao = $request->input('observacao');
+            $despesa->conta_id = $request->input('conta');
+            $despesa->categoria_id = $request->input('categoria');
+            $despesa->usuario_id = $request->user()->id;
+
+            $despesa->save();
+            //Atualiza Saldo da Conta Selecionada
+            $conta = DB::table('contas')->where('id', '=', $despesa->conta_id)->get();
+            $valor_atualizado = $despesa->valor + (int) $conta[0]->valor;
+            DB::table('contas')->where('id', $despesa->conta_id)->update(['valor' => $valor_atualizado]);
+
+            return redirect('/despesas')->with('success', 'Despesa criada com sucesso!');
+        }
     }
 
     public function show(Despesa $despesa){
