@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UsuarioController extends Controller{
     private $usuario;
@@ -42,7 +43,10 @@ class UsuarioController extends Controller{
     public function update(Request $request, User $usuario){
         $usuario->nome = $request->input('nome');
         $usuario->email = $request->input('email');
-        $usuario->data_nascimento = $request->input('data_nascimento');
+
+        if( strlen($request->input('senha')) > 2 ){
+            $usuario->password = Hash::make($request->input('senha'));
+        }
        
         $usuario->save();
 

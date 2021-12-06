@@ -17,9 +17,21 @@
                         <input class="form-control" type="text" name="email" v-bind:value="usuarioObj.email">
                     </div>
                 </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>Nova Senha</label>
+                        <input class="form-control" type="password" name="senha" v-model="novaSenha" minlength="3">
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label style="width: 100%">Repita a senha <small v-if="senhaIncorreta && novaSenha != ''"><b style="color: red; float: right; margin-top: 4px">As senhas não conferem</b></small></label>
+                        <input class="form-control" type="password" v-model="confereSenha" @input="conferirSenha()">
+                    </div>
+                </div>
             </div>
             <button class="btn btn-danger" type="button" v-on:click="voltar()">Voltar</button>
-            <button class="btn btn-primary" type="submit">Alterar</button>
+            <button class="btn btn-primary" type="submit" :disabled="senhaIncorreta && novaSenha != ''">Alterar</button>
         </form>
     </div>
 </template>
@@ -35,7 +47,10 @@
 
         data(){
             return {
-                usuarioObj: {}
+                usuarioObj: {},
+                novaSenha: '',
+                confereSenha: '',
+                senhaIncorreta: false
             }
         },
 
@@ -46,6 +61,9 @@
         methods:{
             voltar(){
                 window.history.back();
+            },
+            conferirSenha(){
+                this.senhaIncorreta = this.novaSenha != this.confereSenha ? true : false;
             }
         },
 

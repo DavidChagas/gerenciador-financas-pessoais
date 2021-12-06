@@ -2808,17 +2808,35 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['action', 'method', 'token', 'usuario'],
   data: function data() {
     return {
-      usuarioObj: {}
+      usuarioObj: {},
+      novaSenha: '',
+      confereSenha: '',
+      senhaIncorreta: false
     };
   },
   created: function created() {},
   methods: {
     voltar: function voltar() {
       window.history.back();
+    },
+    conferirSenha: function conferirSenha() {
+      this.senhaIncorreta = this.novaSenha != this.confereSenha ? true : false;
     }
   },
   mounted: function mounted() {
@@ -64707,6 +64725,84 @@ var render = function() {
                 domProps: { value: _vm.usuarioObj.email }
               })
             ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-6" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", [_vm._v("Nova Senha")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.novaSenha,
+                    expression: "novaSenha"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "password", name: "senha", minlength: "3" },
+                domProps: { value: _vm.novaSenha },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.novaSenha = $event.target.value
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-6" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { staticStyle: { width: "100%" } }, [
+                _vm._v("Repita a senha "),
+                _vm.senhaIncorreta && _vm.novaSenha != ""
+                  ? _c("small", [
+                      _c(
+                        "b",
+                        {
+                          staticStyle: {
+                            color: "red",
+                            float: "right",
+                            "margin-top": "4px"
+                          }
+                        },
+                        [_vm._v("As senhas não conferem")]
+                      )
+                    ])
+                  : _vm._e()
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.confereSenha,
+                    expression: "confereSenha"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "password" },
+                domProps: { value: _vm.confereSenha },
+                on: {
+                  input: [
+                    function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.confereSenha = $event.target.value
+                    },
+                    function($event) {
+                      return _vm.conferirSenha()
+                    }
+                  ]
+                }
+              })
+            ])
           ])
         ]),
         _vm._v(" "),
@@ -64726,7 +64822,13 @@ var render = function() {
         _vm._v(" "),
         _c(
           "button",
-          { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+          {
+            staticClass: "btn btn-primary",
+            attrs: {
+              type: "submit",
+              disabled: _vm.senhaIncorreta && _vm.novaSenha != ""
+            }
+          },
           [_vm._v("Alterar")]
         )
       ],
