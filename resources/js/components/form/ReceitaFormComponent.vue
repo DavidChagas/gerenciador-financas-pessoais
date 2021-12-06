@@ -58,6 +58,33 @@
                     </div>
                 </div>
             </div>
+            <div class="row" v-if="!receitaObj.id">
+                <div class="col-sm-12">
+                    <div class="painel-receita-fixa">
+                        <div class="descricao">Ao informar que é uma receita fixa será cadastrado automaticamente durante a quantidade de meses informadas essa receita.<br>
+                        <b>Atenção</b>, após cadastrar um receita fixa só será possível editar as receitas individualmente.
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Receita fixa?</label>
+                                    <select class="form-control" name="fixa" required>
+                                        <option value="sim">Sim</option>
+                                        <option value="nao">Não</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Quantidade de meses</label>
+                                    <input class="form-control" type="number" name="qtd_meses" min="0" max="12">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    
+            </div>
             <button class="btn btn-danger" type="button" v-on:click="voltar()">Voltar</button>
             <button class="btn btn-primary" type="submit">{{receitaObj.id ? 'Editar' : 'Cadastrar'}}</button>
         </form>
@@ -106,4 +133,17 @@
 </script>
 
 <style lang="scss">
+    .componente-receita-form{
+        .painel-receita-fixa{
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            background-color: whitesmoke;
+            border-radius: 5px;
+
+            .descricao{
+                margin-bottom: 10px;
+                font-size: 12px;
+            }
+        }
+    }
 </style>

@@ -57,24 +57,49 @@ class ReceitaController extends Controller{
     public function store(Request $request){
         $request_valor_formatado = (int) preg_replace('/\D/', '', $request->input('valor'));
 
-        $receita =  $this->receita;
-        $receita->valor = $request_valor_formatado;
-        $receita->descricao = $request->input('descricao');
-        $receita->status = $request->input('status');
-        $receita->data = $request->input('data');
-        $receita->observacao = $request->input('observacao');
-        $receita->conta_id = $request->input('conta');
-        $receita->categoria_id = $request->input('categoria');
-        $receita->usuario_id = $request->user()->id;
+        if($request->input('fixa') == 'sim' && $request->input('qtd_meses') > 0){
+            for ($i=0; $i <= $request->input('qtd_meses'); $i++) { 
+                $this->receita = new Receita();
 
-        $receita->save();
+                $receita =  $this->receita;
+                $receita->valor = $request_valor_formatado;
+                $receita->descricao = $request->input('descricao');
+                $receita->status = $i == 0 ? $request->input('status') : 'nao-pago';
+                $receita->data = date('Y-m-d', strtotime("+".$i." months", strtotime($request->input('data'))));
+                $receita->observacao = $request->input('observacao');
+                $receita->conta_id = $request->input('conta');
+                $receita->categoria_id = $request->input('categoria');
+                $receita->usuario_id = $request->user()->id;
 
-        // Atualiza Saldo da Conta Selecionada
-        $conta = DB::table('contas')->where('id', '=', $receita->conta_id)->get();
-        $valor_atualizado = $receita->valor + (int) $conta[0]->valor;
-        DB::table('contas')->where('id', $receita->conta_id)->update(['valor' => $valor_atualizado]);
+                $receita->save();
+                //Atualiza Saldo da Conta Selecionada
+                $conta = DB::table('contas')->where('id', '=', $receita->conta_id)->get();
+                $valor_atualizado = $receita->valor + (int) $conta[0]->valor;
+                DB::table('contas')->where('id', $receita->conta_id)->update(['valor' => $valor_atualizado]);
+            }
 
-        return redirect('/receitas')->with('success', 'Receita salva com sucesso!');
+            return redirect('/receitas')->with('success', 'Receitas criadas com sucesso!');
+        }else{
+            $receita = $this->receita;
+            $receita->valor = $request_valor_formatado;
+            $receita->descricao = $request->input('descricao');
+            $receita->status = $request->input('status');
+            $receita->data = $request->input('data');
+            $receita->observacao = $request->input('observacao');
+            $receita->conta_id = $request->input('conta');
+            $receita->categoria_id = $request->input('categoria');
+            $receita->usuario_id = $request->user()->id;
+
+            $receita->save();
+            //Atualiza Saldo da Conta Selecionada
+            $conta = DB::table('contas')->where('id', '=', $receita->conta_id)->get();
+            $valor_atualizado = $receita->valor + (int) $conta[0]->valor;
+            DB::table('contas')->where('id', $receita->conta_id)->update(['valor' => $valor_atualizado]);
+
+            return redirect('/receitas')->with('success', 'Receita criada com sucesso!');
+        }
+        
+        
     }
 
     public function show(Receita $receita){
