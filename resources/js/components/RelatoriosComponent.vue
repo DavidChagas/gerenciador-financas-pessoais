@@ -1,7 +1,17 @@
 <template>
     <div class="componente-relatorios">
-        <div class="titulo"><h1>Relatórios</h1></div>
-        <div class="selects">
+        <small class="d-print-block" style="display:none; position: absolute; top: 10px; right: 10px;">
+            Relatório referente à {{this.retornaNomeMes(dataSelecionada.split('-')[1])+' '+dataSelecionada.split('-')[0]}}
+        </small>
+        <div v-switch="relatorioSelecionado" class="titulo d-print-block" style="display:none;">
+            <h1 v-case="'balanco-mensal'">Balanço Mensal</h1>
+            <h1 v-case="'despesas-por-categoria'">Total de despesas por categoria</h1>
+            <h1 v-case="'receitas-por-categoria'">Total de receitas por categoria</h1>
+            <h1 v-case="'despesas-por-conta'">Total de despesas por conta</h1>
+            <h1 v-case="'receitas-por-conta'">Total de receitas por conta</h1>
+        </div>
+        <div class="titulo d-print-none"><h1>Relatórios</h1></div>
+        <div class="selects d-print-none">
             <div class="datas">
                 <small>Escolha um relatório</small>
                 <select class="form-control" v-model="relatorioSelecionado" v-on:change="getRelatorio(relatorioSelecionado, dataSelecionada)">
@@ -47,6 +57,10 @@
                 </tr>
             </tbody>
         </table>
+        <button class="btn btn-info btn-sm d-print-none" onclick="window.print()" style="float: right" v-if="relatorioSelecionado != ''">
+            <i class="fas fa-print"></i> Imprimir
+        </button>
+        <img src="/images/img-relatorio.jpg" class="d-print-block" style="display:none; opacity: .2; position: absolute; bottom: 0px; left: 0px;">
     </div>
 </template>
 

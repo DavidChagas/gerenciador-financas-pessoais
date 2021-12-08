@@ -8,8 +8,10 @@ require('./bootstrap');
 
 window.Vue = require('vue').default;
 window.VueResource = require('vue-resource').default;
+window.VSwitch = require('v-switch-case').default;
 
 Vue.use(VueResource);
+Vue.use(VSwitch);
 
 /**
  * The following block of code may be used to automatically register your
