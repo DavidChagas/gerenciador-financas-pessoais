@@ -74,7 +74,7 @@ class DespesaController extends Controller
                 $despesa->save();
                 //Atualiza Saldo da Conta Selecionada
                 $conta = DB::table('contas')->where('id', '=', $despesa->conta_id)->get();
-                $valor_atualizado = $despesa->valor + (int) $conta[0]->valor;
+                $valor_atualizado = (int) $conta[0]->valor - $despesa->valor;
                 DB::table('contas')->where('id', $despesa->conta_id)->update(['valor' => $valor_atualizado]);
             }
 
@@ -93,7 +93,7 @@ class DespesaController extends Controller
             $despesa->save();
             //Atualiza Saldo da Conta Selecionada
             $conta = DB::table('contas')->where('id', '=', $despesa->conta_id)->get();
-            $valor_atualizado = $despesa->valor + (int) $conta[0]->valor;
+            $valor_atualizado = (int) $conta[0]->valor - $despesa->valor;
             DB::table('contas')->where('id', $despesa->conta_id)->update(['valor' => $valor_atualizado]);
 
             return redirect('/despesas')->with('success', 'Despesa criada com sucesso!');
