@@ -4,7 +4,7 @@
             <option value="0">Contas Ativos</option>
             <option value="1">Contas Arquivados</option>
         </select>
-        <table class="table" v-if="list.length">
+        <table class="table table-hover" v-if="list.length">
             <thead class="thead-light">
                 <tr>
                     <th scope="col">Descrição</th>

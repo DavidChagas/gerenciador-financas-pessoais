@@ -11,6 +11,8 @@ Route::get('/api/reativarObjetivo', [App\Http\Controllers\ObjetivoController::cl
 Route::get('/api/reativarConta', [App\Http\Controllers\ContaController::class, 'reativarConta']);
 Route::get('/api/reativarCategoria', [App\Http\Controllers\CategoriaController::class, 'reativarCategoria']);
 
+Route::get('/getRelatorios', [App\Http\Controllers\RelatoriosController::class, 'getRelatorios']);
+
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('auth');
 
 Route::get('/usuario/edit', [App\Http\Controllers\UsuarioController::class, 'edit'])->middleware('auth');
@@ -55,6 +57,10 @@ Route::delete('/objetivos/{objetivo}', [App\Http\Controllers\ObjetivoController:
 Route::post('/objetivoAportes', [App\Http\Controllers\ObjetivoAporteController::class, 'store'])->middleware('auth');
 Route::delete('/objetivoAportes/{objetivoAporte}', [App\Http\Controllers\ObjetivoAporteController::class, 'destroy'])->middleware('auth');
 Route::put('/objetivoAportes/{objetivoAporte}', [App\Http\Controllers\ObjetivoAporteController::class, 'update'])->middleware('auth');
+
+Route::get('/relatorios', function(){
+	return view('layouts/relatorios');
+});
 
 // Route::get('/home', function(){
 // 	return view('layouts/home');

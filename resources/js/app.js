@@ -41,6 +41,8 @@ Vue.component('conta-list-component', require('./components/list/ListContaCompon
 Vue.component('categoria-list-component', require('./components/list/ListCategoriaComponent.vue').default);
 Vue.component('objetivo-list-component', require('./components/list/ListObjetivoComponent.vue').default);
 
+Vue.component('relatorios-component', require('./components/RelatoriosComponent.vue').default);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

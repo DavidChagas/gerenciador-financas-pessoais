@@ -306,6 +306,8 @@
             });
 
             if(!this.datas.includes(mesAtual)) this.datas.unshift(mesAtual);
+
+            localStorage.setItem("datasFormatadas", this.datasFormatadas);
             
             this.datasFormatadas = this.datas.map(data =>{
                 return {data: data, descricao: this.retornaNomeMes(data.split('-')[1])+' '+data.split('-')[0]}

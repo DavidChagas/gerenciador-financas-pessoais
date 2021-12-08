@@ -16,6 +16,7 @@
                     <a class="acao" href="/receitas"><i class="fas fa-chart-line" style="margin-right: 7px"></i> Receitas</a>
                     <a class="acao" href="/despesas"><i class="fas fa-chart-line" style="margin-right: 7px; transform: rotate(180deg)"></i> Despesas</a>
                     <a class="acao" href="/objetivos"><i class="fas fa-bullseye" style="margin-right: 7px;"></i> Objetivos</a>
+                    <a class="acao" href="/relatorios"><i class="fas fa-file-invoice-dollar" style="margin-right: 7px;"></i> Relatórios</a>
                     <!-- <a class="acao">Objetivos</a> -->
                     <!-- <a class="acao">Investimentos</a> -->
                 </div>
