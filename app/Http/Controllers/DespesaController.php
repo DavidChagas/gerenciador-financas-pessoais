@@ -152,4 +152,8 @@ class DespesaController extends Controller
             return ['status' => 'errorPDO', 'message' => $e->getMessage()];
         }
     }
+
+    public function testeAxios(){
+        echo 'topzera';
+    }
 }

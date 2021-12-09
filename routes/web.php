@@ -45,7 +45,7 @@ Route::get('/despesas/create', [App\Http\Controllers\DespesaController::class, '
 Route::post('/despesas', [App\Http\Controllers\DespesaController::class, 'store'])->middleware('auth');
 Route::get('/despesas/{despesa}/edit', [App\Http\Controllers\DespesaController::class, 'edit'])->middleware('auth');
 Route::put('/despesas/{despesa}', [App\Http\Controllers\DespesaController::class, 'update'])->middleware('auth');
-Route::delete('/despesas/{despesa}', [App\Http\Controllers\DespesaController::class, 'destroy'])->middleware('auth');
+Route::post('/despesas/delete/{despesa}', [App\Http\Controllers\DespesaController::class, 'destroy'])->middleware('auth');
 
 Route::get('/objetivos', [App\Http\Controllers\ObjetivoController::class, 'index'])->name('objetivo.listar')->middleware('auth');
 Route::get('/objetivos/create', [App\Http\Controllers\ObjetivoController::class, 'create'])->name('objetivo.cadastrar')->middleware('auth');

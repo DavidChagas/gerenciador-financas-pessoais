@@ -25,7 +25,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="i in despesas" v-bind:key="i.id">
+                <tr v-for="(i, index) in despesas" v-bind:key="i.id">
                     <td>R$ {{formatPrice(i.valor)}}</td>
                     <td>{{i.descricao}}</td>
                     <td>{{i.conta}}</td>
@@ -34,9 +34,9 @@
                     <td>{{i.status == 'pago' ? 'Pago' : 'Não Pago'}}</td>
                     <td style="text-align: center;" class="d-print-none"> <a v-bind:href="'/'+model+'/'+i.id+'/edit'" class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i></a> </td>
                     <td style="text-align: center;" class="d-print-none"> 
-                        <form v-bind:action="'/'+model+'/'+i.id" method="POST">
-                            <slot name="method"></slot>
-                            <button type="submit" class="btn btn-danger btn-sm"><i class="far fa-trash-alt"></i></button>
+                        <form>
+                            <!-- <slot name="method"></slot> -->
+                            <button type="button" class="btn btn-danger btn-sm" v-on:click="excluirDespesa(i.id, index)"><i class="far fa-trash-alt"></i></button>
                         </form>
                     </td>
                 </tr>
@@ -51,6 +51,7 @@
 
 <script>
     import moment from 'moment';
+    import swal from 'sweetalert';
     import funcoes from "../../funcoes"
     
     export default {
@@ -83,6 +84,37 @@
             },
             abrirModal() {
                 this.visible = true;
+            },
+            excluirDespesa(id, index){
+                swal({
+                title: "Deseja realmente deletar essa despesa?",
+                text: "Essa ação é irreversível!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        axios.post(`/despesas/delete/${id}`).then(response => {
+                            this.despesas.splice(index, 1);
+                            swal("Despesa deletada com sucesso!", {
+                            icon: "success",
+                            });
+                        },err =>{
+                            console.log('err', err);
+                            swal("Algo de errado aconteceu...", {
+                            icon: "warning",
+                            });
+                        });
+                    }
+                });
+                // if (confirm("Do you really want to delete it?")) {
+                //     axios.post(`/despesas/delete/${id}`).then(response => {
+                //         this.despesas.splice(index, 1);
+                //     },err =>{
+                //         console.log('err', err)
+                //     });
+                // }
             },
             mostrarDespesas(mesSelecionado){
                 this.despesas = this.list.filter(despesa =>{
