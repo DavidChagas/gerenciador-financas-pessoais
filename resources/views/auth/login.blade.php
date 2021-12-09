@@ -5,7 +5,7 @@
     <div class="titulo">
         Gerenciador de Finanças Pessoais
     </div>
-    <form method="POST" action="{{ route('login') }}">
+    <form method="POST" action="{{ route('login') }}" autocomplete="off">
         @csrf
 
         <div class="form-group">
@@ -40,18 +40,18 @@
 
         <div class="form-group">
             
-            <button type="submit" class="btn btn-primary">
-                {{ __('Entrar') }}
+            <button type="submit" class="btn btn-block btn-primary" style="margin-top: 10px;height: 46px;font-size: 22px;">
+            <i class="fas fa-sign-in-alt"></i> {{ __('Entrar') }}
             </button>
 
-            <!-- @if (Route::has('password.request'))
-                <a class="btn btn-link" href="{{ route('password.request') }}">
-                    {{ __('Esqueceu sua Senha?') }}
-                </a>
-            @endif -->
-
             @if (Route::has('register'))
-                <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline">Não tenho Conta</a>
+                <a href="{{ route('register') }}" class="btn btn-link" style="color: #90979d; margin-top: 10px">Não tenho Conta</a>
+            @endif
+
+            @if (Route::has('password.request'))
+                <a class="btn btn-link" href="{{ route('password.request') }}" style="float: right; color: #90979d; margin-top: 10px">
+                    {{ __('Esqueci minha Senha') }} <i class="far fa-frown"></i>
+                </a>
             @endif
             
         </div>
