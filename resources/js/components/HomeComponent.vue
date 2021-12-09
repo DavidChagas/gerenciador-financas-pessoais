@@ -55,6 +55,8 @@
                 </div>
             </div>
         </div>
+        <hr style="margin-bottom: 5px;">
+        <div style="text-align: center; width: 100%; margin-bottom: 10px; color: #999"><small>165509 - David Chagas</small></div>
     </div>
 </template>
 
@@ -397,6 +399,7 @@
 
             @media(min-width: 992px){
                 grid-template-columns: repeat(2, 1fr);
+                grid-column-gap: 30px;
             }
 
             .infos{
@@ -404,6 +407,8 @@
                 display: flex;
                 flex-direction: column;
                 justify-content: space-around;
+                box-shadow: 0 0 10px #ddd;
+                border-radius: 5px;
 
                 @media(min-width: 768px){
                     flex-direction: row;
@@ -435,8 +440,12 @@
                 position: relative;
                 margin: 0 auto;
 
+                box-shadow: 0 0 10px #ddd;
+                border-radius: 5px;
+
                 @media(min-width: 992px){
-                    width: 500px;
+                    width: 486px;
+                    padding: 20px;
                 }
 
                 .semInfos{
