@@ -3549,7 +3549,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       sweetalert__WEBPACK_IMPORTED_MODULE_1___default()({
-        title: "Deseja realmente deletar essa despesa?",
+        title: "Deseja realmente excluir essa despesa?",
         text: "Essa ação é irreversível!",
         icon: "warning",
         buttons: true,
@@ -3558,6 +3558,12 @@ __webpack_require__.r(__webpack_exports__);
         if (willDelete) {
           axios.post("/despesas/delete/".concat(id)).then(function (response) {
             _this.despesas.splice(index, 1);
+
+            _this.list.forEach(function (item, indexItem) {
+              if (item.id == id) {
+                _this.list.splice(indexItem, 1);
+              }
+            });
 
             sweetalert__WEBPACK_IMPORTED_MODULE_1___default()("Despesa deletada com sucesso!", {
               icon: "success"
@@ -3569,13 +3575,7 @@ __webpack_require__.r(__webpack_exports__);
             });
           });
         }
-      }); // if (confirm("Do you really want to delete it?")) {
-      //     axios.post(`/despesas/delete/${id}`).then(response => {
-      //         this.despesas.splice(index, 1);
-      //     },err =>{
-      //         console.log('err', err)
-      //     });
-      // }
+      });
     },
     mostrarDespesas: function mostrarDespesas(mesSelecionado) {
       this.despesas = this.list.filter(function (despesa) {
@@ -3922,7 +3922,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _funcoes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../funcoes */ "./resources/js/funcoes.js");
+/* harmony import */ var sweetalert__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! sweetalert */ "./node_modules/sweetalert/dist/sweetalert.min.js");
+/* harmony import */ var sweetalert__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(sweetalert__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _funcoes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../funcoes */ "./resources/js/funcoes.js");
 //
 //
 //
@@ -3974,6 +3976,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -3994,13 +3997,45 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     formatPrice: function formatPrice(value) {
-      return _funcoes__WEBPACK_IMPORTED_MODULE_1__["default"].formatPrice(value);
+      return _funcoes__WEBPACK_IMPORTED_MODULE_2__["default"].formatPrice(value);
     },
     formatDate: function formatDate(value) {
       return moment__WEBPACK_IMPORTED_MODULE_0___default()(String(value)).format('DD/MM/YYYY');
     },
     abrirModal: function abrirModal() {
       this.visible = true;
+    },
+    excluirReceita: function excluirReceita(id, index) {
+      var _this = this;
+
+      sweetalert__WEBPACK_IMPORTED_MODULE_1___default()({
+        title: "Deseja realmente excluir essa receita?",
+        text: "Essa ação é irreversível!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true
+      }).then(function (willDelete) {
+        if (willDelete) {
+          axios.post("/receitas/delete/".concat(id)).then(function (response) {
+            _this.receitas.splice(index, 1);
+
+            _this.list.forEach(function (item, indexItem) {
+              if (item.id == id) {
+                _this.list.splice(indexItem, 1);
+              }
+            });
+
+            sweetalert__WEBPACK_IMPORTED_MODULE_1___default()("Receita deletada com sucesso!", {
+              icon: "success"
+            });
+          }, function (err) {
+            console.log('err', err);
+            sweetalert__WEBPACK_IMPORTED_MODULE_1___default()("Algo de errado aconteceu...", {
+              icon: "warning"
+            });
+          });
+        }
+      });
     },
     mostrarReceitas: function mostrarReceitas(mesSelecionado) {
       this.receitas = this.list.filter(function (receita) {
@@ -4080,7 +4115,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
-    var _this = this;
+    var _this2 = this;
 
     var mesAtual = moment__WEBPACK_IMPORTED_MODULE_0___default()().format('YYYY-MM');
     this.list = JSON.parse(this.infos);
@@ -4089,15 +4124,15 @@ __webpack_require__.r(__webpack_exports__);
       var data = receita.data.split('-');
       var dataFormatada = data[0] + '-' + data[1];
 
-      if (!_this.datas.includes(dataFormatada)) {
-        _this.datas.push(dataFormatada);
+      if (!_this2.datas.includes(dataFormatada)) {
+        _this2.datas.push(dataFormatada);
       }
     });
     if (!this.datas.includes(mesAtual)) this.datas.unshift(mesAtual);
     this.datasFormatadas = this.datas.map(function (data) {
       return {
         data: data,
-        descricao: _this.retornaNomeMes(data.split('-')[1]) + ' ' + data.split('-')[0]
+        descricao: _this2.retornaNomeMes(data.split('-')[1]) + ' ' + data.split('-')[0]
       };
     });
     this.dataSelecionada = mesAtual;
@@ -67322,7 +67357,7 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "tbody",
-                _vm._l(_vm.receitas, function(i) {
+                _vm._l(_vm.receitas, function(i, index) {
                   return _c("tr", { key: i.id }, [
                     _c("td", [
                       _vm._v("R$ " + _vm._s(_vm.formatPrice(i.valor)))
@@ -67369,17 +67404,21 @@ var render = function() {
                         staticStyle: { "text-align": "center" }
                       },
                       [
-                        _c(
-                          "form",
-                          {
-                            attrs: {
-                              action: "/" + _vm.model + "/" + i.id,
-                              method: "POST"
-                            }
-                          },
-                          [_vm._t("method"), _vm._v(" "), _vm._m(1, true)],
-                          2
-                        )
+                        _c("form", [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-danger btn-sm",
+                              attrs: { type: "button" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.excluirReceita(i.id, index)
+                                }
+                              }
+                            },
+                            [_c("i", { staticClass: "far fa-trash-alt" })]
+                          )
+                        ])
                       ]
                     )
                   ])
@@ -67409,16 +67448,6 @@ var staticRenderFns = [
         attrs: { onclick: "window.print()" }
       },
       [_c("i", { staticClass: "fas fa-print" })]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      { staticClass: "btn btn-danger btn-sm", attrs: { type: "submit" } },
-      [_c("i", { staticClass: "far fa-trash-alt" })]
     )
   }
 ]

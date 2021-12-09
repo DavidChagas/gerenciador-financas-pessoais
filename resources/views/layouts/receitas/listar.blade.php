@@ -12,10 +12,10 @@
 <a href="{{route('receita.cadastrar')}}" class="btn btn-primary d-print-none" style="margin-bottom: 40px;">Cadastrar Nova Receita</a>
 
 <receita-list-component infos="{{ $infos }}" datas_receitas="{{ $datas_receitas }}" token="{{ csrf_token() }}" model="receitas">
-	<span slot="method">
+	<!-- <span slot="method">
 		@csrf
 		{{ method_field('DELETE') }}
-	</span>
+	</span> -->
 </receita-list-component>
 
 @endsection

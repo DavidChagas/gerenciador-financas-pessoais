@@ -25,7 +25,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="i in receitas" v-bind:key="i.id">
+                <tr v-for="(i, index) in receitas" v-bind:key="i.id">
                     <td>R$ {{formatPrice(i.valor)}}</td>
                     <td>{{i.descricao}}</td>
                     <td>{{i.conta}}</td>
@@ -34,9 +34,9 @@
                     <td>{{i.status == 'pago' ? 'Recebido' : 'Não Recebido'}}</td>
                     <td style="text-align: center;" class="d-print-none"> <a v-bind:href="'/'+model+'/'+i.id+'/edit'" class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i></a> </td>
                     <td style="text-align: center;" class="d-print-none"> 
-                        <form v-bind:action="'/'+model+'/'+i.id" method="POST">
-                            <slot name="method"></slot>
-                            <button type="submit" class="btn btn-danger btn-sm"><i class="far fa-trash-alt"></i></button>
+                        <form>
+                            <!-- <slot name="method"></slot> -->
+                            <button type="button" class="btn btn-danger btn-sm" v-on:click="excluirReceita(i.id, index)"><i class="far fa-trash-alt"></i></button>
                         </form>
                     </td>
                 </tr>
@@ -51,6 +51,7 @@
 
 <script>
     import moment from 'moment';
+    import swal from 'sweetalert';
     import funcoes from "../../funcoes"
 
     export default {
@@ -83,6 +84,35 @@
             },
             abrirModal() {
                 this.visible = true;
+            },
+            excluirReceita(id, index){
+                swal({
+                title: "Deseja realmente excluir essa receita?",
+                text: "Essa ação é irreversível!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        axios.post(`/receitas/delete/${id}`).then(response => {
+                            this.receitas.splice(index, 1);
+                            this.list.forEach((item, indexItem) =>{
+                                if(item.id == id){
+                                    this.list.splice(indexItem, 1);
+                                }
+                            })
+                            swal("Receita deletada com sucesso!", {
+                            icon: "success",
+                            });
+                        },err =>{
+                            console.log('err', err);
+                            swal("Algo de errado aconteceu...", {
+                            icon: "warning",
+                            });
+                        });
+                    }
+                });
             },
             mostrarReceitas(mesSelecionado){
                 this.receitas = this.list.filter(receita =>{

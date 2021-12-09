@@ -87,7 +87,7 @@
             },
             excluirDespesa(id, index){
                 swal({
-                title: "Deseja realmente deletar essa despesa?",
+                title: "Deseja realmente excluir essa despesa?",
                 text: "Essa ação é irreversível!",
                 icon: "warning",
                 buttons: true,
@@ -97,6 +97,11 @@
                     if (willDelete) {
                         axios.post(`/despesas/delete/${id}`).then(response => {
                             this.despesas.splice(index, 1);
+                            this.list.forEach((item, indexItem) =>{
+                                if(item.id == id){
+                                    this.list.splice(indexItem, 1);
+                                }
+                            })
                             swal("Despesa deletada com sucesso!", {
                             icon: "success",
                             });
@@ -108,13 +113,6 @@
                         });
                     }
                 });
-                // if (confirm("Do you really want to delete it?")) {
-                //     axios.post(`/despesas/delete/${id}`).then(response => {
-                //         this.despesas.splice(index, 1);
-                //     },err =>{
-                //         console.log('err', err)
-                //     });
-                // }
             },
             mostrarDespesas(mesSelecionado){
                 this.despesas = this.list.filter(despesa =>{
