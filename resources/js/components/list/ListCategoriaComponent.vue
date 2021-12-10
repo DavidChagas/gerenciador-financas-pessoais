@@ -25,15 +25,15 @@
                 <tr v-for="i in list" v-bind:key="i.id" v-if="i.arquivado == mostrarCategorias">
                     <td>{{i.descricao}}</td>
                     <td>{{i.tipo}}</td>
-                    <td style="text-align: center;" v-if="mostrarCategorias == 0"> <a v-bind:href="'/'+model+'/'+i.id+'/edit'" class="btn btn-info btn-sm"><i class="fas fa-pencil-alt" style="color:white"></i></a> </td>
+                    <td style="text-align: center;" v-if="mostrarCategorias == 0"> <a v-bind:href="'/'+model+'/'+i.id+'/edit'" class="btn btn-info btn-sm" style="padding: 6px; line-height: 1;"><i class="fas fa-pencil-alt" style="color:white"></i></a> </td>
                     <td style="text-align: center;" v-if="mostrarCategorias == 0"> 
                         <form v-bind:action="'/'+model+'/'+i.id" method="POST">
                             <slot name="method"></slot>
-                            <button type="submit" class="btn btn-danger btn-sm"><i class="far fa-folder-open"></i></button>
+                            <button type="submit" class="btn btn-danger btn-sm" style="padding: 6px; line-height: 1;"><i class="far fa-folder-open"></i></button>
                         </form>
                     </td>
                     <td style="text-align: center;" v-if="mostrarCategorias == 1">
-                        <buttom class="btn btn-success btn-sm" v-on:click="reativarCategoria(i.id)"><i class="far fa-folder"></i></buttom>
+                        <buttom class="btn btn-success btn-sm" v-on:click="reativarCategoria(i.id)" style="padding: 6px; line-height: 1;"><i class="far fa-folder"></i></buttom>
                     </td>
                 </tr>
             </tbody>

@@ -64620,7 +64620,7 @@ var render = function() {
         _c(
           "button",
           {
-            staticClass: "btn btn-danger",
+            staticClass: "btn btn-secondary btn-sm",
             attrs: { type: "button" },
             on: {
               click: function($event) {
@@ -64633,8 +64633,12 @@ var render = function() {
         _vm._v(" "),
         _c(
           "button",
-          { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-          [_vm._v("Cadastrar")]
+          {
+            staticClass: "btn btn-success btn-sm",
+            staticStyle: { "min-width": "70px" },
+            attrs: { type: "submit" }
+          },
+          [_vm._v(_vm._s(_vm.categoria.id ? "Editar" : "Cadastrar"))]
         )
       ],
       2
@@ -66046,6 +66050,7 @@ var render = function() {
                           "a",
                           {
                             staticClass: "btn btn-info btn-sm",
+                            staticStyle: { padding: "6px", "line-height": "1" },
                             attrs: {
                               href: "/" + _vm.model + "/" + i.id + "/edit"
                             }
@@ -66085,6 +66090,10 @@ var render = function() {
                             "buttom",
                             {
                               staticClass: "btn btn-success btn-sm",
+                              staticStyle: {
+                                padding: "6px",
+                                "line-height": "1"
+                              },
                               on: {
                                 click: function($event) {
                                   return _vm.reativarCategoria(i.id)
@@ -66116,7 +66125,11 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "button",
-      { staticClass: "btn btn-danger btn-sm", attrs: { type: "submit" } },
+      {
+        staticClass: "btn btn-danger btn-sm",
+        staticStyle: { padding: "6px", "line-height": "1" },
+        attrs: { type: "submit" }
+      },
       [_c("i", { staticClass: "far fa-folder-open" })]
     )
   }

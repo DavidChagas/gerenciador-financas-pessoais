@@ -25,8 +25,8 @@
                     </div>
                 </div>
             </div>
-            <button class="btn btn-danger" type="button" v-on:click="voltar()">Voltar</button>
-            <button class="btn btn-primary" type="submit">Cadastrar</button>
+            <button class="btn btn-secondary btn-sm" type="button" v-on:click="voltar()">Voltar</button>
+            <button class="btn btn-success btn-sm" type="submit" style="min-width: 70px">{{categoria.id ? 'Editar' : 'Cadastrar'}}</button>
         </form>
     </div>
 </template>
