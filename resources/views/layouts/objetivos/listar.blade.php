@@ -5,7 +5,7 @@
 
 <titulo-form-component titulo="Lista de Objetivos"></titulo-form-component>
 
-<a href="{{route('objetivo.cadastrar')}}" class="btn btn-sm btn-primary" style="margin-bottom: 30px;">Cadastrar Novo Objetivo</a>
+<a href="{{route('objetivo.cadastrar')}}" class="btn btn-success" style="margin-bottom: 30px;">Cadastrar Novo Objetivo</a>
 
 <objetivo-list-component infos="{{ $objetivos }}" token="{{ csrf_token() }}" model="objetivos">
 	<span slot="method">

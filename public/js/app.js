@@ -65337,7 +65337,7 @@ var render = function() {
         _c(
           "button",
           {
-            staticClass: "btn btn-danger",
+            staticClass: "btn btn-secondary",
             attrs: { type: "button" },
             on: {
               click: function($event) {
@@ -65350,8 +65350,12 @@ var render = function() {
         _vm._v(" "),
         _c(
           "button",
-          { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-          [_vm._v("Cadastrar")]
+          {
+            staticClass: "btn btn-success",
+            staticStyle: { "min-width": "70px" },
+            attrs: { type: "submit" }
+          },
+          [_vm._v(_vm._s(_vm.objetivoObj.id ? "Editar" : "Cadastrar"))]
         )
       ],
       2
@@ -65858,7 +65862,7 @@ var render = function() {
         _c(
           "button",
           {
-            staticClass: "btn btn-danger",
+            staticClass: "btn btn-secondary",
             attrs: { type: "button" },
             on: {
               click: function($event) {
@@ -65872,7 +65876,8 @@ var render = function() {
         _c(
           "button",
           {
-            staticClass: "btn btn-primary",
+            staticClass: "btn btn-success",
+            staticStyle: { "min-width": "70px" },
             attrs: {
               type: "submit",
               disabled: _vm.senhaIncorreta && _vm.novaSenha != ""
