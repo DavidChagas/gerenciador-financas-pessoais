@@ -8,7 +8,7 @@
             <slot name="method"></slot>
             <input type="hidden" name="_token" v-bind:value="token">
             <div class="row">
-                <div class="col-sm-6">
+                <div v-bind:class="{ 'col-sm-6': !contaObj.id, 'col-sm-12': contaObj.id }">
                     <div class="form-group">
                         <label>Descrição</label>
                         <input class="form-control" type="text" name="descricao" v-model="contaObj.descricao" required>
@@ -21,10 +21,8 @@
                     </div>
                 </div>
             </div>
-            <div class="botoes">
-                <!-- <button class="btn btn-danger voltar" type="button" v-on:click="voltar()">Voltar</button> -->
-                <button class="btn btn-primary cadastrar" type="submit">Cadastrar</button>
-            </div> 
+            <button class="btn btn-secondary btn-sm" type="button" v-on:click="voltar()">Voltar</button>
+            <button class="btn btn-success btn-sm cadastrar" type="submit" style="min-width: 70px">{{contaObj.id ? 'Editar' : 'Cadastrar'}}</button>
         </form>
     </div>
 </template>
@@ -68,16 +66,6 @@
             color: #444;
             b{
                 font-size: 18px;
-            }
-        }
-
-        .botoes{
-            display: flex;
-            justify-content: flex-end;
-
-            .cadastrar{
-                margin-left: 10px;
-                width: 300px;
             }
         }
     }

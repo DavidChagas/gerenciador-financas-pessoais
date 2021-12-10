@@ -4,7 +4,7 @@
             <option value="0">Contas Ativos</option>
             <option value="1">Contas Arquivados</option>
         </select>
-        <table class="table table-hover" v-if="list.length">
+        <table class="table" v-if="list.length">
             <thead class="thead-light">
                 <tr>
                     <th scope="col">Descrição</th>
@@ -17,16 +17,16 @@
             <tbody>
                 <tr v-for="i in list" v-bind:key="i.id" v-if="i.arquivado == mostrarContas">
                     <td>{{i.descricao}}</td>
-                    <td>{{formatPrice(i.valor)}}</td>
-                    <td style="text-align: center;" v-if="mostrarContas == 0"> <a v-bind:href="'/'+model+'/'+i.id+'/edit'" class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i></a> </td>
+                    <td>R$ {{formatPrice(i.valor)}}</td>
+                    <td style="text-align: center;" v-if="mostrarContas == 0"> <a v-bind:href="'/'+model+'/'+i.id+'/edit'" class="btn btn-primary btn-sm" style="padding: 6px; line-height: 1;"><i class="fas fa-pencil-alt"></i></a> </td>
                     <td style="text-align: center;" v-if="mostrarContas == 0"> 
                         <form v-bind:action="'/'+model+'/'+i.id" method="POST">
                             <slot name="method"></slot>
-                            <button type="submit" class="btn btn-danger btn-sm"><i class="far fa-folder-open"></i></button>
+                            <button type="submit" class="btn btn-danger btn-sm" style="padding: 6px; line-height: 1;"><i class="far fa-folder-open"></i></button>
                         </form>
                     </td>
                     <td style="text-align: center;" v-if="mostrarContas == 1">
-                        <buttom class="btn btn-success btn-sm" v-on:click="reativarConta(i.id)"><i class="far fa-folder"></i></buttom>
+                        <buttom class="btn btn-success btn-sm" v-on:click="reativarConta(i.id)" style="padding: 6px; line-height: 1;"><i class="far fa-folder"></i></buttom>
                     </td>
                 </tr>
             </tbody>

@@ -5,7 +5,7 @@
 
 <titulo-form-component titulo="Lista de Contas"></titulo-form-component>
 
-<a href="{{route('conta.cadastrar')}}" class="btn btn-primary" style="margin-bottom: 30px;">Cadastrar Nova Conta</a>
+<a href="{{route('conta.cadastrar')}}" class="btn btn-success" style="margin-bottom: 30px;">Cadastrar Nova Conta</a>
 
 <conta-list-component infos="{{ $infos }}" token="{{ csrf_token() }}" model="contas">
 	<span slot="method">

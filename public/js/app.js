@@ -2812,8 +2812,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['action', 'method', 'token', 'conta', 'teste'],
@@ -8923,7 +8921,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".componente-conta-form .descricao {\n  color: #444;\n}\n.componente-conta-form .descricao b {\n  font-size: 18px;\n}\n.componente-conta-form .botoes {\n  display: flex;\n  justify-content: flex-end;\n}\n.componente-conta-form .botoes .cadastrar {\n  margin-left: 10px;\n  width: 300px;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".componente-conta-form .descricao {\n  color: #444;\n}\n.componente-conta-form .descricao b {\n  font-size: 18px;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -64701,33 +64699,42 @@ var render = function() {
         }),
         _vm._v(" "),
         _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-sm-6" }, [
-            _c("div", { staticClass: "form-group" }, [
-              _c("label", [_vm._v("Descrição")]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.contaObj.descricao,
-                    expression: "contaObj.descricao"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { type: "text", name: "descricao", required: "" },
-                domProps: { value: _vm.contaObj.descricao },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
+          _c(
+            "div",
+            {
+              class: {
+                "col-sm-6": !_vm.contaObj.id,
+                "col-sm-12": _vm.contaObj.id
+              }
+            },
+            [
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", [_vm._v("Descrição")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.contaObj.descricao,
+                      expression: "contaObj.descricao"
                     }
-                    _vm.$set(_vm.contaObj, "descricao", $event.target.value)
+                  ],
+                  staticClass: "form-control",
+                  attrs: { type: "text", name: "descricao", required: "" },
+                  domProps: { value: _vm.contaObj.descricao },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.contaObj, "descricao", $event.target.value)
+                    }
                   }
-                }
-              })
-            ])
-          ]),
+                })
+              ])
+            ]
+          ),
           _vm._v(" "),
           !_vm.contaObj.usuario_id
             ? _c("div", { staticClass: "col-sm-6" }, [
@@ -64761,7 +64768,29 @@ var render = function() {
             : _vm._e()
         ]),
         _vm._v(" "),
-        _vm._m(1)
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-secondary btn-sm",
+            attrs: { type: "button" },
+            on: {
+              click: function($event) {
+                return _vm.voltar()
+              }
+            }
+          },
+          [_vm._v("Voltar")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-success btn-sm cadastrar",
+            staticStyle: { "min-width": "70px" },
+            attrs: { type: "submit" }
+          },
+          [_vm._v(_vm._s(_vm.contaObj.id ? "Editar" : "Cadastrar"))]
+        )
       ],
       2
     )
@@ -64785,18 +64814,6 @@ var staticRenderFns = [
       _c("br"),
       _vm._v(" "),
       _c("br")
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "botoes" }, [
-      _c(
-        "button",
-        { staticClass: "btn btn-primary cadastrar", attrs: { type: "submit" } },
-        [_vm._v("Cadastrar")]
-      )
     ])
   }
 ]
@@ -66166,7 +66183,7 @@ var render = function() {
       ),
       _vm._v(" "),
       _vm.list.length
-        ? _c("table", { staticClass: "table table-hover" }, [
+        ? _c("table", { staticClass: "table" }, [
             _c("thead", { staticClass: "thead-light" }, [
               _c("tr", [
                 _c("th", { attrs: { scope: "col" } }, [_vm._v("Descrição")]),
@@ -66215,7 +66232,9 @@ var render = function() {
                   ? _c("tr", { key: i.id }, [
                       _c("td", [_vm._v(_vm._s(i.descricao))]),
                       _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(_vm.formatPrice(i.valor)))]),
+                      _c("td", [
+                        _vm._v("R$ " + _vm._s(_vm.formatPrice(i.valor)))
+                      ]),
                       _vm._v(" "),
                       _vm.mostrarContas == 0
                         ? _c(
@@ -66225,7 +66244,11 @@ var render = function() {
                               _c(
                                 "a",
                                 {
-                                  staticClass: "btn btn-info btn-sm",
+                                  staticClass: "btn btn-primary btn-sm",
+                                  staticStyle: {
+                                    padding: "6px",
+                                    "line-height": "1"
+                                  },
                                   attrs: {
                                     href: "/" + _vm.model + "/" + i.id + "/edit"
                                   }
@@ -66269,6 +66292,10 @@ var render = function() {
                                 "buttom",
                                 {
                                   staticClass: "btn btn-success btn-sm",
+                                  staticStyle: {
+                                    padding: "6px",
+                                    "line-height": "1"
+                                  },
                                   on: {
                                     click: function($event) {
                                       return _vm.reativarConta(i.id)
@@ -66303,7 +66330,11 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "button",
-      { staticClass: "btn btn-danger btn-sm", attrs: { type: "submit" } },
+      {
+        staticClass: "btn btn-danger btn-sm",
+        staticStyle: { padding: "6px", "line-height": "1" },
+        attrs: { type: "submit" }
+      },
       [_c("i", { staticClass: "far fa-folder-open" })]
     )
   }
