@@ -64620,7 +64620,7 @@ var render = function() {
         _c(
           "button",
           {
-            staticClass: "btn btn-secondary btn-sm",
+            staticClass: "btn btn-secondary",
             attrs: { type: "button" },
             on: {
               click: function($event) {
@@ -64634,7 +64634,7 @@ var render = function() {
         _c(
           "button",
           {
-            staticClass: "btn btn-success btn-sm",
+            staticClass: "btn btn-success",
             staticStyle: { "min-width": "70px" },
             attrs: { type: "submit" }
           },
@@ -64775,7 +64775,7 @@ var render = function() {
         _c(
           "button",
           {
-            staticClass: "btn btn-secondary btn-sm",
+            staticClass: "btn btn-secondary",
             attrs: { type: "button" },
             on: {
               click: function($event) {
@@ -64789,7 +64789,7 @@ var render = function() {
         _c(
           "button",
           {
-            staticClass: "btn btn-success btn-sm cadastrar",
+            staticClass: "btn btn-success cadastrar",
             staticStyle: { "min-width": "70px" },
             attrs: { type: "submit" }
           },
@@ -65073,7 +65073,7 @@ var render = function() {
         _c(
           "button",
           {
-            staticClass: "btn btn-danger",
+            staticClass: "btn btn-secondary",
             attrs: { type: "button" },
             on: {
               click: function($event) {
@@ -65086,7 +65086,7 @@ var render = function() {
         _vm._v(" "),
         _c(
           "button",
-          { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+          { staticClass: "btn btn-success", attrs: { type: "submit" } },
           [_vm._v(_vm._s(_vm.despesaObj.id ? "Editar" : "Cadastrar"))]
         )
       ],
@@ -65627,7 +65627,7 @@ var render = function() {
         _c(
           "button",
           {
-            staticClass: "btn btn-danger",
+            staticClass: "btn btn-secondary",
             attrs: { type: "button" },
             on: {
               click: function($event) {
@@ -65640,7 +65640,7 @@ var render = function() {
         _vm._v(" "),
         _c(
           "button",
-          { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+          { staticClass: "btn btn-success", attrs: { type: "submit" } },
           [_vm._v(_vm._s(_vm.receitaObj.id ? "Editar" : "Cadastrar"))]
         )
       ],
@@ -66049,7 +66049,7 @@ var render = function() {
                         _c(
                           "a",
                           {
-                            staticClass: "btn btn-info btn-sm",
+                            staticClass: "btn btn-primary btn-sm",
                             staticStyle: { padding: "6px", "line-height": "1" },
                             attrs: {
                               href: "/" + _vm.model + "/" + i.id + "/edit"
@@ -66614,7 +66614,8 @@ var render = function() {
                         _c(
                           "a",
                           {
-                            staticClass: "btn btn-info btn-sm",
+                            staticClass: "btn btn-primary btn-sm",
+                            staticStyle: { padding: "6px", "line-height": "1" },
                             attrs: {
                               href: "/" + _vm.model + "/" + i.id + "/edit"
                             }
@@ -66636,6 +66637,10 @@ var render = function() {
                             "button",
                             {
                               staticClass: "btn btn-danger btn-sm",
+                              staticStyle: {
+                                padding: "6px",
+                                "line-height": "1"
+                              },
                               attrs: { type: "button" },
                               on: {
                                 click: function($event) {
@@ -66671,7 +66676,7 @@ var staticRenderFns = [
     return _c(
       "button",
       {
-        staticClass: "btn btn-info btn-sm d-print-none",
+        staticClass: "btn btn-secondary btn-sm d-print-none",
         attrs: { onclick: "window.print()" }
       },
       [_c("i", { staticClass: "fas fa-print" })]
@@ -67431,7 +67436,8 @@ var render = function() {
                         _c(
                           "a",
                           {
-                            staticClass: "btn btn-info btn-sm",
+                            staticClass: "btn btn-primary btn-sm",
+                            staticStyle: { padding: "6px", "line-height": "1" },
                             attrs: {
                               href: "/" + _vm.model + "/" + i.id + "/edit"
                             }
@@ -67453,6 +67459,10 @@ var render = function() {
                             "button",
                             {
                               staticClass: "btn btn-danger btn-sm",
+                              staticStyle: {
+                                padding: "6px",
+                                "line-height": "1"
+                              },
                               attrs: { type: "button" },
                               on: {
                                 click: function($event) {
@@ -67488,7 +67498,7 @@ var staticRenderFns = [
     return _c(
       "button",
       {
-        staticClass: "btn btn-info btn-sm d-print-none",
+        staticClass: "btn btn-secondary btn-sm d-print-none",
         attrs: { onclick: "window.print()" }
       },
       [_c("i", { staticClass: "fas fa-print" })]

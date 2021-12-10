@@ -21,8 +21,8 @@
                     </div>
                 </div>
             </div>
-            <button class="btn btn-secondary btn-sm" type="button" v-on:click="voltar()">Voltar</button>
-            <button class="btn btn-success btn-sm cadastrar" type="submit" style="min-width: 70px">{{contaObj.id ? 'Editar' : 'Cadastrar'}}</button>
+            <button class="btn btn-secondary" type="button" v-on:click="voltar()">Voltar</button>
+            <button class="btn btn-success cadastrar" type="submit" style="min-width: 70px">{{contaObj.id ? 'Editar' : 'Cadastrar'}}</button>
         </form>
     </div>
 </template>

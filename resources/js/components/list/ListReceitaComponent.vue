@@ -7,7 +7,7 @@
             <select class="form-control d-print-none" name="data" v-model="dataSelecionada" v-on:change="mostrarReceitas(dataSelecionada)">
                 <option v-bind:key="data.data" v-bind:value="data.data" v-for="data in datasFormatadas">{{data.descricao}}</option>
             </select>
-            <button class="btn btn-info btn-sm d-print-none" onclick="window.print()">
+            <button class="btn btn-secondary btn-sm d-print-none" onclick="window.print()">
                 <i class="fas fa-print"></i>
             </button>
         </div>
@@ -32,11 +32,11 @@
                     <td>{{i.categoria}}</td>
                     <td>{{formatDate(i.data)}}</td>
                     <td>{{i.status == 'pago' ? 'Recebido' : 'Não Recebido'}}</td>
-                    <td style="text-align: center;" class="d-print-none"> <a v-bind:href="'/'+model+'/'+i.id+'/edit'" class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i></a> </td>
+                    <td style="text-align: center;" class="d-print-none"> <a v-bind:href="'/'+model+'/'+i.id+'/edit'" class="btn btn-primary btn-sm" style="padding: 6px; line-height: 1;"><i class="fas fa-pencil-alt"></i></a> </td>
                     <td style="text-align: center;" class="d-print-none"> 
                         <form>
                             <!-- <slot name="method"></slot> -->
-                            <button type="button" class="btn btn-danger btn-sm" v-on:click="excluirReceita(i.id, index)"><i class="far fa-trash-alt"></i></button>
+                            <button type="button" class="btn btn-danger btn-sm" v-on:click="excluirReceita(i.id, index)" style="padding: 6px; line-height: 1;"><i class="far fa-trash-alt"></i></button>
                         </form>
                     </td>
                 </tr>

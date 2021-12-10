@@ -85,8 +85,8 @@
                 </div>
                     
             </div>
-            <button class="btn btn-danger" type="button" v-on:click="voltar()">Voltar</button>
-            <button class="btn btn-primary" type="submit">{{despesaObj.id ? 'Editar' : 'Cadastrar'}}</button>
+            <button class="btn btn-secondary" type="button" v-on:click="voltar()">Voltar</button>
+            <button class="btn btn-success" type="submit">{{despesaObj.id ? 'Editar' : 'Cadastrar'}}</button>
         </form>
     </div>
 </template>

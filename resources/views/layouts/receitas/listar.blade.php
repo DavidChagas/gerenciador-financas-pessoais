@@ -9,7 +9,7 @@
 	<titulo-form-component titulo="Relatório de Receitas"></titulo-form-component>
 </div>
 
-<a href="{{route('receita.cadastrar')}}" class="btn btn-primary d-print-none" style="margin-bottom: 40px;">Cadastrar Nova Receita</a>
+<a href="{{route('receita.cadastrar')}}" class="btn btn-success d-print-none" style="margin-bottom: 40px;">Cadastrar Nova Receita</a>
 
 <receita-list-component infos="{{ $infos }}" datas_receitas="{{ $datas_receitas }}" token="{{ csrf_token() }}" model="receitas">
 	<!-- <span slot="method">

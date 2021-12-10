@@ -25,7 +25,7 @@
                 <tr v-for="i in list" v-bind:key="i.id" v-if="i.arquivado == mostrarCategorias">
                     <td>{{i.descricao}}</td>
                     <td>{{i.tipo}}</td>
-                    <td style="text-align: center;" v-if="mostrarCategorias == 0"> <a v-bind:href="'/'+model+'/'+i.id+'/edit'" class="btn btn-info btn-sm" style="padding: 6px; line-height: 1;"><i class="fas fa-pencil-alt" style="color:white"></i></a> </td>
+                    <td style="text-align: center;" v-if="mostrarCategorias == 0"> <a v-bind:href="'/'+model+'/'+i.id+'/edit'" class="btn btn-primary btn-sm" style="padding: 6px; line-height: 1;"><i class="fas fa-pencil-alt" style="color:white"></i></a> </td>
                     <td style="text-align: center;" v-if="mostrarCategorias == 0"> 
                         <form v-bind:action="'/'+model+'/'+i.id" method="POST">
                             <slot name="method"></slot>
