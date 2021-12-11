@@ -10,13 +10,13 @@
             </div>
             <div class="acoes">
                 <div class="paginas">
-                    <a class="acao" href="/"><i class="fas fa-chart-pie" style="margin-right: 7px"></i> Dashboard</a>
-                    <a class="acao" href="/contas"><i class="fas fa-wallet" style="margin-right: 7px"></i> Contas</a>
-                    <a class="acao" href="/categorias"><i class="fas fa-bookmark" style="margin-right: 7px"></i> Categorias</a>
-                    <a class="acao" href="/receitas"><i class="fas fa-chart-line" style="margin-right: 7px"></i> Receitas</a>
-                    <a class="acao" href="/despesas"><i class="fas fa-chart-line" style="margin-right: 7px; transform: rotate(180deg)"></i> Despesas</a>
-                    <a class="acao" href="/objetivos"><i class="fas fa-bullseye" style="margin-right: 7px;"></i> Objetivos</a>
-                    <a class="acao" href="/relatorios"><i class="fas fa-file-invoice-dollar" style="margin-right: 7px;"></i> Relatórios</a>
+                    <a class="acao" href="/" @click="selecionarMenu('dashboard')" v-bind:class="{ active: menuSelecionado == 'dashboard' }"><i class="fas fa-chart-pie" style="margin-right: 7px"></i> Dashboard</a>
+                    <a class="acao" href="/contas" @click="selecionarMenu('contas')" v-bind:class="{ active: menuSelecionado == 'contas' }"><i class="fas fa-wallet" style="margin-right: 7px"></i> Contas</a>
+                    <a class="acao" href="/categorias" @click="selecionarMenu('categorias')" v-bind:class="{ active: menuSelecionado == 'categorias' }"><i class="fas fa-bookmark" style="margin-right: 7px"></i> Categorias</a>
+                    <a class="acao" href="/receitas" @click="selecionarMenu('receitas')" v-bind:class="{ active: menuSelecionado == 'receitas' }"><i class="fas fa-chart-line" style="margin-right: 7px"></i> Receitas</a>
+                    <a class="acao" href="/despesas" @click="selecionarMenu('despesas')" v-bind:class="{ active: menuSelecionado == 'despesas' }"><i class="fas fa-chart-line" style="margin-right: 7px; transform: rotate(180deg)"></i> Despesas</a>
+                    <a class="acao" href="/objetivos" @click="selecionarMenu('objetivos')" v-bind:class="{ active: menuSelecionado == 'objetivos' }"><i class="fas fa-bullseye" style="margin-right: 7px;"></i> Objetivos</a>
+                    <a class="acao" href="/relatorios" @click="selecionarMenu('relatorios')" v-bind:class="{ active: menuSelecionado == 'relatorios' }"><i class="fas fa-file-invoice-dollar" style="margin-right: 7px;"></i> Relatórios</a>
                     <!-- <a class="acao">Objetivos</a> -->
                     <!-- <a class="acao">Investimentos</a> -->
                 </div>
@@ -39,11 +39,17 @@
         ],
         data(){
             return {
-                menuMobileAberto : false
+                menuMobileAberto : false,
+                menuSelecionado : ''
+            }
+        },
+        methods: {
+            selecionarMenu(menu){
+                localStorage.setItem("menuSelecionado", menu);
             }
         },
         mounted() {
-            console.log('Component mounted.')
+            this.menuSelecionado = localStorage.getItem("menuSelecionado");
         }
     }
 </script>
@@ -131,8 +137,12 @@
                         
                         &:hover{
                             cursor: pointer;
-                            background-color: #354d60;
+                            background-color: #253543;
                         } 
+
+                        &.active{
+                            background-color: #354d60;
+                        }
                     }
                 }
 

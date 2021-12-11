@@ -2548,11 +2548,17 @@ __webpack_require__.r(__webpack_exports__);
   props: ['nomeUsuario'],
   data: function data() {
     return {
-      menuMobileAberto: false
+      menuMobileAberto: false,
+      menuSelecionado: ''
     };
   },
+  methods: {
+    selecionarMenu: function selecionarMenu(menu) {
+      localStorage.setItem("menuSelecionado", menu);
+    }
+  },
   mounted: function mounted() {
-    console.log('Component mounted.');
+    this.menuSelecionado = localStorage.getItem("menuSelecionado");
   }
 });
 
@@ -8905,7 +8911,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".componente-menu .btn-mobile {\n  position: absolute;\n  top: 10px;\n  left: 10px;\n  width: 25px;\n  height: 25px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  border-radius: 4px;\n  background-color: rgba(0, 0, 0, 0.515);\n  color: white;\n  transition: all 0.7s ease;\n  z-index: 9;\n}\n.componente-menu .btn-mobile.aberto {\n  left: 250px;\n}\n@media (min-width: 992px) {\n.componente-menu .btn-mobile {\n    display: none;\n}\n}\n.componente-menu .menu {\n  position: fixed;\n  height: 100%;\n  min-width: 280px;\n  padding: 30px 0;\n  background-color: #182b3a;\n  box-shadow: 5px 4px 25px #555;\n  color: white;\n  transition: all 0.7s ease;\n  z-index: 1;\n}\n@media (max-width: 991px) {\n.componente-menu .menu {\n    min-width: 0px;\n    left: -280px;\n}\n}\n.componente-menu .menu.abrir {\n  min-width: 280px;\n  left: 0px;\n  overflow: hidden;\n}\n.componente-menu .menu .usuario {\n  margin-bottom: 20px;\n  padding-bottom: 20px;\n  border-bottom: 1px solid #bbb;\n  text-align: center;\n}\n.componente-menu .menu .acoes {\n  height: 90%;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n}\n.componente-menu .menu .acoes .paginas {\n  display: flex;\n  flex-direction: column;\n}\n.componente-menu .menu .acoes .paginas .acao {\n  padding: 15px 30px;\n  color: white;\n  text-decoration: none;\n  background-color: #182b3a;\n  transition: all 0.2s;\n}\n.componente-menu .menu .acoes .paginas .acao:hover {\n  cursor: pointer;\n  background-color: #354d60;\n}\n.componente-menu .menu .acoes .footer-menu {\n  padding: 0 30px;\n  display: flex;\n  justify-content: space-between;\n}\n.componente-menu .menu .acoes .footer-menu button, .componente-menu .menu .acoes .footer-menu a {\n  padding: 2px;\n  background-color: transparent;\n  color: white;\n  border-left: none;\n  border-right: none;\n  border-top: none;\n  border-bottom: 1px solid #eee;\n  border-radius: 0;\n}\n.componente-menu .menu .acoes .footer-menu button:hover, .componente-menu .menu .acoes .footer-menu a:hover {\n  color: #acacac;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".componente-menu .btn-mobile {\n  position: absolute;\n  top: 10px;\n  left: 10px;\n  width: 25px;\n  height: 25px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  border-radius: 4px;\n  background-color: rgba(0, 0, 0, 0.515);\n  color: white;\n  transition: all 0.7s ease;\n  z-index: 9;\n}\n.componente-menu .btn-mobile.aberto {\n  left: 250px;\n}\n@media (min-width: 992px) {\n.componente-menu .btn-mobile {\n    display: none;\n}\n}\n.componente-menu .menu {\n  position: fixed;\n  height: 100%;\n  min-width: 280px;\n  padding: 30px 0;\n  background-color: #182b3a;\n  box-shadow: 5px 4px 25px #555;\n  color: white;\n  transition: all 0.7s ease;\n  z-index: 1;\n}\n@media (max-width: 991px) {\n.componente-menu .menu {\n    min-width: 0px;\n    left: -280px;\n}\n}\n.componente-menu .menu.abrir {\n  min-width: 280px;\n  left: 0px;\n  overflow: hidden;\n}\n.componente-menu .menu .usuario {\n  margin-bottom: 20px;\n  padding-bottom: 20px;\n  border-bottom: 1px solid #bbb;\n  text-align: center;\n}\n.componente-menu .menu .acoes {\n  height: 90%;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n}\n.componente-menu .menu .acoes .paginas {\n  display: flex;\n  flex-direction: column;\n}\n.componente-menu .menu .acoes .paginas .acao {\n  padding: 15px 30px;\n  color: white;\n  text-decoration: none;\n  background-color: #182b3a;\n  transition: all 0.2s;\n}\n.componente-menu .menu .acoes .paginas .acao:hover {\n  cursor: pointer;\n  background-color: #253543;\n}\n.componente-menu .menu .acoes .paginas .acao.active {\n  background-color: #354d60;\n}\n.componente-menu .menu .acoes .footer-menu {\n  padding: 0 30px;\n  display: flex;\n  justify-content: space-between;\n}\n.componente-menu .menu .acoes .footer-menu button, .componente-menu .menu .acoes .footer-menu a {\n  padding: 2px;\n  background-color: transparent;\n  color: white;\n  border-left: none;\n  border-right: none;\n  border-top: none;\n  border-bottom: 1px solid #eee;\n  border-radius: 0;\n}\n.componente-menu .menu .acoes .footer-menu button:hover, .componente-menu .menu .acoes .footer-menu a:hover {\n  color: #acacac;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -64337,7 +64343,157 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "acoes" }, [
-        _vm._m(0),
+        _c("div", { staticClass: "paginas" }, [
+          _c(
+            "a",
+            {
+              staticClass: "acao",
+              class: { active: _vm.menuSelecionado == "dashboard" },
+              attrs: { href: "/" },
+              on: {
+                click: function($event) {
+                  return _vm.selecionarMenu("dashboard")
+                }
+              }
+            },
+            [
+              _c("i", {
+                staticClass: "fas fa-chart-pie",
+                staticStyle: { "margin-right": "7px" }
+              }),
+              _vm._v(" Dashboard")
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "acao",
+              class: { active: _vm.menuSelecionado == "contas" },
+              attrs: { href: "/contas" },
+              on: {
+                click: function($event) {
+                  return _vm.selecionarMenu("contas")
+                }
+              }
+            },
+            [
+              _c("i", {
+                staticClass: "fas fa-wallet",
+                staticStyle: { "margin-right": "7px" }
+              }),
+              _vm._v(" Contas")
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "acao",
+              class: { active: _vm.menuSelecionado == "categorias" },
+              attrs: { href: "/categorias" },
+              on: {
+                click: function($event) {
+                  return _vm.selecionarMenu("categorias")
+                }
+              }
+            },
+            [
+              _c("i", {
+                staticClass: "fas fa-bookmark",
+                staticStyle: { "margin-right": "7px" }
+              }),
+              _vm._v(" Categorias")
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "acao",
+              class: { active: _vm.menuSelecionado == "receitas" },
+              attrs: { href: "/receitas" },
+              on: {
+                click: function($event) {
+                  return _vm.selecionarMenu("receitas")
+                }
+              }
+            },
+            [
+              _c("i", {
+                staticClass: "fas fa-chart-line",
+                staticStyle: { "margin-right": "7px" }
+              }),
+              _vm._v(" Receitas")
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "acao",
+              class: { active: _vm.menuSelecionado == "despesas" },
+              attrs: { href: "/despesas" },
+              on: {
+                click: function($event) {
+                  return _vm.selecionarMenu("despesas")
+                }
+              }
+            },
+            [
+              _c("i", {
+                staticClass: "fas fa-chart-line",
+                staticStyle: {
+                  "margin-right": "7px",
+                  transform: "rotate(180deg)"
+                }
+              }),
+              _vm._v(" Despesas")
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "acao",
+              class: { active: _vm.menuSelecionado == "objetivos" },
+              attrs: { href: "/objetivos" },
+              on: {
+                click: function($event) {
+                  return _vm.selecionarMenu("objetivos")
+                }
+              }
+            },
+            [
+              _c("i", {
+                staticClass: "fas fa-bullseye",
+                staticStyle: { "margin-right": "7px" }
+              }),
+              _vm._v(" Objetivos")
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "acao",
+              class: { active: _vm.menuSelecionado == "relatorios" },
+              attrs: { href: "/relatorios" },
+              on: {
+                click: function($event) {
+                  return _vm.selecionarMenu("relatorios")
+                }
+              }
+            },
+            [
+              _c("i", {
+                staticClass: "fas fa-file-invoice-dollar",
+                staticStyle: { "margin-right": "7px" }
+              }),
+              _vm._v(" Relatórios")
+            ]
+          )
+        ]),
         _vm._v(" "),
         _c("div", { staticClass: "footer-menu" }, [
           _c(
@@ -64371,70 +64527,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "paginas" }, [
-      _c("a", { staticClass: "acao", attrs: { href: "/" } }, [
-        _c("i", {
-          staticClass: "fas fa-chart-pie",
-          staticStyle: { "margin-right": "7px" }
-        }),
-        _vm._v(" Dashboard")
-      ]),
-      _vm._v(" "),
-      _c("a", { staticClass: "acao", attrs: { href: "/contas" } }, [
-        _c("i", {
-          staticClass: "fas fa-wallet",
-          staticStyle: { "margin-right": "7px" }
-        }),
-        _vm._v(" Contas")
-      ]),
-      _vm._v(" "),
-      _c("a", { staticClass: "acao", attrs: { href: "/categorias" } }, [
-        _c("i", {
-          staticClass: "fas fa-bookmark",
-          staticStyle: { "margin-right": "7px" }
-        }),
-        _vm._v(" Categorias")
-      ]),
-      _vm._v(" "),
-      _c("a", { staticClass: "acao", attrs: { href: "/receitas" } }, [
-        _c("i", {
-          staticClass: "fas fa-chart-line",
-          staticStyle: { "margin-right": "7px" }
-        }),
-        _vm._v(" Receitas")
-      ]),
-      _vm._v(" "),
-      _c("a", { staticClass: "acao", attrs: { href: "/despesas" } }, [
-        _c("i", {
-          staticClass: "fas fa-chart-line",
-          staticStyle: { "margin-right": "7px", transform: "rotate(180deg)" }
-        }),
-        _vm._v(" Despesas")
-      ]),
-      _vm._v(" "),
-      _c("a", { staticClass: "acao", attrs: { href: "/objetivos" } }, [
-        _c("i", {
-          staticClass: "fas fa-bullseye",
-          staticStyle: { "margin-right": "7px" }
-        }),
-        _vm._v(" Objetivos")
-      ]),
-      _vm._v(" "),
-      _c("a", { staticClass: "acao", attrs: { href: "/relatorios" } }, [
-        _c("i", {
-          staticClass: "fas fa-file-invoice-dollar",
-          staticStyle: { "margin-right": "7px" }
-        }),
-        _vm._v(" Relatórios")
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
