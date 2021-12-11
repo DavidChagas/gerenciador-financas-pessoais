@@ -3617,6 +3617,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -9144,7 +9145,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".componente-listagem-despesa {\n  position: relative;\n}\n.componente-listagem-despesa .datas {\n  position: absolute;\n  right: 50px;\n  width: 200px;\n  margin-bottom: 30px;\n  margin-top: -35px;\n  display: grid;\n  grid-template-columns: auto auto;\n}\n@media (min-width: 768px) {\n.componente-listagem-despesa .datas {\n    margin-top: -70px;\n}\n}\n.componente-listagem-despesa .datas button {\n  margin-left: 10px;\n  color: white;\n}\n.componente-listagem-despesa .datas select {\n  width: 200px;\n  border-top: none;\n  border-left: none;\n  border-right: none;\n  border-radius: 0px;\n  height: 30px;\n  padding: 5px;\n}\n.componente-listagem-despesa .datas select:focus {\n  border-color: transparent;\n  outline: none;\n  box-shadow: none;\n}\n@media (max-width: 767px) {\ntd, th {\n    padding: 5px 10px;\n    white-space: nowrap;\n}\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".componente-listagem-despesa {\n  position: relative;\n}\n.componente-listagem-despesa .fa-check-circle {\n  color: green;\n}\n.componente-listagem-despesa .fa-times-circle {\n  color: red;\n}\n.componente-listagem-despesa .datas {\n  position: absolute;\n  right: 50px;\n  width: 200px;\n  margin-bottom: 30px;\n  margin-top: -35px;\n  display: grid;\n  grid-template-columns: auto auto;\n}\n@media (min-width: 768px) {\n.componente-listagem-despesa .datas {\n    margin-top: -70px;\n}\n}\n.componente-listagem-despesa .datas button {\n  margin-left: 10px;\n  color: white;\n}\n.componente-listagem-despesa .datas select {\n  width: 200px;\n  border-top: none;\n  border-left: none;\n  border-right: none;\n  border-radius: 0px;\n  height: 30px;\n  padding: 5px;\n}\n.componente-listagem-despesa .datas select:focus {\n  border-color: transparent;\n  outline: none;\n  box-shadow: none;\n}\n@media (max-width: 767px) {\ntd, th {\n    padding: 5px 10px;\n    white-space: nowrap;\n}\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -9192,7 +9193,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".componente-listagem-receita {\n  position: relative;\n}\n.componente-listagem-receita .datas {\n  position: absolute;\n  right: 50px;\n  width: 200px;\n  margin-bottom: 30px;\n  margin-top: -35px;\n  display: grid;\n  grid-template-columns: auto auto;\n}\n@media (min-width: 768px) {\n.componente-listagem-receita .datas {\n    margin-top: -70px;\n}\n}\n.componente-listagem-receita .datas button {\n  margin-left: 10px;\n  color: white;\n}\n.componente-listagem-receita .datas select {\n  width: 200px;\n  border-top: none;\n  border-left: none;\n  border-right: none;\n  border-radius: 0px;\n  height: 30px;\n  padding: 5px;\n}\n.componente-listagem-receita .datas select:focus {\n  border-color: transparent;\n  outline: none;\n  box-shadow: none;\n}\n@media (max-width: 767px) {\n.componente-listagem-receita td, .componente-listagem-receita th {\n    padding: 5px 10px;\n    white-space: nowrap;\n}\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".componente-listagem-receita {\n  position: relative;\n}\n.componente-listagem-receita .fa-check-circle {\n  color: green;\n}\n.componente-listagem-receita .fa-times-circle {\n  color: red;\n}\n.componente-listagem-receita .datas {\n  position: absolute;\n  right: 50px;\n  width: 200px;\n  margin-bottom: 30px;\n  margin-top: -35px;\n  display: grid;\n  grid-template-columns: auto auto;\n}\n@media (min-width: 768px) {\n.componente-listagem-receita .datas {\n    margin-top: -70px;\n}\n}\n.componente-listagem-receita .datas button {\n  margin-left: 10px;\n  color: white;\n}\n.componente-listagem-receita .datas select {\n  width: 200px;\n  border-top: none;\n  border-left: none;\n  border-right: none;\n  border-radius: 0px;\n  height: 30px;\n  padding: 5px;\n}\n.componente-listagem-receita .datas select:focus {\n  border-color: transparent;\n  outline: none;\n  box-shadow: none;\n}\n@media (max-width: 767px) {\n.componente-listagem-receita td, .componente-listagem-receita th {\n    padding: 5px 10px;\n    white-space: nowrap;\n}\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -66928,7 +66929,15 @@ var render = function() {
                     _c("td", [_vm._v(_vm._s(_vm.formatDate(i.data)))]),
                     _vm._v(" "),
                     _c("td", [
-                      _vm._v(_vm._s(i.status == "pago" ? "Pago" : "Não Pago"))
+                      _c("i", {
+                        class:
+                          i.status == "pago"
+                            ? "far fa-check-circle"
+                            : "far fa-times-circle"
+                      }),
+                      _vm._v(
+                        " " + _vm._s(i.status == "pago" ? "Pago" : "Não Pago")
+                      )
                     ]),
                     _vm._v(" "),
                     _c(
@@ -67748,8 +67757,17 @@ var render = function() {
                     _c("td", [_vm._v(_vm._s(_vm.formatDate(i.data)))]),
                     _vm._v(" "),
                     _c("td", [
+                      _c("i", {
+                        class:
+                          i.status == "pago"
+                            ? "far fa-check-circle"
+                            : "far fa-times-circle"
+                      }),
                       _vm._v(
-                        _vm._s(i.status == "pago" ? "Recebido" : "Não Recebido")
+                        " " +
+                          _vm._s(
+                            i.status == "pago" ? "Recebido" : "Não Recebido"
+                          )
                       )
                     ]),
                     _vm._v(" "),

@@ -26,12 +26,13 @@
             </thead>
             <tbody>
                 <tr v-for="(i, index) in despesas" v-bind:key="i.id">
+                    
                     <td>R$ {{formatPrice(i.valor)}}</td>
                     <td>{{i.descricao}}</td>
                     <td>{{i.conta}}</td>
                     <td>{{i.categoria}}</td>
                     <td>{{formatDate(i.data)}}</td>
-                    <td>{{i.status == 'pago' ? 'Pago' : 'Não Pago'}}</td>
+                    <td><i v-bind:class="i.status == 'pago' ? 'far fa-check-circle' : 'far fa-times-circle'"></i> {{i.status == 'pago' ? 'Pago' : 'Não Pago'}}</td>
                     <td style="text-align: center;" class="d-print-none"> <a v-bind:href="'/'+model+'/'+i.id+'/edit'" class="btn btn-primary btn-sm" style="padding: 6px; line-height: 1;"><i class="fas fa-pencil-alt"></i></a> </td>
                     <td style="text-align: center;" class="d-print-none"> 
                         <form>
@@ -211,6 +212,13 @@
 <style lang="scss">
    .componente-listagem-despesa{
         position: relative;
+
+        .fa-check-circle{
+            color: green;
+        }
+        .fa-times-circle{
+            color: red;
+        }
 
         .datas{
             position: absolute;

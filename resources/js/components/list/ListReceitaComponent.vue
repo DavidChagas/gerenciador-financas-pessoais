@@ -31,7 +31,7 @@
                     <td>{{i.conta}}</td>
                     <td>{{i.categoria}}</td>
                     <td>{{formatDate(i.data)}}</td>
-                    <td>{{i.status == 'pago' ? 'Recebido' : 'Não Recebido'}}</td>
+                    <td><i v-bind:class="i.status == 'pago' ? 'far fa-check-circle' : 'far fa-times-circle'"></i> {{i.status == 'pago' ? 'Recebido' : 'Não Recebido'}}</td>
                     <td style="text-align: center;" class="d-print-none"> <a v-bind:href="'/'+model+'/'+i.id+'/edit'" class="btn btn-primary btn-sm" style="padding: 6px; line-height: 1;"><i class="fas fa-pencil-alt"></i></a> </td>
                     <td style="text-align: center;" class="d-print-none"> 
                         <form>
@@ -211,6 +211,13 @@
 <style lang="scss">
    .componente-listagem-receita{
         position: relative;
+
+        .fa-check-circle{
+            color: green;
+        }
+        .fa-times-circle{
+            color: red;
+        }
 
         .datas{
             position: absolute;
