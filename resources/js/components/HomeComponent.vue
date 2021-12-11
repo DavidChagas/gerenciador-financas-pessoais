@@ -74,7 +74,7 @@
                         <td>{{i.descricao}}</td>
                         <td>R$ {{formatPrice(i.valor)}}</td>
                         <td>{{formatDate(i.data)}}</td>
-                        <td style="text-align: center;" v-on:click="marcarComoPago(i.id, index, tipoPendenciaSelecionada)"> 
+                        <td style="text-align: center;" v-on:click="marcarComoPago(i.id, i.valor, i.conta_id, index, tipoPendenciaSelecionada)"> 
                             <button class="btn btn-sm btn-success" v-if="tipoPendenciaSelecionada == 'receita'">Receber</button> 
                             <button class="btn btn-sm btn-success" v-if="tipoPendenciaSelecionada == 'despesa'">Pagar</button> 
                         </td>
@@ -197,9 +197,9 @@
                 });
             },
 
-            marcarComoPago(id, index, tipo){
+            marcarComoPago(id, valor, id_conta, index, tipo){
                 if(tipo == 'receita'){
-                    this.$http.get(`/api/receitas/pagar?idReceita=${id}`).then(response => {
+                    this.$http.get(`/api/receitas/pagar?idReceita=${id}&valor=${valor}&idConta=${id_conta}`).then(response => {
                         this.receitasPendentes.splice(index, 1);
                         
                         swal("Receita marcada como recebida com sucesso!", {
@@ -212,7 +212,7 @@
                         });
                     });
                 }else{
-                    this.$http.get(`/api/despesas/pagar?idDespesa=${id}`).then(response => {
+                    this.$http.get(`/api/despesas/pagar?idDespesa=${id}&valor=${valor}&idConta=${id_conta}`).then(response => {
                         this.despesasPendentes.splice(index, 1);
                         
                         swal("Despesa marcada como paga com sucesso!", {

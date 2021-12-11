@@ -72,10 +72,13 @@ class ReceitaController extends Controller{
                 $receita->usuario_id = $request->user()->id;
 
                 $receita->save();
-                //Atualiza Saldo da Conta Selecionada
-                $conta = DB::table('contas')->where('id', '=', $receita->conta_id)->get();
-                $valor_atualizado = $receita->valor + (int) $conta[0]->valor;
-                DB::table('contas')->where('id', $receita->conta_id)->update(['valor' => $valor_atualizado]);
+
+                if($receita->status == 'pago'){
+                    //Atualiza Saldo da Conta Selecionada
+                    $conta = DB::table('contas')->where('id', '=', $receita->conta_id)->get();
+                    $valor_atualizado = $receita->valor + (int) $conta[0]->valor;
+                    DB::table('contas')->where('id', $receita->conta_id)->update(['valor' => $valor_atualizado]);
+                } 
             }
 
             return redirect('/receitas')->with('success', 'Receitas criadas com sucesso!');
@@ -91,15 +94,16 @@ class ReceitaController extends Controller{
             $receita->usuario_id = $request->user()->id;
 
             $receita->save();
-            //Atualiza Saldo da Conta Selecionada
-            $conta = DB::table('contas')->where('id', '=', $receita->conta_id)->get();
-            $valor_atualizado = $receita->valor + (int) $conta[0]->valor;
-            DB::table('contas')->where('id', $receita->conta_id)->update(['valor' => $valor_atualizado]);
+            
+            if($receita->status == 'pago'){
+                //Atualiza Saldo da Conta Selecionada
+                $conta = DB::table('contas')->where('id', '=', $receita->conta_id)->get();
+                $valor_atualizado = $receita->valor + (int) $conta[0]->valor;
+                DB::table('contas')->where('id', $receita->conta_id)->update(['valor' => $valor_atualizado]);
+            }
 
             return redirect('/receitas')->with('success', 'Receita criada com sucesso!');
         }
-        
-        
     }
 
     public function show(Receita $receita){
@@ -115,15 +119,30 @@ class ReceitaController extends Controller{
 
     public function update(Request $request, Receita $receita){
         $request_valor_formatado = (int) preg_replace('/\D/', '', $request->input('valor'));
-        
-        // Atualiza Saldo da Conta Selecionada
-        $contaAntiga = DB::table('contas')->where('id', '=', $receita->conta_id)->get();
-        $contaAntigaValor = (int) $contaAntiga[0]->valor - $receita->valor;
-        DB::table('contas')->where('id', $contaAntiga[0]->id)->update(['valor' => $contaAntigaValor]);
-        
-        $contaNova = DB::table('contas')->where('id', '=', $request->input('conta'))->get();
-        $contaNovaValor = (int) $contaNova[0]->valor + $request_valor_formatado;
-        DB::table('contas')->where('id', $contaNova[0]->id)->update(['valor' => $contaNovaValor]);
+
+        $status_antigo = $receita->status;
+        $status_novo   = $request->input('status');
+
+        if($status_antigo == 'pago' && $status_novo == 'nao-pago'){
+            // Apenas diminui da conta antiga
+            $contaAntiga = DB::table('contas')->where('id', '=', $receita->conta_id)->get();
+            $contaAntigaValor = (int) $contaAntiga[0]->valor - $receita->valor;
+            DB::table('contas')->where('id', $contaAntiga[0]->id)->update(['valor' => $contaAntigaValor]);
+        }elseif ($status_antigo == 'pago' && $status_novo == 'pago') {
+            // Diminui da conta antiga
+            $contaAntiga = DB::table('contas')->where('id', '=', $receita->conta_id)->get();
+            $contaAntigaValor = (int) $contaAntiga[0]->valor - $receita->valor;
+            DB::table('contas')->where('id', $contaAntiga[0]->id)->update(['valor' => $contaAntigaValor]);
+            // Soma na conta nova (ou pode ser a mesma, nesse caso atualizando o valor)
+            $contaNova = DB::table('contas')->where('id', '=', $request->input('conta'))->get();
+            $contaNovaValor = (int) $contaNova[0]->valor + $request_valor_formatado;
+            DB::table('contas')->where('id', $contaNova[0]->id)->update(['valor' => $contaNovaValor]);
+        }elseif ($status_antigo == 'nao-pago' && $status_novo == 'pago') {
+            // Apenas soma na conta nova
+            $contaNova = DB::table('contas')->where('id', '=', $request->input('conta'))->get();
+            $contaNovaValor = (int) $contaNova[0]->valor + $request_valor_formatado;
+            DB::table('contas')->where('id', $contaNova[0]->id)->update(['valor' => $contaNovaValor]);
+        }
 
         $receita->valor = $request_valor_formatado;
         $receita->descricao = $request->input('descricao');
@@ -157,10 +176,15 @@ class ReceitaController extends Controller{
 
     public function marcarComoPaga(){
         $id_receita = $_GET['idReceita'];
+        $id_conta   = $_GET['idConta'];
+        $valor      = $_GET['valor'];
         
-        $affected = DB::table('receitas')
-              ->where('id', $id_receita)
-              ->update(['status' => 'pago']);
+        $affected = DB::table('receitas')->where('id', $id_receita)->update(['status' => 'pago']);
+
+        // Apenas soma na conta
+        $conta = DB::table('contas')->where('id', '=', $id_conta)->get();
+        $contaNovoValor = (int) $conta[0]->valor + $valor;
+        DB::table('contas')->where('id', $conta[0]->id)->update(['valor' => $contaNovoValor]);
 
         return;
     }

@@ -72,10 +72,13 @@ class DespesaController extends Controller
                 $despesa->usuario_id = $request->user()->id;
 
                 $despesa->save();
-                //Atualiza Saldo da Conta Selecionada
-                $conta = DB::table('contas')->where('id', '=', $despesa->conta_id)->get();
-                $valor_atualizado = (int) $conta[0]->valor - $despesa->valor;
-                DB::table('contas')->where('id', $despesa->conta_id)->update(['valor' => $valor_atualizado]);
+
+                if($despesa->status == 'pago'){
+                    //Atualiza Saldo da Conta Selecionada
+                    $conta = DB::table('contas')->where('id', '=', $despesa->conta_id)->get();
+                    $valor_atualizado = (int) $conta[0]->valor - $despesa->valor;
+                    DB::table('contas')->where('id', $despesa->conta_id)->update(['valor' => $valor_atualizado]);
+                }
             }
 
             return redirect('/despesas')->with('success', 'Despesas criadas com sucesso!');
@@ -91,10 +94,13 @@ class DespesaController extends Controller
             $despesa->usuario_id = $request->user()->id;
 
             $despesa->save();
-            //Atualiza Saldo da Conta Selecionada
-            $conta = DB::table('contas')->where('id', '=', $despesa->conta_id)->get();
-            $valor_atualizado = (int) $conta[0]->valor - $despesa->valor;
-            DB::table('contas')->where('id', $despesa->conta_id)->update(['valor' => $valor_atualizado]);
+
+            if($despesa->status == 'pago'){
+                //Atualiza Saldo da Conta Selecionada
+                $conta = DB::table('contas')->where('id', '=', $despesa->conta_id)->get();
+                $valor_atualizado = (int) $conta[0]->valor - $despesa->valor;
+                DB::table('contas')->where('id', $despesa->conta_id)->update(['valor' => $valor_atualizado]);
+            }
 
             return redirect('/despesas')->with('success', 'Despesa criada com sucesso!');
         }
@@ -114,14 +120,29 @@ class DespesaController extends Controller
     public function update(Request $request, Despesa $despesa){
         $request_valor_formatado = (int) preg_replace('/\D/', '', $request->input('valor'));
 
-        // Atualiza Saldo da Conta Selecionada
-        $contaAntiga = DB::table('contas')->where('id', '=', $despesa->conta_id)->get();
-        $contaAntigaValor = (int) $contaAntiga[0]->valor + $despesa->valor;
-        DB::table('contas')->where('id', $contaAntiga[0]->id)->update(['valor' => $contaAntigaValor]);
-        
-        $contaNova = DB::table('contas')->where('id', '=', $request->input('conta'))->get();
-        $contaNovaValor = (int) $contaNova[0]->valor - $request_valor_formatado;
-        DB::table('contas')->where('id', $contaNova[0]->id)->update(['valor' => $contaNovaValor]);
+        $status_antigo = $despesa->status;
+        $status_novo   = $request->input('status');
+
+        if($status_antigo == 'pago' && $status_novo == 'nao-pago'){
+            // Apenas soma na conta nova
+            $contaAntiga = DB::table('contas')->where('id', '=', $despesa->conta_id)->get();
+            $contaAntigaValor = (int) $contaAntiga[0]->valor + $despesa->valor;
+            DB::table('contas')->where('id', $contaAntiga[0]->id)->update(['valor' => $contaAntigaValor]);
+        }elseif ($status_antigo == 'pago' && $status_novo == 'pago') {
+            // Soma da conta antiga
+            $contaAntiga = DB::table('contas')->where('id', '=', $despesa->conta_id)->get();
+            $contaAntigaValor = (int) $contaAntiga[0]->valor + $despesa->valor;
+            DB::table('contas')->where('id', $contaAntiga[0]->id)->update(['valor' => $contaAntigaValor]);
+            // Diminui na conta nova (ou pode ser a mesma, nesse caso atualizando o valor)
+            $contaNova = DB::table('contas')->where('id', '=', $request->input('conta'))->get();
+            $contaNovaValor = (int) $contaNova[0]->valor - $request_valor_formatado;
+            DB::table('contas')->where('id', $contaNova[0]->id)->update(['valor' => $contaNovaValor]);
+        }elseif ($status_antigo == 'nao-pago' && $status_novo == 'pago') {
+            // Apenas diminui da conta antiga
+            $contaNova = DB::table('contas')->where('id', '=', $request->input('conta'))->get();
+            $contaNovaValor = (int) $contaNova[0]->valor - $request_valor_formatado;
+            DB::table('contas')->where('id', $contaNova[0]->id)->update(['valor' => $contaNovaValor]);
+        }
 
         $despesa->valor = $request_valor_formatado;
         $despesa->descricao = $request->input('descricao');
@@ -155,10 +176,15 @@ class DespesaController extends Controller
 
     public function marcarComoPaga(){
         $id_despesa = $_GET['idDespesa'];
+        $id_conta   = $_GET['idConta'];
+        $valor      = $_GET['valor'];
         
-        $affected = DB::table('despesas')
-              ->where('id', $id_despesa)
-              ->update(['status' => 'pago']);
+        $affected = DB::table('despesas')->where('id', $id_despesa)->update(['status' => 'pago']);
+
+        // Diminui da conta
+        $conta = DB::table('contas')->where('id', '=', $id_conta)->get();
+        $contaNovoValor = (int) $conta[0]->valor - $valor;
+        DB::table('contas')->where('id', $conta[0]->id)->update(['valor' => $contaNovoValor]);
 
         return;
     }

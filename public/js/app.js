@@ -2259,11 +2259,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         console.log('err: ');
       });
     },
-    marcarComoPago: function marcarComoPago(id, index, tipo) {
+    marcarComoPago: function marcarComoPago(id, valor, id_conta, index, tipo) {
       var _this3 = this;
 
       if (tipo == 'receita') {
-        this.$http.get("/api/receitas/pagar?idReceita=".concat(id)).then(function (response) {
+        this.$http.get("/api/receitas/pagar?idReceita=".concat(id, "&valor=").concat(valor, "&idConta=").concat(id_conta)).then(function (response) {
           _this3.receitasPendentes.splice(index, 1);
 
           sweetalert__WEBPACK_IMPORTED_MODULE_2___default()("Receita marcada como recebida com sucesso!", {
@@ -2276,7 +2276,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           });
         });
       } else {
-        this.$http.get("/api/despesas/pagar?idDespesa=".concat(id)).then(function (response) {
+        this.$http.get("/api/despesas/pagar?idDespesa=".concat(id, "&valor=").concat(valor, "&idConta=").concat(id_conta)).then(function (response) {
           _this3.despesasPendentes.splice(index, 1);
 
           sweetalert__WEBPACK_IMPORTED_MODULE_2___default()("Despesa marcada como paga com sucesso!", {
@@ -64107,6 +64107,8 @@ var render = function() {
                             click: function($event) {
                               return _vm.marcarComoPago(
                                 i.id,
+                                i.valor,
+                                i.conta_id,
                                 index,
                                 _vm.tipoPendenciaSelecionada
                               )
