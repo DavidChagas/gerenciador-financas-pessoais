@@ -78,4 +78,14 @@ class HomeController extends Controller{
         
         return [$soma_categoria_receitas, $soma_categoria_despesas];
     }
+
+    public function getPendencias(){
+        $first = (String) $_GET['first'];
+        $last = (String) $_GET['last'];
+
+        $receitas_pendentes = DB::table('receitas')->select('*')->whereBetween('data', ["$first", "$last"])->where('usuario_id', '=', Auth::id())->where('status', '=', 'nao-pago')->get();
+        $despesas_pendentes = DB::table('despesas')->select('*')->whereBetween('data', ["$first", "$last"])->where('usuario_id', '=', Auth::id())->where('status', '=', 'nao-pago')->get();
+        
+        return [$receitas_pendentes, $despesas_pendentes];
+    }
 }

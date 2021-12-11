@@ -10,6 +10,10 @@ Route::get('/api/aportes', [App\Http\Controllers\ObjetivoAporteController::class
 Route::get('/api/reativarObjetivo', [App\Http\Controllers\ObjetivoController::class, 'reativarObjetivo']);
 Route::get('/api/reativarConta', [App\Http\Controllers\ContaController::class, 'reativarConta']);
 Route::get('/api/reativarCategoria', [App\Http\Controllers\CategoriaController::class, 'reativarCategoria']);
+Route::get('/api/getPendencias', [App\Http\Controllers\HomeController::class, 'getPendencias']);
+Route::get('/api/getPendencias', [App\Http\Controllers\HomeController::class, 'getPendencias']);
+Route::get('/api/receitas/pagar', [App\Http\Controllers\ReceitaController::class, 'marcarComoPaga']);
+Route::get('/api/despesas/pagar', [App\Http\Controllers\DespesaController::class, 'marcarComoPaga']);
 
 Route::get('/getRelatorios', [App\Http\Controllers\RelatoriosController::class, 'getRelatorios']);
 

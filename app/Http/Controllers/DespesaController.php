@@ -153,7 +153,13 @@ class DespesaController extends Controller
         }
     }
 
-    public function testeAxios(){
-        echo 'topzera';
+    public function marcarComoPaga(){
+        $id_despesa = $_GET['idDespesa'];
+        
+        $affected = DB::table('despesas')
+              ->where('id', $id_despesa)
+              ->update(['status' => 'pago']);
+
+        return;
     }
 }

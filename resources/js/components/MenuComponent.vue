@@ -67,7 +67,7 @@
 
             background-color: rgba(0, 0, 0, 0.515);
             color: white;
-            transition: all 1s ease;
+            transition: all .7s ease;
             z-index: 9;
 
             &.aberto{
@@ -84,13 +84,13 @@
             height: 100%;
             min-width: 280px;
 
-            padding: 30px;
+            padding: 30px 0;
 
             background-color: $brand-primary;
             box-shadow: 5px 4px 25px #555;
             color: white;
 
-            transition: all 1s ease;
+            transition: all .7s ease;
             z-index: 1;
 
             @media(max-width: 991px){
@@ -122,20 +122,22 @@
                     flex-direction: column;
                     
                     .acao{
-                        margin: 5px 0;
-                        padding: 5px 0;
+                        padding: 15px 30px;
 
                         color: white;
                         text-decoration: none;
+                        background-color: #182b3a;
+                        transition: all .2s;
                         
                         &:hover{
                             cursor: pointer;
-                            color: #ddd;
+                            background-color: #354d60;
                         } 
                     }
                 }
 
                 .footer-menu{
+                    padding: 0 30px;
                     display: flex;
                     justify-content: space-between;
                     button, a{

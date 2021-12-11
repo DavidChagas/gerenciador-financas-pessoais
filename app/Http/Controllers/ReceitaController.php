@@ -154,4 +154,14 @@ class ReceitaController extends Controller{
             return ['status' => 'errorPDO', 'message' => $e->getMessage()];
         }
     }
+
+    public function marcarComoPaga(){
+        $id_receita = $_GET['idReceita'];
+        
+        $affected = DB::table('receitas')
+              ->where('id', $id_receita)
+              ->update(['status' => 'pago']);
+
+        return;
+    }
 }

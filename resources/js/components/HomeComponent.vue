@@ -3,7 +3,7 @@
         <div class="cabecalho">
             <h1>Dashboard</h1>
             <div class="datas">
-                <select class="form-control" name="data" v-model="dataSelecionada" v-on:change="getTotais(dataSelecionada)">
+                <select class="form-control" name="data" v-model="dataSelecionada" v-on:change="getTotais(dataSelecionada); getPendencias(dataSelecionada)">
                     <option v-bind:key="data.data" v-bind:value="data.data" v-for="data in datasFormatadas">{{data.descricao}}</option>
                 </select>
             </div>
@@ -15,8 +15,10 @@
         </div>
         
         <div class="grafico-barras">
-            
             <div class="infos">
+                <div class="notificacao" v-on:click="modalPendenciasAberto = true" v-if="receitasPendentes.length || despesasPendentes.length">
+                    <i class="fas fa-exclamation-circle"></i> <b>Pendências</b>
+                </div>
                 <div class="total">
                     <img src="/images/receitas.png">
                     <div>
@@ -55,6 +57,44 @@
                 </div>
             </div>
         </div>
+
+        <!-- MODAL PENDÊNCIAS -->
+        <div class="overlay" v-bind:class="{ active: modalPendenciasAberto }" v-on:click="modalPendenciasAberto = false"></div>
+        <div class="modal-pendencias" v-bind:class="{ active: modalPendenciasAberto }">
+            <button class="btn btn-xs btn-danger" type="button" @click="modalPendenciasAberto = false">x</button>
+            <div class="titulo">Pendências do mês de {{this.retornaNomeMes(dataSelecionada.split('-')[1])+' de '+dataSelecionada.split('-')[0]}}</div>
+            <div class="tipos">
+                <div class="tipo receita" v-bind:class="{ active: tipoPendenciaSelecionada == 'receita' }" v-on:click="tipoPendenciaSelecionada = 'receita'">Receitas</div>
+                <div class="tipo despesa" v-bind:class="{ active: tipoPendenciaSelecionada == 'despesa' }" v-on:click="tipoPendenciaSelecionada = 'despesa'">Despesas</div>
+            </div>
+
+            <table v-bind:class="dispositivo == 'desktop' ? 'table' : 'table table-responsive'">
+                <tbody>
+                    <tr v-for="(i, index) in tipoPendenciaSelecionada == 'receita' ? receitasPendentes : despesasPendentes" v-bind:key="i.id">
+                        <td>{{i.descricao}}</td>
+                        <td>R$ {{formatPrice(i.valor)}}</td>
+                        <td>{{formatDate(i.data)}}</td>
+                        <td style="text-align: center;" v-on:click="marcarComoPago(i.id, index, tipoPendenciaSelecionada)"> 
+                            <button class="btn btn-sm btn-success" v-if="tipoPendenciaSelecionada == 'receita'">Receber</button> 
+                            <button class="btn btn-sm btn-success" v-if="tipoPendenciaSelecionada == 'despesa'">Pagar</button> 
+                        </td>
+                    </tr>
+                    <tr v-if="tipoPendenciaSelecionada == 'receita' && !receitasPendentes.length">
+                        <td style="display:flex;flex-direction: column;justify-content: center;align-items: center;">
+                            <img src="/images/list-empty.png" width="150px;">
+                            <b style="color: #787878"> Nenhuma receita pendente nesse período </b>
+                        </td> 
+                    </tr>
+                    <tr v-if="tipoPendenciaSelecionada == 'despesa' && !despesasPendentes.length">
+                        <td style="display:flex;flex-direction: column;justify-content: center;align-items: center;">
+                            <img src="/images/list-empty.png" width="150px;">
+                            <b style="color: #787878"> Nenhuma despesa pendente nesse período </b>
+                        </td> 
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
         <hr style="margin-bottom: 5px;">
         <div style="text-align: center; width: 100%; margin-bottom: 10px; color: #999"><small>165509 - David Chagas</small></div>
     </div>
@@ -62,7 +102,8 @@
 
 <script>
     import moment from 'moment';
-    import funcoes from "../funcoes"
+    import funcoes from "../funcoes";
+    import swal from 'sweetalert';
     
     export default {
         props : [
@@ -84,6 +125,11 @@
                 primeiroCarregamentoBar: true,
                 primeiroCarregamentoReceitas: true,
                 primeiroCarregamentoDespesas: true,
+                receitasPendentes: [],
+                despesasPendentes: [],
+                modalPendenciasAberto: false,
+                tipoPendenciaSelecionada: 'receita',
+                dispositivo: 'desktop'
             }
         },
 
@@ -96,6 +142,16 @@
         methods:{
             formatPrice(value) {
                 return funcoes.formatPrice(value);
+            },
+            formatDate(value){
+                return moment(String(value)).format('DD/MM/YYYY');
+            },
+            verificarDispositivo(){
+                if (screen.width < 640 || screen.height < 480) {
+                    this.dispositivo = 'mobile';
+                }else{
+                    this.dispositivo = 'desktop';
+                }
             },
 
             getTotais(dataSelecionada){
@@ -127,6 +183,48 @@
                 }, err => {
                     console.log('err: ');
                 });
+            },
+
+            getPendencias(dataSelecionada){
+                const firstDay = dataSelecionada+'-01';
+                const lastDay = dataSelecionada+'-31';
+
+                this.$http.get(`/api/getPendencias?first=${firstDay}&last=${lastDay}`).then(response => {
+                    this.receitasPendentes = response.body[0];
+                    this.despesasPendentes = response.body[1];
+                }, err => {
+                    console.log('err: ');
+                });
+            },
+
+            marcarComoPago(id, index, tipo){
+                if(tipo == 'receita'){
+                    this.$http.get(`/api/receitas/pagar?idReceita=${id}`).then(response => {
+                        this.receitasPendentes.splice(index, 1);
+                        
+                        swal("Receita marcada como recebida com sucesso!", {
+                            icon: "success",
+                        });
+                    },err =>{
+                        console.log('err', err);
+                        swal("Algo de errado aconteceu...", {
+                        icon: "warning",
+                        });
+                    });
+                }else{
+                    this.$http.get(`/api/despesas/pagar?idDespesa=${id}`).then(response => {
+                        this.despesasPendentes.splice(index, 1);
+                        
+                        swal("Despesa marcada como paga com sucesso!", {
+                            icon: "success",
+                        });
+                    },err =>{
+                        console.log('err', err);
+                        swal("Algo de errado aconteceu...", {
+                        icon: "warning",
+                        });
+                    });
+                }
             },
 
             montarGraficoBarra(){               
@@ -317,8 +415,9 @@
 
             this.dataSelecionada = mesAtual;
 
+            this.verificarDispositivo();
             this.getTotais(mesAtual);
-
+            this.getPendencias(mesAtual);
         }
     }
 </script>
@@ -403,6 +502,7 @@
             }
 
             .infos{
+                position: relative;
                 padding: 30px 20px;
                 display: flex;
                 flex-direction: column;
@@ -423,7 +523,28 @@
                     margin: 0 auto;
                 }
                 
+                .notificacao{
+                    position: absolute;
+                    top: 7px;
+                    right: 10px;
+                    color: #4a4a4a;
 
+                    display: flex;
+                    align-items: center;
+                    line-height: 1;
+
+                    transition: all .5s;
+                    cursor: pointer;
+
+                    &:hover{
+                        color: black;
+                    }
+
+                    i{
+                        margin-right: 5px;
+                        font-size: 18px;
+                    }
+                }
                 .total{
                     display: flex;
                     justify-content: center;
@@ -497,6 +618,101 @@
                     font-size: 24px;
                     text-align: center;
                     color: #444;
+                }
+            }
+        }
+
+        .overlay{
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.15);
+            z-index: 1;
+
+            &.active{
+                display: block; 
+            }
+        }
+
+        .modal-pendencias{
+            position: absolute;
+            top: calc(50% - 200px);
+            left: 50%;
+
+            display: none;
+
+            width: 300px;
+            max-height: 400px;
+            margin-left: -150px;
+            padding: 15px;
+
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0px 0px 22px #a1a1a1;
+
+            @media(min-width: 768px){
+                width: 600px;
+                padding: 20px 30px;
+            }
+
+            &.active{
+                display: block;
+                z-index: 2;
+            }
+
+            > button{
+                float: right;
+                padding: 0px 5px 3px;
+                line-height: 1;
+                font-weight: bold;
+            }
+
+            > .titulo{
+                margin: 20px 0;
+                text-align: center;
+                font-size: 18px;
+                color: #444;
+            }
+
+            > .tipos{
+                margin: 20px 0;
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+
+                border: 1px solid #ddd;
+                border-radius: 20px;
+
+                background-color: #f1f1f1;
+                color: rgb(58, 58, 58);
+
+                > .tipo{
+                    padding: 5px 0;
+                    text-align: center;
+                    border-radius: 20px;
+                    font-size: 15px;
+
+                    transition: all .2s;
+                    border: 1px solid transparent;
+                    cursor: pointer;
+
+                    &.active{
+                        border: 1px solid #999;
+                        background-color: white;
+                        color: black;
+
+                        &.despesa{
+                            border: 1px solid red;
+                            color: red;
+                        }
+                        &.receita{
+                            border: 1px solid green;
+                            color: green;
+                        }
+                    }
                 }
             }
         }

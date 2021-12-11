@@ -2068,6 +2068,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _funcoes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../funcoes */ "./resources/js/funcoes.js");
+/* harmony import */ var sweetalert__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! sweetalert */ "./node_modules/sweetalert/dist/sweetalert.min.js");
+/* harmony import */ var sweetalert__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(sweetalert__WEBPACK_IMPORTED_MODULE_2__);
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 //
@@ -2132,6 +2134,47 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2148,7 +2191,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       semMovimentacoes: false,
       primeiroCarregamentoBar: true,
       primeiroCarregamentoReceitas: true,
-      primeiroCarregamentoDespesas: true
+      primeiroCarregamentoDespesas: true,
+      receitasPendentes: [],
+      despesasPendentes: [],
+      modalPendenciasAberto: false,
+      tipoPendenciaSelecionada: 'receita',
+      dispositivo: 'desktop'
     };
   },
   created: function created() {
@@ -2158,6 +2206,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   methods: {
     formatPrice: function formatPrice(value) {
       return _funcoes__WEBPACK_IMPORTED_MODULE_1__["default"].formatPrice(value);
+    },
+    formatDate: function formatDate(value) {
+      return moment__WEBPACK_IMPORTED_MODULE_0___default()(String(value)).format('DD/MM/YYYY');
+    },
+    verificarDispositivo: function verificarDispositivo() {
+      if (screen.width < 640 || screen.height < 480) {
+        this.dispositivo = 'mobile';
+      } else {
+        this.dispositivo = 'desktop';
+      }
     },
     getTotais: function getTotais(dataSelecionada) {
       var _this = this;
@@ -2188,6 +2246,49 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }, function (err) {
         console.log('err: ');
       });
+    },
+    getPendencias: function getPendencias(dataSelecionada) {
+      var _this2 = this;
+
+      var firstDay = dataSelecionada + '-01';
+      var lastDay = dataSelecionada + '-31';
+      this.$http.get("/api/getPendencias?first=".concat(firstDay, "&last=").concat(lastDay)).then(function (response) {
+        _this2.receitasPendentes = response.body[0];
+        _this2.despesasPendentes = response.body[1];
+      }, function (err) {
+        console.log('err: ');
+      });
+    },
+    marcarComoPago: function marcarComoPago(id, index, tipo) {
+      var _this3 = this;
+
+      if (tipo == 'receita') {
+        this.$http.get("/api/receitas/pagar?idReceita=".concat(id)).then(function (response) {
+          _this3.receitasPendentes.splice(index, 1);
+
+          sweetalert__WEBPACK_IMPORTED_MODULE_2___default()("Receita marcada como recebida com sucesso!", {
+            icon: "success"
+          });
+        }, function (err) {
+          console.log('err', err);
+          sweetalert__WEBPACK_IMPORTED_MODULE_2___default()("Algo de errado aconteceu...", {
+            icon: "warning"
+          });
+        });
+      } else {
+        this.$http.get("/api/despesas/pagar?idDespesa=".concat(id)).then(function (response) {
+          _this3.despesasPendentes.splice(index, 1);
+
+          sweetalert__WEBPACK_IMPORTED_MODULE_2___default()("Despesa marcada como paga com sucesso!", {
+            icon: "success"
+          });
+        }, function (err) {
+          console.log('err', err);
+          sweetalert__WEBPACK_IMPORTED_MODULE_2___default()("Algo de errado aconteceu...", {
+            icon: "warning"
+          });
+        });
+      }
     },
     montarGraficoBarra: function montarGraficoBarra() {
       var _ref;
@@ -2334,23 +2435,23 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   },
   mounted: function mounted() {
-    var _this2 = this;
+    var _this4 = this;
 
     var mesAtual = moment__WEBPACK_IMPORTED_MODULE_0___default()().format('YYYY-MM');
     this.datas_receitasObj.forEach(function (receita) {
       var data = receita.data.split('-');
       var dataFormatada = data[0] + '-' + data[1];
 
-      if (!_this2.datas.includes(dataFormatada)) {
-        _this2.datas.push(dataFormatada);
+      if (!_this4.datas.includes(dataFormatada)) {
+        _this4.datas.push(dataFormatada);
       }
     });
     this.datas_despesasObj.forEach(function (despesa) {
       var data = despesa.data.split('-');
       var dataFormatada = data[0] + '-' + data[1];
 
-      if (!_this2.datas.includes(dataFormatada)) {
-        _this2.datas.push(dataFormatada);
+      if (!_this4.datas.includes(dataFormatada)) {
+        _this4.datas.push(dataFormatada);
       }
     });
     if (!this.datas.includes(mesAtual)) this.datas.unshift(mesAtual);
@@ -2358,11 +2459,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     this.datasFormatadas = this.datas.map(function (data) {
       return {
         data: data,
-        descricao: _this2.retornaNomeMes(data.split('-')[1]) + ' ' + data.split('-')[0]
+        descricao: _this4.retornaNomeMes(data.split('-')[1]) + ' ' + data.split('-')[0]
       };
     });
     this.dataSelecionada = mesAtual;
+    this.verificarDispositivo();
     this.getTotais(mesAtual);
+    this.getPendencias(mesAtual);
   }
 });
 
@@ -8753,7 +8856,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".componente-home {\n  max-width: 1200px;\n  margin: 0 auto;\n}\n.componente-home .cabecalho {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  margin: 50px 0 10px 0;\n}\n@media (min-width: 768px) {\n.componente-home .cabecalho {\n    flex-direction: row;\n    justify-content: space-between;\n}\n}\n.componente-home .cabecalho .datas {\n  width: 200px;\n}\n@media (max-width: 767px) {\n.componente-home .cabecalho .datas {\n    margin-top: 20px;\n}\n}\n.componente-home .cabecalho .datas select {\n  border-top: none;\n  border-left: none;\n  border-right: none;\n  border-radius: 0px;\n}\n.componente-home .cabecalho .datas select:focus {\n  border-color: transparent;\n  outline: none;\n  box-shadow: none;\n}\n.componente-home .saldoTotal {\n  margin-bottom: 30px;\n  text-align: center;\n  font-size: 30px;\n  font-weight: bold;\n  color: #444;\n}\n.componente-home .saldoTotal small {\n  font-size: 15px;\n}\n.componente-home .totais {\n  display: grid;\n  grid-template-columns: repeat(2, 1fr);\n  grid-column-gap: 10px;\n}\n.componente-home .totais .total {\n  height: 100px;\n  background-color: #eee;\n  box-shadow: 3px 3px 5px #aaa;\n  border-radius: 5px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.componente-home .grafico-barras {\n  display: grid;\n  grid-template-columns: repeat(1, 1fr);\n  width: 100%;\n}\n@media (min-width: 992px) {\n.componente-home .grafico-barras {\n    grid-template-columns: repeat(2, 1fr);\n    grid-column-gap: 30px;\n}\n}\n.componente-home .grafico-barras .infos {\n  padding: 30px 20px;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-around;\n  border-radius: 5px;\n}\n@media (min-width: 768px) {\n.componente-home .grafico-barras .infos {\n    flex-direction: row;\n    box-shadow: 0 0 10px #ddd;\n}\n}\n@media (min-width: 992px) {\n.componente-home .grafico-barras .infos {\n    flex-direction: column;\n    width: 486px;\n    margin: 0 auto;\n}\n}\n@media (min-width: 1500px) {\n.componente-home .grafico-barras .infos {\n    width: 550px;\n    margin: 0 auto;\n}\n}\n.componente-home .grafico-barras .infos .total {\n  display: flex;\n  justify-content: center;\n}\n.componente-home .grafico-barras .infos .total img {\n  width: 50px;\n  height: 50px;\n  margin-right: 20px;\n}\n.componente-home .grafico-barras .infos .total span {\n  font-size: 24px;\n  font-weight: bold;\n  color: #444;\n}\n.componente-home .grafico-barras .grafico {\n  position: relative;\n  margin: 0 auto;\n  border-radius: 5px;\n}\n@media (min-width: 992px) {\n.componente-home .grafico-barras .grafico {\n    width: 486px;\n    padding: 20px;\n    box-shadow: 0 0 10px #ddd;\n    margin: 0 auto;\n}\n}\n@media (min-width: 1500px) {\n.componente-home .grafico-barras .grafico {\n    width: 550px;\n    margin: 0 auto;\n}\n}\n.componente-home .grafico-barras .grafico .semInfos {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  -webkit-backdrop-filter: blur(3px);\n          backdrop-filter: blur(3px);\n  color: black;\n  font-size: 18px;\n}\n.componente-home .grafico-pizza {\n  margin-bottom: 50px;\n  display: grid;\n  grid-template-columns: repeat(1, 1fr);\n  width: 100%;\n}\n@media (min-width: 992px) {\n.componente-home .grafico-pizza {\n    grid-template-columns: repeat(2, 1fr);\n}\n}\n.componente-home .grafico-pizza .tipo {\n  width: 300px;\n  margin: 50px auto 0 auto;\n}\n.componente-home .grafico-pizza .tipo .descricao {\n  font-weight: bold;\n  font-size: 24px;\n  text-align: center;\n  color: #444;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".componente-home {\n  max-width: 1200px;\n  margin: 0 auto;\n}\n.componente-home .cabecalho {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  margin: 50px 0 10px 0;\n}\n@media (min-width: 768px) {\n.componente-home .cabecalho {\n    flex-direction: row;\n    justify-content: space-between;\n}\n}\n.componente-home .cabecalho .datas {\n  width: 200px;\n}\n@media (max-width: 767px) {\n.componente-home .cabecalho .datas {\n    margin-top: 20px;\n}\n}\n.componente-home .cabecalho .datas select {\n  border-top: none;\n  border-left: none;\n  border-right: none;\n  border-radius: 0px;\n}\n.componente-home .cabecalho .datas select:focus {\n  border-color: transparent;\n  outline: none;\n  box-shadow: none;\n}\n.componente-home .saldoTotal {\n  margin-bottom: 30px;\n  text-align: center;\n  font-size: 30px;\n  font-weight: bold;\n  color: #444;\n}\n.componente-home .saldoTotal small {\n  font-size: 15px;\n}\n.componente-home .totais {\n  display: grid;\n  grid-template-columns: repeat(2, 1fr);\n  grid-column-gap: 10px;\n}\n.componente-home .totais .total {\n  height: 100px;\n  background-color: #eee;\n  box-shadow: 3px 3px 5px #aaa;\n  border-radius: 5px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.componente-home .grafico-barras {\n  display: grid;\n  grid-template-columns: repeat(1, 1fr);\n  width: 100%;\n}\n@media (min-width: 992px) {\n.componente-home .grafico-barras {\n    grid-template-columns: repeat(2, 1fr);\n    grid-column-gap: 30px;\n}\n}\n.componente-home .grafico-barras .infos {\n  position: relative;\n  padding: 30px 20px;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-around;\n  border-radius: 5px;\n}\n@media (min-width: 768px) {\n.componente-home .grafico-barras .infos {\n    flex-direction: row;\n    box-shadow: 0 0 10px #ddd;\n}\n}\n@media (min-width: 992px) {\n.componente-home .grafico-barras .infos {\n    flex-direction: column;\n    width: 486px;\n    margin: 0 auto;\n}\n}\n@media (min-width: 1500px) {\n.componente-home .grafico-barras .infos {\n    width: 550px;\n    margin: 0 auto;\n}\n}\n.componente-home .grafico-barras .infos .notificacao {\n  position: absolute;\n  top: 7px;\n  right: 10px;\n  color: #4a4a4a;\n  display: flex;\n  align-items: center;\n  line-height: 1;\n  transition: all 0.5s;\n  cursor: pointer;\n}\n.componente-home .grafico-barras .infos .notificacao:hover {\n  color: black;\n}\n.componente-home .grafico-barras .infos .notificacao i {\n  margin-right: 5px;\n  font-size: 18px;\n}\n.componente-home .grafico-barras .infos .total {\n  display: flex;\n  justify-content: center;\n}\n.componente-home .grafico-barras .infos .total img {\n  width: 50px;\n  height: 50px;\n  margin-right: 20px;\n}\n.componente-home .grafico-barras .infos .total span {\n  font-size: 24px;\n  font-weight: bold;\n  color: #444;\n}\n.componente-home .grafico-barras .grafico {\n  position: relative;\n  margin: 0 auto;\n  border-radius: 5px;\n}\n@media (min-width: 992px) {\n.componente-home .grafico-barras .grafico {\n    width: 486px;\n    padding: 20px;\n    box-shadow: 0 0 10px #ddd;\n    margin: 0 auto;\n}\n}\n@media (min-width: 1500px) {\n.componente-home .grafico-barras .grafico {\n    width: 550px;\n    margin: 0 auto;\n}\n}\n.componente-home .grafico-barras .grafico .semInfos {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  -webkit-backdrop-filter: blur(3px);\n          backdrop-filter: blur(3px);\n  color: black;\n  font-size: 18px;\n}\n.componente-home .grafico-pizza {\n  margin-bottom: 50px;\n  display: grid;\n  grid-template-columns: repeat(1, 1fr);\n  width: 100%;\n}\n@media (min-width: 992px) {\n.componente-home .grafico-pizza {\n    grid-template-columns: repeat(2, 1fr);\n}\n}\n.componente-home .grafico-pizza .tipo {\n  width: 300px;\n  margin: 50px auto 0 auto;\n}\n.componente-home .grafico-pizza .tipo .descricao {\n  font-weight: bold;\n  font-size: 24px;\n  text-align: center;\n  color: #444;\n}\n.componente-home .overlay {\n  display: none;\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 100vw;\n  height: 100vh;\n  background-color: rgba(0, 0, 0, 0.15);\n  z-index: 1;\n}\n.componente-home .overlay.active {\n  display: block;\n}\n.componente-home .modal-pendencias {\n  position: absolute;\n  top: calc(50% - 200px);\n  left: 50%;\n  display: none;\n  width: 300px;\n  max-height: 400px;\n  margin-left: -150px;\n  padding: 15px;\n  background-color: white;\n  border: 1px solid #ddd;\n  border-radius: 5px;\n  box-shadow: 0px 0px 22px #a1a1a1;\n}\n@media (min-width: 768px) {\n.componente-home .modal-pendencias {\n    width: 600px;\n    padding: 20px 30px;\n}\n}\n.componente-home .modal-pendencias.active {\n  display: block;\n  z-index: 2;\n}\n.componente-home .modal-pendencias > button {\n  float: right;\n  padding: 0px 5px 3px;\n  line-height: 1;\n  font-weight: bold;\n}\n.componente-home .modal-pendencias > .titulo {\n  margin: 20px 0;\n  text-align: center;\n  font-size: 18px;\n  color: #444;\n}\n.componente-home .modal-pendencias > .tipos {\n  margin: 20px 0;\n  display: grid;\n  grid-template-columns: repeat(2, 1fr);\n  border: 1px solid #ddd;\n  border-radius: 20px;\n  background-color: #f1f1f1;\n  color: #3a3a3a;\n}\n.componente-home .modal-pendencias > .tipos > .tipo {\n  padding: 5px 0;\n  text-align: center;\n  border-radius: 20px;\n  font-size: 15px;\n  transition: all 0.2s;\n  border: 1px solid transparent;\n  cursor: pointer;\n}\n.componente-home .modal-pendencias > .tipos > .tipo.active {\n  border: 1px solid #999;\n  background-color: white;\n  color: black;\n}\n.componente-home .modal-pendencias > .tipos > .tipo.active.despesa {\n  border: 1px solid red;\n  color: red;\n}\n.componente-home .modal-pendencias > .tipos > .tipo.active.receita {\n  border: 1px solid green;\n  color: green;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -8801,7 +8904,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".componente-menu .btn-mobile {\n  position: absolute;\n  top: 10px;\n  left: 10px;\n  width: 25px;\n  height: 25px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  border-radius: 4px;\n  background-color: rgba(0, 0, 0, 0.515);\n  color: white;\n  transition: all 1s ease;\n  z-index: 9;\n}\n.componente-menu .btn-mobile.aberto {\n  left: 250px;\n}\n@media (min-width: 992px) {\n.componente-menu .btn-mobile {\n    display: none;\n}\n}\n.componente-menu .menu {\n  position: fixed;\n  height: 100%;\n  min-width: 280px;\n  padding: 30px;\n  background-color: #182b3a;\n  box-shadow: 5px 4px 25px #555;\n  color: white;\n  transition: all 1s ease;\n  z-index: 1;\n}\n@media (max-width: 991px) {\n.componente-menu .menu {\n    min-width: 0px;\n    left: -280px;\n}\n}\n.componente-menu .menu.abrir {\n  min-width: 280px;\n  left: 0px;\n  overflow: hidden;\n}\n.componente-menu .menu .usuario {\n  margin-bottom: 20px;\n  padding-bottom: 20px;\n  border-bottom: 1px solid #bbb;\n  text-align: center;\n}\n.componente-menu .menu .acoes {\n  height: 90%;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n}\n.componente-menu .menu .acoes .paginas {\n  display: flex;\n  flex-direction: column;\n}\n.componente-menu .menu .acoes .paginas .acao {\n  margin: 5px 0;\n  padding: 5px 0;\n  color: white;\n  text-decoration: none;\n}\n.componente-menu .menu .acoes .paginas .acao:hover {\n  cursor: pointer;\n  color: #ddd;\n}\n.componente-menu .menu .acoes .footer-menu {\n  display: flex;\n  justify-content: space-between;\n}\n.componente-menu .menu .acoes .footer-menu button, .componente-menu .menu .acoes .footer-menu a {\n  padding: 2px;\n  background-color: transparent;\n  color: white;\n  border-left: none;\n  border-right: none;\n  border-top: none;\n  border-bottom: 1px solid #eee;\n  border-radius: 0;\n}\n.componente-menu .menu .acoes .footer-menu button:hover, .componente-menu .menu .acoes .footer-menu a:hover {\n  color: #acacac;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".componente-menu .btn-mobile {\n  position: absolute;\n  top: 10px;\n  left: 10px;\n  width: 25px;\n  height: 25px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  border-radius: 4px;\n  background-color: rgba(0, 0, 0, 0.515);\n  color: white;\n  transition: all 0.7s ease;\n  z-index: 9;\n}\n.componente-menu .btn-mobile.aberto {\n  left: 250px;\n}\n@media (min-width: 992px) {\n.componente-menu .btn-mobile {\n    display: none;\n}\n}\n.componente-menu .menu {\n  position: fixed;\n  height: 100%;\n  min-width: 280px;\n  padding: 30px 0;\n  background-color: #182b3a;\n  box-shadow: 5px 4px 25px #555;\n  color: white;\n  transition: all 0.7s ease;\n  z-index: 1;\n}\n@media (max-width: 991px) {\n.componente-menu .menu {\n    min-width: 0px;\n    left: -280px;\n}\n}\n.componente-menu .menu.abrir {\n  min-width: 280px;\n  left: 0px;\n  overflow: hidden;\n}\n.componente-menu .menu .usuario {\n  margin-bottom: 20px;\n  padding-bottom: 20px;\n  border-bottom: 1px solid #bbb;\n  text-align: center;\n}\n.componente-menu .menu .acoes {\n  height: 90%;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n}\n.componente-menu .menu .acoes .paginas {\n  display: flex;\n  flex-direction: column;\n}\n.componente-menu .menu .acoes .paginas .acao {\n  padding: 15px 30px;\n  color: white;\n  text-decoration: none;\n  background-color: #182b3a;\n  transition: all 0.2s;\n}\n.componente-menu .menu .acoes .paginas .acao:hover {\n  cursor: pointer;\n  background-color: #354d60;\n}\n.componente-menu .menu .acoes .footer-menu {\n  padding: 0 30px;\n  display: flex;\n  justify-content: space-between;\n}\n.componente-menu .menu .acoes .footer-menu button, .componente-menu .menu .acoes .footer-menu a {\n  padding: 2px;\n  background-color: transparent;\n  color: white;\n  border-left: none;\n  border-right: none;\n  border-top: none;\n  border-bottom: 1px solid #eee;\n  border-radius: 0;\n}\n.componente-menu .menu .acoes .footer-menu button:hover, .componente-menu .menu .acoes .footer-menu a:hover {\n  color: #acacac;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -63796,7 +63899,8 @@ var render = function() {
                     : $$selectedVal[0]
                 },
                 function($event) {
-                  return _vm.getTotais(_vm.dataSelecionada)
+                  _vm.getTotais(_vm.dataSelecionada)
+                  _vm.getPendencias(_vm.dataSelecionada)
                 }
               ]
             }
@@ -63823,6 +63927,25 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "grafico-barras" }, [
       _c("div", { staticClass: "infos" }, [
+        _vm.receitasPendentes.length || _vm.despesasPendentes.length
+          ? _c(
+              "div",
+              {
+                staticClass: "notificacao",
+                on: {
+                  click: function($event) {
+                    _vm.modalPendenciasAberto = true
+                  }
+                }
+              },
+              [
+                _c("i", { staticClass: "fas fa-exclamation-circle" }),
+                _vm._v(" "),
+                _c("b", [_vm._v("Pendências")])
+              ]
+            )
+          : _vm._e(),
+        _vm._v(" "),
         _c("div", { staticClass: "total" }, [
           _c("img", { attrs: { src: "/images/receitas.png" } }),
           _vm._v(" "),
@@ -63873,9 +63996,158 @@ var render = function() {
         ])
       : _vm._e(),
     _vm._v(" "),
+    _c("div", {
+      staticClass: "overlay",
+      class: { active: _vm.modalPendenciasAberto },
+      on: {
+        click: function($event) {
+          _vm.modalPendenciasAberto = false
+        }
+      }
+    }),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal-pendencias",
+        class: { active: _vm.modalPendenciasAberto }
+      },
+      [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-xs btn-danger",
+            attrs: { type: "button" },
+            on: {
+              click: function($event) {
+                _vm.modalPendenciasAberto = false
+              }
+            }
+          },
+          [_vm._v("x")]
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "titulo" }, [
+          _vm._v(
+            "Pendências do mês de " +
+              _vm._s(
+                this.retornaNomeMes(_vm.dataSelecionada.split("-")[1]) +
+                  " de " +
+                  _vm.dataSelecionada.split("-")[0]
+              )
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "tipos" }, [
+          _c(
+            "div",
+            {
+              staticClass: "tipo receita",
+              class: { active: _vm.tipoPendenciaSelecionada == "receita" },
+              on: {
+                click: function($event) {
+                  _vm.tipoPendenciaSelecionada = "receita"
+                }
+              }
+            },
+            [_vm._v("Receitas")]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "tipo despesa",
+              class: { active: _vm.tipoPendenciaSelecionada == "despesa" },
+              on: {
+                click: function($event) {
+                  _vm.tipoPendenciaSelecionada = "despesa"
+                }
+              }
+            },
+            [_vm._v("Despesas")]
+          )
+        ]),
+        _vm._v(" "),
+        _c(
+          "table",
+          {
+            class:
+              _vm.dispositivo == "desktop" ? "table" : "table table-responsive"
+          },
+          [
+            _c(
+              "tbody",
+              [
+                _vm._l(
+                  _vm.tipoPendenciaSelecionada == "receita"
+                    ? _vm.receitasPendentes
+                    : _vm.despesasPendentes,
+                  function(i, index) {
+                    return _c("tr", { key: i.id }, [
+                      _c("td", [_vm._v(_vm._s(i.descricao))]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _vm._v("R$ " + _vm._s(_vm.formatPrice(i.valor)))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(_vm.formatDate(i.data)))]),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        {
+                          staticStyle: { "text-align": "center" },
+                          on: {
+                            click: function($event) {
+                              return _vm.marcarComoPago(
+                                i.id,
+                                index,
+                                _vm.tipoPendenciaSelecionada
+                              )
+                            }
+                          }
+                        },
+                        [
+                          _vm.tipoPendenciaSelecionada == "receita"
+                            ? _c(
+                                "button",
+                                { staticClass: "btn btn-sm btn-success" },
+                                [_vm._v("Receber")]
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.tipoPendenciaSelecionada == "despesa"
+                            ? _c(
+                                "button",
+                                { staticClass: "btn btn-sm btn-success" },
+                                [_vm._v("Pagar")]
+                              )
+                            : _vm._e()
+                        ]
+                      )
+                    ])
+                  }
+                ),
+                _vm._v(" "),
+                _vm.tipoPendenciaSelecionada == "receita" &&
+                !_vm.receitasPendentes.length
+                  ? _c("tr", [_vm._m(2)])
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.tipoPendenciaSelecionada == "despesa" &&
+                !_vm.despesasPendentes.length
+                  ? _c("tr", [_vm._m(3)])
+                  : _vm._e()
+              ],
+              2
+            )
+          ]
+        )
+      ]
+    ),
+    _vm._v(" "),
     _c("hr", { staticStyle: { "margin-bottom": "5px" } }),
     _vm._v(" "),
-    _vm._m(2)
+    _vm._m(4)
   ])
 }
 var staticRenderFns = [
@@ -63906,6 +64178,56 @@ var staticRenderFns = [
         _c("canvas", { attrs: { id: "categoriaDespesasChart" } })
       ])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "td",
+      {
+        staticStyle: {
+          display: "flex",
+          "flex-direction": "column",
+          "justify-content": "center",
+          "align-items": "center"
+        }
+      },
+      [
+        _c("img", {
+          attrs: { src: "/images/list-empty.png", width: "150px;" }
+        }),
+        _vm._v(" "),
+        _c("b", { staticStyle: { color: "#787878" } }, [
+          _vm._v(" Nenhuma receita pendente nesse período ")
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "td",
+      {
+        staticStyle: {
+          display: "flex",
+          "flex-direction": "column",
+          "justify-content": "center",
+          "align-items": "center"
+        }
+      },
+      [
+        _c("img", {
+          attrs: { src: "/images/list-empty.png", width: "150px;" }
+        }),
+        _vm._v(" "),
+        _c("b", { staticStyle: { color: "#787878" } }, [
+          _vm._v(" Nenhuma despesa pendente nesse período ")
+        ])
+      ]
+    )
   },
   function() {
     var _vm = this
