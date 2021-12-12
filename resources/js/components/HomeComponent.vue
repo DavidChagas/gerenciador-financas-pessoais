@@ -159,7 +159,6 @@
                 const lastDay = dataSelecionada+'-31';
 
                 this.$http.get(`/api/getTotais?first=${firstDay}&last=${lastDay}`).then(response => {
-                   
                     this.totalReceitas = response.body[0].total_receitas == null ? 0 : funcoes.formatarValorGraficos(response.body[0].total_receitas);
                     // if( this.totalReceitas == null ) this.totalReceitas = 0;
                     this.totalDespesas = response.body[1].total_despesas == null ? 0 : funcoes.formatarValorGraficos(response.body[1].total_despesas);
@@ -201,6 +200,11 @@
                 if(tipo == 'receita'){
                     this.$http.get(`/api/receitas/pagar?idReceita=${id}&valor=${valor}&idConta=${id_conta}`).then(response => {
                         this.receitasPendentes.splice(index, 1);
+
+                        setTimeout(()=>{ 
+                            location.reload(); 
+                        }, 2000);
+                        
                         
                         swal("Receita marcada como recebida com sucesso!", {
                             icon: "success",

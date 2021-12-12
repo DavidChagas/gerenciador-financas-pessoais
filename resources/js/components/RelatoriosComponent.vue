@@ -57,6 +57,11 @@
                 </tr>
             </tbody>
         </table>
+        <div class="aviso-selecionar-relatorio d-print-none" v-if="relatorioSelecionado == ''">
+            <img src="/images/selecione-relatorio.jpg" style="opacity: .7;">
+            <br>
+            <span>Selecione um relatório</span>
+        </div>
         <button class="btn btn-info btn-sm d-print-none" onclick="window.print()" style="float: right" v-if="relatorioSelecionado != ''">
             <i class="fas fa-print"></i> Imprimir
         </button>
@@ -196,5 +201,22 @@
                 }
             }
         } 
+
+        .aviso-selecionar-relatorio{
+            position: relative;
+            margin-top: 50px;
+            text-align: center;
+
+            span{
+                position: absolute;
+                width: 300px;
+                left: calc(50% - 150px);
+                bottom: 0%;
+
+                font-weight: bold;
+                font-size: 25px;
+                color: #444;
+            }
+        }
     }
 </style>

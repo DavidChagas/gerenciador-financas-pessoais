@@ -2,7 +2,7 @@
     <div class="componente-lista-vazia">
         <img src="/images/list-empty.png">
         <div class="titulo">
-            Nenhum registro cadastrato até o momento.
+            Nenhum registro cadastrado até o momento.
         </div>
         
     </div>
