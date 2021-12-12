@@ -1,6 +1,6 @@
 <template>
     <div class="componente-listagem-conta">
-        <select class="form-control select-contas" v-model="mostrarContas">
+        <select class="form-control select-contas" v-model="mostrarContas" v-if="list.length">
             <option value="0">Contas Ativos</option>
             <option value="1">Contas Arquivados</option>
         </select>
@@ -33,8 +33,6 @@
         </table>
 
         <lista-vazia-component v-if="!list.length"></lista-vazia-component>
-
-        <modal-exclusao-component v-if="visible"></modal-exclusao-component>
     </div>
 </template>
 
@@ -50,7 +48,6 @@
         data(){
             return {
                 list: [],
-                visible: false,
                 item: '',
                 mostrarContas: 0
             }
@@ -58,9 +55,6 @@
         methods: {
             formatPrice(value) {
                 return funcoes.formatPrice(value);
-            },
-            abrirModal() {
-                this.visible = true;
             },
             reativarConta(id){
                 this.$http.get(`/api/reativarConta?idConta=${id}`).then(() => {

@@ -1,17 +1,17 @@
 <template>
     <div class="componente-listagem-tabela">
-        <select class="form-control select-categorias" v-model="mostrarCategorias">
+        <select class="form-control select-categorias" v-model="mostrarCategorias" v-if="list.length">
             <option value="0">Ativas</option>
             <option value="1">Arquivadas</option>
         </select>
-        <div class="filtro">
+        <div class="filtro" v-if="list.length">
             <select class="form-control" v-model="filtroSelecionado" v-on:change="selecionarFiltro(filtroSelecionado)">
                 <option value="Todos">Todos</option>
                 <option value="Receitas">Receitas</option>
                 <option value="Despesas">Despesas</option>
             </select>
         </div>
-        <table class="table">
+        <table class="table" v-if="list.length">
             <thead class="thead-light">
                 <tr>
                     <th scope="col">Descrição</th>
@@ -39,7 +39,7 @@
             </tbody>
         </table>
 
-        <modal-exclusao-component v-if="visible"></modal-exclusao-component>
+        <lista-vazia-component v-if="!list.length"></lista-vazia-component>
     </div>
 </template>
 

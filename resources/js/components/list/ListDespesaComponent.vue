@@ -1,6 +1,6 @@
 <template>
     <div class="componente-listagem-despesa">
-        <div class="datas">
+        <div class="datas" v-if="list.length">
             <div class="d-print-block" style="display:none">
                 Referente à {{this.retornaNomeMes(dataSelecionada.split('-')[1])+' '+dataSelecionada.split('-')[0]}}
             </div>

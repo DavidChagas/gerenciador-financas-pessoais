@@ -1,7 +1,7 @@
 <template>
     <div class="componente-listagem-objetivo" v-bind:class="{ active: modalAberto }">
         <div class="overlay" v-bind:class="{ active: modalAberto }"></div>
-        <select class="form-control select-objetivos" v-model="mostrarObjetivos">
+        <select class="form-control select-objetivos" v-model="mostrarObjetivos" v-if="list.length">
             <option value="0">Objetivos Ativos</option>
             <option value="1">Objetivos Arquivados</option>
         </select>
