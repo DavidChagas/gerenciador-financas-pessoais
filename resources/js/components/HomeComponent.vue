@@ -515,7 +515,7 @@
                 }
                 @media(min-width: 992px){
                     flex-direction: column;
-                    width: 486px;
+                    width: 470px;
                     margin: 0 auto;
                 }
                 @media(min-width: 1500px){
@@ -571,7 +571,7 @@
 
                 
                 @media(min-width: 992px){
-                    width: 486px;
+                    width: 470px;
                     padding: 20px;
                     box-shadow: 0 0 10px #ddd;
                     margin: 0 auto;
