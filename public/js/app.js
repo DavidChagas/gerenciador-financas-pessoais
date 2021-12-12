@@ -3056,7 +3056,8 @@ __webpack_require__.r(__webpack_exports__);
     return {
       despesaObj: {},
       contasObj: [],
-      categoriasObj: []
+      categoriasObj: [],
+      despesaFixa: 'nao'
     };
   },
   created: function created() {
@@ -3267,7 +3268,8 @@ __webpack_require__.r(__webpack_exports__);
     return {
       receitaObj: {},
       contasObj: [],
-      categoriasObj: []
+      categoriasObj: [],
+      receitaFixa: 'nao'
     };
   },
   created: function created() {
@@ -8857,7 +8859,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".componente-home {\n  max-width: 1200px;\n  margin: 0 auto;\n}\n.componente-home .cabecalho {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  margin: 50px 0 10px 0;\n}\n@media (min-width: 768px) {\n.componente-home .cabecalho {\n    flex-direction: row;\n    justify-content: space-between;\n}\n}\n.componente-home .cabecalho .datas {\n  width: 200px;\n}\n@media (max-width: 767px) {\n.componente-home .cabecalho .datas {\n    margin-top: 20px;\n}\n}\n.componente-home .cabecalho .datas select {\n  border-top: none;\n  border-left: none;\n  border-right: none;\n  border-radius: 0px;\n}\n.componente-home .cabecalho .datas select:focus {\n  border-color: transparent;\n  outline: none;\n  box-shadow: none;\n}\n.componente-home .saldoTotal {\n  margin-bottom: 30px;\n  text-align: center;\n  font-size: 30px;\n  font-weight: bold;\n  color: #444;\n}\n.componente-home .saldoTotal small {\n  font-size: 15px;\n}\n.componente-home .totais {\n  display: grid;\n  grid-template-columns: repeat(2, 1fr);\n  grid-column-gap: 10px;\n}\n.componente-home .totais .total {\n  height: 100px;\n  background-color: #eee;\n  box-shadow: 3px 3px 5px #aaa;\n  border-radius: 5px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.componente-home .grafico-barras {\n  display: grid;\n  grid-template-columns: repeat(1, 1fr);\n  width: 100%;\n}\n@media (min-width: 992px) {\n.componente-home .grafico-barras {\n    grid-template-columns: repeat(2, 1fr);\n    grid-column-gap: 30px;\n}\n}\n.componente-home .grafico-barras .infos {\n  position: relative;\n  padding: 30px 20px;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-around;\n  border-radius: 5px;\n}\n@media (min-width: 768px) {\n.componente-home .grafico-barras .infos {\n    flex-direction: row;\n    box-shadow: 0 0 10px #ddd;\n}\n}\n@media (min-width: 992px) {\n.componente-home .grafico-barras .infos {\n    flex-direction: column;\n    width: 486px;\n    margin: 0 auto;\n}\n}\n@media (min-width: 1500px) {\n.componente-home .grafico-barras .infos {\n    width: 550px;\n    margin: 0 auto;\n}\n}\n.componente-home .grafico-barras .infos .notificacao {\n  position: absolute;\n  top: 7px;\n  right: 10px;\n  color: #4a4a4a;\n  display: flex;\n  align-items: center;\n  line-height: 1;\n  transition: all 0.5s;\n  cursor: pointer;\n}\n.componente-home .grafico-barras .infos .notificacao:hover {\n  color: black;\n}\n.componente-home .grafico-barras .infos .notificacao i {\n  margin-right: 5px;\n  font-size: 18px;\n}\n.componente-home .grafico-barras .infos .total {\n  display: flex;\n  justify-content: center;\n}\n.componente-home .grafico-barras .infos .total img {\n  width: 50px;\n  height: 50px;\n  margin-right: 20px;\n}\n.componente-home .grafico-barras .infos .total span {\n  font-size: 24px;\n  font-weight: bold;\n  color: #444;\n}\n.componente-home .grafico-barras .grafico {\n  position: relative;\n  margin: 0 auto;\n  border-radius: 5px;\n}\n@media (min-width: 992px) {\n.componente-home .grafico-barras .grafico {\n    width: 486px;\n    padding: 20px;\n    box-shadow: 0 0 10px #ddd;\n    margin: 0 auto;\n}\n}\n@media (min-width: 1500px) {\n.componente-home .grafico-barras .grafico {\n    width: 550px;\n    margin: 0 auto;\n}\n}\n.componente-home .grafico-barras .grafico .semInfos {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  -webkit-backdrop-filter: blur(3px);\n          backdrop-filter: blur(3px);\n  color: black;\n  font-size: 18px;\n}\n.componente-home .grafico-pizza {\n  margin-bottom: 50px;\n  display: grid;\n  grid-template-columns: repeat(1, 1fr);\n  width: 100%;\n}\n@media (min-width: 992px) {\n.componente-home .grafico-pizza {\n    grid-template-columns: repeat(2, 1fr);\n}\n}\n.componente-home .grafico-pizza .tipo {\n  width: 300px;\n  margin: 50px auto 0 auto;\n}\n.componente-home .grafico-pizza .tipo .descricao {\n  font-weight: bold;\n  font-size: 24px;\n  text-align: center;\n  color: #444;\n}\n.componente-home .overlay {\n  display: none;\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 100vw;\n  height: 100vh;\n  background-color: rgba(0, 0, 0, 0.15);\n  z-index: 1;\n}\n.componente-home .overlay.active {\n  display: block;\n}\n.componente-home .modal-pendencias {\n  position: absolute;\n  top: calc(50% - 200px);\n  left: 50%;\n  display: none;\n  width: 300px;\n  max-height: 400px;\n  margin-left: -150px;\n  padding: 15px;\n  background-color: white;\n  border: 1px solid #ddd;\n  border-radius: 5px;\n  box-shadow: 0px 0px 22px #a1a1a1;\n}\n@media (min-width: 768px) {\n.componente-home .modal-pendencias {\n    width: 600px;\n    padding: 20px 30px;\n}\n}\n.componente-home .modal-pendencias.active {\n  display: block;\n  z-index: 2;\n}\n.componente-home .modal-pendencias > button {\n  float: right;\n  padding: 0px 5px 3px;\n  line-height: 1;\n  font-weight: bold;\n}\n.componente-home .modal-pendencias > .titulo {\n  margin: 20px 0;\n  text-align: center;\n  font-size: 18px;\n  color: #444;\n}\n.componente-home .modal-pendencias > .tipos {\n  margin: 20px 0;\n  display: grid;\n  grid-template-columns: repeat(2, 1fr);\n  border: 1px solid #ddd;\n  border-radius: 20px;\n  background-color: #f1f1f1;\n  color: #3a3a3a;\n}\n.componente-home .modal-pendencias > .tipos > .tipo {\n  padding: 5px 0;\n  text-align: center;\n  border-radius: 20px;\n  font-size: 15px;\n  transition: all 0.2s;\n  border: 1px solid transparent;\n  cursor: pointer;\n}\n.componente-home .modal-pendencias > .tipos > .tipo.active {\n  border: 1px solid #999;\n  background-color: white;\n  color: black;\n}\n.componente-home .modal-pendencias > .tipos > .tipo.active.despesa {\n  border: 1px solid red;\n  color: red;\n}\n.componente-home .modal-pendencias > .tipos > .tipo.active.receita {\n  border: 1px solid green;\n  color: green;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".componente-home {\n  max-width: 1200px;\n  margin: 0 auto;\n}\n.componente-home .cabecalho {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  margin: 50px 0 10px 0;\n}\n@media (min-width: 768px) {\n.componente-home .cabecalho {\n    flex-direction: row;\n    justify-content: space-between;\n}\n}\n.componente-home .cabecalho .datas {\n  width: 200px;\n}\n@media (max-width: 767px) {\n.componente-home .cabecalho .datas {\n    margin-top: 20px;\n}\n}\n.componente-home .cabecalho .datas select {\n  border-top: none;\n  border-left: none;\n  border-right: none;\n  border-radius: 0px;\n}\n.componente-home .cabecalho .datas select:focus {\n  border-color: transparent;\n  outline: none;\n  box-shadow: none;\n}\n.componente-home .saldoTotal {\n  margin-bottom: 30px;\n  text-align: center;\n  font-size: 30px;\n  font-weight: bold;\n  color: #444;\n}\n.componente-home .saldoTotal small {\n  font-size: 15px;\n}\n.componente-home .totais {\n  display: grid;\n  grid-template-columns: repeat(2, 1fr);\n  grid-column-gap: 10px;\n}\n.componente-home .totais .total {\n  height: 100px;\n  background-color: #eee;\n  box-shadow: 3px 3px 5px #aaa;\n  border-radius: 5px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.componente-home .grafico-barras {\n  display: grid;\n  grid-template-columns: repeat(1, 1fr);\n  width: 100%;\n}\n@media (min-width: 992px) {\n.componente-home .grafico-barras {\n    grid-template-columns: repeat(2, 1fr);\n    grid-column-gap: 10px;\n}\n}\n.componente-home .grafico-barras .infos {\n  position: relative;\n  padding: 30px 20px;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-around;\n  border-radius: 5px;\n}\n@media (min-width: 768px) {\n.componente-home .grafico-barras .infos {\n    flex-direction: row;\n    box-shadow: 0 0 10px #ddd;\n}\n}\n@media (min-width: 992px) {\n.componente-home .grafico-barras .infos {\n    flex-direction: column;\n    width: 486px;\n    margin: 0 auto;\n}\n}\n@media (min-width: 1500px) {\n.componente-home .grafico-barras .infos {\n    width: 550px;\n    margin: 0 auto;\n}\n}\n.componente-home .grafico-barras .infos .notificacao {\n  position: absolute;\n  top: 7px;\n  right: 10px;\n  color: #4a4a4a;\n  display: flex;\n  align-items: center;\n  line-height: 1;\n  transition: all 0.5s;\n  cursor: pointer;\n}\n.componente-home .grafico-barras .infos .notificacao:hover {\n  color: black;\n}\n.componente-home .grafico-barras .infos .notificacao i {\n  margin-right: 5px;\n  font-size: 18px;\n}\n.componente-home .grafico-barras .infos .total {\n  display: flex;\n  justify-content: center;\n}\n.componente-home .grafico-barras .infos .total img {\n  width: 50px;\n  height: 50px;\n  margin-right: 20px;\n}\n.componente-home .grafico-barras .infos .total span {\n  font-size: 24px;\n  font-weight: bold;\n  color: #444;\n}\n.componente-home .grafico-barras .grafico {\n  position: relative;\n  margin: 0 auto;\n  border-radius: 5px;\n}\n@media (min-width: 992px) {\n.componente-home .grafico-barras .grafico {\n    width: 486px;\n    padding: 20px;\n    box-shadow: 0 0 10px #ddd;\n    margin: 0 auto;\n}\n}\n@media (min-width: 1500px) {\n.componente-home .grafico-barras .grafico {\n    width: 550px;\n    margin: 0 auto;\n}\n}\n.componente-home .grafico-barras .grafico .semInfos {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  -webkit-backdrop-filter: blur(3px);\n          backdrop-filter: blur(3px);\n  color: black;\n  font-size: 18px;\n}\n.componente-home .grafico-pizza {\n  margin-bottom: 50px;\n  display: grid;\n  grid-template-columns: repeat(1, 1fr);\n  width: 100%;\n}\n@media (min-width: 992px) {\n.componente-home .grafico-pizza {\n    grid-template-columns: repeat(2, 1fr);\n}\n}\n.componente-home .grafico-pizza .tipo {\n  width: 300px;\n  margin: 50px auto 0 auto;\n}\n.componente-home .grafico-pizza .tipo .descricao {\n  font-weight: bold;\n  font-size: 24px;\n  text-align: center;\n  color: #444;\n}\n.componente-home .overlay {\n  display: none;\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 100vw;\n  height: 100vh;\n  background-color: rgba(0, 0, 0, 0.15);\n  z-index: 1;\n}\n.componente-home .overlay.active {\n  display: block;\n}\n.componente-home .modal-pendencias {\n  position: absolute;\n  top: calc(50% - 200px);\n  left: 50%;\n  display: none;\n  width: 300px;\n  max-height: 400px;\n  margin-left: -150px;\n  padding: 15px;\n  background-color: white;\n  border: 1px solid #ddd;\n  border-radius: 5px;\n  box-shadow: 0px 0px 22px #a1a1a1;\n}\n@media (min-width: 768px) {\n.componente-home .modal-pendencias {\n    width: 600px;\n    padding: 20px 30px;\n}\n}\n.componente-home .modal-pendencias.active {\n  display: block;\n  z-index: 2;\n}\n.componente-home .modal-pendencias > button {\n  float: right;\n  padding: 0px 5px 3px;\n  line-height: 1;\n  font-weight: bold;\n}\n.componente-home .modal-pendencias > .titulo {\n  margin: 20px 0;\n  text-align: center;\n  font-size: 18px;\n  color: #444;\n}\n.componente-home .modal-pendencias > .tipos {\n  margin: 20px 0;\n  display: grid;\n  grid-template-columns: repeat(2, 1fr);\n  border: 1px solid #ddd;\n  border-radius: 20px;\n  background-color: #f1f1f1;\n  color: #3a3a3a;\n}\n.componente-home .modal-pendencias > .tipos > .tipo {\n  padding: 5px 0;\n  text-align: center;\n  border-radius: 20px;\n  font-size: 15px;\n  transition: all 0.2s;\n  border: 1px solid transparent;\n  cursor: pointer;\n}\n.componente-home .modal-pendencias > .tipos > .tipo.active {\n  border: 1px solid #999;\n  background-color: white;\n  color: black;\n}\n.componente-home .modal-pendencias > .tipos > .tipo.active.despesa {\n  border: 1px solid red;\n  color: red;\n}\n.componente-home .modal-pendencias > .tipos > .tipo.active.receita {\n  border: 1px solid green;\n  color: green;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -65428,8 +65430,35 @@ var render = function() {
               _c(
                 "select",
                 {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.despesaObj.conta_id,
+                      expression: "despesaObj.conta_id"
+                    }
+                  ],
                   staticClass: "form-control",
-                  attrs: { name: "conta", required: "" }
+                  attrs: { name: "conta", required: "" },
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.despesaObj,
+                        "conta_id",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    }
+                  }
                 },
                 _vm._l(_vm.contasObj, function(conta) {
                   return _c(
@@ -65450,8 +65479,35 @@ var render = function() {
               _c(
                 "select",
                 {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.despesaObj.categoria_id,
+                      expression: "despesaObj.categoria_id"
+                    }
+                  ],
                   staticClass: "form-control",
-                  attrs: { name: "categoria", required: "" }
+                  attrs: { name: "categoria", required: "" },
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.despesaObj,
+                        "categoria_id",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    }
+                  }
                 },
                 _vm._l(_vm.categoriasObj, function(categoria) {
                   return _c(
@@ -65479,7 +65535,78 @@ var render = function() {
         ]),
         _vm._v(" "),
         !_vm.despesaObj.id
-          ? _c("div", { staticClass: "row" }, [_vm._m(1)])
+          ? _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-sm-12" }, [
+                _c("div", { staticClass: "painel-despesa-fixa" }, [
+                  _vm._m(1),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-sm-4" }, [
+                      _c("div", { staticClass: "form-group" }, [
+                        _c("label", [_vm._v("Despesa fixa?")]),
+                        _vm._v(" "),
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.despesaFixa,
+                                expression: "despesaFixa"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: { name: "fixa", required: "" },
+                            on: {
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.despesaFixa = $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              }
+                            }
+                          },
+                          [
+                            _c("option", { attrs: { value: "sim" } }, [
+                              _vm._v("Sim")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "nao" } }, [
+                              _vm._v("Não")
+                            ])
+                          ]
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-4" }, [
+                      _c("div", { staticClass: "form-group" }, [
+                        _c("label", [_vm._v("Quantidade de meses")]),
+                        _vm._v(" "),
+                        _c("input", {
+                          staticClass: "form-control",
+                          attrs: {
+                            type: "number",
+                            name: "qtd_meses",
+                            min: "0",
+                            max: "12",
+                            disabled: _vm.despesaFixa == "nao"
+                          }
+                        })
+                      ])
+                    ])
+                  ])
+                ])
+              ])
+            ])
           : _vm._e(),
         _vm._v(" "),
         _c(
@@ -65519,57 +65646,16 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-sm-12" }, [
-      _c("div", { staticClass: "painel-despesa-fixa" }, [
-        _c("div", { staticClass: "descricao" }, [
-          _vm._v(
-            "Ao informar que é uma despesa fixa será cadastrado automaticamente durante a quantidade de meses informadas essa despesa."
-          ),
-          _c("br"),
-          _vm._v(" "),
-          _c("b", [_vm._v("Atenção")]),
-          _vm._v(
-            ", após cadastrar um despesa fixa só será possível editar as despesas individualmente.\n                    "
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-sm-4" }, [
-            _c("div", { staticClass: "form-group" }, [
-              _c("label", [_vm._v("Despesa fixa?")]),
-              _vm._v(" "),
-              _c(
-                "select",
-                {
-                  staticClass: "form-control",
-                  attrs: { name: "fixa", required: "" }
-                },
-                [
-                  _c("option", { attrs: { value: "sim" } }, [_vm._v("Sim")]),
-                  _vm._v(" "),
-                  _c("option", { attrs: { value: "nao" } }, [_vm._v("Não")])
-                ]
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-sm-4" }, [
-            _c("div", { staticClass: "form-group" }, [
-              _c("label", [_vm._v("Quantidade de meses")]),
-              _vm._v(" "),
-              _c("input", {
-                staticClass: "form-control",
-                attrs: {
-                  type: "number",
-                  name: "qtd_meses",
-                  min: "0",
-                  max: "12"
-                }
-              })
-            ])
-          ])
-        ])
-      ])
+    return _c("div", { staticClass: "descricao" }, [
+      _vm._v(
+        "Ao informar que é uma despesa fixa será cadastrado automaticamente durante a quantidade de meses informadas essa despesa."
+      ),
+      _c("br"),
+      _vm._v(" "),
+      _c("b", [_vm._v("Atenção")]),
+      _vm._v(
+        ", após cadastrar um despesa fixa só será possível editar as despesas individualmente.\n                    "
+      )
     ])
   }
 ]
@@ -65942,8 +66028,35 @@ var render = function() {
               _c(
                 "select",
                 {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.receitaObj.conta_id,
+                      expression: "receitaObj.conta_id"
+                    }
+                  ],
                   staticClass: "form-control",
-                  attrs: { name: "conta", required: "" }
+                  attrs: { name: "conta", required: "" },
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.receitaObj,
+                        "conta_id",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    }
+                  }
                 },
                 _vm._l(_vm.contasObj, function(conta) {
                   return _c(
@@ -65964,8 +66077,35 @@ var render = function() {
               _c(
                 "select",
                 {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.receitaObj.categoria_id,
+                      expression: "receitaObj.categoria_id"
+                    }
+                  ],
                   staticClass: "form-control",
-                  attrs: { name: "categoria", required: "" }
+                  attrs: { name: "categoria", required: "" },
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.receitaObj,
+                        "categoria_id",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    }
+                  }
                 },
                 _vm._l(_vm.categoriasObj, function(categoria) {
                   return _c(
@@ -66037,7 +66177,78 @@ var render = function() {
         ]),
         _vm._v(" "),
         !_vm.receitaObj.id
-          ? _c("div", { staticClass: "row" }, [_vm._m(1)])
+          ? _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-sm-12" }, [
+                _c("div", { staticClass: "painel-receita-fixa" }, [
+                  _vm._m(1),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-sm-4" }, [
+                      _c("div", { staticClass: "form-group" }, [
+                        _c("label", [_vm._v("Receita fixa?")]),
+                        _vm._v(" "),
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.receitaFixa,
+                                expression: "receitaFixa"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: { name: "fixa", required: "" },
+                            on: {
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.receitaFixa = $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              }
+                            }
+                          },
+                          [
+                            _c("option", { attrs: { value: "sim" } }, [
+                              _vm._v("Sim")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "nao" } }, [
+                              _vm._v("Não")
+                            ])
+                          ]
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-4" }, [
+                      _c("div", { staticClass: "form-group" }, [
+                        _c("label", [_vm._v("Quantidade de meses")]),
+                        _vm._v(" "),
+                        _c("input", {
+                          staticClass: "form-control",
+                          attrs: {
+                            type: "number",
+                            name: "qtd_meses",
+                            min: "0",
+                            max: "12",
+                            disabled: _vm.receitaFixa == "nao"
+                          }
+                        })
+                      ])
+                    ])
+                  ])
+                ])
+              ])
+            ])
           : _vm._e(),
         _vm._v(" "),
         _c(
@@ -66077,57 +66288,16 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-sm-12" }, [
-      _c("div", { staticClass: "painel-receita-fixa" }, [
-        _c("div", { staticClass: "descricao" }, [
-          _vm._v(
-            "Ao informar que é uma receita fixa será cadastrado automaticamente durante a quantidade de meses informadas essa receita."
-          ),
-          _c("br"),
-          _vm._v(" "),
-          _c("b", [_vm._v("Atenção")]),
-          _vm._v(
-            ", após cadastrar um receita fixa só será possível editar as receitas individualmente.\n                    "
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-sm-4" }, [
-            _c("div", { staticClass: "form-group" }, [
-              _c("label", [_vm._v("Receita fixa?")]),
-              _vm._v(" "),
-              _c(
-                "select",
-                {
-                  staticClass: "form-control",
-                  attrs: { name: "fixa", required: "" }
-                },
-                [
-                  _c("option", { attrs: { value: "sim" } }, [_vm._v("Sim")]),
-                  _vm._v(" "),
-                  _c("option", { attrs: { value: "nao" } }, [_vm._v("Não")])
-                ]
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-sm-4" }, [
-            _c("div", { staticClass: "form-group" }, [
-              _c("label", [_vm._v("Quantidade de meses")]),
-              _vm._v(" "),
-              _c("input", {
-                staticClass: "form-control",
-                attrs: {
-                  type: "number",
-                  name: "qtd_meses",
-                  min: "0",
-                  max: "12"
-                }
-              })
-            ])
-          ])
-        ])
-      ])
+    return _c("div", { staticClass: "descricao" }, [
+      _vm._v(
+        "Ao informar que é uma receita fixa será cadastrado automaticamente durante a quantidade de meses informadas essa receita."
+      ),
+      _c("br"),
+      _vm._v(" "),
+      _c("b", [_vm._v("Atenção")]),
+      _vm._v(
+        ", após cadastrar um receita fixa só será possível editar as receitas individualmente.\n                    "
+      )
     ])
   }
 ]

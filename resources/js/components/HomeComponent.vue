@@ -498,7 +498,7 @@
 
             @media(min-width: 992px){
                 grid-template-columns: repeat(2, 1fr);
-                grid-column-gap: 30px;
+                grid-column-gap: 10px;
             }
 
             .infos{

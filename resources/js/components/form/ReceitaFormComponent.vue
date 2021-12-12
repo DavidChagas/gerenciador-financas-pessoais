@@ -32,7 +32,7 @@
                 <div class="col-sm-4">
                     <div class="form-group">
                         <label>Conta</label>
-                        <select class="form-control" name="conta" required>
+                        <select class="form-control" name="conta" v-model="receitaObj.conta_id" required>
                             <option v-bind:value="conta.id" v-for="conta in contasObj" v-bind:key="conta.id">{{conta.descricao}}</option>
                         </select>
                     </div>
@@ -40,7 +40,7 @@
                 <div class="col-sm-4">
                     <div class="form-group">
                         <label>Categorias</label>
-                        <select class="form-control" name="categoria" required>
+                        <select class="form-control" name="categoria" v-model="receitaObj.categoria_id" required>
                             <option v-bind:value="categoria.id" v-for="categoria in categoriasObj" v-bind:key="categoria.id">{{categoria.descricao}}</option>
                         </select>
                     </div>
@@ -68,7 +68,7 @@
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <label>Receita fixa?</label>
-                                    <select class="form-control" name="fixa" required>
+                                    <select class="form-control" name="fixa" v-model="receitaFixa" required>
                                         <option value="sim">Sim</option>
                                         <option value="nao">Não</option>
                                     </select>
@@ -77,7 +77,7 @@
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <label>Quantidade de meses</label>
-                                    <input class="form-control" type="number" name="qtd_meses" min="0" max="12">
+                                    <input class="form-control" type="number" name="qtd_meses" min="0" max="12" :disabled="receitaFixa == 'nao'">
                                 </div>
                             </div>
                         </div>
@@ -108,7 +108,8 @@
             return {
                 receitaObj: {},
                 contasObj: [],
-                categoriasObj: []
+                categoriasObj: [],
+                receitaFixa: 'nao'
             }
         },
 
