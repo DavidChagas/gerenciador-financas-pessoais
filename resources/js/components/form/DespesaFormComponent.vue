@@ -38,17 +38,23 @@
                 <div class="col-sm-4">
                     <div class="form-group">
                         <label>Conta</label>
-                        <select class="form-control" name="conta" v-model="despesaObj.conta_id" required>
-                            <option v-bind:value="conta.id" v-for="conta in contasObj" v-bind:key="conta.id">{{conta.descricao}}</option>
-                        </select>
+                        <div style="display: flex;">
+                            <select class="form-control" name="conta" v-model="despesaObj.conta_id" required>
+                                <option v-bind:value="conta.id" v-for="conta in contasObj" v-bind:key="conta.id">{{conta.descricao}}</option>
+                            </select>
+                            <a class="btn btn-success" href="/contas" style="margin-left: 10px; white-space: nowrap;">Criar Conta</a>
+                        </div>
                     </div>
                 </div>
                 <div class="col-sm-4">
                     <div class="form-group">
                         <label>Categorias</label>
-                        <select class="form-control" name="categoria" v-model="despesaObj.categoria_id" required>
-                            <option v-bind:value="categoria.id" v-for="categoria in categoriasObj" v-bind:key="categoria.id">{{categoria.descricao}}</option>
-                        </select>
+                        <div style="display: flex;">
+                            <select class="form-control" name="categoria" v-model="despesaObj.categoria_id" required>
+                                <option v-bind:value="categoria.id" v-for="categoria in categoriasObj" v-bind:key="categoria.id">{{categoria.descricao}}</option>
+                            </select>
+                            <a class="btn btn-success" href="/categorias" style="margin-left: 10px; white-space: nowrap;">Criar Categoria</a>
+                        </div>
                     </div>
                 </div>
                 <div class="col-sm-12">

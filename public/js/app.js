@@ -3094,6 +3094,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['action', 'method', 'token', 'despesa', 'contas', 'categoriasDespesa'],
@@ -3213,6 +3219,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _funcoes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../funcoes */ "./resources/js/funcoes.js");
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -65626,48 +65638,63 @@ var render = function() {
             _c("div", { staticClass: "form-group" }, [
               _c("label", [_vm._v("Conta")]),
               _vm._v(" "),
-              _c(
-                "select",
-                {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.despesaObj.conta_id,
-                      expression: "despesaObj.conta_id"
+              _c("div", { staticStyle: { display: "flex" } }, [
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.despesaObj.conta_id,
+                        expression: "despesaObj.conta_id"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { name: "conta", required: "" },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.despesaObj,
+                          "conta_id",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      }
                     }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { name: "conta", required: "" },
-                  on: {
-                    change: function($event) {
-                      var $$selectedVal = Array.prototype.filter
-                        .call($event.target.options, function(o) {
-                          return o.selected
-                        })
-                        .map(function(o) {
-                          var val = "_value" in o ? o._value : o.value
-                          return val
-                        })
-                      _vm.$set(
-                        _vm.despesaObj,
-                        "conta_id",
-                        $event.target.multiple
-                          ? $$selectedVal
-                          : $$selectedVal[0]
-                      )
-                    }
-                  }
-                },
-                _vm._l(_vm.contasObj, function(conta) {
-                  return _c(
-                    "option",
-                    { key: conta.id, domProps: { value: conta.id } },
-                    [_vm._v(_vm._s(conta.descricao))]
-                  )
-                }),
-                0
-              )
+                  },
+                  _vm._l(_vm.contasObj, function(conta) {
+                    return _c(
+                      "option",
+                      { key: conta.id, domProps: { value: conta.id } },
+                      [_vm._v(_vm._s(conta.descricao))]
+                    )
+                  }),
+                  0
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-success",
+                    staticStyle: {
+                      "margin-left": "10px",
+                      "white-space": "nowrap"
+                    },
+                    attrs: { href: "/contas" }
+                  },
+                  [_vm._v("Criar Conta")]
+                )
+              ])
             ])
           ]),
           _vm._v(" "),
@@ -65675,48 +65702,63 @@ var render = function() {
             _c("div", { staticClass: "form-group" }, [
               _c("label", [_vm._v("Categorias")]),
               _vm._v(" "),
-              _c(
-                "select",
-                {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.despesaObj.categoria_id,
-                      expression: "despesaObj.categoria_id"
+              _c("div", { staticStyle: { display: "flex" } }, [
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.despesaObj.categoria_id,
+                        expression: "despesaObj.categoria_id"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { name: "categoria", required: "" },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.despesaObj,
+                          "categoria_id",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      }
                     }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { name: "categoria", required: "" },
-                  on: {
-                    change: function($event) {
-                      var $$selectedVal = Array.prototype.filter
-                        .call($event.target.options, function(o) {
-                          return o.selected
-                        })
-                        .map(function(o) {
-                          var val = "_value" in o ? o._value : o.value
-                          return val
-                        })
-                      _vm.$set(
-                        _vm.despesaObj,
-                        "categoria_id",
-                        $event.target.multiple
-                          ? $$selectedVal
-                          : $$selectedVal[0]
-                      )
-                    }
-                  }
-                },
-                _vm._l(_vm.categoriasObj, function(categoria) {
-                  return _c(
-                    "option",
-                    { key: categoria.id, domProps: { value: categoria.id } },
-                    [_vm._v(_vm._s(categoria.descricao))]
-                  )
-                }),
-                0
-              )
+                  },
+                  _vm._l(_vm.categoriasObj, function(categoria) {
+                    return _c(
+                      "option",
+                      { key: categoria.id, domProps: { value: categoria.id } },
+                      [_vm._v(_vm._s(categoria.descricao))]
+                    )
+                  }),
+                  0
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-success",
+                    staticStyle: {
+                      "margin-left": "10px",
+                      "white-space": "nowrap"
+                    },
+                    attrs: { href: "/categorias" }
+                  },
+                  [_vm._v("Criar Categoria")]
+                )
+              ])
             ])
           ]),
           _vm._v(" "),
@@ -66224,48 +66266,63 @@ var render = function() {
             _c("div", { staticClass: "form-group" }, [
               _c("label", [_vm._v("Conta")]),
               _vm._v(" "),
-              _c(
-                "select",
-                {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.receitaObj.conta_id,
-                      expression: "receitaObj.conta_id"
+              _c("div", { staticStyle: { display: "flex" } }, [
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.receitaObj.conta_id,
+                        expression: "receitaObj.conta_id"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { name: "conta", required: "" },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.receitaObj,
+                          "conta_id",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      }
                     }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { name: "conta", required: "" },
-                  on: {
-                    change: function($event) {
-                      var $$selectedVal = Array.prototype.filter
-                        .call($event.target.options, function(o) {
-                          return o.selected
-                        })
-                        .map(function(o) {
-                          var val = "_value" in o ? o._value : o.value
-                          return val
-                        })
-                      _vm.$set(
-                        _vm.receitaObj,
-                        "conta_id",
-                        $event.target.multiple
-                          ? $$selectedVal
-                          : $$selectedVal[0]
-                      )
-                    }
-                  }
-                },
-                _vm._l(_vm.contasObj, function(conta) {
-                  return _c(
-                    "option",
-                    { key: conta.id, domProps: { value: conta.id } },
-                    [_vm._v(_vm._s(conta.descricao))]
-                  )
-                }),
-                0
-              )
+                  },
+                  _vm._l(_vm.contasObj, function(conta) {
+                    return _c(
+                      "option",
+                      { key: conta.id, domProps: { value: conta.id } },
+                      [_vm._v(_vm._s(conta.descricao))]
+                    )
+                  }),
+                  0
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-success",
+                    staticStyle: {
+                      "margin-left": "10px",
+                      "white-space": "nowrap"
+                    },
+                    attrs: { href: "/contas" }
+                  },
+                  [_vm._v("Criar Conta")]
+                )
+              ])
             ])
           ]),
           _vm._v(" "),
@@ -66273,48 +66330,63 @@ var render = function() {
             _c("div", { staticClass: "form-group" }, [
               _c("label", [_vm._v("Categorias")]),
               _vm._v(" "),
-              _c(
-                "select",
-                {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.receitaObj.categoria_id,
-                      expression: "receitaObj.categoria_id"
+              _c("div", { staticStyle: { display: "flex" } }, [
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.receitaObj.categoria_id,
+                        expression: "receitaObj.categoria_id"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { name: "categoria", required: "" },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.receitaObj,
+                          "categoria_id",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      }
                     }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { name: "categoria", required: "" },
-                  on: {
-                    change: function($event) {
-                      var $$selectedVal = Array.prototype.filter
-                        .call($event.target.options, function(o) {
-                          return o.selected
-                        })
-                        .map(function(o) {
-                          var val = "_value" in o ? o._value : o.value
-                          return val
-                        })
-                      _vm.$set(
-                        _vm.receitaObj,
-                        "categoria_id",
-                        $event.target.multiple
-                          ? $$selectedVal
-                          : $$selectedVal[0]
-                      )
-                    }
-                  }
-                },
-                _vm._l(_vm.categoriasObj, function(categoria) {
-                  return _c(
-                    "option",
-                    { key: categoria.id, domProps: { value: categoria.id } },
-                    [_vm._v(_vm._s(categoria.descricao))]
-                  )
-                }),
-                0
-              )
+                  },
+                  _vm._l(_vm.categoriasObj, function(categoria) {
+                    return _c(
+                      "option",
+                      { key: categoria.id, domProps: { value: categoria.id } },
+                      [_vm._v(_vm._s(categoria.descricao))]
+                    )
+                  }),
+                  0
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-success",
+                    staticStyle: {
+                      "margin-left": "10px",
+                      "white-space": "nowrap"
+                    },
+                    attrs: { href: "/categorias" }
+                  },
+                  [_vm._v("Criar Categoria")]
+                )
+              ])
             ])
           ]),
           _vm._v(" "),
