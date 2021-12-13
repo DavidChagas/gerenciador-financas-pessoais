@@ -213,6 +213,11 @@
             display: flex;
             justify-content: space-around;
 
+            @media(max-width: 767px){
+                flex-direction: column;
+                align-items: center;
+            }
+
             .datas{
                 width: 300px;
 

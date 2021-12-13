@@ -4,7 +4,7 @@
             <option value="0">Contas Ativos</option>
             <option value="1">Contas Arquivados</option>
         </select>
-        <table class="table" v-if="list.length">
+        <table v-bind:class="dispositivo == 'desktop' ? 'table' : 'table table-responsive'" v-if="list.length">
             <thead class="thead-light">
                 <tr>
                     <th scope="col">Descrição</th>
@@ -49,12 +49,20 @@
             return {
                 list: [],
                 item: '',
-                mostrarContas: 0
+                mostrarContas: 0,
+                dispositivo: 'desktop'
             }
         },
         methods: {
             formatPrice(value) {
                 return funcoes.formatPrice(value);
+            },
+            verificarDispositivo(){
+                if (screen.width < 640 || screen.height < 480) {
+                    this.dispositivo = 'mobile';
+                }else{
+                    this.dispositivo = 'desktop';
+                }
             },
             reativarConta(id){
                 this.$http.get(`/api/reativarConta?idConta=${id}`).then(() => {
@@ -66,6 +74,7 @@
         },
         mounted(){
             this.list = JSON.parse(this.infos);
+            this.verificarDispositivo();
         }
     }
 </script>

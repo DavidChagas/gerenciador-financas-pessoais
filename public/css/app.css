@@ -10056,12 +10056,18 @@ body #app-login .pagina {
   }
 }
 body #app-login .pagina > .panel-login {
-  min-width: 500px;
-  padding: 40px 60px;
+  min-width: 300px;
+  padding: 20px 20px;
   background-color: rgba(0, 0, 0, 0.95);
   border-radius: 5px;
   box-shadow: 0px 0px 40px black;
   z-index: 1;
+}
+@media (min-width: 768px) {
+  body #app-login .pagina > .panel-login {
+    min-width: 500px;
+    padding: 40px 60px;
+  }
 }
 body #app-login .pagina > .panel-login > .titulo {
   color: white;

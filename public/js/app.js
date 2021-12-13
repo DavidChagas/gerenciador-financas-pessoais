@@ -3476,7 +3476,8 @@ __webpack_require__.r(__webpack_exports__);
       visible: false,
       item: '',
       filtroSelecionado: 'Todos',
-      mostrarCategorias: 0
+      mostrarCategorias: 0,
+      dispositivo: 'desktop'
     };
   },
   methods: {
@@ -3502,6 +3503,13 @@ __webpack_require__.r(__webpack_exports__);
           break;
       }
     },
+    verificarDispositivo: function verificarDispositivo() {
+      if (screen.width < 640 || screen.height < 480) {
+        this.dispositivo = 'mobile';
+      } else {
+        this.dispositivo = 'desktop';
+      }
+    },
     reativarCategoria: function reativarCategoria(id) {
       this.$http.get("/api/reativarCategoria?idCategoria=".concat(id)).then(function () {
         window.location.reload();
@@ -3513,6 +3521,7 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     this.list = JSON.parse(this.infos);
     this.todasCategorias = JSON.parse(this.infos);
+    this.verificarDispositivo();
   }
 });
 
@@ -3575,12 +3584,20 @@ __webpack_require__.r(__webpack_exports__);
     return {
       list: [],
       item: '',
-      mostrarContas: 0
+      mostrarContas: 0,
+      dispositivo: 'desktop'
     };
   },
   methods: {
     formatPrice: function formatPrice(value) {
       return _funcoes__WEBPACK_IMPORTED_MODULE_0__["default"].formatPrice(value);
+    },
+    verificarDispositivo: function verificarDispositivo() {
+      if (screen.width < 640 || screen.height < 480) {
+        this.dispositivo = 'mobile';
+      } else {
+        this.dispositivo = 'desktop';
+      }
     },
     reativarConta: function reativarConta(id) {
       this.$http.get("/api/reativarConta?idConta=".concat(id)).then(function () {
@@ -3592,6 +3609,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     this.list = JSON.parse(this.infos);
+    this.verificarDispositivo();
   }
 });
 
@@ -9000,7 +9018,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".componente-relatorios .titulo {\n  width: 100%;\n  margin: 50px 0 50px 0;\n  text-align: center;\n}\n.componente-relatorios .selects {\n  margin-bottom: 30px;\n  display: flex;\n  justify-content: space-around;\n}\n.componente-relatorios .selects .datas {\n  width: 300px;\n}\n@media (max-width: 767px) {\n.componente-relatorios .selects .datas {\n    margin-top: 20px;\n}\n}\n.componente-relatorios .selects .datas select {\n  border-top: none;\n  border-left: none;\n  border-right: none;\n  border-radius: 0px;\n  font-size: 16px;\n}\n.componente-relatorios .selects .datas select:focus {\n  border-color: transparent;\n  outline: none;\n  box-shadow: none;\n}\n.componente-relatorios .aviso-selecionar-relatorio {\n  position: relative;\n  margin-top: 50px;\n  text-align: center;\n}\n.componente-relatorios .aviso-selecionar-relatorio span {\n  position: absolute;\n  width: 300px;\n  left: calc(50% - 150px);\n  bottom: 0%;\n  font-weight: bold;\n  font-size: 25px;\n  color: #444;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".componente-relatorios .titulo {\n  width: 100%;\n  margin: 50px 0 50px 0;\n  text-align: center;\n}\n.componente-relatorios .selects {\n  margin-bottom: 30px;\n  display: flex;\n  justify-content: space-around;\n}\n@media (max-width: 767px) {\n.componente-relatorios .selects {\n    flex-direction: column;\n    align-items: center;\n}\n}\n.componente-relatorios .selects .datas {\n  width: 300px;\n}\n@media (max-width: 767px) {\n.componente-relatorios .selects .datas {\n    margin-top: 20px;\n}\n}\n.componente-relatorios .selects .datas select {\n  border-top: none;\n  border-left: none;\n  border-right: none;\n  border-radius: 0px;\n  font-size: 16px;\n}\n.componente-relatorios .selects .datas select:focus {\n  border-color: transparent;\n  outline: none;\n  box-shadow: none;\n}\n.componente-relatorios .aviso-selecionar-relatorio {\n  position: relative;\n  margin-top: 50px;\n  text-align: center;\n}\n.componente-relatorios .aviso-selecionar-relatorio span {\n  position: absolute;\n  width: 300px;\n  left: calc(50% - 150px);\n  bottom: 0%;\n  font-weight: bold;\n  font-size: 25px;\n  color: #444;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -66768,140 +66786,150 @@ var render = function() {
         : _vm._e(),
       _vm._v(" "),
       _vm.list.length
-        ? _c("table", { staticClass: "table" }, [
-            _c("thead", { staticClass: "thead-light" }, [
-              _c("tr", [
-                _c("th", { attrs: { scope: "col" } }, [_vm._v("Descrição")]),
-                _vm._v(" "),
-                _c("th", { attrs: { scope: "col" } }, [_vm._v("Tipo")]),
-                _vm._v(" "),
-                _vm.mostrarCategorias == 0
-                  ? _c(
-                      "th",
-                      {
-                        staticStyle: { "text-align": "center" },
-                        attrs: { scope: "col", width: "50px" }
-                      },
-                      [_vm._v("Editar")]
-                    )
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.mostrarCategorias == 0
-                  ? _c(
-                      "th",
-                      {
-                        staticStyle: { "text-align": "center" },
-                        attrs: { scope: "col", width: "50px" }
-                      },
-                      [_vm._v("Arquivar")]
-                    )
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.mostrarCategorias == 1
-                  ? _c(
-                      "th",
-                      {
-                        staticStyle: { "text-align": "center" },
-                        attrs: { scope: "col", width: "50px" }
-                      },
-                      [_vm._v("Reativar")]
-                    )
-                  : _vm._e()
-              ])
-            ]),
-            _vm._v(" "),
-            _c(
-              "tbody",
-              _vm._l(_vm.list, function(i) {
-                return i.arquivado == _vm.mostrarCategorias
-                  ? _c("tr", { key: i.id }, [
-                      _c("td", [_vm._v(_vm._s(i.descricao))]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(i.tipo))]),
-                      _vm._v(" "),
-                      _vm.mostrarCategorias == 0
-                        ? _c(
-                            "td",
-                            { staticStyle: { "text-align": "center" } },
-                            [
-                              _c(
-                                "a",
-                                {
-                                  staticClass: "btn btn-primary btn-sm",
-                                  staticStyle: {
-                                    padding: "6px",
-                                    "line-height": "1"
-                                  },
-                                  attrs: {
-                                    href: "/" + _vm.model + "/" + i.id + "/edit"
-                                  }
-                                },
-                                [
-                                  _c("i", {
-                                    staticClass: "fas fa-pencil-alt",
-                                    staticStyle: { color: "white" }
-                                  })
-                                ]
-                              )
-                            ]
-                          )
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm.mostrarCategorias == 0
-                        ? _c(
-                            "td",
-                            { staticStyle: { "text-align": "center" } },
-                            [
-                              _c(
-                                "form",
-                                {
-                                  attrs: {
-                                    action: "/" + _vm.model + "/" + i.id,
-                                    method: "POST"
-                                  }
-                                },
-                                [
-                                  _vm._t("method"),
-                                  _vm._v(" "),
-                                  _vm._m(0, true)
-                                ],
-                                2
-                              )
-                            ]
-                          )
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm.mostrarCategorias == 1
-                        ? _c(
-                            "td",
-                            { staticStyle: { "text-align": "center" } },
-                            [
-                              _c(
-                                "buttom",
-                                {
-                                  staticClass: "btn btn-success btn-sm",
-                                  staticStyle: {
-                                    padding: "6px",
-                                    "line-height": "1"
-                                  },
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.reativarCategoria(i.id)
+        ? _c(
+            "table",
+            {
+              class:
+                _vm.dispositivo == "desktop"
+                  ? "table"
+                  : "table table-responsive"
+            },
+            [
+              _c("thead", { staticClass: "thead-light" }, [
+                _c("tr", [
+                  _c("th", { attrs: { scope: "col" } }, [_vm._v("Descrição")]),
+                  _vm._v(" "),
+                  _c("th", { attrs: { scope: "col" } }, [_vm._v("Tipo")]),
+                  _vm._v(" "),
+                  _vm.mostrarCategorias == 0
+                    ? _c(
+                        "th",
+                        {
+                          staticStyle: { "text-align": "center" },
+                          attrs: { scope: "col", width: "50px" }
+                        },
+                        [_vm._v("Editar")]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.mostrarCategorias == 0
+                    ? _c(
+                        "th",
+                        {
+                          staticStyle: { "text-align": "center" },
+                          attrs: { scope: "col", width: "50px" }
+                        },
+                        [_vm._v("Arquivar")]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.mostrarCategorias == 1
+                    ? _c(
+                        "th",
+                        {
+                          staticStyle: { "text-align": "center" },
+                          attrs: { scope: "col", width: "50px" }
+                        },
+                        [_vm._v("Reativar")]
+                      )
+                    : _vm._e()
+                ])
+              ]),
+              _vm._v(" "),
+              _c(
+                "tbody",
+                _vm._l(_vm.list, function(i) {
+                  return i.arquivado == _vm.mostrarCategorias
+                    ? _c("tr", { key: i.id }, [
+                        _c("td", [_vm._v(_vm._s(i.descricao))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(i.tipo))]),
+                        _vm._v(" "),
+                        _vm.mostrarCategorias == 0
+                          ? _c(
+                              "td",
+                              { staticStyle: { "text-align": "center" } },
+                              [
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass: "btn btn-primary btn-sm",
+                                    staticStyle: {
+                                      padding: "6px",
+                                      "line-height": "1"
+                                    },
+                                    attrs: {
+                                      href:
+                                        "/" + _vm.model + "/" + i.id + "/edit"
                                     }
-                                  }
-                                },
-                                [_c("i", { staticClass: "far fa-folder" })]
-                              )
-                            ],
-                            1
-                          )
-                        : _vm._e()
-                    ])
-                  : _vm._e()
-              }),
-              0
-            )
-          ])
+                                  },
+                                  [
+                                    _c("i", {
+                                      staticClass: "fas fa-pencil-alt",
+                                      staticStyle: { color: "white" }
+                                    })
+                                  ]
+                                )
+                              ]
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.mostrarCategorias == 0
+                          ? _c(
+                              "td",
+                              { staticStyle: { "text-align": "center" } },
+                              [
+                                _c(
+                                  "form",
+                                  {
+                                    attrs: {
+                                      action: "/" + _vm.model + "/" + i.id,
+                                      method: "POST"
+                                    }
+                                  },
+                                  [
+                                    _vm._t("method"),
+                                    _vm._v(" "),
+                                    _vm._m(0, true)
+                                  ],
+                                  2
+                                )
+                              ]
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.mostrarCategorias == 1
+                          ? _c(
+                              "td",
+                              { staticStyle: { "text-align": "center" } },
+                              [
+                                _c(
+                                  "buttom",
+                                  {
+                                    staticClass: "btn btn-success btn-sm",
+                                    staticStyle: {
+                                      padding: "6px",
+                                      "line-height": "1"
+                                    },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.reativarCategoria(i.id)
+                                      }
+                                    }
+                                  },
+                                  [_c("i", { staticClass: "far fa-folder" })]
+                                )
+                              ],
+                              1
+                            )
+                          : _vm._e()
+                      ])
+                    : _vm._e()
+                }),
+                0
+              )
+            ]
+          )
         : _vm._e(),
       _vm._v(" "),
       !_vm.list.length ? _c("lista-vazia-component") : _vm._e()
@@ -66993,137 +67021,151 @@ var render = function() {
         : _vm._e(),
       _vm._v(" "),
       _vm.list.length
-        ? _c("table", { staticClass: "table" }, [
-            _c("thead", { staticClass: "thead-light" }, [
-              _c("tr", [
-                _c("th", { attrs: { scope: "col" } }, [_vm._v("Descrição")]),
-                _vm._v(" "),
-                _c("th", { attrs: { scope: "col" } }, [_vm._v("Valor")]),
-                _vm._v(" "),
-                _vm.mostrarContas == 0
-                  ? _c(
-                      "th",
-                      {
-                        staticStyle: { "text-align": "center" },
-                        attrs: { scope: "col", width: "50px" }
-                      },
-                      [_vm._v("Editar")]
-                    )
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.mostrarContas == 0
-                  ? _c(
-                      "th",
-                      {
-                        staticStyle: { "text-align": "center" },
-                        attrs: { scope: "col", width: "50px" }
-                      },
-                      [_vm._v("Arquivar")]
-                    )
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.mostrarContas == 1
-                  ? _c(
-                      "th",
-                      {
-                        staticStyle: { "text-align": "center" },
-                        attrs: { scope: "col", width: "50px" }
-                      },
-                      [_vm._v("Reativar")]
-                    )
-                  : _vm._e()
-              ])
-            ]),
-            _vm._v(" "),
-            _c(
-              "tbody",
-              _vm._l(_vm.list, function(i) {
-                return i.arquivado == _vm.mostrarContas
-                  ? _c("tr", { key: i.id }, [
-                      _c("td", [_vm._v(_vm._s(i.descricao))]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _vm._v("R$ " + _vm._s(_vm.formatPrice(i.valor)))
-                      ]),
-                      _vm._v(" "),
-                      _vm.mostrarContas == 0
-                        ? _c(
-                            "td",
-                            { staticStyle: { "text-align": "center" } },
-                            [
-                              _c(
-                                "a",
-                                {
-                                  staticClass: "btn btn-primary btn-sm",
-                                  staticStyle: {
-                                    padding: "6px",
-                                    "line-height": "1"
-                                  },
-                                  attrs: {
-                                    href: "/" + _vm.model + "/" + i.id + "/edit"
-                                  }
-                                },
-                                [_c("i", { staticClass: "fas fa-pencil-alt" })]
-                              )
-                            ]
-                          )
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm.mostrarContas == 0
-                        ? _c(
-                            "td",
-                            { staticStyle: { "text-align": "center" } },
-                            [
-                              _c(
-                                "form",
-                                {
-                                  attrs: {
-                                    action: "/" + _vm.model + "/" + i.id,
-                                    method: "POST"
-                                  }
-                                },
-                                [
-                                  _vm._t("method"),
-                                  _vm._v(" "),
-                                  _vm._m(0, true)
-                                ],
-                                2
-                              )
-                            ]
-                          )
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm.mostrarContas == 1
-                        ? _c(
-                            "td",
-                            { staticStyle: { "text-align": "center" } },
-                            [
-                              _c(
-                                "buttom",
-                                {
-                                  staticClass: "btn btn-success btn-sm",
-                                  staticStyle: {
-                                    padding: "6px",
-                                    "line-height": "1"
-                                  },
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.reativarConta(i.id)
+        ? _c(
+            "table",
+            {
+              class:
+                _vm.dispositivo == "desktop"
+                  ? "table"
+                  : "table table-responsive"
+            },
+            [
+              _c("thead", { staticClass: "thead-light" }, [
+                _c("tr", [
+                  _c("th", { attrs: { scope: "col" } }, [_vm._v("Descrição")]),
+                  _vm._v(" "),
+                  _c("th", { attrs: { scope: "col" } }, [_vm._v("Valor")]),
+                  _vm._v(" "),
+                  _vm.mostrarContas == 0
+                    ? _c(
+                        "th",
+                        {
+                          staticStyle: { "text-align": "center" },
+                          attrs: { scope: "col", width: "50px" }
+                        },
+                        [_vm._v("Editar")]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.mostrarContas == 0
+                    ? _c(
+                        "th",
+                        {
+                          staticStyle: { "text-align": "center" },
+                          attrs: { scope: "col", width: "50px" }
+                        },
+                        [_vm._v("Arquivar")]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.mostrarContas == 1
+                    ? _c(
+                        "th",
+                        {
+                          staticStyle: { "text-align": "center" },
+                          attrs: { scope: "col", width: "50px" }
+                        },
+                        [_vm._v("Reativar")]
+                      )
+                    : _vm._e()
+                ])
+              ]),
+              _vm._v(" "),
+              _c(
+                "tbody",
+                _vm._l(_vm.list, function(i) {
+                  return i.arquivado == _vm.mostrarContas
+                    ? _c("tr", { key: i.id }, [
+                        _c("td", [_vm._v(_vm._s(i.descricao))]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v("R$ " + _vm._s(_vm.formatPrice(i.valor)))
+                        ]),
+                        _vm._v(" "),
+                        _vm.mostrarContas == 0
+                          ? _c(
+                              "td",
+                              { staticStyle: { "text-align": "center" } },
+                              [
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass: "btn btn-primary btn-sm",
+                                    staticStyle: {
+                                      padding: "6px",
+                                      "line-height": "1"
+                                    },
+                                    attrs: {
+                                      href:
+                                        "/" + _vm.model + "/" + i.id + "/edit"
                                     }
-                                  }
-                                },
-                                [_c("i", { staticClass: "far fa-folder" })]
-                              )
-                            ],
-                            1
-                          )
-                        : _vm._e()
-                    ])
-                  : _vm._e()
-              }),
-              0
-            )
-          ])
+                                  },
+                                  [
+                                    _c("i", {
+                                      staticClass: "fas fa-pencil-alt"
+                                    })
+                                  ]
+                                )
+                              ]
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.mostrarContas == 0
+                          ? _c(
+                              "td",
+                              { staticStyle: { "text-align": "center" } },
+                              [
+                                _c(
+                                  "form",
+                                  {
+                                    attrs: {
+                                      action: "/" + _vm.model + "/" + i.id,
+                                      method: "POST"
+                                    }
+                                  },
+                                  [
+                                    _vm._t("method"),
+                                    _vm._v(" "),
+                                    _vm._m(0, true)
+                                  ],
+                                  2
+                                )
+                              ]
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.mostrarContas == 1
+                          ? _c(
+                              "td",
+                              { staticStyle: { "text-align": "center" } },
+                              [
+                                _c(
+                                  "buttom",
+                                  {
+                                    staticClass: "btn btn-success btn-sm",
+                                    staticStyle: {
+                                      padding: "6px",
+                                      "line-height": "1"
+                                    },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.reativarConta(i.id)
+                                      }
+                                    }
+                                  },
+                                  [_c("i", { staticClass: "far fa-folder" })]
+                                )
+                              ],
+                              1
+                            )
+                          : _vm._e()
+                      ])
+                    : _vm._e()
+                }),
+                0
+              )
+            ]
+          )
         : _vm._e(),
       _vm._v(" "),
       !_vm.list.length ? _c("lista-vazia-component") : _vm._e()

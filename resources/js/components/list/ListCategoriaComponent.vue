@@ -11,7 +11,7 @@
                 <option value="Despesas">Despesas</option>
             </select>
         </div>
-        <table class="table" v-if="list.length">
+        <table v-bind:class="dispositivo == 'desktop' ? 'table' : 'table table-responsive'" v-if="list.length">
             <thead class="thead-light">
                 <tr>
                     <th scope="col">Descrição</th>
@@ -57,7 +57,8 @@
                 visible: false,
                 item: '',
                 filtroSelecionado: 'Todos',
-                mostrarCategorias: 0
+                mostrarCategorias: 0,
+                dispositivo: 'desktop'
             }
         },
         methods: {
@@ -77,6 +78,13 @@
                     break;
                 }
             },
+            verificarDispositivo(){
+                if (screen.width < 640 || screen.height < 480) {
+                    this.dispositivo = 'mobile';
+                }else{
+                    this.dispositivo = 'desktop';
+                }
+            },
             reativarCategoria(id){
                 this.$http.get(`/api/reativarCategoria?idCategoria=${id}`).then(() => {
                    window.location.reload();
@@ -88,6 +96,7 @@
         mounted(){
             this.list = JSON.parse(this.infos);
             this.todasCategorias = JSON.parse(this.infos);
+            this.verificarDispositivo();
         }
     }
 </script>
