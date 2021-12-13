@@ -13,19 +13,33 @@
         <div class="titulo d-print-none"><h1>Relatórios</h1></div>
         <div class="selects d-print-none">
             <div class="datas">
+                <small>Escolha o tipo de relatório</small>
+                <select class="form-control" v-model="tipoRelatorioSelecionado">
+                    <option value="mensal">Mensal</option>
+                    <option value="anual">Anual</option>
+                </select>
+            </div>
+            <div class="datas">
                 <small>Escolha um relatório</small>
-                <select class="form-control" v-model="relatorioSelecionado" v-on:change="getRelatorio(relatorioSelecionado, dataSelecionada)">
-                    <option value="balanco-mensal">Balanço Mensal</option>
+                <select class="form-control" v-model="relatorioSelecionado" v-on:change="getRelatorio()">
+                    <option value="balanco-mensal" v-if="tipoRelatorioSelecionado == 'mensal'">Balanço Mensal</option>
+                    <option value="balanco-mensal" v-if="tipoRelatorioSelecionado == 'anual'">Balanço Anual</option>
                     <option value="despesas-por-categoria">Total de despesas por categoria</option>
                     <option value="receitas-por-categoria">Total de receitas por categoria</option>
                     <option value="despesas-por-conta">Total de despesas por conta</option>
                     <option value="receitas-por-conta">Total de receitas por conta</option>
                 </select>
             </div>
-            <div class="datas">
+            <div class="datas" v-if="tipoRelatorioSelecionado == 'mensal'">
                 <small>Selecione um mês</small>
-                <select class="form-control" name="data" v-model="dataSelecionada" v-on:change="getRelatorio(relatorioSelecionado, dataSelecionada)">
+                <select class="form-control" name="data" v-model="dataSelecionada" v-on:change="getRelatorio()">
                     <option v-bind:key="data.data" v-bind:value="data.data" v-for="data in datasFormatadas">{{data.descricao}}</option>
+                </select>
+            </div>
+            <div class="datas" v-if="tipoRelatorioSelecionado == 'anual'">
+                <small>Selecione o ano</small>
+                <select class="form-control" name="data" v-model="anoSelecionado" v-on:change="getRelatorio()">
+                    <option v-bind:key="ano" v-bind:value="ano" v-for="ano in anos">{{ano}}</option>
                 </select>
             </div>
         </div>
@@ -36,24 +50,24 @@
                 </tr>
             </thead>
             <tbody v-if="relatorioSelecionado == 'despesas-por-categoria' || relatorioSelecionado == 'receitas-por-categoria'">
-                <tr v-for="linha in relatorioLinhas" v-bind:key="linha">
+                <tr v-for="(linha, index) in relatorioLinhas" v-bind:key="index">
                     <td>{{linha.Categoria}}</td>
-                    <td>R$ {{formatPrice(linha.Total)}}</td>
+                    <td>R$ {{formatPrice(linha.Total_Pago)}}</td>
+                    <td>R$ {{formatPrice(linha.Total_Pendente)}}</td>
                 </tr>
             </tbody>
             <tbody v-if="relatorioSelecionado == 'despesas-por-conta' || relatorioSelecionado == 'receitas-por-conta'">
-                <tr v-for="linha in relatorioLinhas" v-bind:key="linha">
+                <tr v-for="(linha, index) in relatorioLinhas" v-bind:key="index">
                     <td>{{linha.Conta}}</td>
-                    <td>R$ {{formatPrice(linha.Total)}}</td>
+                    <td>R$ {{formatPrice(linha.Total_Pago)}}</td>
+                    <td>R$ {{formatPrice(linha.Total_Pendente)}}</td>
                 </tr>
             </tbody>
-            <tbody v-if="relatorioSelecionado == 'balanco-mensal'">
+            <tbody v-if="relatorioSelecionado == 'balanco-mensal' || relatorioSelecionado == 'balanco-anual' ">
                 <tr>
-                    <td v-for="linha in relatorioLinhas" v-bind:key="linha">
+                    <td v-for="(linha, index) in relatorioLinhas" v-bind:key="index">
                         R$ {{formatPrice(linha.Total)}}
                     </td>
-                    <!-- <td>R$ {{formatPrice(linha.Total_Receitas)}}</td>
-                    <td>R$ {{formatPrice(linha.Total_Despesas)}}</td> -->
                 </tr>
             </tbody>
         </table>
@@ -81,29 +95,42 @@
             return {
                dataSelecionada: '',
                datasFormatadas: [],
+               anos: [],
                relatorioColunas: [],
                relatorioLinhas: [],
-               relatorioSelecionado: ''
+               relatorioSelecionado: '',
+               tipoRelatorioSelecionado: 'mensal',
+               anoSelecionado: ''
             }
         },
         methods:{
             formatPrice(value) {
                 return funcoes.formatPrice(value);
             },
-            getRelatorio(relatorioSelecionado, dataSelecionada){
+            getRelatorio(){
+                if(!this.relatorioSelecionado) return;
+                if(this.tipoRelatorioSelecionado == 'mensal' && !this.dataSelecionada) return;
+                if(this.tipoRelatorioSelecionado == 'anual' && !this.anoSelecionado) return;
+
                 this.relatorioLinhas = [];
                 this.relatorioColunas = [];
 
-                const firstDay = dataSelecionada+'-01';
-                const lastDay = dataSelecionada+'-31';
+                let firstDay = '';
+                let lastDay = '';
 
-                this.$http.get(`/getRelatorios?relatorio=${relatorioSelecionado}&first=${firstDay}&last=${lastDay}`).then(response => {
+                if(this.tipoRelatorioSelecionado == 'mensal'){
+                    firstDay = this.dataSelecionada+'-01';
+                    lastDay = this.dataSelecionada+'-31';
+                }else{
+                    firstDay = this.anoSelecionado+'-01-01';
+                    lastDay = this.anoSelecionado+'-12-31';
+                }
+
+                this.$http.get(`/getRelatorios?relatorio=${this.relatorioSelecionado}&first=${firstDay}&last=${lastDay}&tipoRelatorio=${this.tipoRelatorioSelecionado}`).then(response => {
                    this.relatorioLinhas = response.body[0];
-                   console.log(this.relatorioLinhas);
                    this.relatorioColunas = response.body[1];
-                   console.log(this.relatorioColunas);
                 }, err => {
-                    console.log('err: ');
+                    console.log('err: ', err);
                 });
             },
             retornaNomeMes(mesNumero){
@@ -153,6 +180,14 @@
         mounted() {
             const mesAtual = moment().format('YYYY-MM');
             let datas = localStorage.getItem("datas").split(',');
+
+            console.log(datas);
+            datas.forEach(data =>{
+                let ano =  data.split('-')[0];
+                if(!this.anos.includes(ano)) this.anos.push(ano);
+            })
+
+            console.log(this.anos);
             
             this.datasFormatadas = datas.map(data =>{
                 return {data: data, descricao: this.retornaNomeMes(data.split('-')[1])+' '+data.split('-')[0]}

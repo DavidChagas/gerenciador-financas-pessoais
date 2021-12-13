@@ -17,12 +17,13 @@ class RelatoriosController extends Controller{
         $relatorio = $_GET['relatorio'];
         $first = (String) $_GET['first'];
         $last = (String) $_GET['last'];
+        $tipoRelatorio = (String) $_GET['tipoRelatorio'];
 
         switch ($relatorio) {
             case 'despesas-por-categoria':
-                $colunas = ['Categoria', 'Total'];
+                $colunas = ['Categoria', 'Total Pago', 'Total Pendente'];
                 $linhas = DB::table('despesas')
-                ->select(DB::raw('SUM(despesas.valor) AS Total'), 'categorias.descricao as Categoria')
+                ->select(DB::raw("SUM(IF(despesas.status='pago',despesas.valor,0)) AS Total_Pago" ), DB::raw( "SUM(IF(despesas.status='nao-pago',despesas.valor,0)) AS Total_Pendente" ), 'categorias.descricao as Categoria')
                 ->join('categorias', 'categorias.id', '=', 'despesas.categoria_id')
                 ->whereBetween('despesas.data', ["$first", "$last"])
                 ->where('despesas.usuario_id', '=', Auth::id())
@@ -32,9 +33,9 @@ class RelatoriosController extends Controller{
                 break;
             
             case 'receitas-por-categoria':
-                $colunas = ['Categoria', 'Total'];
+                $colunas = ['Categoria', 'Total Pago', 'Total Pendente'];
                 $linhas = DB::table('receitas')
-                ->select(DB::raw('SUM(receitas.valor) AS Total'), 'categorias.descricao as Categoria')
+                ->select(DB::raw( "SUM(IF(receitas.status='pago',receitas.valor,0)) AS Total_Pago" ), DB::raw( "SUM(IF(receitas.status='nao-pago',receitas.valor,0)) AS Total_Pendente" ), 'categorias.descricao as Categoria')
                 ->join('categorias', 'categorias.id', '=', 'receitas.categoria_id')
                 ->whereBetween('receitas.data', ["$first", "$last"])
                 ->where('receitas.usuario_id', '=', Auth::id())
@@ -43,9 +44,9 @@ class RelatoriosController extends Controller{
                 ->get();
                 break;
             case 'despesas-por-conta':
-                $colunas = ['Conta', 'Total'];
+                $colunas = ['Conta', 'Total Pago', 'Total Pendente'];
                 $linhas = DB::table('despesas')
-                ->select(DB::raw('SUM(despesas.valor) AS Total'), 'contas.descricao as Conta')
+                ->select(DB::raw( "SUM(IF(despesas.status='pago',despesas.valor,0)) AS Total_Pago" ), DB::raw( "SUM(IF(despesas.status='nao-pago',despesas.valor,0)) AS Total_Pendente" ), 'contas.descricao as Conta')
                 ->join('contas', 'contas.id', '=', 'despesas.conta_id')
                 ->whereBetween('despesas.data', ["$first", "$last"])
                 ->where('despesas.usuario_id', '=', Auth::id())
@@ -54,9 +55,9 @@ class RelatoriosController extends Controller{
                 ->get();
                 break;
             case 'receitas-por-conta':
-                $colunas = ['Conta', 'Total'];
+                $colunas = ['Conta', 'Total Pago', 'Total Pendente'];
                 $linhas = DB::table('receitas')
-                ->select(DB::raw('SUM(receitas.valor) AS Total'), 'contas.descricao as Conta')
+                ->select(DB::raw( "SUM(IF(receitas.status='pago',receitas.valor,0)) AS Total_Pago" ), DB::raw( "SUM(IF(receitas.status='nao-pago',receitas.valor,0)) AS Total_Pendente" ), 'contas.descricao as Conta')
                 ->join('contas', 'contas.id', '=', 'receitas.conta_id')
                 ->whereBetween('receitas.data', ["$first", "$last"])
                 ->where('receitas.usuario_id', '=', Auth::id())
@@ -70,12 +71,14 @@ class RelatoriosController extends Controller{
                 ->select(DB::raw('SUM(receitas.valor) AS "Total"'))
                 ->whereBetween('receitas.data', ["$first", "$last"])
                 ->where('receitas.usuario_id', '=', Auth::id())
+                ->where('receitas.status', '=', 'pago')
                 ->get();
 
                 $linha2 = DB::table('despesas')
                 ->select(DB::raw('SUM(despesas.valor) AS "Total"'))
                 ->whereBetween('despesas.data', ["$first", "$last"])
                 ->where('despesas.usuario_id', '=', Auth::id())
+                ->where('despesas.status', '=', 'pago')
                 ->get();
 
                 $linhas = json_decode(json_encode($linha1), true);
@@ -86,6 +89,30 @@ class RelatoriosController extends Controller{
                 $linhas = json_decode(json_encode($linhas), false);
 
                 break;
+            case 'balanco-anual':
+                    $colunas = ['Total Receitas', 'Total Despesas'];
+                    $linha1 = DB::table('receitas')
+                    ->select(DB::raw('SUM(receitas.valor) AS "Total"'))
+                    ->whereBetween('receitas.data', ["$first", "$last"])
+                    ->where('receitas.usuario_id', '=', Auth::id())
+                    ->where('receitas.status', '=', 'pago')
+                    ->get();
+    
+                    $linha2 = DB::table('despesas')
+                    ->select(DB::raw('SUM(despesas.valor) AS "Total"'))
+                    ->whereBetween('despesas.data', ["$first", "$last"])
+                    ->where('despesas.usuario_id', '=', Auth::id())
+                    ->where('despesas.status', '=', 'pago')
+                    ->get();
+    
+                    $linhas = json_decode(json_encode($linha1), true);
+                    $x = json_decode(json_encode($linha2), true)[0];
+                    
+                    array_push($linhas, $x);
+                    
+                    $linhas = json_decode(json_encode($linhas), false);
+    
+                    break;
         }
 
         

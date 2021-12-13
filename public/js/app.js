@@ -2268,7 +2268,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
           setTimeout(function () {
             location.reload();
-          }, 2000);
+          }, 1000);
           sweetalert__WEBPACK_IMPORTED_MODULE_2___default()("Receita marcada como recebida com sucesso!", {
             icon: "success"
           });
@@ -2282,6 +2282,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         this.$http.get("/api/despesas/pagar?idDespesa=".concat(id, "&valor=").concat(valor, "&idConta=").concat(id_conta)).then(function (response) {
           _this3.despesasPendentes.splice(index, 1);
 
+          setTimeout(function () {
+            location.reload();
+          }, 1000);
           sweetalert__WEBPACK_IMPORTED_MODULE_2___default()("Despesa marcada como paga com sucesso!", {
             icon: "success"
           });
@@ -2458,7 +2461,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
     });
     if (!this.datas.includes(mesAtual)) this.datas.unshift(mesAtual);
-    localStorage.setItem("datasFormatadas", this.datasFormatadas);
+    localStorage.setItem("datas", this.datas);
     this.datasFormatadas = this.datas.map(function (data) {
       return {
         data: data,
@@ -2695,6 +2698,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2703,29 +2720,42 @@ __webpack_require__.r(__webpack_exports__);
     return {
       dataSelecionada: '',
       datasFormatadas: [],
+      anos: [],
       relatorioColunas: [],
       relatorioLinhas: [],
-      relatorioSelecionado: ''
+      relatorioSelecionado: '',
+      tipoRelatorioSelecionado: 'mensal',
+      anoSelecionado: ''
     };
   },
   methods: {
     formatPrice: function formatPrice(value) {
       return _funcoes__WEBPACK_IMPORTED_MODULE_1__["default"].formatPrice(value);
     },
-    getRelatorio: function getRelatorio(relatorioSelecionado, dataSelecionada) {
+    getRelatorio: function getRelatorio() {
       var _this = this;
 
+      if (!this.relatorioSelecionado) return;
+      if (this.tipoRelatorioSelecionado == 'mensal' && !this.dataSelecionada) return;
+      if (this.tipoRelatorioSelecionado == 'anual' && !this.anoSelecionado) return;
       this.relatorioLinhas = [];
       this.relatorioColunas = [];
-      var firstDay = dataSelecionada + '-01';
-      var lastDay = dataSelecionada + '-31';
-      this.$http.get("/getRelatorios?relatorio=".concat(relatorioSelecionado, "&first=").concat(firstDay, "&last=").concat(lastDay)).then(function (response) {
+      var firstDay = '';
+      var lastDay = '';
+
+      if (this.tipoRelatorioSelecionado == 'mensal') {
+        firstDay = this.dataSelecionada + '-01';
+        lastDay = this.dataSelecionada + '-31';
+      } else {
+        firstDay = this.anoSelecionado + '-01-01';
+        lastDay = this.anoSelecionado + '-12-31';
+      }
+
+      this.$http.get("/getRelatorios?relatorio=".concat(this.relatorioSelecionado, "&first=").concat(firstDay, "&last=").concat(lastDay, "&tipoRelatorio=").concat(this.tipoRelatorioSelecionado)).then(function (response) {
         _this.relatorioLinhas = response.body[0];
-        console.log(_this.relatorioLinhas);
         _this.relatorioColunas = response.body[1];
-        console.log(_this.relatorioColunas);
       }, function (err) {
-        console.log('err: ');
+        console.log('err: ', err);
       });
     },
     retornaNomeMes: function retornaNomeMes(mesNumero) {
@@ -2789,6 +2819,12 @@ __webpack_require__.r(__webpack_exports__);
 
     var mesAtual = moment__WEBPACK_IMPORTED_MODULE_0___default()().format('YYYY-MM');
     var datas = localStorage.getItem("datas").split(',');
+    console.log(datas);
+    datas.forEach(function (data) {
+      var ano = data.split('-')[0];
+      if (!_this2.anos.includes(ano)) _this2.anos.push(ano);
+    });
+    console.log(this.anos);
     this.datasFormatadas = datas.map(function (data) {
       return {
         data: data,
@@ -63950,9 +63986,14 @@ var render = function() {
                 }
               },
               [
-                _c("i", { staticClass: "fas fa-exclamation-circle" }),
-                _vm._v(" "),
-                _c("b", [_vm._v("Pendências")])
+                _c("b", [
+                  _vm._v(
+                    _vm._s(
+                      _vm.receitasPendentes.length +
+                        _vm.despesasPendentes.length
+                    ) + " Pendências"
+                  )
+                ])
               ]
             )
           : _vm._e(),
@@ -64725,6 +64766,45 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "selects d-print-none" }, [
       _c("div", { staticClass: "datas" }, [
+        _c("small", [_vm._v("Escolha o tipo de relatório")]),
+        _vm._v(" "),
+        _c(
+          "select",
+          {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.tipoRelatorioSelecionado,
+                expression: "tipoRelatorioSelecionado"
+              }
+            ],
+            staticClass: "form-control",
+            on: {
+              change: function($event) {
+                var $$selectedVal = Array.prototype.filter
+                  .call($event.target.options, function(o) {
+                    return o.selected
+                  })
+                  .map(function(o) {
+                    var val = "_value" in o ? o._value : o.value
+                    return val
+                  })
+                _vm.tipoRelatorioSelecionado = $event.target.multiple
+                  ? $$selectedVal
+                  : $$selectedVal[0]
+              }
+            }
+          },
+          [
+            _c("option", { attrs: { value: "mensal" } }, [_vm._v("Mensal")]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "anual" } }, [_vm._v("Anual")])
+          ]
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "datas" }, [
         _c("small", [_vm._v("Escolha um relatório")]),
         _vm._v(" "),
         _c(
@@ -64755,18 +64835,23 @@ var render = function() {
                     : $$selectedVal[0]
                 },
                 function($event) {
-                  return _vm.getRelatorio(
-                    _vm.relatorioSelecionado,
-                    _vm.dataSelecionada
-                  )
+                  return _vm.getRelatorio()
                 }
               ]
             }
           },
           [
-            _c("option", { attrs: { value: "balanco-mensal" } }, [
-              _vm._v("Balanço Mensal")
-            ]),
+            _vm.tipoRelatorioSelecionado == "mensal"
+              ? _c("option", { attrs: { value: "balanco-mensal" } }, [
+                  _vm._v("Balanço Mensal")
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.tipoRelatorioSelecionado == "anual"
+              ? _c("option", { attrs: { value: "balanco-mensal" } }, [
+                  _vm._v("Balanço Anual")
+                ])
+              : _vm._e(),
             _vm._v(" "),
             _c("option", { attrs: { value: "despesas-por-categoria" } }, [
               _vm._v("Total de despesas por categoria")
@@ -64787,56 +64872,103 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "datas" }, [
-        _c("small", [_vm._v("Selecione um mês")]),
-        _vm._v(" "),
-        _c(
-          "select",
-          {
-            directives: [
+      _vm.tipoRelatorioSelecionado == "mensal"
+        ? _c("div", { staticClass: "datas" }, [
+            _c("small", [_vm._v("Selecione um mês")]),
+            _vm._v(" "),
+            _c(
+              "select",
               {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.dataSelecionada,
-                expression: "dataSelecionada"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { name: "data" },
-            on: {
-              change: [
-                function($event) {
-                  var $$selectedVal = Array.prototype.filter
-                    .call($event.target.options, function(o) {
-                      return o.selected
-                    })
-                    .map(function(o) {
-                      var val = "_value" in o ? o._value : o.value
-                      return val
-                    })
-                  _vm.dataSelecionada = $event.target.multiple
-                    ? $$selectedVal
-                    : $$selectedVal[0]
-                },
-                function($event) {
-                  return _vm.getRelatorio(
-                    _vm.relatorioSelecionado,
-                    _vm.dataSelecionada
-                  )
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.dataSelecionada,
+                    expression: "dataSelecionada"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { name: "data" },
+                on: {
+                  change: [
+                    function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.dataSelecionada = $event.target.multiple
+                        ? $$selectedVal
+                        : $$selectedVal[0]
+                    },
+                    function($event) {
+                      return _vm.getRelatorio()
+                    }
+                  ]
                 }
-              ]
-            }
-          },
-          _vm._l(_vm.datasFormatadas, function(data) {
-            return _c(
-              "option",
-              { key: data.data, domProps: { value: data.data } },
-              [_vm._v(_vm._s(data.descricao))]
+              },
+              _vm._l(_vm.datasFormatadas, function(data) {
+                return _c(
+                  "option",
+                  { key: data.data, domProps: { value: data.data } },
+                  [_vm._v(_vm._s(data.descricao))]
+                )
+              }),
+              0
             )
-          }),
-          0
-        )
-      ])
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.tipoRelatorioSelecionado == "anual"
+        ? _c("div", { staticClass: "datas" }, [
+            _c("small", [_vm._v("Selecione o ano")]),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.anoSelecionado,
+                    expression: "anoSelecionado"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { name: "data" },
+                on: {
+                  change: [
+                    function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.anoSelecionado = $event.target.multiple
+                        ? $$selectedVal
+                        : $$selectedVal[0]
+                    },
+                    function($event) {
+                      return _vm.getRelatorio()
+                    }
+                  ]
+                }
+              },
+              _vm._l(_vm.anos, function(ano) {
+                return _c("option", { key: ano, domProps: { value: ano } }, [
+                  _vm._v(_vm._s(ano))
+                ])
+              }),
+              0
+            )
+          ])
+        : _vm._e()
     ]),
     _vm._v(" "),
     _c("table", { staticClass: "table table-sm" }, [
@@ -64856,11 +64988,17 @@ var render = function() {
       _vm.relatorioSelecionado == "receitas-por-categoria"
         ? _c(
             "tbody",
-            _vm._l(_vm.relatorioLinhas, function(linha) {
-              return _c("tr", { key: linha }, [
+            _vm._l(_vm.relatorioLinhas, function(linha, index) {
+              return _c("tr", { key: index }, [
                 _c("td", [_vm._v(_vm._s(linha.Categoria))]),
                 _vm._v(" "),
-                _c("td", [_vm._v("R$ " + _vm._s(_vm.formatPrice(linha.Total)))])
+                _c("td", [
+                  _vm._v("R$ " + _vm._s(_vm.formatPrice(linha.Total_Pago)))
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _vm._v("R$ " + _vm._s(_vm.formatPrice(linha.Total_Pendente)))
+                ])
               ])
             }),
             0
@@ -64871,23 +65009,30 @@ var render = function() {
       _vm.relatorioSelecionado == "receitas-por-conta"
         ? _c(
             "tbody",
-            _vm._l(_vm.relatorioLinhas, function(linha) {
-              return _c("tr", { key: linha }, [
+            _vm._l(_vm.relatorioLinhas, function(linha, index) {
+              return _c("tr", { key: index }, [
                 _c("td", [_vm._v(_vm._s(linha.Conta))]),
                 _vm._v(" "),
-                _c("td", [_vm._v("R$ " + _vm._s(_vm.formatPrice(linha.Total)))])
+                _c("td", [
+                  _vm._v("R$ " + _vm._s(_vm.formatPrice(linha.Total_Pago)))
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _vm._v("R$ " + _vm._s(_vm.formatPrice(linha.Total_Pendente)))
+                ])
               ])
             }),
             0
           )
         : _vm._e(),
       _vm._v(" "),
-      _vm.relatorioSelecionado == "balanco-mensal"
+      _vm.relatorioSelecionado == "balanco-mensal" ||
+      _vm.relatorioSelecionado == "balanco-anual"
         ? _c("tbody", [
             _c(
               "tr",
-              _vm._l(_vm.relatorioLinhas, function(linha) {
-                return _c("td", { key: linha }, [
+              _vm._l(_vm.relatorioLinhas, function(linha, index) {
+                return _c("td", { key: index }, [
                   _vm._v(
                     "\n                    R$ " +
                       _vm._s(_vm.formatPrice(linha.Total)) +
