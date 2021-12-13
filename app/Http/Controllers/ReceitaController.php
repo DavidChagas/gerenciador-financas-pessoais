@@ -161,10 +161,12 @@ class ReceitaController extends Controller{
         try {
             $receita->delete();
 
-            // Atualiza Saldo da Conta Selecionada
-            $conta = DB::table('contas')->where('id', '=', $receita->conta_id)->get();
-            $valor_atualizado = (int) $conta[0]->valor - $receita->valor ;
-            DB::table('contas')->where('id', $receita->conta_id)->update(['valor' => $valor_atualizado]);
+            if($receita->status == 'pago'){
+                // Atualiza Saldo da Conta Selecionada
+                $conta = DB::table('contas')->where('id', '=', $receita->conta_id)->get();
+                $valor_atualizado = (int) $conta[0]->valor - $receita->valor ;
+                DB::table('contas')->where('id', $receita->conta_id)->update(['valor' => $valor_atualizado]);
+            }
 
             return redirect('/receitas')->with('success', 'Receita excluida com sucesso!');
         } catch (\Illuminate\Database\QueryException $qe) {

@@ -161,10 +161,12 @@ class DespesaController extends Controller
         try {
             $despesa->delete();
 
-            // Atualiza Saldo da Conta Selecionada
-            $conta = DB::table('contas')->where('id', '=', $despesa->conta_id)->get();
-            $valor_atualizado = (int) $conta[0]->valor + $despesa->valor ;
-            DB::table('contas')->where('id', $despesa->conta_id)->update(['valor' => $valor_atualizado]);
+            if($despesa->status == 'pago'){
+                // Atualiza Saldo da Conta Selecionada
+                $conta = DB::table('contas')->where('id', '=', $despesa->conta_id)->get();
+                $valor_atualizado = (int) $conta[0]->valor + $despesa->valor ;
+                DB::table('contas')->where('id', $despesa->conta_id)->update(['valor' => $valor_atualizado]);
+            }
 
             return redirect('/despesas')->with('success', 'Despesa excluida com sucesso!');
         } catch (\Illuminate\Database\QueryException $qe) {
