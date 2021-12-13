@@ -17,7 +17,7 @@
         <div class="grafico-barras">
             <div class="infos">
                 <div class="notificacao" v-on:click="modalPendenciasAberto = true" v-if="receitasPendentes.length || despesasPendentes.length">
-                    <i class="fas fa-exclamation-circle"></i> <b>Pendências</b>
+                    <b>{{receitasPendentes.length + despesasPendentes.length}} Pendências</b>
                 </div>
                 <div class="total">
                     <img src="/images/receitas.png">
@@ -203,7 +203,7 @@
 
                         setTimeout(()=>{ 
                             location.reload(); 
-                        }, 2000);
+                        }, 1000);
                         
                         
                         swal("Receita marcada como recebida com sucesso!", {
@@ -218,6 +218,10 @@
                 }else{
                     this.$http.get(`/api/despesas/pagar?idDespesa=${id}&valor=${valor}&idConta=${id_conta}`).then(response => {
                         this.despesasPendentes.splice(index, 1);
+
+                        setTimeout(()=>{ 
+                            location.reload(); 
+                        }, 1000);
                         
                         swal("Despesa marcada como paga com sucesso!", {
                             icon: "success",
@@ -411,7 +415,7 @@
 
             if(!this.datas.includes(mesAtual)) this.datas.unshift(mesAtual);
 
-            localStorage.setItem("datasFormatadas", this.datasFormatadas);
+            localStorage.setItem("datas", this.datas);
             
             this.datasFormatadas = this.datas.map(data =>{
                 return {data: data, descricao: this.retornaNomeMes(data.split('-')[1])+' '+data.split('-')[0]}
