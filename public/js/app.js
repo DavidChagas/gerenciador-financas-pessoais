@@ -2712,6 +2712,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2819,12 +2822,10 @@ __webpack_require__.r(__webpack_exports__);
 
     var mesAtual = moment__WEBPACK_IMPORTED_MODULE_0___default()().format('YYYY-MM');
     var datas = localStorage.getItem("datas").split(',');
-    console.log(datas);
     datas.forEach(function (data) {
       var ano = data.split('-')[0];
       if (!_this2.anos.includes(ano)) _this2.anos.push(ano);
     });
-    console.log(this.anos);
     this.datasFormatadas = datas.map(function (data) {
       return {
         data: data,
@@ -64972,17 +64973,19 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("table", { staticClass: "table table-sm" }, [
-      _c("thead", { staticClass: "thead-light" }, [
-        _c(
-          "tr",
-          _vm._l(_vm.relatorioColunas, function(coluna) {
-            return _c("th", { key: coluna, attrs: { scope: "col" } }, [
-              _vm._v(_vm._s(coluna))
-            ])
-          }),
-          0
-        )
-      ]),
+      _vm.relatorioLinhas.length
+        ? _c("thead", { staticClass: "thead-light" }, [
+            _c(
+              "tr",
+              _vm._l(_vm.relatorioColunas, function(coluna) {
+                return _c("th", { key: coluna, attrs: { scope: "col" } }, [
+                  _vm._v(_vm._s(coluna))
+                ])
+              }),
+              0
+            )
+          ])
+        : _vm._e(),
       _vm._v(" "),
       _vm.relatorioSelecionado == "despesas-por-categoria" ||
       _vm.relatorioSelecionado == "receitas-por-categoria"
@@ -65043,6 +65046,18 @@ var render = function() {
               0
             )
           ])
+        : _vm._e(),
+      _vm._v(" "),
+      !_vm.relatorioLinhas.length && _vm.relatorioSelecionado != ""
+        ? _c(
+            "h4",
+            { staticStyle: { "text-align": "center", margin: "50px 0" } },
+            [
+              _vm._v(
+                "\n            Nenhuma informação encontada nesse período\n        "
+              )
+            ]
+          )
         : _vm._e()
     ]),
     _vm._v(" "),
@@ -65059,7 +65074,7 @@ var render = function() {
         ])
       : _vm._e(),
     _vm._v(" "),
-    _vm.relatorioSelecionado != ""
+    _vm.relatorioSelecionado != "" && _vm.relatorioLinhas.length
       ? _c(
           "button",
           {

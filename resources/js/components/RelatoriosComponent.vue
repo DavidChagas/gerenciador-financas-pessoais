@@ -44,7 +44,7 @@
             </div>
         </div>
         <table class="table table-sm">
-            <thead class="thead-light">
+            <thead class="thead-light" v-if="relatorioLinhas.length">
                 <tr>
                     <th scope="col" v-for="coluna in relatorioColunas" v-bind:key="coluna">{{coluna}}</th>
                 </tr>
@@ -70,13 +70,16 @@
                     </td>
                 </tr>
             </tbody>
+            <h4 v-if="!relatorioLinhas.length && relatorioSelecionado != ''" style="text-align: center; margin: 50px 0">
+                Nenhuma informação encontada nesse período
+            </h4>
         </table>
         <div class="aviso-selecionar-relatorio d-print-none" v-if="relatorioSelecionado == ''">
             <img src="/images/selecione-relatorio.jpg" style="opacity: .7;">
             <br>
             <span>Selecione um relatório</span>
         </div>
-        <button class="btn btn-info btn-sm d-print-none" onclick="window.print()" style="float: right" v-if="relatorioSelecionado != ''">
+        <button class="btn btn-info btn-sm d-print-none" onclick="window.print()" style="float: right" v-if="relatorioSelecionado != '' && relatorioLinhas.length">
             <i class="fas fa-print"></i> Imprimir
         </button>
         <img src="/images/img-relatorio.jpg" class="d-print-block" style="display:none; opacity: .2; position: absolute; bottom: 0px; left: 0px;">
@@ -181,13 +184,10 @@
             const mesAtual = moment().format('YYYY-MM');
             let datas = localStorage.getItem("datas").split(',');
 
-            console.log(datas);
             datas.forEach(data =>{
                 let ano =  data.split('-')[0];
                 if(!this.anos.includes(ano)) this.anos.push(ano);
             })
-
-            console.log(this.anos);
             
             this.datasFormatadas = datas.map(data =>{
                 return {data: data, descricao: this.retornaNomeMes(data.split('-')[1])+' '+data.split('-')[0]}

@@ -1,5 +1,5 @@
 ﻿# Host: localhost  (Version 5.5.5-10.4.14-MariaDB)
-# Date: 2021-11-28 22:26:49
+# Date: 2021-12-13 11:24:35
 # Generator: MySQL-Front 6.1  (Build 1.26)
 
 
@@ -28,40 +28,40 @@ REPLACE INTO `migrations` (`id`,`migration`,`batch`) VALUES (1,'2014_10_12_00000
 # Data for table "users"
 #
 
-REPLACE INTO `users` (`id`,`nome`,`email`,`email_verified_at`,`password`,`remember_token`,`created_at`,`updated_at`) VALUES (1,'David Chagas','davidmdchagas@hotmail.com',NULL,'$2y$10$85jeklibHFqvTsY.aRIOl.lzmaEazhOv1y4tL.N.oBJRo9VDOKvuq',NULL,'2021-11-29 01:13:27','2021-11-29 01:13:27');
+REPLACE INTO `users` (`id`,`nome`,`email`,`email_verified_at`,`password`,`remember_token`,`created_at`,`updated_at`) VALUES (1,'David Chagas','davidmdchagas@hotmail.com',NULL,'$2y$10$rsWC.YKQnWcDeiaR0KGLb.B/Yvc.l986JP.bwX7sJ6Jk4EWwcUYxy',NULL,'2021-12-13 13:58:53','2021-12-13 13:58:53');
 
 #
 # Data for table "objetivos"
 #
 
-REPLACE INTO `objetivos` (`id`,`nome`,`descricao`,`valor`,`data_inicial`,`data_final`,`usuario_id`) VALUES (1,'Comprar um celular novo',NULL,400000,'2021-10-05','2022-06-01',1);
+REPLACE INTO `objetivos` (`id`,`nome`,`descricao`,`valor`,`data_inicial`,`data_final`,`arquivado`,`usuario_id`) VALUES (1,'Viagem (Férias de 2022)',NULL,500000,'2021-11-20','2022-12-20',0,1);
 
 #
 # Data for table "objetivo_aportes"
 #
 
-REPLACE INTO `objetivo_aportes` (`id`,`valor`,`data`,`objetivo_id`) VALUES (1,20000,'2021-10-05',1),(2,40000,'2021-11-05',1);
+REPLACE INTO `objetivo_aportes` (`id`,`valor`,`data`,`objetivo_id`) VALUES (1,50000,'2021-11-20',1);
 
 #
 # Data for table "contas"
 #
 
-REPLACE INTO `contas` (`id`,`descricao`,`valor`,`usuario_id`) VALUES (1,'Carteira',-30000,1),(2,'Poupança',0,1),(3,'NuConta',320000,1);
+REPLACE INTO `contas` (`id`,`descricao`,`valor`,`arquivado`,`usuario_id`) VALUES (1,'Carteira',20000,0,1),(2,'Caixa (Poupança)',250000,0,1),(3,'NuConta',230000,0,1);
 
 #
 # Data for table "categorias"
 #
 
-REPLACE INTO `categorias` (`id`,`descricao`,`tipo`,`usuario_id`) VALUES (1,'Salário','Receita',1),(2,'Bônus','Receita',1),(3,'Transporte','Despesa',1),(4,'Saúde','Despesa',1),(5,'Lazer','Despesa',1),(6,'Educação','Despesa',1);
+REPLACE INTO `categorias` (`id`,`descricao`,`tipo`,`arquivado`,`usuario_id`) VALUES (1,'Salário','Receita',0,1),(2,'Bônus','Receita',0,1),(3,'Transporte','Despesa',0,1),(4,'Outros','Receita',0,1),(5,'Outros','Despesa',0,1),(6,'Saúde','Despesa',0,1),(7,'Alimentação','Despesa',0,1),(8,'Lazer','Despesa',0,1);
 
 #
 # Data for table "receitas"
 #
 
-REPLACE INTO `receitas` (`id`,`valor`,`status`,`data`,`descricao`,`observacao`,`usuario_id`,`conta_id`,`categoria_id`) VALUES (1,200000,'pago','2021-10-05','Pagamento',NULL,1,3,1),(2,50000,'pago','2021-10-05','PPR',NULL,1,1,2),(3,200000,'pago','2021-11-05','Pagamento',NULL,1,3,1),(4,55000,'pago','2021-11-05','PPR',NULL,1,1,2);
+REPLACE INTO `receitas` (`id`,`valor`,`status`,`data`,`descricao`,`observacao`,`usuario_id`,`conta_id`,`categoria_id`) VALUES (1,250000,'pago','2021-11-05','Pagamento',NULL,1,3,1),(2,50000,'pago','2021-11-05','PPR',NULL,1,1,2);
 
 #
 # Data for table "despesas"
 #
 
-REPLACE INTO `despesas` (`id`,`valor`,`status`,`data`,`descricao`,`observacao`,`usuario_id`,`conta_id`,`categoria_id`) VALUES (1,80000,'pago','2021-10-06','Faculdade',NULL,1,1,3),(2,20000,'pago','2021-10-05','Ônibus Faculdade',NULL,1,1,3),(3,80000,'pago','2021-11-05','Faculdade',NULL,1,3,6),(4,25000,'pago','2021-11-09','Ônibus Faculdade',NULL,1,1,3),(5,10000,'pago','2021-11-18','Dentista',NULL,1,1,4);
+REPLACE INTO `despesas` (`id`,`valor`,`status`,`data`,`descricao`,`observacao`,`usuario_id`,`conta_id`,`categoria_id`) VALUES (1,15000,'pago','2021-11-10','Dentista',NULL,1,1,6),(2,4000,'pago','2021-11-15','Uber',NULL,1,3,3),(3,15000,'pago','2021-11-25','Compras Supermercado',NULL,1,1,7),(4,6000,'pago','2021-11-18','Cinema',NULL,1,3,8),(5,10000,'pago','2021-11-06','Academia',NULL,1,3,6);
